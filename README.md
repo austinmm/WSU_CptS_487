@@ -7,4 +7,4 @@ Bullet hell game written in C# using MonoGame.
 * Cole Bennett
 * Ben Hamlim
 * Sam Schreiber
-* Eric Ejort
+* Eric Hjort

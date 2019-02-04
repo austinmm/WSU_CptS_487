@@ -47,7 +47,7 @@ namespace GameClasses
             return ret;
         }
 
-        public HashSet<GameObject> getObjectsCollided(GameObject gameObject, Type type) /* Optional filter parameter */
+        public HashSet<GameObject> GetObjectsCollided(GameObject gameObject, Type type) /* Optional filter parameter */
         {
             HashSet<GameObject> ret = new HashSet<GameObject>();
             double radius = gameObject.HitBoxRadius;
@@ -88,7 +88,7 @@ namespace GameClasses
         private CollisionBucket FetchBucket(GameObject gameObject)
         {
             Vector2 coordinates = GetCoordinates(gameObject.Position);
-            if (!IsValidBucketCoordinates(coordinates.X + xOffset, coordinates.Y + yOffset))
+            if (!IsValidBucketCoordinates(coordinates.X, coordinates.Y))
                 return null;
 
             CollisionBucket bucket = collisionBuckets[(int)coordinates.X][(int)coordinates.Y];
@@ -97,8 +97,12 @@ namespace GameClasses
 
         private Boolean IsValidBucketCoordinates(float x, float y)
         {
-            return !(coordinates.X + xOffset >= this.width || coordinates.X + xOffset < 0
-                || coordinates.Y + yOffset >= this.height || coordinates.Y + yOffset < 0);
+            // TODO: what is this code trying to do?
+
+            // return !(coordinates.X + xOffset >= this.width || coordinates.X + xOffset < 0
+            //     || coordinates.Y + yOffset >= this.height || coordinates.Y + yOffset < 0);
+            
+            return false;
         }
 
         private CollisionBucket FetchBucket(GameObject gameObject, int xOffset, int yOffset)
@@ -107,7 +111,7 @@ namespace GameClasses
             if (!IsValidBucketCoordinates(coordinates.X + xOffset, coordinates.Y + yOffset))
                 return null;
 
-            CollisionBucket bucket = collisionBuckets[coordinates.X + xOffset][coordinates.Y + yOffset];
+            CollisionBucket bucket = collisionBuckets[(int)coordinates.X + xOffset][(int)coordinates.Y + yOffset];
             return bucket;
         }
 

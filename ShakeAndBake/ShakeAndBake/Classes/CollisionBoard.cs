@@ -9,13 +9,17 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Threading;
 using System.Diagnostics;
-using System.Numerics;
 
 namespace GameClasses
 {
     public class CollisionBoard
     {
-        public CollisionBoard(Int16 windowHeight, Int16 windowWidth, Int16 bucketWidth) {
+        private List<List<CollisionBucket>> collisionBuckets;
+        private int width;
+        private int height;
+        private int bucketWidth;
+
+        public CollisionBoard(int windowHeight, int windowWidth, int bucketWidth) {
             this.collisionBuckets = new List<List<CollisionBucket>>();
             this.width = windowWidth / bucketWidth;
             this.height = windowHeight / bucketWidth;
@@ -31,43 +35,49 @@ namespace GameClasses
             this.bucketWidth = bucketWidth;
         }
 
-        public Vector2 getCoordinates(Int16 x, Int16 y) {
+        public Vector2 GetCoordinates(Vector2 position)
+        {
+            return GetCoordinates(position.X, position.Y);
+        }
+
+        public Vector2 GetCoordinates(float x, float y) {
             Vector2 ret = new Vector2();
             ret.X = x / this.bucketWidth;
             ret.Y = y / this.bucketWidth;
             return ret;
         }
 
-        public HashSet<GameObject> getObjectsCollided(GameObject gameObject, Type type = GameObject /* Optional filter parameter */)
+        public HashSet<GameObject> getObjectsCollided(GameObject gameObject, Type type) /* Optional filter parameter */
         {
             HashSet<GameObject> ret = new HashSet<GameObject>();
             double radius = gameObject.HitBoxRadius;
 
             /* Directions */
-            int[] dirs = new int[][] {  { 1,1 }, { 0, 1 }, { -1, 1 },
-                                        { 1, 0 } , { 0, 0 } , { -1, 0 }
-                                        { 1, -1 } , { 0, -1 } , { -1, -1 } };
+            int[,] dirs = new int[,] {
+                { 1, 1 }, { 0, 1 }, { -1, 1 },
+                { 1, 0 } , { 0, 0 } , { -1, 0 },
+                { 1, -1 } , { 0, -1 } , { -1, -1 }
+            };
 
             /* Check all neighboring cells */
             for (int i = 0; i < 9; ++i)
             {
-                int[] dir = dirs[i];
-                int xOffset = dir[0];
-                int yOffset = dir[1];
+                int xOffset = dirs[i, 0];
+                int yOffset = dirs[i, 1];
 
-                CollisionBucket cb = fetchBucket(gameObject, xOffset, yOffset);
-
+                CollisionBucket cb = FetchBucket(gameObject, xOffset, yOffset);
                 /* null indicates that the coordinates were invalid */
                 if (cb != null)
                 {
                     /* For all game objects in the bucket, if within the collision region add to return set */                
-                    for (GameObject go in cb.getObjects()) {
-                        if (go.getType() != type)
+                    foreach (GameObject go in cb.GetObjects()) {
+                        if (go.GetType() != type)
                             continue;
 
-                        if (Vector2.Distance(gameObject, go) <= radius || Vector2.Distance(gameObject, go) <= go.HitBoxRadius)
+                        if (Vector2.Distance(gameObject.Position, go.Position) <= radius
+                         || Vector2.Distance(gameObject.Position, go.Position) <= go.HitBoxRadius)
                         {
-                            ret.Add(cb);
+                            ret.Add(go);
                         }
                     }
                 }
@@ -75,73 +85,67 @@ namespace GameClasses
             return ret;
         }
 
-        private CollisionBucket fetchBucket(GameObject gameObject)
+        private CollisionBucket FetchBucket(GameObject gameObject)
         {
-            Vector2 coordinates = getCoordinates(gameObject.Position);
-            if (!isValidBucketCoordinates(coordinates.X + xOffset, coordinates.Y + yOffset))
+            Vector2 coordinates = GetCoordinates(gameObject.Position);
+            if (!IsValidBucketCoordinates(coordinates.X + xOffset, coordinates.Y + yOffset))
                 return null;
 
-            CollisionBucket bucket = collisionBuckets[coordinats.X][coordinates.Y];
+            CollisionBucket bucket = collisionBuckets[(int)coordinates.X][(int)coordinates.Y];
             return bucket;
         }
 
-        private Boolean isValidBucketCoordinates(int x, int y)
+        private Boolean IsValidBucketCoordinates(float x, float y)
         {
             return !(coordinates.X + xOffset >= this.width || coordinates.X + xOffset < 0
                 || coordinates.Y + yOffset >= this.height || coordinates.Y + yOffset < 0);
         }
 
-        private CollisionBucket fetchBucket(GameObject gameObject, int xOffset, int yOffset)
+        private CollisionBucket FetchBucket(GameObject gameObject, int xOffset, int yOffset)
         {
-            Vector2 coordinates = getCoordinates(gameObject.Position);
-            if (!isValidBucketCoordinates(coordinates.X + xOffset, coordinates.Y + yOffset))
+            Vector2 coordinates = GetCoordinates(gameObject.Position);
+            if (!IsValidBucketCoordinates(coordinates.X + xOffset, coordinates.Y + yOffset))
                 return null;
 
             CollisionBucket bucket = collisionBuckets[coordinates.X + xOffset][coordinates.Y + yOffset];
             return bucket;
         }
 
-        public void fillBucket(GameObject gameObject) 
+        public void FillBucket(GameObject gameObject) 
         {
-            CollisionBucket bucket = fetchBucket(gameObject);
-            bucket.addElement(gameObject);
+            CollisionBucket bucket = FetchBucket(gameObject);
+            bucket.AddElement(gameObject);
         }
 
-        public Boolean removeFromBucketIfExists(GameObject gameObject)
+        public Boolean RemoveFromBucketIfExists(GameObject gameObject)
         {
-            CollisionBucket bucket = fetchBucket(gameObject);
-            return bucket.removeElement(gameObject);
+            CollisionBucket bucket = FetchBucket(gameObject);
+            return bucket.RemoveElement(gameObject);
         }
-
-        public class CollisionBucket
-        {
-            public CollisionBucket()
-            {
-                objects = new HashSet<GameObject>();
-            }
-
-            public HashSet<GameObject> getObjects()
-            {
-                return this.objects;
-            }
-
-            public void addElement(GameObject obj)
-            {
-                objects.Add(obj);
-            }
-
-            public Boolean removeElement(GameObject obj)
-            {
-                return objects.remove(obj);
-            }
-
-            private HashSet<GameObject> objects;
-        }
-
-        private List<List<CollisionBucket>> collisionBuckets;
-        private Int16 width;
-        private Int16 height;
-        private Int16 bucketWidth;
     }
+    
+    public class CollisionBucket
+    {
+        private HashSet<GameObject> objects;
 
+        public CollisionBucket()
+        {
+            objects = new HashSet<GameObject>();
+        }
+
+        public HashSet<GameObject> GetObjects()
+        {
+            return this.objects;
+        }
+
+        public void AddElement(GameObject obj)
+        {
+            objects.Add(obj);
+        }
+
+        public Boolean RemoveElement(GameObject obj)
+        {
+            return objects.Remove(obj);
+        }
+    }
 }

@@ -55,6 +55,7 @@ TestResults/
 # Visual Studio 2017 cache/options directory#
 ######################
 .vs/
+.vs
 /.vs
 v15/
 /v15

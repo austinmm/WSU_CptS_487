@@ -42,8 +42,8 @@ namespace GameClasses
 
         public Vector2 GetCoordinates(float x, float y) {
             Vector2 ret = new Vector2();
-            ret.X = x / this.bucketWidth;
-            ret.Y = y / this.bucketWidth;
+            ret.X = (int)(x / this.bucketWidth);
+            ret.Y = (int)(y / this.bucketWidth);
             return ret;
         }
 
@@ -95,20 +95,26 @@ namespace GameClasses
             return bucket;
         }
 
-        private Boolean IsValidBucketCoordinates(float x, float y)
+	/* This only checks to ensure that x and y do not fall out of bounds on the collision board.
+	   In the future this may have additional checks, but this seems sufficient for now.  
+	*/
+        private Boolean IsValidBucketCoordinates(int x, int y)
         {
-            // TODO: what is this code trying to do?
+	/***
 
-            // return !(coordinates.X + xOffset >= this.width || coordinates.X + xOffset < 0
-            //     || coordinates.Y + yOffset >= this.height || coordinates.Y + yOffset < 0);
-            
-            return false;
+	x and y are always integers because they are BUCKET coordinates (i.e. indices on collisionBuckets)
+	, NOT regular coordinates
+	****/
+            return !(coordinates.X >= this.width || coordinates.X < 0
+              || coordinates.Y >= this.height || coordinates.Y < 0);            
         }
 
         private CollisionBucket FetchBucket(GameObject gameObject, int xOffset, int yOffset)
         {
             Vector2 coordinates = GetCoordinates(gameObject.Position);
-            if (!IsValidBucketCoordinates(coordinates.X + xOffset, coordinates.Y + yOffset))
+	    
+	    /* If the coordinates are out of bounds, we return null. */
+            if (!IsValidBucketCoordinates((int)coordinates.X + xOffset, (int)coordinates.Y + yOffset))
                 return null;
 
             CollisionBucket bucket = collisionBuckets[(int)coordinates.X + xOffset][(int)coordinates.Y + yOffset];

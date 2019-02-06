@@ -16,8 +16,8 @@ namespace GameClasses
     {
         public event PropertyChangedEventHandler PropertyChanged;
         //This is a set path that the projectile objects will travel when update is called
-        protected List<Vector2> path;
-        public List<Vector2> Path
+        protected Path path;
+        public Path Path
         {
             get { return this.path; }
             set { this.path = value; }

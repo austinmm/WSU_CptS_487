@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using GameClasses;
 
 namespace ShakeAndBake
 {
@@ -11,7 +12,7 @@ namespace ShakeAndBake
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
+
         public ShakeAndBakeGame()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -63,7 +64,8 @@ namespace ShakeAndBake
                 Exit();
 
             // TODO: Add your update logic here
-
+            GameController.CheckBoard();
+            GameBoard.UpdateBoard();
             base.Update(gameTime);
         }
 

@@ -15,12 +15,14 @@ namespace GameClasses
     public class Enemy : Character
     {
         //This is a set path that the enemy objects will travel when update is called
-        protected List<Vector2> path;
-        public List<Vector2> Path
+        protected Path path;
+        
+        public Path Path
         {
             get { return this.path; }
             set { this.path = value; }
         }
+
         //Enemy Constructor
         public Enemy() : base() { }
         //Updates the 

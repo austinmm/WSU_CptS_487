@@ -10,9 +10,9 @@ How many lives the player has
 How much HP the bosses have
 Each new level / wave has a sound that says "Shake N Bake!!"
 
-##Overview:
+## Overview:
 
-###There are 4 phases:
+### There are 4 phases:
 
 * Regular play with grunts
 * Mid Boss Attack
@@ -24,3 +24,5 @@ Bosses need more sophisticated attacks
 Bosss must have two different stages of attack, mimicking the first stage and third stage of the demo video
 01:36-02:22
 03:07-03:52
+
+### Next

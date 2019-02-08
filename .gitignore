@@ -55,10 +55,7 @@ TestResults/
 # Visual Studio 2017 cache/options directory#
 ######################
 .vs/
-.vs
-/.vs
 v15/
-/v15
 # OS generated files #
 ######################
 .DS_Store?

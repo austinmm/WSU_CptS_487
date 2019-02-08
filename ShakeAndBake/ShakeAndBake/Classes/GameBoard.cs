@@ -15,6 +15,35 @@ namespace GameClasses
     //GameBoard is static since their can only be one GameBoard in existance at any given time
     static class GameBoard
     {
+        //Variable containing the overall speed of the game changed by player input for speed mode
+        static private double gameSpeed;
+        static public double GameSpeed
+        {
+            get { return gameSpeed; }
+            set { gameSpeed = value;//upon changing gamespeed all entities are updated
+                foreach(Enemy enemy in visibleEnemies)
+                {
+                    enemy.Acceleration = value;
+                    foreach (Projectile proj in enemy.Projectiles)
+                    {
+                        proj.Acceleration = value;
+                    }
+                }
+                foreach (Enemy enemy in deadEnemies)
+                {
+                    enemy.Acceleration = value;
+                    foreach (Projectile proj in enemy.Projectiles)
+                    {
+                        proj.Acceleration = value;
+                    }
+                }
+                user.Acceleration = value;
+                foreach (Projectile proj in user.Projectiles)
+                {
+                    proj.Acceleration = value;
+                }
+            }
+        }
         //Contains a list of all enemies currently visible on the gameboard
         static private int enemiesLeft;
         static public int EnemiesLeft

@@ -1,4 +1,6 @@
-﻿namespace GameClasses
+﻿using Microsoft.Xna.Framework;
+
+namespace GameClasses
 {
     public enum EnemyType
     {
@@ -21,15 +23,15 @@
          }
 
         //Updates the 
-        public override void Update()
+        public override void Update(GameTime gameTime)
         {
-            base.Update();
-
             //Fire a new projectile if firerate field will allow
             this.FireProjectile();
 
             //Move Enemy to new position in its set path
             position = path.NextPoint();
+            
+            base.Update(gameTime);  
         }
         
         //Checks if a specific projectile, that just updated its coordinates, has hit our player

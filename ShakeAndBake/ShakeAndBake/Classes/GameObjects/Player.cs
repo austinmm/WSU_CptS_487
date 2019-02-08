@@ -16,7 +16,9 @@ namespace GameClasses
     public class Player : Character
     {
         public Player() : base() { }
-        public override void Update()
+        
+
+        public override void Update(GameTime gameTime)
         {
             KeyboardState state = Keyboard.GetState();//gets the state of the keyboard and checks the combos as follows
             //down right
@@ -67,8 +69,9 @@ namespace GameClasses
             {
                 this.position.Y = Position.Y - (float)(Velocity * Acceleration);
             }
-            base.Update();
+            base.Update(gameTime);
         }
+        
         //Checks if any of the player's projectiles have hit the visable enimies on the GameBoard
         protected override void CheckForHits(Projectile projectile)
         {

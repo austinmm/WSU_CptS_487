@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -77,23 +79,33 @@ namespace GameClasses
         }
 
         //MultiThread this Method call
-        static public void UpdateBoard()
+        static public void UpdateBoard(GameTime gameTime)
         {
+            user.Update(gameTime);
             //Call update on all our visible enemies, this will automatically update their projectiles as well
             foreach (Enemy enemy in visibleEnemies)
             {
-                enemy.Update();
+                enemy.Update(gameTime);
             }
             //check deadEnimies list to see if they have any projectiles left on the board
             foreach (Enemy enemy in deadEnemies)
             {
-                enemy.Update();
+                enemy.Update(gameTime);
                 if (enemy.Projectiles.Count == 0)
                 {
                     deadEnemies.Remove(enemy);
                 }
             }
-            user.Update();
+        }
+
+        static public void Draw(SpriteBatch spriteBatch)
+        {
+            foreach (Enemy enemy in visibleEnemies)
+            {
+                enemy.Draw(spriteBatch);
+            }
+            // draw player last
+            user.Draw(spriteBatch);
         }
 
         static public bool IsHit(Character character, Projectile projectile)

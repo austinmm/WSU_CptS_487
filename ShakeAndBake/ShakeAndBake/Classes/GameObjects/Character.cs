@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -77,13 +78,21 @@ namespace GameClasses
             projectiles.CollectionChanged += OnProjectileChange;
         }
         
-        public override void Update()
+        public override void Update(GameTime gameTime)
         {
             if (!this.isDestroyed)
             {
-                base.Update();
-                this.UpdateProjectiles();
+                this.UpdateProjectiles(gameTime);
             }
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            foreach (Projectile projectile in projectiles)
+            {
+                projectile.Draw(spriteBatch);
+            }
+            // draw character here or in derived enemy/player classes
         }
 
         private void OnProjectileChange(object sender, NotifyCollectionChangedEventArgs e)
@@ -99,12 +108,12 @@ namespace GameClasses
             if (e.OldItems != null) { }
         }
 
-        public void UpdateProjectiles()
+        public void UpdateProjectiles(GameTime gameTime)
         {
             //Update existing bullets already fired by the character
             foreach (Projectile projectile in this.projectiles)
             {
-                projectile.Update();
+                projectile.Update(gameTime);
             }
         }
 

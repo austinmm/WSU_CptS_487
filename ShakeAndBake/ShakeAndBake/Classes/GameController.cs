@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 
 namespace GameClasses
 {
@@ -64,7 +65,7 @@ namespace GameClasses
         }
         
         //Checks if current stage has finished
-        static public void CheckBoard()
+        static public void CheckBoard(GameTime gameTime)
         {
             //if no enemies left then update stage
             int enemyCount = GameBoard.VisibleEnemies.Count;

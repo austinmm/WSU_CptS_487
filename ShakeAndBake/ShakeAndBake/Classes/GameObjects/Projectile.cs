@@ -46,9 +46,9 @@ namespace GameClasses
             this.path = path;
         }
 
-        public override void Update()
+        public override void Update(GameTime gameTime)
         {
-            base.Update();
+            base.Update(gameTime);
             
             //Update the position of the projectile based off of its spritePath
             position = path.NextPoint();

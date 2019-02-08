@@ -63,9 +63,11 @@ namespace ShakeAndBake
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-            GameController.CheckBoard();
-            GameBoard.UpdateBoard();
+            GameBoard.UpdateBoard(gameTime);
+
+            // Check game after updating game board
+            GameController.CheckBoard(gameTime);
+
             base.Update(gameTime);
         }
 
@@ -77,7 +79,9 @@ namespace ShakeAndBake
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin();
+            GameBoard.Draw(spriteBatch);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

@@ -21,6 +21,20 @@ namespace GameClasses
         public override void Update(GameTime gameTime)
         {
             KeyboardState state = Keyboard.GetState();//gets the state of the keyboard and checks the combos as follows
+            //utilizes the left control as the switch between speed modes essentially halving the speed when pressed.
+            if (state.IsKeyDown(Keys.LeftControl))
+            {
+                GameBoard.GameSpeed = 1;
+            }
+            if (state.IsKeyUp(Keys.LeftControl))
+            {
+                GameBoard.GameSpeed = 2;
+            }
+            //Spacebar fires user projectile
+            if (state.IsKeyDown(Keys.Space))
+            {
+                this.FireProjectile();
+            }
             //down right
             if (state.IsKeyDown(Keys.Right) && state.IsKeyDown(Keys.Down) && !(state.IsKeyDown(Keys.Left)) && !(state.IsKeyDown(Keys.Up)))
             {

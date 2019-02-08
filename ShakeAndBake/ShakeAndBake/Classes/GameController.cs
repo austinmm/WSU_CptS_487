@@ -25,6 +25,7 @@ namespace GameClasses
         //Constructor
         static GameController()
         {
+            stages = new List<GameBoardConfigs>();
             stages.Add(GameBoardConfigs.Stage1);
             stages.Add(GameBoardConfigs.Stage2);
             stages.Add(GameBoardConfigs.Stage3);

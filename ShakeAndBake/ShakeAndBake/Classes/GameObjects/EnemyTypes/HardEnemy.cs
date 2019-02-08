@@ -17,12 +17,12 @@ namespace GameClasses
         //Hard Enemy Constructor
         public Hard() : base()
         {
-            this.path = EnemyPaths.HardPath;
+            this.path = EnemyPaths.DefaultPath(this.position, new Vector2(0, 1));
         }
+
         public override void Update()
         {
             base.Update();
-            //Move Enemy to new position in its set path
         }
     }
 }

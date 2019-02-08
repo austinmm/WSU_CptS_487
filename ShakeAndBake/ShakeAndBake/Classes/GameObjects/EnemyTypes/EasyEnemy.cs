@@ -17,12 +17,12 @@ namespace GameClasses
         //Easy Enemy Constructor
         public Easy() : base()
         {
-            this.path = EnemyPaths.EasyPath;
+            this.path = EnemyPaths.DefaultPath(this.position, new Vector2(0, 1));
         }
+        
         public override void Update()
         {
             base.Update();
-            //Move Enemy to new position in its set path
         }
     }
 }

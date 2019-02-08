@@ -12,13 +12,11 @@ using System.Diagnostics;
 
 namespace GameClasses
 {
-
-
-
     public abstract class Character : GameObject
     {
         //Used to invoke the characters update 
         private event PropertyChangedEventHandler ProjectilePropertyChanged;
+
         //This contains the amount of time the character has been alive for
         protected Stopwatch timeAlive;
         public Stopwatch TimeAlive
@@ -26,6 +24,7 @@ namespace GameClasses
             get { return this.timeAlive; }
             set { this.timeAlive = value; }
         }
+
         //This contains the time the character last fired a projectile (Milliseconds)
         protected Nullable<double> lastFiredTime;
         public Nullable<double> LastFiredTime
@@ -33,6 +32,7 @@ namespace GameClasses
             get { return this.lastFiredTime; }
             set { this.lastFiredTime = value; }
         }
+
         //This contains the speed at which the character can fire their projectiles (Milliseconds)
         protected double fireRate;
         public double FireRate
@@ -40,6 +40,7 @@ namespace GameClasses
             get { return this.fireRate; }
             set { this.fireRate = value; }
         }
+
         //This contains the amount of health a character has left
         protected double health;
         public double Health
@@ -47,6 +48,7 @@ namespace GameClasses
             get { return this.health; }
             set { this.health = value; }
         }
+
         //Tuple???
         //This contains a list of all the projectile types the character is allowed to fire
         protected List<ProjectileTypes> projectileTypes;
@@ -55,6 +57,7 @@ namespace GameClasses
             get { return this.projectileTypes; }
             set { this.projectileTypes = value; }
         }
+
         //This contains a ObservableCollection of all the projectiles the character currently has
         protected ObservableCollection<Projectile> projectiles;
         public ObservableCollection<Projectile> Projectiles
@@ -62,6 +65,7 @@ namespace GameClasses
             get { return this.projectiles; }
             set { this.projectiles = value; }
         }
+
         public Character() : base()
         {
             //When projectiles are added or removed from the ObservableCollection then "OnProjectileChange" is automatically called
@@ -72,6 +76,7 @@ namespace GameClasses
             this.projectiles = new ObservableCollection<Projectile>();
             projectiles.CollectionChanged += OnProjectileChange;
         }
+        
         public override void Update()
         {
             if (!this.isDestroyed)
@@ -80,6 +85,7 @@ namespace GameClasses
                 this.UpdateProjectiles();
             }
         }
+
         private void OnProjectileChange(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
@@ -92,6 +98,7 @@ namespace GameClasses
             }
             if (e.OldItems != null) { }
         }
+
         public void UpdateProjectiles()
         {
             //Update existing bullets already fired by the character
@@ -100,6 +107,7 @@ namespace GameClasses
                 projectile.Update();
             }
         }
+
         //Invoked when a projectile is updated
         private void Projectile_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -113,17 +121,19 @@ namespace GameClasses
                 this.ProjectilePropertyChanged(sender, e);
             }
         }
+
         public virtual void FireProjectile()
         {
             if (this.CanFire())
             {
                 //Creates a new projectile to be added to the character's ObservableCollection of projectiles
-                Projectile projectile = new Projectile();
+                Projectile projectile = new Projectile(new StraightPath(this.position, new Vector2(0, 1), 2));
                 //The projectiles position is set to the current character's position
                 projectile.Position = this.position;
                 this.projectiles.Add(projectile);
             }
         }
+
         protected bool CanFire()
         {
             //character has fired atleast one projectile
@@ -139,6 +149,7 @@ namespace GameClasses
             this.lastFiredTime = this.timeAlive.ElapsedMilliseconds;
             return true;
         }
+
         protected abstract void CheckForHits(Projectile projectile);
     }
 }

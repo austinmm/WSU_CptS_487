@@ -31,7 +31,7 @@ namespace GameClasses
         public override void Draw(SpriteBatch spriteBatch)
         {
             // draw enemy here
-            
+     
             base.Draw(spriteBatch);
         }
     }

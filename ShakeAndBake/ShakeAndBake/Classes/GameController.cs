@@ -56,7 +56,7 @@ namespace GameClasses
                     GameBoard.VisibleEnemies.Add(EnemeyFactory.CreateEnemy(EnemyType.MidBoss));
                     break;
                 case GameBoardConfigs.Stage3:
-                    for (int i = 0; i < 2; i++) {
+                    for (int i = 0; i < 3; i++) {
                         GameBoard.VisibleEnemies.Add(EnemeyFactory.CreateEnemy(EnemyType.Hard));
                     }
                     GameBoard.VisibleEnemies.Add(EnemeyFactory.CreateEnemy(EnemyType.FinalBoss));

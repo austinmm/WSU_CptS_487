@@ -59,6 +59,7 @@
     <Compile Include="Classes\Path.cs" />
     <Compile Include="Classes\GameObjects\EnemyTypes\FinalBoss.cs" />
     <Compile Include="Classes\GameObjects\EnemyTypes\MidBoss.cs" />
+    <Compile Include="Classes\GameObjects\EnemyFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

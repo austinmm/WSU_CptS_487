@@ -1,4 +1,4 @@
-# 487Sp19_ShakeAndBake
+# ShakeAndBake
 
 Bullet hell game written in C# using MonoGame.
 

@@ -12,10 +12,10 @@ using System.Diagnostics;
 
 namespace GameClasses
 {
-    public class Boss : Enemy
+    public class MidBoss : Enemy
     {
         //Boss Enemy Constructor
-        public Boss() : base()
+        public MidBoss() : base()
         {
             this.path = EnemyPaths.BossPath;
         }

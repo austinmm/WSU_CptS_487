@@ -37,7 +37,10 @@ namespace GameClasses
             ConfigureNextStage();
         }
         //Changes the GameBoard class to reflect the current stage
-        static public void ConfigureNextStage() { }
+        static public void ConfigureNextStage() {
+
+         }
+         
         //Checks if current stage has finished
         static public void CheckBoard()
         {

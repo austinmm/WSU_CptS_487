@@ -1,17 +1,10 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Threading;
-using System.Diagnostics;
-
-namespace GameClasses
+﻿namespace GameClasses
 {
+    public enum EnemyType
+    {
+        Easy, Medium, Hard, MidBoss, FinalBoss
+    }
+    
     public class Enemy : Character
     {
         //This is a set path that the enemy objects will travel when update is called

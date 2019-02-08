@@ -22,6 +22,7 @@ namespace GameClasses
             get { return enemiesLeft; }
             set { enemiesLeft = value; }
         }
+
         //Contains a list of all enemies currently visible on the gameboard
         static private ObservableCollection<Enemy> visibleEnemies;
         static public ObservableCollection<Enemy> VisibleEnemies
@@ -29,6 +30,7 @@ namespace GameClasses
             get { return visibleEnemies; }
             set { visibleEnemies = value; }
         }
+
         //Contains a list of all enemies that have dies but still have projectiles on the gameboard
         static private List<Enemy> deadEnemies;
         static public List<Enemy> DeadEnemies
@@ -36,6 +38,7 @@ namespace GameClasses
             get { return deadEnemies; }
             set { deadEnemies = value; }
         }
+
         //This is our one and only player that is controlled by the user (keyboard input)
         static private Player user;
         static public Player User
@@ -43,6 +46,7 @@ namespace GameClasses
             get { return user; }
             set { user = value; }
         }
+
         //Constructor for GameBoard class
         static GameBoard()
         {
@@ -52,6 +56,7 @@ namespace GameClasses
             //When enemy is added or removed from collection "updateEnimies" is automatically called
             visibleEnemies.CollectionChanged += UpdateEnemies;
         }
+
         //When an Enemy is added or removed from the ObservableCollection "visibleEnemies"
         static public void UpdateEnemies(object sender, NotifyCollectionChangedEventArgs e)
         {
@@ -70,6 +75,7 @@ namespace GameClasses
                 }
             }
         }
+
         //MultiThread this Method call
         static public void UpdateBoard()
         {
@@ -89,6 +95,7 @@ namespace GameClasses
             }
             user.Update();
         }
+
         static public bool IsHit(Character character, Projectile projectile)
         {
             if (character != null && projectile != null)
@@ -122,6 +129,9 @@ namespace GameClasses
             }
             return false;
         }
-        static public void PlayerDied() { }
+
+        static public void PlayerDied() {
+            // game over
+        }
     }
 }

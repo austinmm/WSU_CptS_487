@@ -1,8 +1,8 @@
 namespace GameClasses
 {
-    public class EnemeyFactory
+    public static class EnemeyFactory
     {
-        public Enemy GetEnemy(EnemyType type)
+        public static Enemy CreateEnemy(EnemyType type)
         {
             switch (type) {
                 case EnemyType.Easy:

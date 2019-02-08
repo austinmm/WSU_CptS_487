@@ -43,23 +43,23 @@ namespace GameClasses
             {
                 case GameBoardConfigs.Stage1:
                     for (int i = 0; i < 3; i++) {
-                        GameBoard.VisibleEnemies.Add(new Easy());
+                        GameBoard.VisibleEnemies.Add(EnemeyFactory.CreateEnemy(EnemyType.Easy));
                     }
-                    for (int i = 0; i < 3; i++) {
-                        GameBoard.VisibleEnemies.Add(new Medium());
+                    for (int i = 0; i < 2; i++) {
+                        GameBoard.VisibleEnemies.Add(EnemeyFactory.CreateEnemy(EnemyType.Medium));
                     }
                     break;
                 case GameBoardConfigs.Stage2:
                     for (int i = 0; i < 3; i++) {
-                        GameBoard.VisibleEnemies.Add(new Medium());
+                        GameBoard.VisibleEnemies.Add(EnemeyFactory.CreateEnemy(EnemyType.Medium));
                     }
-                    GameBoard.VisibleEnemies.Add(new MidBoss());
+                    GameBoard.VisibleEnemies.Add(EnemeyFactory.CreateEnemy(EnemyType.MidBoss));
                     break;
                 case GameBoardConfigs.Stage3:
-                    for (int i = 0; i < 3; i++) {
-                        GameBoard.VisibleEnemies.Add(new Hard());
+                    for (int i = 0; i < 2; i++) {
+                        GameBoard.VisibleEnemies.Add(EnemeyFactory.CreateEnemy(EnemyType.Hard));
                     }
-                    GameBoard.VisibleEnemies.Add(new FinalBoss());
+                    GameBoard.VisibleEnemies.Add(EnemeyFactory.CreateEnemy(EnemyType.FinalBoss));
                     break;
             }
         }

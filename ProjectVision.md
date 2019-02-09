@@ -16,7 +16,6 @@ Each new level / wave has a sound that says "Shake N Bake!!"
 
 * Regular play with grunts
 * Mid Boss Attack
-* Bosses need more sophisticated attacks
 * More Grunts
 * Final Boss
 

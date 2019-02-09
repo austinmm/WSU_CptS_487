@@ -10,6 +10,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Threading;
 using System.Diagnostics;
+using ShakeAndBake;
 
 namespace GameClasses
 {
@@ -30,8 +31,7 @@ namespace GameClasses
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            // draw enemy here
-            
+
             base.Draw(spriteBatch);
         }
     }

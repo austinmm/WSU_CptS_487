@@ -11,6 +11,8 @@ using System.ComponentModel;
 using System.Threading;
 using System.Diagnostics;
 
+using ShakeAndBake;
+
 namespace GameClasses
 {
     public class Easy : Enemy
@@ -23,16 +25,14 @@ namespace GameClasses
         
         public override void Update(GameTime gameTime)
         {
-            // update enemy here
-
             base.Update(gameTime);
+            
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            // draw enemy here
-     
-            base.Draw(spriteBatch);
+            base.Draw(spriteBatch); 
+            spriteBatch.Draw(ShakeAndBakeGame.circle, new Vector2(50, 50), Color.White);
         }
     }
 }

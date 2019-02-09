@@ -10,6 +10,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Threading;
 using System.Diagnostics;
+using ShakeAndBake;
 
 namespace GameClasses
 {
@@ -84,15 +85,16 @@ namespace GameClasses
             {
                 this.UpdateProjectiles(gameTime);
             }
+            // update character in derived enemy/player classes
         }
-
+        
         public override void Draw(SpriteBatch spriteBatch)
         {
             foreach (Projectile projectile in projectiles)
             {
                 projectile.Draw(spriteBatch);
             }
-            // draw character here or in derived enemy/player classes
+            // draw character in derived enemy/player classes
         }
 
         private void OnProjectileChange(object sender, NotifyCollectionChangedEventArgs e)

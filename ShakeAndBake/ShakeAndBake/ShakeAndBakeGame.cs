@@ -32,6 +32,8 @@ namespace ShakeAndBake
             base.Initialize();
         }
 
+        public static Texture2D circle, player;
+
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
@@ -40,8 +42,9 @@ namespace ShakeAndBake
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
+            
+            circle = Content.Load<Texture2D>("circle");
+            player = Content.Load<Texture2D>("player");
         }
 
         /// <summary>
@@ -50,7 +53,7 @@ namespace ShakeAndBake
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            Content.Unload();
         }
 
         /// <summary>

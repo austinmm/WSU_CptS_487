@@ -1,14 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Threading;
-using System.Diagnostics;
 
 namespace GameClasses
 {
@@ -88,8 +80,8 @@ namespace GameClasses
         private CollisionBucket FetchBucket(GameObject gameObject)
         {
             Vector2 coordinates = GetCoordinates(gameObject.Position);
-            if (!IsValidBucketCoordinates(coordinates.X, coordinates.Y))
-                return null;
+            // if (!IsValidBucketCoordinates(coordinates.X, coordinates.Y))
+            //     return null;
 
             CollisionBucket bucket = collisionBuckets[(int)coordinates.X][(int)coordinates.Y];
             return bucket;
@@ -105,8 +97,10 @@ namespace GameClasses
 	x and y are always integers because they are BUCKET coordinates (i.e. indices on collisionBuckets)
 	, NOT regular coordinates
 	****/
-            return !(coordinates.X >= this.width || coordinates.X < 0
-              || coordinates.Y >= this.height || coordinates.Y < 0);            
+            // return !(coordinates.X >= this.width || coordinates.X < 0
+            //   || coordinates.Y >= this.height || coordinates.Y < 0); 
+              return false;
+
         }
 
         private CollisionBucket FetchBucket(GameObject gameObject, int xOffset, int yOffset)

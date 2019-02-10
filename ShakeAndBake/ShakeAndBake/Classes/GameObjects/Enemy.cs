@@ -19,14 +19,14 @@ namespace GameClasses
 
         //Enemy Constructor
         public Enemy() : base() {
-            
-         }
+            HitBoxRadius = 50;
+        }
 
         //Updates the 
         public override void Update(GameTime gameTime)
         {
             //Fire a new projectile if firerate field will allow
-            this.FireProjectile();
+            //this.FireProjectile();
 
             //Move Enemy to new position in its set path
             position = path.NextPoint();

@@ -2,15 +2,10 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Threading;
 using System.Diagnostics;
-using ShakeAndBake;
 
 namespace GameClasses
 {
@@ -28,7 +23,7 @@ namespace GameClasses
         }
 
         //This contains the time the character last fired a projectile (Milliseconds)
-        protected Nullable<double> lastFiredTime;
+        protected double? lastFiredTime;
         public Nullable<double> LastFiredTime
         {
             get { return this.lastFiredTime; }
@@ -76,6 +71,7 @@ namespace GameClasses
             this.timeAlive.Start();
             this.ProjectileTypes = new List<ProjectileTypes>();
             this.projectiles = new ObservableCollection<Projectile>();
+
             projectiles.CollectionChanged += OnProjectileChange;
         }
         
@@ -87,7 +83,7 @@ namespace GameClasses
             }
             // update character in derived enemy/player classes
         }
-        
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             foreach (Projectile projectile in projectiles)
@@ -138,7 +134,8 @@ namespace GameClasses
             if (this.CanFire())
             {
                 //Creates a new projectile to be added to the character's ObservableCollection of projectiles
-                Projectile projectile = new Projectile(new StraightPath(this.position, new Vector2(0, 1), 2));
+                Projectile projectile = new PlayerBullet(new StraightPath(Vector2.Subtract(this.position, new Vector2(0, 20)), new Vector2(0, -1), 2));
+                
                 //The projectiles position is set to the current character's position
                 projectile.Position = this.position;
                 this.projectiles.Add(projectile);
@@ -151,7 +148,7 @@ namespace GameClasses
             if (this.lastFiredTime.HasValue)
             {
                 //if the character has to wait longer until they can fire another projectile
-                if (this.lastFiredTime + this.fireRate < this.timeAlive.ElapsedMilliseconds)
+                if (this.timeAlive.ElapsedMilliseconds < this.lastFiredTime + this.fireRate)
                 {
                     return false;
                 }

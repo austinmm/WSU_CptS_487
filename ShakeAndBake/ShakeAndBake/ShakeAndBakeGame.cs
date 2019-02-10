@@ -10,12 +10,15 @@ namespace ShakeAndBake
     /// </summary>
     public class ShakeAndBakeGame : Game
     {
-        GraphicsDeviceManager graphics;
+        public static GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
         public ShakeAndBakeGame()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = 900;
+            graphics.PreferredBackBufferHeight = 700;
+            graphics.ApplyChanges();
             Content.RootDirectory = "Content";
         }
 
@@ -32,7 +35,7 @@ namespace ShakeAndBake
             base.Initialize();
         }
 
-        public static Texture2D circle, player;
+        public static Texture2D circle, player, playerBullet;
 
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
@@ -45,6 +48,7 @@ namespace ShakeAndBake
             
             circle = Content.Load<Texture2D>("circle");
             player = Content.Load<Texture2D>("player");
+            playerBullet = Content.Load<Texture2D>("player_bullet");
         }
 
         /// <summary>
@@ -80,7 +84,7 @@ namespace ShakeAndBake
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
             GameBoard.Draw(spriteBatch);

@@ -1,20 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Threading;
-using System.Diagnostics;
 
 namespace GameClasses
 {
     //https://docs.microsoft.com/en-us/dotnet/api/system.collections.objectmodel.observablecollection-1?view=netframework-4.7.2
     //https://dotnetcodr.com/2015/05/29/getting-notified-when-collection-changes-with-observablecollection-in-c-net/
-    public enum GameBoardConfigs { Stage1, Stage2, Stage3 }
+    public enum GameBoardConfigs { Phase1, Phase2, Phase3, Phase4 }
     
     public static class EnemyPaths
     {

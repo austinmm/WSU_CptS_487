@@ -1,16 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Threading;
-using System.Diagnostics;
 using ShakeAndBake;
 
 namespace GameClasses
@@ -18,12 +8,16 @@ namespace GameClasses
     public class Player : Character
     {
         public Player() : base() {
-
+            Velocity = 3;
+            Acceleration = 2;
+            FireRate = 40;
+            sprite = ShakeAndBakeGame.player;
         }
         
         public override void Update(GameTime gameTime)
         {
-            Console.WriteLine(" " + Keyboard.GetState());
+            base.Update(gameTime);
+
             KeyboardState state = Keyboard.GetState();//gets the state of the keyboard and checks the combos as follows
             //utilizes the left control as the switch between speed modes essentially halving the speed when pressed.
             if (state.IsKeyDown(Keys.LeftControl))
@@ -37,11 +31,14 @@ namespace GameClasses
             //Spacebar fires user projectile
             if (state.IsKeyDown(Keys.Space))
             {
-                this.FireProjectile();
+                FireProjectile();
             }
 
-            Velocity = 3;
-            Acceleration = 1;
+            if (!isInWindow())
+            {    
+                return;
+            }
+
 
             //down right
             if (state.IsKeyDown(Keys.Right) && state.IsKeyDown(Keys.Down) && !(state.IsKeyDown(Keys.Left)) && !(state.IsKeyDown(Keys.Up)))
@@ -91,14 +88,27 @@ namespace GameClasses
             {
                 this.position.Y = Position.Y + (float)(Velocity * Acceleration);
             }
-            base.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            base.Draw(spriteBatch);
             spriteBatch.Draw(ShakeAndBakeGame.player, position, Color.White);
         }
-        
+
+        public override void FireProjectile()
+        {
+            if (!this.CanFire()) return;
+            Vector2 pos = Vector2.Add(position, new Vector2((ShakeAndBakeGame.player.Width - ShakeAndBakeGame.playerBullet.Width) / 2,
+             -ShakeAndBakeGame.playerBullet.Height));
+            Projectile projectile = new PlayerBullet(new StraightPath(pos, new Vector2(0, -1), 3));
+            projectile.Sprite = ShakeAndBakeGame.playerBullet;
+            
+            //The projectiles position is set to the current character's position
+            projectile.Position = pos;
+            this.projectiles.Add(projectile);
+        }
+
         //Checks if any of the player's projectiles have hit the visable enimies on the GameBoard
         protected override void CheckForHits(Projectile projectile)
         {

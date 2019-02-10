@@ -1,15 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Threading;
-using System.Diagnostics;
 
 using ShakeAndBake;
 
@@ -32,7 +22,7 @@ namespace GameClasses
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch); 
-            spriteBatch.Draw(ShakeAndBakeGame.circle, new Vector2(50, 50), Color.White);
+            spriteBatch.Draw(ShakeAndBakeGame.circle, position, Color.White);
         }
     }
 }

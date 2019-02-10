@@ -1,20 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Threading;
-using System.Diagnostics;
+using ShakeAndBake;
 
 namespace GameClasses
 {
     public abstract class GameObject
     {
+        protected Texture2D sprite;
+        public Texture2D Sprite
+        {
+            get { return this.sprite; }
+            set { this.sprite = value; }
+        }
+
         //Used to determine if object has been destroyed or not
         protected bool isDestroyed;
         public bool IsDestroyed
@@ -62,16 +60,30 @@ namespace GameClasses
 
         public virtual void Update(GameTime gameTime) { }
 
-        static private bool IsInBounds(Vector2 coordinates)
+        // checks if the game object is in the game window
+        public bool isInWindow()
         {
-            double Min_Window_X = 0, Max_Window_X = 100;
-            double Min_Window_Y = 0, Max_Window_Y = 100;
-            if ((coordinates.X > Max_Window_X || coordinates.X < Min_Window_X) ||
-                (coordinates.Y > Max_Window_Y || coordinates.Y < Min_Window_Y))
+            if (sprite == null) return false;
+            int windowWidth = ShakeAndBakeGame.graphics.GraphicsDevice.Viewport.Width;
+            int windowHeight = ShakeAndBakeGame.graphics.GraphicsDevice.Viewport.Height;
+            if (position.X < 0 || position.Y < 0
+                || position.X + sprite.Width > windowWidth
+                || position.Y + sprite.Height > windowHeight)
             {
                 return false;
             }
             return true;
+        }
+
+        // checks if pos is in the sprite texture bounds
+        public bool BoundsContains(Vector2 coords)
+        {
+            if (coords.X >= position.X && coords.X <= position.X + sprite.Width &&
+                coords.Y >= position.Y && coords.Y <= position.Y + sprite.Height)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

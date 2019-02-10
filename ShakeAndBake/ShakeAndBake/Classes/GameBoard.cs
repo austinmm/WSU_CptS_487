@@ -1,16 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Threading;
-using System.Diagnostics;
+using ShakeAndBake;
 
 namespace GameClasses
 {
@@ -83,9 +77,29 @@ namespace GameClasses
         {
             visibleEnemies = new ObservableCollection<Enemy>();
             deadEnemies = new List<Enemy>();
+
             user = new Player();
+            int width = ShakeAndBakeGame.graphics.GraphicsDevice.Viewport.Width;
+            int height = ShakeAndBakeGame.graphics.GraphicsDevice.Viewport.Height;
+            user.Position = new Vector2((width /2 - ShakeAndBakeGame.player.Width / 2),
+             height - ShakeAndBakeGame.player.Height - 50);
+
             //When enemy is added or removed from collection "updateEnimies" is automatically called
             visibleEnemies.CollectionChanged += UpdateEnemies;
+        }
+
+        static Random rand = new Random();
+
+        static public void AddEnemy(EnemyType type)
+        {
+            Enemy enemy = EnemeyFactory.CreateEnemy(type);
+
+            int width = ShakeAndBakeGame.graphics.GraphicsDevice.Viewport.Width;
+            int height = ShakeAndBakeGame.graphics.GraphicsDevice.Viewport.Height;
+
+            enemy.Position = new Vector2(rand.Next(0, width), 0);
+            enemy.Path = new StraightPath(enemy.Position, new Vector2(0, 1), 2);
+            visibleEnemies.Add(enemy);
         }
 
         //When an Enemy is added or removed from the ObservableCollection "visibleEnemies"
@@ -114,6 +128,13 @@ namespace GameClasses
             //Call update on all our visible enemies, this will automatically update their projectiles as well
             foreach (Enemy enemy in visibleEnemies)
             {
+                foreach (Projectile p in user.Projectiles)
+                {
+                    if (IsHit(enemy, p))
+                    {
+                        enemy.IsDestroyed = true;
+                    }
+                }
                 enemy.Update(gameTime);
             }
             //check deadEnimies list to see if they have any projectiles left on the board
@@ -131,7 +152,10 @@ namespace GameClasses
         {
             foreach (Enemy enemy in visibleEnemies)
             {
-                enemy.Draw(spriteBatch);
+                if (!enemy.IsDestroyed)
+                {
+                    enemy.Draw(spriteBatch);
+                }
             }
             // draw player last
             user.Draw(spriteBatch);
@@ -141,14 +165,12 @@ namespace GameClasses
         {
             if (character != null && projectile != null)
             {
-                //Unsure if logic is corrects
+                //Unsure if logic is correct
                 double xLow = character.Position.X - character.HitBoxRadius;
                 double xHigh = character.Position.X - character.HitBoxRadius;
                 double yLow = character.Position.Y - character.HitBoxRadius;
                 double yHigh = character.Position.Y - character.HitBoxRadius;
-                if (projectile.Position.X >= xLow && projectile.Position.X >= xHigh
-                    && projectile.Position.Y >= yLow && projectile.Position.Y >= yHigh)
-                {
+                if (projectile.Position.X >= xLow && projectile.Position.X >= xHigh) {
                     //character is Hit
                     character.Health -= projectile.HitDamage;
                     //Check if character is dead
@@ -166,6 +188,7 @@ namespace GameClasses
                         }
                         return true;
                     }
+                    return true;
                 }
             }
             return false;

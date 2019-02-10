@@ -1,14 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
+using Microsoft.Xna.Framework.Graphics;
 using System.ComponentModel;
-using System.Threading;
-using System.Diagnostics;
+using ShakeAndBake;
 
 namespace GameClasses
 {
@@ -50,12 +43,15 @@ namespace GameClasses
         {
             base.Update(gameTime);
             
+            if (!isInWindow()) return;
+
             //Update the position of the projectile based off of its spritePath
             position = path.NextPoint();
             
             //Tell the event handler that the projectile has moved and thus it needs to check if it has hit an enemy or player
             RaisePropertyChanged("Projectile_Position_Changed");
         }
+
         //https://github.com/jbe2277/waf/wiki/Implementing-and-usage-of-INotifyPropertyChanged
         protected void RaisePropertyChanged(string propertyName)
         {
@@ -69,6 +65,19 @@ namespace GameClasses
             {
                 PropertyChanged(this, property);
             }
+        }
+    }
+
+    public class PlayerBullet : Projectile
+    {
+        public PlayerBullet(Path path) : base(path)
+        {
+            
+        }
+        
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(ShakeAndBakeGame.playerBullet, position, Color.White);
         }
     }
 }

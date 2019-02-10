@@ -6,7 +6,6 @@ namespace GameClasses
     //GameController is static since their can only be one GameController in existance at any given time
     static class GameController
     {
-        //Maybe Make a Tuple??
         //Contains a list of all different stages available
         static private List<GameBoardConfigs> stages;
         static public List<GameBoardConfigs> Stages
@@ -27,10 +26,11 @@ namespace GameClasses
         static GameController()
         {
             stages = new List<GameBoardConfigs>();
-            stages.Add(GameBoardConfigs.Stage1);
-            stages.Add(GameBoardConfigs.Stage2);
-            stages.Add(GameBoardConfigs.Stage3);
-            
+            stages.Add(GameBoardConfigs.Phase1);
+            stages.Add(GameBoardConfigs.Phase2);
+            stages.Add(GameBoardConfigs.Phase3);
+            stages.Add(GameBoardConfigs.Phase4);
+
             currentStage = 0;
             ConfigureNextStage();
         }
@@ -38,28 +38,31 @@ namespace GameClasses
         //Changes the GameBoard class to reflect the current stage
         static public void ConfigureNextStage()
         {
-            GameBoardConfigs stage = stages[currentStage];
-            switch (stage)
+            GameBoardConfigs phase = stages[currentStage];
+            switch (phase)
             {
-                case GameBoardConfigs.Stage1:
+                case GameBoardConfigs.Phase1:
                     for (int i = 0; i < 3; i++) {
-                        GameBoard.VisibleEnemies.Add(EnemeyFactory.CreateEnemy(EnemyType.Easy));
+                        GameBoard.AddEnemy(EnemyType.Easy);
                     }
                     for (int i = 0; i < 2; i++) {
-                        GameBoard.VisibleEnemies.Add(EnemeyFactory.CreateEnemy(EnemyType.Medium));
+                        GameBoard.AddEnemy(EnemyType.Medium);
                     }
                     break;
-                case GameBoardConfigs.Stage2:
+                case GameBoardConfigs.Phase2:
                     for (int i = 0; i < 3; i++) {
-                        GameBoard.VisibleEnemies.Add(EnemeyFactory.CreateEnemy(EnemyType.Medium));
+                        GameBoard.AddEnemy(EnemyType.Medium);
                     }
-                    GameBoard.VisibleEnemies.Add(EnemeyFactory.CreateEnemy(EnemyType.MidBoss));
+                    GameBoard.AddEnemy(EnemyType.MidBoss);
                     break;
-                case GameBoardConfigs.Stage3:
+                case GameBoardConfigs.Phase3:
                     for (int i = 0; i < 3; i++) {
-                        GameBoard.VisibleEnemies.Add(EnemeyFactory.CreateEnemy(EnemyType.Hard));
+                        GameBoard.AddEnemy(EnemyType.Hard);
                     }
-                    GameBoard.VisibleEnemies.Add(EnemeyFactory.CreateEnemy(EnemyType.FinalBoss));
+                    GameBoard.AddEnemy(EnemyType.FinalBoss);
+                    break;
+                case GameBoardConfigs.Phase4:
+
                     break;
             }
         }

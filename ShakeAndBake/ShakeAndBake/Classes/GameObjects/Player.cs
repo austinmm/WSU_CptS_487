@@ -49,8 +49,14 @@ namespace GameClasses
                 //if result is out of the window undo the change in position
                 if (!isInWindow())
                 {
-                    this.position.X = Position.X - xChange;
-                    this.position.Y = Position.Y - yChange;
+                    if (!isInWindowHeight())
+                    {
+                        this.position.Y = Position.Y - yChange;
+                    }
+                    if (!isInWindowWidth())
+                    {
+                        this.position.X = Position.X - xChange;
+                    }
                 }
             }
             //up right
@@ -63,8 +69,14 @@ namespace GameClasses
                 //if result is out of the window undo the change in position
                 if (!isInWindow())
                 {
-                    this.position.X = Position.X - xChange;
-                    this.position.Y = Position.Y + yChange;
+                    if (!isInWindowHeight())
+                    {
+                        this.position.Y = Position.Y + yChange;
+                    }
+                    if (!isInWindowWidth())
+                    {
+                        this.position.X = Position.X - xChange;
+                    }
                 }
             }
             //right
@@ -89,8 +101,14 @@ namespace GameClasses
                 //if result is out of the window undo the change in position
                 if (!isInWindow())
                 {
-                    this.position.X = Position.X + xChange;
-                    this.position.Y = Position.Y - yChange;
+                    if (!isInWindowHeight())
+                    {
+                        this.position.Y = Position.Y - yChange;
+                    }
+                    if (!isInWindowWidth())
+                    {
+                        this.position.X = Position.X + xChange;
+                    }
                 }
             }
             //left up
@@ -103,8 +121,14 @@ namespace GameClasses
                 //if result is out of the window undo the change in position
                 if (!isInWindow())
                 {
-                    this.position.X = Position.X + xChange;
-                    this.position.Y = Position.Y + yChange;
+                    if (!isInWindowHeight())
+                    {
+                        this.position.Y = Position.Y + yChange;
+                    }
+                    if (!isInWindowWidth())
+                    {
+                        this.position.X = Position.X + xChange;
+                    }
                 }
             }
             //left

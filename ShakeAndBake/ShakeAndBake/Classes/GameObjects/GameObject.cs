@@ -75,6 +75,28 @@ namespace GameClasses
             return true;
         }
 
+        public bool isInWindowWidth()
+        {
+            if (sprite == null) return false;
+            int windowWidth = ShakeAndBakeGame.graphics.GraphicsDevice.Viewport.Width;
+            if (position.X < 0 || position.X + sprite.Width > windowWidth)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool isInWindowHeight()
+        {
+            if (sprite == null) return false;
+            int windowHeight = ShakeAndBakeGame.graphics.GraphicsDevice.Viewport.Height;
+            if (position.Y < 0 || position.Y + sprite.Height > windowHeight)
+            {
+                return false;
+            }
+            return true;
+        }
+
         // checks if pos is in the sprite texture bounds
         public bool BoundsContains(Vector2 coords)
         {

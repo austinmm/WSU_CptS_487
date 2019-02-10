@@ -23,13 +23,17 @@ Each new level / wave has a sound that says "Shake N Bake!!"
 
 1. Regular Play w/ Grunts:
     * The first wave will render 10 Enemies; however, only four will ever be on the screen at one time.
-        * Easy Enemy (7): 10 Health and 5pts. Projectile Damage.
-        * Medium Enemy (3): 25 Health and 15pts. Projectile Damage.
     * Everytime and Enemy dies a new one is rendered on screen until all 10 have been killed.
-    * The Enemies will shoot 2 projectile patterns, Straight and Triangle.
+    * The Enemies will be...
+        * Easy Enemy (7): 10 Health and 5pts Projectile Damage.
+        * Medium Enemy (3): 25 Health and 15pts Projectile Damage.
+    * The Enemy Projectiles will be...
+        * Easy Enemy: Straight Path (Rockets)
+        * Medium Enemy: Triangle Path (Fire Balls)
     * The Player will have...
-        * 100 Health.
-        * Projectiles that shoot straight and will be 5pts. Damage.
+        * 100 Health
+        * Projectiles: Straight Path (Lazers) - 5pts Damage
+    * Once all 10 enemies are killed then Mid Boss Attack begins.
 2. Mid Boss Attack:
 3. More Grunts:
 4. Final Boss:

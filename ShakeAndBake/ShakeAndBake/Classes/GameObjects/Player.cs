@@ -34,59 +34,111 @@ namespace GameClasses
                 FireProjectile();
             }
 
-            if (!isInWindow())
-            {    
-                return;
-            }
+            //variables to hold calculations preventing redundant calculations
+            float xChange = (float)(Velocity * Acceleration);
+            float yChange = (float)(Velocity * Acceleration);
 
 
             //down right
             if (state.IsKeyDown(Keys.Right) && state.IsKeyDown(Keys.Down) && !(state.IsKeyDown(Keys.Left)) && !(state.IsKeyDown(Keys.Up)))
             {
                 //looking into better computation for diagonal cause this moves farther than it should
-                this.position.X = Position.X + (float)(Velocity * Acceleration);
-                this.position.Y = Position.Y + (float)(Velocity * Acceleration);
+                this.position.X = Position.X + xChange;
+                this.position.Y = Position.Y + yChange;
+
+                //if result is out of the window undo the change in position
+                if (!isInWindow())
+                {
+                    this.position.X = Position.X - xChange;
+                    this.position.Y = Position.Y - yChange;
+                }
             }
             //up right
             if (state.IsKeyDown(Keys.Right) && state.IsKeyDown(Keys.Up) && !(state.IsKeyDown(Keys.Left)) && !(state.IsKeyDown(Keys.Down)))
             {
                 //looking into better computation for diagonal cause this moves farther than it should
-                this.position.X = Position.X + (float)(Velocity * Acceleration);
-                this.position.Y = Position.Y - (float)(Velocity * Acceleration);
+                this.position.X = Position.X + xChange;
+                this.position.Y = Position.Y - yChange;
+
+                //if result is out of the window undo the change in position
+                if (!isInWindow())
+                {
+                    this.position.X = Position.X - xChange;
+                    this.position.Y = Position.Y + yChange;
+                }
             }
             //right
             if (state.IsKeyDown(Keys.Right) && !(state.IsKeyDown(Keys.Up)) && !(state.IsKeyDown(Keys.Down)) && !(state.IsKeyDown(Keys.Left)))
             {
-                this.position.X = Position.X + (float)(Velocity * Acceleration);
+                this.position.X = Position.X + xChange;
+
+                //if result is out of the window undo the change in position
+                if (!isInWindow())
+                {
+                    this.position.X = Position.X - xChange;
+                }
+
             }
             //left down
             if (state.IsKeyDown(Keys.Left) && state.IsKeyDown(Keys.Down) && !(state.IsKeyDown(Keys.Up)) && !(state.IsKeyDown(Keys.Right)))
             {
                 //looking into better computation for diagonal cause this moves farther than it should
-                this.position.X = Position.X - (float)(Velocity * Acceleration);
-                this.position.Y = Position.Y + (float)(Velocity * Acceleration);
+                this.position.X = Position.X - xChange;
+                this.position.Y = Position.Y + yChange;
+
+                //if result is out of the window undo the change in position
+                if (!isInWindow())
+                {
+                    this.position.X = Position.X + xChange;
+                    this.position.Y = Position.Y - yChange;
+                }
             }
             //left up
             if (state.IsKeyDown(Keys.Left) && state.IsKeyDown(Keys.Up) && !(state.IsKeyDown(Keys.Down)) && !(state.IsKeyDown(Keys.Right)))
             {
                 //looking into better computation for diagonal cause this moves farther than it should
-                this.position.X = Position.X - (float)(Velocity * Acceleration);
-                this.position.Y = Position.Y - (float)(Velocity * Acceleration);
+                this.position.X = Position.X - xChange;
+                this.position.Y = Position.Y - yChange;
+
+                //if result is out of the window undo the change in position
+                if (!isInWindow())
+                {
+                    this.position.X = Position.X + xChange;
+                    this.position.Y = Position.Y + yChange;
+                }
             }
             //left
             if (state.IsKeyDown(Keys.Left) && !(state.IsKeyDown(Keys.Up)) && !(state.IsKeyDown(Keys.Down)) && !(state.IsKeyDown(Keys.Right)))
             {
-                this.position.X = Position.X - (float)(Velocity * Acceleration);
+                this.position.X = Position.X - xChange;
+
+                //if result is out of the window undo the change in position
+                if (!isInWindow())
+                {
+                    this.position.X = Position.X + xChange;
+                }
             }
             //up
             if (state.IsKeyDown(Keys.Up) && !(state.IsKeyDown(Keys.Left)) && !(state.IsKeyDown(Keys.Right)) && !(state.IsKeyDown(Keys.Down)))
             {
-                this.position.Y = Position.Y - (float)(Velocity * Acceleration);
+                this.position.Y = Position.Y - yChange;
+
+                //if result is out of the window undo the change in position
+                if (!isInWindow())
+                {
+                    this.position.Y = Position.Y + yChange;
+                }
             }
             //down
             if (state.IsKeyDown(Keys.Down) && !(state.IsKeyDown(Keys.Left)) && !(state.IsKeyDown(Keys.Right)) && !(state.IsKeyDown(Keys.Up)))
             {
-                this.position.Y = Position.Y + (float)(Velocity * Acceleration);
+                this.position.Y = Position.Y + yChange;
+
+                //if result is out of the window undo the change in position
+                if (!isInWindow())
+                {
+                    this.position.Y = Position.Y - yChange;
+                }
             }
         }
 

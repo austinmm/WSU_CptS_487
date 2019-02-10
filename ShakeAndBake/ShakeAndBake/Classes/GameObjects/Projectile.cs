@@ -43,7 +43,11 @@ namespace GameClasses
         {
             base.Update(gameTime);
             
-            if (!isInWindow()) return;
+            if (position.Y + this.sprite.Height < 0) 
+            {
+                IsDestroyed = true;
+                return;
+            }
 
             //Update the position of the projectile based off of its spritePath
             position = path.NextPoint();
@@ -72,12 +76,12 @@ namespace GameClasses
     {
         public PlayerBullet(Path path) : base(path)
         {
-            
+            sprite = ShakeAndBakeGame.playerBullet;
         }
         
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(ShakeAndBakeGame.playerBullet, position, Color.White);
+            spriteBatch.Draw(sprite, position, Color.White);
         }
     }
 }

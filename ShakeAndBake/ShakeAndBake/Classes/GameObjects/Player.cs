@@ -20,11 +20,11 @@ namespace GameClasses
 
             KeyboardState state = Keyboard.GetState();//gets the state of the keyboard and checks the combos as follows
             //utilizes the left control as the switch between speed modes essentially halving the speed when pressed.
-            if (state.IsKeyDown(Keys.LeftControl))
+            if (state.IsKeyDown(Keys.S))
             {
                 GameBoard.GameSpeed = 1;
             }
-            if (state.IsKeyUp(Keys.LeftControl))
+            if (state.IsKeyUp(Keys.S))
             {
                 GameBoard.GameSpeed = 2;
             }
@@ -49,11 +49,11 @@ namespace GameClasses
                 //if result is out of the window undo the change in position
                 if (!isInWindow())
                 {
-                    if (!isInWindowHeight())
+                    if (!IsInWindowHeight())
                     {
                         this.position.Y = Position.Y - yChange;
                     }
-                    if (!isInWindowWidth())
+                    if (!IsInWindowWidth())
                     {
                         this.position.X = Position.X - xChange;
                     }
@@ -69,11 +69,11 @@ namespace GameClasses
                 //if result is out of the window undo the change in position
                 if (!isInWindow())
                 {
-                    if (!isInWindowHeight())
+                    if (!IsInWindowHeight())
                     {
                         this.position.Y = Position.Y + yChange;
                     }
-                    if (!isInWindowWidth())
+                    if (!IsInWindowWidth())
                     {
                         this.position.X = Position.X - xChange;
                     }
@@ -101,11 +101,11 @@ namespace GameClasses
                 //if result is out of the window undo the change in position
                 if (!isInWindow())
                 {
-                    if (!isInWindowHeight())
+                    if (!IsInWindowHeight())
                     {
                         this.position.Y = Position.Y - yChange;
                     }
-                    if (!isInWindowWidth())
+                    if (!IsInWindowWidth())
                     {
                         this.position.X = Position.X + xChange;
                     }
@@ -121,11 +121,11 @@ namespace GameClasses
                 //if result is out of the window undo the change in position
                 if (!isInWindow())
                 {
-                    if (!isInWindowHeight())
+                    if (!IsInWindowHeight())
                     {
                         this.position.Y = Position.Y + yChange;
                     }
-                    if (!isInWindowWidth())
+                    if (!IsInWindowWidth())
                     {
                         this.position.X = Position.X + xChange;
                     }
@@ -179,7 +179,7 @@ namespace GameClasses
              -ShakeAndBakeGame.playerBullet.Height));
             Projectile projectile = new PlayerBullet(new StraightPath(pos, new Vector2(0, -1), 3));
             projectile.Sprite = ShakeAndBakeGame.playerBullet;
-            
+
             //The projectiles position is set to the current character's position
             projectile.Position = pos;
             this.projectiles.Add(projectile);

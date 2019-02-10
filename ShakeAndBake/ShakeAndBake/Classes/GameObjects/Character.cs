@@ -88,7 +88,9 @@ namespace GameClasses
         {
             foreach (Projectile projectile in projectiles)
             {
-                projectile.Draw(spriteBatch);
+                if (!projectile.IsDestroyed) {
+                    projectile.Draw(spriteBatch);
+                }
             }
             // draw character in derived enemy/player classes
         }

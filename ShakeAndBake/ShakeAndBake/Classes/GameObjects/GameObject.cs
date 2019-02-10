@@ -75,7 +75,7 @@ namespace GameClasses
             return true;
         }
 
-        public bool isInWindowWidth()
+        public bool IsInWindowWidth()
         {
             if (sprite == null) return false;
             int windowWidth = ShakeAndBakeGame.graphics.GraphicsDevice.Viewport.Width;
@@ -86,7 +86,7 @@ namespace GameClasses
             return true;
         }
 
-        public bool isInWindowHeight()
+        public bool IsInWindowHeight()
         {
             if (sprite == null) return false;
             int windowHeight = ShakeAndBakeGame.graphics.GraphicsDevice.Viewport.Height;

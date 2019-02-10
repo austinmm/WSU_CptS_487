@@ -98,6 +98,7 @@ namespace GameClasses
             int height = ShakeAndBakeGame.graphics.GraphicsDevice.Viewport.Height;
 
             enemy.Position = new Vector2(rand.Next(0, width), 0);
+            enemy.Acceleration = rand.Next(1, 3);
             enemy.Path = new StraightPath(enemy.Position, new Vector2(0, 1), 2);
             visibleEnemies.Add(enemy);
         }
@@ -128,34 +129,40 @@ namespace GameClasses
             //Call update on all our visible enemies, this will automatically update their projectiles as well
             foreach (Enemy enemy in visibleEnemies)
             {
-                foreach (Projectile p in user.Projectiles)
+                // must iterate using index to remove from list while iterating
+                for (int i = 0; i < user.Projectiles.Count; i++)
                 {
+                    Projectile p = user.Projectiles[i];
+                    if (p.IsDestroyed)
+                    {
+                        user.Projectiles.RemoveAt(i);
+                        continue;
+                    }
                     if (IsHit(enemy, p))
                     {
                         enemy.IsDestroyed = true;
+                        deadEnemies.Add(enemy);
                     }
                 }
                 enemy.Update(gameTime);
             }
             //check deadEnimies list to see if they have any projectiles left on the board
-            foreach (Enemy enemy in deadEnemies)
+            for (int i = 0; i < deadEnemies.Count; i++)
             {
+                Enemy enemy = deadEnemies[i];
                 enemy.Update(gameTime);
                 if (enemy.Projectiles.Count == 0)
                 {
-                    deadEnemies.Remove(enemy);
+                    deadEnemies.RemoveAt(i);
                 }
             }
         }
-
+        
         static public void Draw(SpriteBatch spriteBatch)
         {
             foreach (Enemy enemy in visibleEnemies)
             {
-                if (!enemy.IsDestroyed)
-                {
-                    enemy.Draw(spriteBatch);
-                }
+                enemy.Draw(spriteBatch);
             }
             // draw player last
             user.Draw(spriteBatch);

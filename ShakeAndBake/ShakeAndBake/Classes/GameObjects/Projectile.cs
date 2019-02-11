@@ -72,6 +72,8 @@ namespace GameClasses
                 {
                     if (go.IsDestroyed)
                         continue;
+
+                    /* TODO: Replace this with a function which does damage instead of instant kill */
                     go.IsDestroyed = true;
                     this.IsDestroyed = true;
                 }
@@ -82,6 +84,8 @@ namespace GameClasses
                     {
                         if (go.IsDestroyed)
                             continue;
+
+                        /* TODO: Replace this with a function which does damage instead of instant kill */
                         go.IsDestroyed = true;
                         this.IsDestroyed = true;
                     }

@@ -6,6 +6,18 @@ namespace GameClasses
     //GameController is static since their can only be one GameController in existance at any given time
     static class GameController
     {
+        public enum GameState
+        {
+            PLAYING, GAMEOVER
+        }
+
+        static private GameState gameState;
+        static public GameState State
+        {
+            get { return gameState; }
+            set { gameState = value; }
+        }
+
         //Contains a list of all different stages available
         static private List<GameBoardConfigs> stages;
         static public List<GameBoardConfigs> Stages
@@ -31,6 +43,7 @@ namespace GameClasses
             stages.Add(GameBoardConfigs.Phase3);
             stages.Add(GameBoardConfigs.Phase4);
 
+            State = GameState.PLAYING;
             currentStage = 0;
             ConfigureNextStage();
         }
@@ -78,7 +91,7 @@ namespace GameClasses
                 //New stage
                 if (++currentStage >= stages.Count)
                 {
-                    //TODO: end the game here, showing a win screen
+                    State = GameState.GAMEOVER;
                     return;
                 }
                 ConfigureNextStage();

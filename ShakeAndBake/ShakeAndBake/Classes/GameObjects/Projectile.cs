@@ -40,10 +40,9 @@ namespace GameClasses
         }
 
         public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-            
-            if (position.Y + this.sprite.Height < 0) 
+        {            
+            if (position.Y + this.sprite.Height < 0 ||
+                position.Y > ShakeAndBakeGame.graphics.GraphicsDevice.Viewport.Height) 
             {
                 IsDestroyed = true;
                 return;
@@ -77,6 +76,19 @@ namespace GameClasses
         public PlayerBullet(Path path) : base(path)
         {
             sprite = ShakeAndBakeGame.playerBullet;
+        }
+        
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(sprite, position, Color.White);
+        }
+    }
+
+    public class EnemyBullet : Projectile
+    {
+        public EnemyBullet(Path path) : base(path)
+        {
+            sprite = ShakeAndBakeGame.enemyBullet;
         }
         
         public override void Draw(SpriteBatch spriteBatch)

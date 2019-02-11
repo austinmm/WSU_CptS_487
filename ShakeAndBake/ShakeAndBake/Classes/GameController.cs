@@ -42,7 +42,7 @@ namespace GameClasses
             switch (phase)
             {
                 case GameBoardConfigs.Phase1:
-                    for (int i = 0; i < 3; i++) {
+                    for (int i = 0; i < 5; i++) {
                         GameBoard.AddEnemy(EnemyType.Easy);
                     }
                     for (int i = 0; i < 2; i++) {
@@ -50,19 +50,20 @@ namespace GameClasses
                     }
                     break;
                 case GameBoardConfigs.Phase2:
-                    for (int i = 0; i < 3; i++) {
-                        GameBoard.AddEnemy(EnemyType.Medium);
+                    for (int i = 0; i < 2; i++) {
+                        GameBoard.AddEnemy(EnemyType.MidBoss);
                     }
-                    GameBoard.AddEnemy(EnemyType.MidBoss);
                     break;
                 case GameBoardConfigs.Phase3:
                     for (int i = 0; i < 3; i++) {
+                        GameBoard.AddEnemy(EnemyType.Medium);
+                    }
+                    for (int i = 0; i < 2; i++) {
                         GameBoard.AddEnemy(EnemyType.Hard);
                     }
-                    GameBoard.AddEnemy(EnemyType.FinalBoss);
                     break;
                 case GameBoardConfigs.Phase4:
-
+                    GameBoard.AddEnemy(EnemyType.FinalBoss);
                     break;
             }
         }
@@ -70,12 +71,15 @@ namespace GameClasses
         //Checks if current stage has finished
         static public void CheckBoard(GameTime gameTime)
         {
-            //if no enemies left then update stage
-            int enemyCount = GameBoard.VisibleEnemies.Count;
-            if (enemyCount == 0 && GameBoard.EnemiesLeft == 0)
+            //if no enemies left then update to next stage
+            if (GameBoard.VisibleEnemies.Count == 0)
             {
                 //New stage
-                CurrentStage++;
+                if (++currentStage >= stages.Count)
+                {
+                    //TODO: end the game here, showing a win screen
+                    return;
+                }
                 ConfigureNextStage();
             }
         }

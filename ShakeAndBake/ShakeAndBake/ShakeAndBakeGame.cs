@@ -35,7 +35,7 @@ namespace ShakeAndBake
             base.Initialize();
         }
 
-        public static Texture2D circle, player, playerBullet;
+        public static Texture2D circle, player, playerBullet, enemyBullet;
 
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
@@ -49,8 +49,9 @@ namespace ShakeAndBake
             circle = Content.Load<Texture2D>("circle");
             player = Content.Load<Texture2D>("player");
             playerBullet = Content.Load<Texture2D>("player_bullet");
+            enemyBullet = Content.Load<Texture2D>("enemy_bullet");
         }
-
+        
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
         /// game-specific content.

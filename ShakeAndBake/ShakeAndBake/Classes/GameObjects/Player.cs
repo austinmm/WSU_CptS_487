@@ -10,7 +10,7 @@ namespace GameClasses
         public Player() : base() {
             Velocity = 3;
             Acceleration = 2;
-            FireRate = 40;
+            FireRate = 60;
             sprite = ShakeAndBakeGame.player;
         }
         
@@ -170,6 +170,7 @@ namespace GameClasses
         {
             base.Draw(spriteBatch);
             spriteBatch.Draw(ShakeAndBakeGame.player, position, Color.White);
+            //spriteBatch.DrawString(null, "" + this.health, position, Color.White);
         }
 
         public override void FireProjectile()
@@ -178,8 +179,7 @@ namespace GameClasses
             Vector2 pos = Vector2.Add(position, new Vector2((ShakeAndBakeGame.player.Width - ShakeAndBakeGame.playerBullet.Width) / 2,
              -ShakeAndBakeGame.playerBullet.Height));
             Projectile projectile = new PlayerBullet(new StraightPath(pos, new Vector2(0, -1), 3));
-            projectile.Sprite = ShakeAndBakeGame.playerBullet;
-
+      
             //The projectiles position is set to the current character's position
             projectile.Position = pos;
             this.projectiles.Add(projectile);

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ShakeAndBake;
 
 namespace GameClasses
 {
@@ -9,19 +10,19 @@ namespace GameClasses
         public Medium() : base()
         {
             this.path = EnemyPaths.DefaultPath(this.position, new Vector2(0, 1));
+            sprite = ShakeAndBakeGame.circle;
         }
         
         public override void Update(GameTime gameTime)
         {
-            // update enemy here
-
             base.Update(gameTime);
+            
         }
-
+        
         public override void Draw(SpriteBatch spriteBatch)
         {
-
-            base.Draw(spriteBatch);
+            base.Draw(spriteBatch); 
+            spriteBatch.Draw(sprite, position, Color.White);
         }
     }
 }

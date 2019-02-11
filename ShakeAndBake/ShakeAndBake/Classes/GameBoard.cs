@@ -40,13 +40,6 @@ namespace GameClasses
                 }
             }
         }
-        //Contains a list of all enemies currently visible on the gameboard
-        static private int enemiesLeft;
-        static public int EnemiesLeft
-        {
-            get { return enemiesLeft; }
-            set { enemiesLeft = value; }
-        }
 
         //Contains a list of all enemies currently visible on the gameboard
         static private ObservableCollection<Enemy> visibleEnemies;
@@ -81,8 +74,8 @@ namespace GameClasses
             user = new Player();
             int width = ShakeAndBakeGame.graphics.GraphicsDevice.Viewport.Width;
             int height = ShakeAndBakeGame.graphics.GraphicsDevice.Viewport.Height;
-            user.Position = new Vector2((width /2 - ShakeAndBakeGame.player.Width / 2),
-             height - ShakeAndBakeGame.player.Height - 50);
+            user.Position = new Vector2((width / 2 - ShakeAndBakeGame.player.Width / 2),
+             height - ShakeAndBakeGame.player.Height);
 
             //When enemy is added or removed from collection "updateEnimies" is automatically called
             visibleEnemies.CollectionChanged += UpdateEnemies;
@@ -97,9 +90,11 @@ namespace GameClasses
             int width = ShakeAndBakeGame.graphics.GraphicsDevice.Viewport.Width;
             int height = ShakeAndBakeGame.graphics.GraphicsDevice.Viewport.Height;
 
-            enemy.Position = new Vector2(rand.Next(0, width), 0);
-            enemy.Acceleration = rand.Next(1, 3);
-            enemy.Path = new StraightPath(enemy.Position, new Vector2(0, 1), 2);
+            // spawn enemy on top of screen, randomly between the width of the screen
+            enemy.Position = new Vector2(rand.Next(0, width - enemy.Sprite.Width), -enemy.Sprite.Height);
+            double velocity = Util.randDouble(1, 3);
+            enemy.Velocity = velocity;
+            enemy.Path = new StraightPath(enemy.Position, new Vector2(0, 1), (float) velocity);
             visibleEnemies.Add(enemy);
         }
 
@@ -127,8 +122,15 @@ namespace GameClasses
         {
             user.Update(gameTime);
             //Call update on all our visible enemies, this will automatically update their projectiles as well
-            foreach (Enemy enemy in visibleEnemies)
+            for (int j = 0; j < visibleEnemies.Count; j++)
             {
+                Enemy enemy = visibleEnemies[j];
+                if (enemy.IsDestroyed)
+                {
+                    visibleEnemies.RemoveAt(j);
+                    deadEnemies.Add(enemy);
+                    continue;
+                }
                 // must iterate using index to remove from list while iterating
                 for (int i = 0; i < user.Projectiles.Count; i++)
                 {
@@ -140,11 +142,20 @@ namespace GameClasses
                     }
                     if (IsHit(enemy, p))
                     {
+                        // player hit enemy, so remove enemy and the projectile
                         enemy.IsDestroyed = true;
+                        visibleEnemies.RemoveAt(j);
                         deadEnemies.Add(enemy);
+
+                        p.IsDestroyed = true;
+                        user.Projectiles.RemoveAt(i);
+                        break;
                     }
                 }
-                enemy.Update(gameTime);
+                if (!enemy.IsDestroyed)
+                {
+                    enemy.Update(gameTime);
+                }
             }
             //check deadEnimies list to see if they have any projectiles left on the board
             for (int i = 0; i < deadEnemies.Count; i++)
@@ -157,7 +168,7 @@ namespace GameClasses
                 }
             }
         }
-        
+
         static public void Draw(SpriteBatch spriteBatch)
         {
             foreach (Enemy enemy in visibleEnemies)
@@ -167,17 +178,19 @@ namespace GameClasses
             // draw player last
             user.Draw(spriteBatch);
         }
-
+        
         static public bool IsHit(Character character, Projectile projectile)
         {
             if (character != null && projectile != null)
             {
+                if (character.BoundsContains(projectile.Position))
+                {
                 //Unsure if logic is correct
-                double xLow = character.Position.X - character.HitBoxRadius;
-                double xHigh = character.Position.X - character.HitBoxRadius;
-                double yLow = character.Position.Y - character.HitBoxRadius;
-                double yHigh = character.Position.Y - character.HitBoxRadius;
-                if (projectile.Position.X >= xLow && projectile.Position.X >= xHigh) {
+                // double xLow = character.Position.X - character.HitBoxRadius;
+                // double xHigh = character.Position.X - character.HitBoxRadius;
+                // double yLow = character.Position.Y - character.HitBoxRadius;
+                // double yHigh = character.Position.Y - character.HitBoxRadius;
+                // if (projectile.Position.X >= xLow && projectile.Position.X >= xHigh) {
                     //character is Hit
                     character.Health -= projectile.HitDamage;
                     //Check if character is dead

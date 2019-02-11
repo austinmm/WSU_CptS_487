@@ -131,18 +131,7 @@ namespace GameClasses
             }
         }
 
-        public virtual void FireProjectile()
-        {
-            if (this.CanFire())
-            {
-                //Creates a new projectile to be added to the character's ObservableCollection of projectiles
-                Projectile projectile = new PlayerBullet(new StraightPath(Vector2.Subtract(this.position, new Vector2(0, 20)), new Vector2(0, -1), 2));
-                
-                //The projectiles position is set to the current character's position
-                projectile.Position = this.position;
-                this.projectiles.Add(projectile);
-            }
-        }
+        public virtual void FireProjectile() {}
 
         protected bool CanFire()
         {

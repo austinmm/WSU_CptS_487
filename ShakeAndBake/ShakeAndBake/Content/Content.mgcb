@@ -37,6 +37,18 @@
 /processorParam:TextureFormat=Color
 /build:circle.png
 
+#begin monster_bullet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:monster_bullet.png;enemy_bullet.png
+
 #begin player.png
 /importer:TextureImporter
 /processor:TextureProcessor

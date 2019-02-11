@@ -58,7 +58,7 @@ namespace GameClasses
         
         public virtual void Draw(SpriteBatch spriteBatch) { }
 
-        public virtual void Update(GameTime gameTime) { }
+        public virtual void Update(GameTime gameTime, CollisionBoard cb) { }
 
         // checks if the game object is in the game window
         public bool isInWindow()

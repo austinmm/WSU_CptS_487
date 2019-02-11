@@ -12,9 +12,9 @@ namespace GameClasses
             sprite = ShakeAndBakeGame.circle;
         }
         
-        public override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime, CollisionBoard cb)
         {
-            base.Update(gameTime);
+            base.Update(gameTime, cb);
             
         }
         

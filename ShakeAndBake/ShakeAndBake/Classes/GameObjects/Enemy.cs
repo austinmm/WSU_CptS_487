@@ -30,6 +30,15 @@ namespace GameClasses
             //Move Enemy to new position in its set path
             position = path.NextPoint();
 
+            // random shake effect for bosses, just to add variety right now (move to appropriate classes later)
+            if (this is MidBoss)
+            {
+                position.X = position.X + (float)Util.randDouble(1, 25);
+            } else if (this is FinalBoss)
+            {
+                position.X = position.X + (float)Util.randDouble(1, 50);
+            }
+
             // enemy went off screen without dying, so destroy it
             if (position.Y > ShakeAndBakeGame.graphics.GraphicsDevice.Viewport.Height)
             {

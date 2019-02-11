@@ -64,11 +64,10 @@ namespace GameClasses
                 {
                     /* For all game objects in the bucket, if within the collision region add to return set */                
                     foreach (GameObject go in cb.GetObjects()) {
-                        if (!go.GetType().IsSubclassOf(type))
+                        if (!go.GetType().IsSubclassOf(type) && !go.GetType().Equals(type))
                             continue;
-
-                        if (Vector2.Distance(gameObject.Position, go.Position) <= radius
-                         || Vector2.Distance(gameObject.Position, go.Position) <= go.HitBoxRadius)
+                        if (gameObject.BoundsContains(go.Position)
+                            || go.BoundsContains(gameObject.Position))
                         {
                             ret.Add(go);
                         }

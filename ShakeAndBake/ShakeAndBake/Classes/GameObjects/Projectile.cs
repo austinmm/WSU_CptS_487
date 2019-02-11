@@ -62,16 +62,29 @@ namespace GameClasses
             cb.FillBucket(this);
 
             if (this.GetType().Equals(typeof(EnemyBullet))) {
-                //Do not need collision board for this! Player position is already known
             }
             else if (this.GetType().Equals(typeof(PlayerBullet)))
             {
-                //Look for collisions with player
-                HashSet<GameObject> collided = cb.GetObjectsCollided(this, typeof(Enemy));
+                HashSet<GameObject> collidedEnemies = cb.GetObjectsCollided(this, typeof(Enemy));
+                HashSet<GameObject> collidedBullets = cb.GetObjectsCollided(this, typeof(EnemyBullet));
 
-                foreach (Enemy go in collided)
+                foreach (Enemy go in collidedEnemies)
                 {
+                    if (go.IsDestroyed)
+                        continue;
                     go.IsDestroyed = true;
+                    this.IsDestroyed = true;
+                }
+
+                if (!this.IsDestroyed)
+                {
+                    foreach (EnemyBullet go in collidedBullets)
+                    {
+                        if (go.IsDestroyed)
+                            continue;
+                        go.IsDestroyed = true;
+                        this.IsDestroyed = true;
+                    }
                 }
             }
 
@@ -99,6 +112,7 @@ namespace GameClasses
         public PlayerBullet(Path path) : base(path)
         {
             sprite = ShakeAndBakeGame.playerBullet;
+            this.hitBoxRadius = sprite.Width/2;
         }
         
         public override void Draw(SpriteBatch spriteBatch)
@@ -112,8 +126,9 @@ namespace GameClasses
         public EnemyBullet(Path path) : base(path)
         {
             sprite = ShakeAndBakeGame.enemyBullet;
+            this.hitBoxRadius = sprite.Width/2;
         }
-        
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(sprite, position, Color.White);

@@ -1,24 +1,19 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Threading;
 using System.Diagnostics;
 
 namespace GameClasses
 {
-
-
-
     public abstract class Character : GameObject
     {
         //Used to invoke the characters update 
         private event PropertyChangedEventHandler ProjectilePropertyChanged;
+
         //This contains the amount of time the character has been alive for
         protected Stopwatch timeAlive;
         public Stopwatch TimeAlive
@@ -26,13 +21,15 @@ namespace GameClasses
             get { return this.timeAlive; }
             set { this.timeAlive = value; }
         }
+
         //This contains the time the character last fired a projectile (Milliseconds)
-        protected Nullable<double> lastFiredTime;
+        protected double? lastFiredTime;
         public Nullable<double> LastFiredTime
         {
             get { return this.lastFiredTime; }
             set { this.lastFiredTime = value; }
         }
+
         //This contains the speed at which the character can fire their projectiles (Milliseconds)
         protected double fireRate;
         public double FireRate
@@ -40,6 +37,7 @@ namespace GameClasses
             get { return this.fireRate; }
             set { this.fireRate = value; }
         }
+
         //This contains the amount of health a character has left
         protected double health;
         public double Health
@@ -47,6 +45,7 @@ namespace GameClasses
             get { return this.health; }
             set { this.health = value; }
         }
+
         //Tuple???
         //This contains a list of all the projectile types the character is allowed to fire
         protected List<ProjectileTypes> projectileTypes;
@@ -55,6 +54,7 @@ namespace GameClasses
             get { return this.projectileTypes; }
             set { this.projectileTypes = value; }
         }
+
         //This contains a ObservableCollection of all the projectiles the character currently has
         protected ObservableCollection<Projectile> projectiles;
         public ObservableCollection<Projectile> Projectiles
@@ -62,6 +62,7 @@ namespace GameClasses
             get { return this.projectiles; }
             set { this.projectiles = value; }
         }
+
         public Character() : base()
         {
             //When projectiles are added or removed from the ObservableCollection then "OnProjectileChange" is automatically called
@@ -70,16 +71,30 @@ namespace GameClasses
             this.timeAlive.Start();
             this.ProjectileTypes = new List<ProjectileTypes>();
             this.projectiles = new ObservableCollection<Projectile>();
+
             projectiles.CollectionChanged += OnProjectileChange;
         }
-        public override void Update()
+        
+        public override void Update(GameTime gameTime)
         {
             if (!this.isDestroyed)
             {
-                base.Update();
-                this.UpdateProjectiles();
+                this.UpdateProjectiles(gameTime);
             }
+            // update character in derived enemy/player classes
         }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            foreach (Projectile projectile in projectiles)
+            {
+                if (!projectile.IsDestroyed) {
+                    projectile.Draw(spriteBatch);
+                }
+            }
+            // draw character in derived enemy/player classes
+        }
+
         private void OnProjectileChange(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
@@ -92,14 +107,16 @@ namespace GameClasses
             }
             if (e.OldItems != null) { }
         }
-        public void UpdateProjectiles()
+
+        public void UpdateProjectiles(GameTime gameTime)
         {
             //Update existing bullets already fired by the character
             foreach (Projectile projectile in this.projectiles)
             {
-                projectile.Update();
+                projectile.Update(gameTime);
             }
         }
+
         //Invoked when a projectile is updated
         private void Projectile_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -113,24 +130,16 @@ namespace GameClasses
                 this.ProjectilePropertyChanged(sender, e);
             }
         }
-        public virtual void FireProjectile()
-        {
-            if (this.CanFire())
-            {
-                //Creates a new projectile to be added to the character's ObservableCollection of projectiles
-                Projectile projectile = new Projectile();
-                //The projectiles position is set to the current character's position
-                projectile.Position = this.position;
-                this.projectiles.Add(projectile);
-            }
-        }
+
+        public virtual void FireProjectile() {}
+
         protected bool CanFire()
         {
             //character has fired atleast one projectile
             if (this.lastFiredTime.HasValue)
             {
                 //if the character has to wait longer until they can fire another projectile
-                if (this.lastFiredTime + this.fireRate < this.timeAlive.ElapsedMilliseconds)
+                if (this.timeAlive.ElapsedMilliseconds < this.lastFiredTime + this.fireRate)
                 {
                     return false;
                 }
@@ -139,6 +148,7 @@ namespace GameClasses
             this.lastFiredTime = this.timeAlive.ElapsedMilliseconds;
             return true;
         }
+
         protected abstract void CheckForHits(Projectile projectile);
     }
 }

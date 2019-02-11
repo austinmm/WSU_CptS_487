@@ -85,6 +85,13 @@ namespace ShakeAndBake
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+            if (GameController.State == GameController.GameState.GAMEOVER)
+            {
+                // TODO game over screen, handle in game board?
+                GraphicsDevice.Clear(Color.LimeGreen);
+                return;
+            }
+
             GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();

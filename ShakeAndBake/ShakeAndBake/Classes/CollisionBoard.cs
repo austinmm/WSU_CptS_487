@@ -13,8 +13,9 @@ namespace GameClasses
 
         public CollisionBoard(int windowHeight, int windowWidth, int bucketWidth) {
             this.collisionBuckets = new List<List<CollisionBucket>>();
-            this.width = windowWidth / bucketWidth;
-            this.height = windowHeight / bucketWidth;
+
+            this.width = windowWidth / bucketWidth + bucketWidth;
+            this.height = windowHeight / bucketWidth + bucketWidth;
 
             for (int i = 0; i < this.width; ++i)
             {
@@ -63,7 +64,7 @@ namespace GameClasses
                 {
                     /* For all game objects in the bucket, if within the collision region add to return set */                
                     foreach (GameObject go in cb.GetObjects()) {
-                        if (go.GetType() != type)
+                        if (!go.GetType().IsSubclassOf(type))
                             continue;
 
                         if (Vector2.Distance(gameObject.Position, go.Position) <= radius
@@ -80,8 +81,8 @@ namespace GameClasses
         private CollisionBucket FetchBucket(GameObject gameObject)
         {
             Vector2 coordinates = GetCoordinates(gameObject.Position);
-            // if (!IsValidBucketCoordinates(coordinates.X, coordinates.Y))
-            //     return null;
+             if (!IsValidBucketCoordinates((int)coordinates.X, (int)coordinates.Y))
+                 return null;
 
             CollisionBucket bucket = collisionBuckets[(int)coordinates.X][(int)coordinates.Y];
             return bucket;
@@ -92,15 +93,8 @@ namespace GameClasses
 	*/
         private Boolean IsValidBucketCoordinates(int x, int y)
         {
-	/***
-
-	x and y are always integers because they are BUCKET coordinates (i.e. indices on collisionBuckets)
-	, NOT regular coordinates
-	****/
-            // return !(coordinates.X >= this.width || coordinates.X < 0
-            //   || coordinates.Y >= this.height || coordinates.Y < 0); 
-              return false;
-
+             return !(x >= this.width || x < 0
+               || y >= this.height || y < 0); 
         }
 
         private CollisionBucket FetchBucket(GameObject gameObject, int xOffset, int yOffset)
@@ -118,12 +112,21 @@ namespace GameClasses
         public void FillBucket(GameObject gameObject) 
         {
             CollisionBucket bucket = FetchBucket(gameObject);
+            
+            if (bucket == null)
+            {
+                return;
+            }
             bucket.AddElement(gameObject);
         }
 
         public Boolean RemoveFromBucketIfExists(GameObject gameObject)
         {
+            var t = gameObject;
             CollisionBucket bucket = FetchBucket(gameObject);
+            if (bucket == null)
+                return false;
+
             return bucket.RemoveElement(gameObject);
         }
     }

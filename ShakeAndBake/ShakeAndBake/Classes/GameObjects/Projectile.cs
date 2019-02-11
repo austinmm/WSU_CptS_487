@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.ComponentModel;
 using ShakeAndBake;
+using System.Collections.Generic;
 
 namespace GameClasses
 {
@@ -39,20 +40,42 @@ namespace GameClasses
             this.path = path;
         }
 
-        public override void Update(GameTime gameTime)
-        {            
+        public override void Update(GameTime gameTime, CollisionBoard cb)
+        {
             if (position.Y + this.sprite.Height < 0 ||
-                position.Y > ShakeAndBakeGame.graphics.GraphicsDevice.Viewport.Height) 
+                position.Y > ShakeAndBakeGame.graphics.GraphicsDevice.Viewport.Height)
             {
                 IsDestroyed = true;
                 return;
             }
 
+            //Before updating position, remove current bucket position on collision board
+            cb.RemoveFromBucketIfExists(this);
+
             //Update the position of the projectile based off of its spritePath
             position = path.NextPoint();
-            
+
             //Tell the event handler that the projectile has moved and thus it needs to check if it has hit an enemy or player
             RaisePropertyChanged("Projectile_Position_Changed");
+
+            //Fill bucket on collision board
+            cb.FillBucket(this);
+
+            if (this.GetType().Equals(typeof(EnemyBullet))) {
+                //Do not need collision board for this! Player position is already known
+            }
+            else if (this.GetType().Equals(typeof(PlayerBullet)))
+            {
+                //Look for collisions with player
+                HashSet<GameObject> collided = cb.GetObjectsCollided(this, typeof(Enemy));
+
+                foreach (Enemy go in collided)
+                {
+                    go.IsDestroyed = true;
+                }
+            }
+
+            //cb.GetObjectsCollided(this, GameObject)
         }
 
         //https://github.com/jbe2277/waf/wiki/Implementing-and-usage-of-INotifyPropertyChanged

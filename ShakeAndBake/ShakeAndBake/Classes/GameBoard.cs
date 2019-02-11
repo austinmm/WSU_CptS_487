@@ -12,6 +12,7 @@ namespace GameClasses
     static class GameBoard
     {
         //Variable containing the overall speed of the game changed by player input for speed mode
+        static private CollisionBoard collisionBoard;
         static private double gameSpeed;
         static public double GameSpeed
         {
@@ -68,6 +69,10 @@ namespace GameClasses
         //Constructor for GameBoard class
         static GameBoard()
         {
+            collisionBoard = new CollisionBoard(ShakeAndBakeGame.graphics.GraphicsDevice.Viewport.Height,
+                ShakeAndBakeGame.graphics.GraphicsDevice.Viewport.Width,
+                ShakeAndBakeGame.player.Width);
+
             visibleEnemies = new ObservableCollection<Enemy>();
             deadEnemies = new List<Enemy>();
 
@@ -120,7 +125,7 @@ namespace GameClasses
         //MultiThread this Method call
         static public void UpdateBoard(GameTime gameTime)
         {
-            user.Update(gameTime);
+            user.Update(gameTime, collisionBoard);
             //Call update on all our visible enemies, this will automatically update their projectiles as well
             for (int j = 0; j < visibleEnemies.Count; j++)
             {
@@ -140,7 +145,7 @@ namespace GameClasses
                         user.Projectiles.RemoveAt(i);
                         continue;
                     }
-                    if (IsHit(enemy, p))
+                    if (enemy.IsDestroyed)
                     {
                         // player hit enemy, so remove enemy and the projectile
                         enemy.IsDestroyed = true;
@@ -149,19 +154,21 @@ namespace GameClasses
 
                         p.IsDestroyed = true;
                         user.Projectiles.RemoveAt(i);
+
+                        collisionBoard.RemoveFromBucketIfExists(enemy);
                         break;
                     }
                 }
                 if (!enemy.IsDestroyed)
                 {
-                    enemy.Update(gameTime);
+                    enemy.Update(gameTime, collisionBoard);
                 }
             }
             //check deadEnimies list to see if they have any projectiles left on the board
             for (int i = 0; i < deadEnemies.Count; i++)
             {
                 Enemy enemy = deadEnemies[i];
-                enemy.Update(gameTime);
+                enemy.Update(gameTime, collisionBoard);
                 if (enemy.Projectiles.Count == 0)
                 {
                     deadEnemies.RemoveAt(i);
@@ -217,6 +224,11 @@ namespace GameClasses
         // called before configuring a phase
         static public void Reset()
         {
+
+            collisionBoard = new CollisionBoard(ShakeAndBakeGame.graphics.GraphicsDevice.Viewport.Width,
+                ShakeAndBakeGame.graphics.GraphicsDevice.Viewport.Height,
+                ShakeAndBakeGame.player.Width);
+
             // clear player bullets
             user.Projectiles.Clear();
         }

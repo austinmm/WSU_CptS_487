@@ -214,6 +214,13 @@ namespace GameClasses
             return false;
         }
 
+        // called before configuring a phase
+        static public void Reset()
+        {
+            // clear player bullets
+            user.Projectiles.Clear();
+        }
+        
         static public void PlayerDied() {
             // game over
         }

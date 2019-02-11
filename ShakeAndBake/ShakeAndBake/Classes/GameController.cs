@@ -38,6 +38,7 @@ namespace GameClasses
         //Changes the GameBoard class to reflect the current stage
         static public void ConfigureNextStage()
         {
+            GameBoard.Reset();
             GameBoardConfigs phase = stages[currentStage];
             switch (phase)
             {

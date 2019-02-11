@@ -26,8 +26,8 @@ Each new level / wave has a sound that says "Shake N Bake!!"
 | Phase Three  | More Grunts            | 75  | 15  | Hard - 10      | Medium - 5 | Circle   | Spiral Down  |
 | Phase Four   | Final Boss             | 100 | 1   | Final Boss - 1 | N/A        | Firework | Checkerboard |
 
-#### 1. Regular Play w/ Grunts:
-* The first wave will render 10 Enemies; however, only four will ever be on the screen at one time.
+#### Phase 1. Regular Play w/ Grunts:
+* The first phase will render 10 Enemies; however, only four will ever be on the screen at one time.
 * Everytime and Enemy dies a new one is rendered on screen until all 10 have been killed.
 * The Enemies will be...
     * Easy Enemy (7): 10 Health and 5pts Projectile Damage
@@ -40,10 +40,10 @@ Each new level / wave has a sound that says "Shake N Bake!!"
     * Projectiles: Straight Path (Lazers) - 5pts Damage
 * Once all 10 enemies are killed then Mid Boss Attack begins.
 
-#### 2. Mid Boss Attack:
+#### Phase 2. Mid Boss Attack:
 * Two Mid Boss Enemies will be rendered during this stage; the first will spawn immediately and the other will spawn shortly after.
 * The Mid Boss Enemies will have...
-    * 10 Health and 5pts Projectile Damage
+    * 80 Health and 15pts Projectile Damage
     * Projectiles:
         * Fire Works (Fire Balls) - 7pts Damage
         * Lazers - 5pts Damage
@@ -51,8 +51,8 @@ Each new level / wave has a sound that says "Shake N Bake!!"
     * 75 Health
     * Projectiles: Straight Path (Lazers) - 8 pts Damage
 
-#### 3. More Grunts:
-* The first wave will render 15 Enemies; one Medium and one Hard enemy will be rendered at a time until none are left of each type.
+#### Phase 3. More Grunts:
+* The third phase will render 15 Enemies; one Medium and one Hard enemy will be rendered at a time until none are left of each type.
 * The Enemies will be...
     * Medium Enemy (5): 25 Health and 15pts Projectile Damage
     * Hard Enemy (10): 35 Health and 20pts Projectile Damage
@@ -63,7 +63,7 @@ Each new level / wave has a sound that says "Shake N Bake!!"
     * 75 Health
     * Projectiles: Straight Path (Lazers) - 6 pts Damage
 
-#### 4. Final Boss:
+#### Phase 4. Final Boss Attack:
 * One Final Boss will be rendered during this stage.
 * The Final Boss will have...
     * 200 Health

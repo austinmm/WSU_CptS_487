@@ -38,6 +38,7 @@
     * Projectiles:
         * Fire Works (Fire Balls) - 7pts Damage
         * Lazers - 5pts Damage
+    * "SHAKE AND BAKE!" sound and visual effects when a Mid Boss is defeated
 * The Player will have...
     * 75 Health
     * Projectiles: Straight Path (Lazers) - 8 pts Damage
@@ -60,13 +61,11 @@
     * 200 Health
     * Projectiles: 
         * Fire Works (Fire Balls) - 10pts Damage
-        * Chekerboard (Arrow Heads) - 15pts Damage 
+        * Chekerboard (Arrow Heads) - 15pts Damage
+    * Attacks Stages:
+        * Spiral array of fire balls - every 10 seconds
+        * Circular array of checkerboard projectiles that expand continuously from the boss - every 5 seconds
+    * "SHAKE AND BAKE!" sound and visual effects when the Final Boss is defeated
 * The Player will have...
     * 100 Health
     * Projectiles: Straight Path (Lazers) - 10pts Damage
-
-##### Bosses
-Bosses need more sophisticated attacks
-Bosss must have two different stages of attack, mimicking the first stage and third stage of the demo video
-01:36-02:22
-03:07-03:52

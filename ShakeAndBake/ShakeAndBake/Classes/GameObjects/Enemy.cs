@@ -25,10 +25,8 @@ namespace GameClasses
         }
 
         //Updates the 
-        public override void Update(GameTime gameTime, CollisionBoard cb)
+        public override void Update(GameTime gameTime)
         {
-            cb.RemoveFromBucketIfExists(this);
-            
             //Move Enemy to new position in its set path
             position = path.NextPoint();
 
@@ -48,12 +46,10 @@ namespace GameClasses
                 return;
             }
 
-            cb.FillBucket(this);
-
             //Fire a new projectile if firerate field will allow
             this.FireProjectile();
             
-            base.Update(gameTime, cb);
+            base.Update(gameTime);  
         }
         
         public override void FireProjectile()

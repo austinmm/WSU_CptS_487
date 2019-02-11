@@ -134,36 +134,28 @@ namespace GameClasses
                 {
                     visibleEnemies.RemoveAt(j);
                     deadEnemies.Add(enemy);
+                    collisionBoard.RemoveFromBucketIfExists(enemy);
                     continue;
                 }
-                // must iterate using index to remove from list while iterating
-                for (int i = 0; i < user.Projectiles.Count; i++)
-                {
-                    Projectile p = user.Projectiles[i];
-                    if (p.IsDestroyed)
-                    {
-                        user.Projectiles.RemoveAt(i);
-                        continue;
-                    }
-                    if (enemy.IsDestroyed)
-                    {
-                        // player hit enemy, so remove enemy and the projectile
-                        enemy.IsDestroyed = true;
-                        visibleEnemies.RemoveAt(j);
-                        deadEnemies.Add(enemy);
-
-                        p.IsDestroyed = true;
-                        user.Projectiles.RemoveAt(i);
-
-                        collisionBoard.RemoveFromBucketIfExists(enemy);
-                        break;
-                    }
-                }
+                
                 if (!enemy.IsDestroyed)
                 {
                     enemy.Update(gameTime, collisionBoard);
                 }
             }
+
+            //Check if player bullets destroyed
+            for (int i = 0; i < user.Projectiles.Count; i++)
+            {
+                Projectile p = user.Projectiles[i];
+                if (p.IsDestroyed)
+                {
+                    user.Projectiles.RemoveAt(i);
+                    collisionBoard.RemoveFromBucketIfExists(p);
+                    continue;
+                }
+            }
+
             //check deadEnimies list to see if they have any projectiles left on the board
             for (int i = 0; i < deadEnemies.Count; i++)
             {

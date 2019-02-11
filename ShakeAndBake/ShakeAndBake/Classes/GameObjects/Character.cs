@@ -75,11 +75,11 @@ namespace GameClasses
             projectiles.CollectionChanged += OnProjectileChange;
         }
         
-        public override void Update(GameTime gameTime, CollisionBoard cb)
+        public override void Update(GameTime gameTime)
         {
             if (!this.isDestroyed)
             {
-                this.UpdateProjectiles(gameTime, cb);
+                this.UpdateProjectiles(gameTime);
             }
             // update character in derived enemy/player classes
         }
@@ -108,12 +108,12 @@ namespace GameClasses
             if (e.OldItems != null) { }
         }
 
-        public void UpdateProjectiles(GameTime gameTime, CollisionBoard cb)
+        public void UpdateProjectiles(GameTime gameTime)
         {
             //Update existing bullets already fired by the character
             foreach (Projectile projectile in this.projectiles)
             {
-                projectile.Update(gameTime, cb);
+                projectile.Update(gameTime);
             }
         }
 
@@ -123,7 +123,7 @@ namespace GameClasses
             //Type cast sender as a Projectile type
             Projectile projectile = sender as Projectile;
             //Checks if the projectile has hit the user's or enemies, dependant on inheriting classes, hitBoxRadius
-            //this.CheckForHits(projectile);
+            this.CheckForHits(projectile);
             if (this.ProjectilePropertyChanged != null)
             {
                 //Passes reference to projectile that changed

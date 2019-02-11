@@ -14,12 +14,9 @@ namespace GameClasses
             sprite = ShakeAndBakeGame.player;
         }
         
-        public override void Update(GameTime gameTime, CollisionBoard cb)
+        public override void Update(GameTime gameTime)
         {
-            //Remove player's collision bucket before update
-            cb.RemoveFromBucketIfExists(this);
-
-            base.Update(gameTime, cb);
+            base.Update(gameTime);
 
             KeyboardState state = Keyboard.GetState();//gets the state of the keyboard and checks the combos as follows
             //utilizes the left control as the switch between speed modes essentially halving the speed when pressed.
@@ -167,9 +164,6 @@ namespace GameClasses
                     this.position.Y = Position.Y - yChange;
                 }
             }
-
-            //Update collision board
-            cb.FillBucket(this);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

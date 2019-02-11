@@ -1,27 +1,22 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
+using Microsoft.Xna.Framework.Graphics;
 using System.ComponentModel;
-using System.Threading;
-using System.Diagnostics;
+using ShakeAndBake;
 
 namespace GameClasses
 {
     public class Projectile : GameObject, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+
         //This is a set path that the projectile objects will travel when update is called
-        protected List<Vector2> path;
-        public List<Vector2> Path
+        protected Path path;
+        public Path Path
         {
             get { return this.path; }
             set { this.path = value; }
         }
+
         //This is the type of the projectile which will determine its image, path, hitDamage
         private ProjectileTypes type;
         public ProjectileTypes Type
@@ -29,6 +24,7 @@ namespace GameClasses
             get { return this.type; }
             set { this.type = value; }
         }
+
         //This is the amount of damage an enemy or player will take if hit by this projectile
         private double hitDamage;
         public double HitDamage
@@ -36,19 +32,29 @@ namespace GameClasses
             get { return this.hitDamage; }
             set { this.hitDamage = value; }
         }
+
         //Projectile Constructor
-        public Projectile()
+        public Projectile(Path path)
         {
-            //changed based on projectile type
-            this.path = ProjectilePaths.EasyPath;
+            this.path = path;
         }
-        public override void Update()
-        {
-            base.Update();
+
+        public override void Update(GameTime gameTime)
+        {            
+            if (position.Y + this.sprite.Height < 0 ||
+                position.Y > ShakeAndBakeGame.graphics.GraphicsDevice.Viewport.Height) 
+            {
+                IsDestroyed = true;
+                return;
+            }
+
             //Update the position of the projectile based off of its spritePath
+            position = path.NextPoint();
+            
             //Tell the event handler that the projectile has moved and thus it needs to check if it has hit an enemy or player
             RaisePropertyChanged("Projectile_Position_Changed");
         }
+
         //https://github.com/jbe2277/waf/wiki/Implementing-and-usage-of-INotifyPropertyChanged
         protected void RaisePropertyChanged(string propertyName)
         {
@@ -62,6 +68,32 @@ namespace GameClasses
             {
                 PropertyChanged(this, property);
             }
+        }
+    }
+
+    public class PlayerBullet : Projectile
+    {
+        public PlayerBullet(Path path) : base(path)
+        {
+            sprite = ShakeAndBakeGame.playerBullet;
+        }
+        
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(sprite, position, Color.White);
+        }
+    }
+
+    public class EnemyBullet : Projectile
+    {
+        public EnemyBullet(Path path) : base(path)
+        {
+            sprite = ShakeAndBakeGame.enemyBullet;
+        }
+        
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(sprite, position, Color.White);
         }
     }
 }

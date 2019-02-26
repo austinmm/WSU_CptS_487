@@ -1,8 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using ShakeAndBake.Model.GameEntity;
 
-namespace GameClasses
+namespace ShakeAndBake.Model
 {
     public class CollisionBoard
     {
@@ -11,10 +12,12 @@ namespace GameClasses
         private int height;
         private int bucketWidth;
 
-        public CollisionBoard(int windowHeight, int windowWidth, int bucketWidth) {
+        public CollisionBoard(int windowHeight, int windowWidth, int bucketWidth)
+        {
             this.collisionBuckets = new List<List<CollisionBucket>>();
-            this.width = windowWidth / bucketWidth;
-            this.height = windowHeight / bucketWidth;
+
+            this.width = windowWidth / bucketWidth + bucketWidth;
+            this.height = windowHeight / bucketWidth + bucketWidth;
 
             for (int i = 0; i < this.width; ++i)
             {
@@ -32,7 +35,8 @@ namespace GameClasses
             return GetCoordinates(position.X, position.Y);
         }
 
-        public Vector2 GetCoordinates(float x, float y) {
+        public Vector2 GetCoordinates(float x, float y)
+        {
             Vector2 ret = new Vector2();
             ret.X = (int)(x / this.bucketWidth);
             ret.Y = (int)(y / this.bucketWidth);
@@ -61,13 +65,13 @@ namespace GameClasses
                 /* null indicates that the coordinates were invalid */
                 if (cb != null)
                 {
-                    /* For all game objects in the bucket, if within the collision region add to return set */                
-                    foreach (GameObject go in cb.GetObjects()) {
-                        if (go.GetType() != type)
+                    /* For all game objects in the bucket, if within the collision region add to return set */
+                    foreach (GameObject go in cb.GetObjects())
+                    {
+                        if (!go.GetType().IsSubclassOf(type) && !go.GetType().Equals(type))
                             continue;
-
-                        if (Vector2.Distance(gameObject.Position, go.Position) <= radius
-                         || Vector2.Distance(gameObject.Position, go.Position) <= go.HitBoxRadius)
+                        if (gameObject.BoundsContains(go.Position)
+                            || go.BoundsContains(gameObject.Position))
                         {
                             ret.Add(go);
                         }
@@ -80,34 +84,27 @@ namespace GameClasses
         private CollisionBucket FetchBucket(GameObject gameObject)
         {
             Vector2 coordinates = GetCoordinates(gameObject.Position);
-            // if (!IsValidBucketCoordinates(coordinates.X, coordinates.Y))
-            //     return null;
+            if (!IsValidBucketCoordinates((int)coordinates.X, (int)coordinates.Y))
+                return null;
 
             CollisionBucket bucket = collisionBuckets[(int)coordinates.X][(int)coordinates.Y];
             return bucket;
         }
 
-	/* This only checks to ensure that x and y do not fall out of bounds on the collision board.
-	   In the future this may have additional checks, but this seems sufficient for now.  
-	*/
+        /* This only checks to ensure that x and y do not fall out of bounds on the collision board.
+           In the future this may have additional checks, but this seems sufficient for now.  
+        */
         private Boolean IsValidBucketCoordinates(int x, int y)
         {
-	/***
-
-	x and y are always integers because they are BUCKET coordinates (i.e. indices on collisionBuckets)
-	, NOT regular coordinates
-	****/
-            // return !(coordinates.X >= this.width || coordinates.X < 0
-            //   || coordinates.Y >= this.height || coordinates.Y < 0); 
-              return false;
-
+            return !(x >= this.width || x < 0
+              || y >= this.height || y < 0);
         }
 
         private CollisionBucket FetchBucket(GameObject gameObject, int xOffset, int yOffset)
         {
             Vector2 coordinates = GetCoordinates(gameObject.Position);
-	    
-	    /* If the coordinates are out of bounds, we return null. */
+
+            /* If the coordinates are out of bounds, we return null. */
             if (!IsValidBucketCoordinates((int)coordinates.X + xOffset, (int)coordinates.Y + yOffset))
                 return null;
 
@@ -115,19 +112,28 @@ namespace GameClasses
             return bucket;
         }
 
-        public void FillBucket(GameObject gameObject) 
+        public void FillBucket(GameObject gameObject)
         {
             CollisionBucket bucket = FetchBucket(gameObject);
+
+            if (bucket == null)
+            {
+                return;
+            }
             bucket.AddElement(gameObject);
         }
 
         public Boolean RemoveFromBucketIfExists(GameObject gameObject)
         {
+            var t = gameObject;
             CollisionBucket bucket = FetchBucket(gameObject);
+            if (bucket == null)
+                return false;
+
             return bucket.RemoveElement(gameObject);
         }
     }
-    
+
     public class CollisionBucket
     {
         private HashSet<GameObject> objects;

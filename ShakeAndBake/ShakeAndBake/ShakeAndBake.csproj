@@ -42,25 +42,27 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Classes\GameBoard.cs" />
-    <Compile Include="Classes\GameController.cs" />
-    <Compile Include="Classes\GameObjects\Character.cs" />
-    <Compile Include="Classes\GameObjects\Enemy.cs" />
-    <Compile Include="Classes\GameObjects\EnemyTypes\EasyEnemy.cs" />
-    <Compile Include="Classes\GameObjects\EnemyTypes\HardEnemy.cs" />
-    <Compile Include="Classes\GameObjects\EnemyTypes\MediumEnemy.cs" />
-    <Compile Include="Classes\GameObjects\GameObject.cs" />
-    <Compile Include="Classes\GameObjects\Player.cs" />
-    <Compile Include="Classes\GameObjects\Projectile.cs" />
-    <Compile Include="Classes\HelperObjects.cs" />
+    <Compile Include="Classes\View\GameBoard.cs" />
+    <Compile Include="Classes\Model\GameData.cs" />
+    <Compile Include="Classes\Controller\GameController.cs" />
+    <Compile Include="Classes\Model\GameEntity\Character.cs" />
+    <Compile Include="Classes\Model\GameEntity\Enemy.cs" />
+    <Compile Include="Classes\Model\GameEntity\EnemyTypes\EasyEnemy.cs" />
+    <Compile Include="Classes\Model\GameEntity\EnemyTypes\HardEnemy.cs" />
+    <Compile Include="Classes\Model\GameEntity\EnemyTypes\MediumEnemy.cs" />
+    <Compile Include="Classes\Extras\GameConfig.cs" />
+    <Compile Include="Classes\Model\GameEntity\GameObject.cs" />
+    <Compile Include="Classes\Model\GameEntity\Player.cs" />
+    <Compile Include="Classes\Model\GameEntity\Projectile.cs" />
+    <Compile Include="Classes\Extras\HelperObjects.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShakeAndBakeGame.cs" />
-    <Compile Include="Classes\Path.cs" />
-    <Compile Include="Classes\GameObjects\EnemyTypes\FinalBoss.cs" />
-    <Compile Include="Classes\GameObjects\EnemyTypes\MidBoss.cs" />
-    <Compile Include="Classes\GameObjects\EnemyFactory.cs" />
-    <Compile Include="Classes\CollisionBoard.cs" />
+    <Compile Include="Classes\Extras\Path.cs" />
+    <Compile Include="Classes\Model\GameEntity\EnemyTypes\FinalBoss.cs" />
+    <Compile Include="Classes\Model\GameEntity\EnemyTypes\MidBoss.cs" />
+    <Compile Include="Classes\Model\EnemyFactory.cs" />
+    <Compile Include="Classes\Model\CollisionBoard.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

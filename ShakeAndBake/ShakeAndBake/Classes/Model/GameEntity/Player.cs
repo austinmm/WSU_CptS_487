@@ -1,32 +1,35 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using ShakeAndBake;
 
-namespace GameClasses
+namespace ShakeAndBake.Model.GameEntity
 {
     public class Player : Character
     {
-        public Player() : base() {
+        public Player() : base()
+        {
             Velocity = 3;
             Acceleration = 2;
             FireRate = 60;
             sprite = ShakeAndBakeGame.player;
         }
-        
-        public override void Update(GameTime gameTime)
+
+        public override void Update(GameTime gameTime, CollisionBoard cb)
         {
-            base.Update(gameTime);
+            //Remove player's collision bucket before update
+            cb.RemoveFromBucketIfExists(this);
+
+            base.Update(gameTime, cb);
 
             KeyboardState state = Keyboard.GetState();//gets the state of the keyboard and checks the combos as follows
             //utilizes the left control as the switch between speed modes essentially halving the speed when pressed.
             if (state.IsKeyDown(Keys.S))
             {
-                GameBoard.GameSpeed = 1;
+                GameConfig.GameSpeed = 1;
             }
             if (state.IsKeyUp(Keys.S))
             {
-                GameBoard.GameSpeed = 2;
+                GameConfig.GameSpeed = 2;
             }
             //Spacebar fires user projectile
             if (state.IsKeyDown(Keys.Space))
@@ -164,6 +167,9 @@ namespace GameClasses
                     this.position.Y = Position.Y - yChange;
                 }
             }
+
+            //Update collision board
+            cb.FillBucket(this);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -179,19 +185,10 @@ namespace GameClasses
             Vector2 pos = Vector2.Add(position, new Vector2((ShakeAndBakeGame.player.Width - ShakeAndBakeGame.playerBullet.Width) / 2,
              -ShakeAndBakeGame.playerBullet.Height));
             Projectile projectile = new PlayerBullet(new StraightPath(pos, new Vector2(0, -1), 3));
-      
+
             //The projectiles position is set to the current character's position
             projectile.Position = pos;
             this.projectiles.Add(projectile);
-        }
-
-        //Checks if any of the player's projectiles have hit the visable enimies on the GameBoard
-        protected override void CheckForHits(Projectile projectile)
-        {
-            foreach (Enemy enemy in GameBoard.VisibleEnemies)
-            {
-                GameBoard.IsHit(enemy, projectile);
-            }
         }
     }
 }

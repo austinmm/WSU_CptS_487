@@ -1,8 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ShakeAndBake;
 
-namespace GameClasses
+namespace ShakeAndBake.Model.GameEntity
 {
     public abstract class GameObject
     {
@@ -20,7 +19,7 @@ namespace GameClasses
             get { return this.isDestroyed; }
             set { this.isDestroyed = value; }
         }
-        
+
         //Holds the current position of the object
         protected Vector2 position;
         public Vector2 Position
@@ -55,17 +54,17 @@ namespace GameClasses
 
         //constructor
         public GameObject() { }
-        
+
         public virtual void Draw(SpriteBatch spriteBatch) { }
 
-        public virtual void Update(GameTime gameTime) { }
+        public virtual void Update(GameTime gameTime, CollisionBoard cb) { }
 
         // checks if the game object is in the game window
         public bool isInWindow()
         {
             if (sprite == null) return false;
-            int windowWidth = ShakeAndBakeGame.graphics.GraphicsDevice.Viewport.Width;
-            int windowHeight = ShakeAndBakeGame.graphics.GraphicsDevice.Viewport.Height;
+            int windowWidth = GameConfig.Width;
+            int windowHeight = GameConfig.Height;
             if (position.X < 0 || position.Y < 0
                 || position.X + sprite.Width > windowWidth
                 || position.Y + sprite.Height > windowHeight)
@@ -78,7 +77,7 @@ namespace GameClasses
         public bool IsInWindowWidth()
         {
             if (sprite == null) return false;
-            int windowWidth = ShakeAndBakeGame.graphics.GraphicsDevice.Viewport.Width;
+            int windowWidth = GameConfig.Width;
             if (position.X < 0 || position.X + sprite.Width > windowWidth)
             {
                 return false;
@@ -89,7 +88,7 @@ namespace GameClasses
         public bool IsInWindowHeight()
         {
             if (sprite == null) return false;
-            int windowHeight = ShakeAndBakeGame.graphics.GraphicsDevice.Viewport.Height;
+            int windowHeight = GameConfig.Height;
             if (position.Y < 0 || position.Y + sprite.Height > windowHeight)
             {
                 return false;

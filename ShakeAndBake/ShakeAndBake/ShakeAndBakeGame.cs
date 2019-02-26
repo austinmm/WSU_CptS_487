@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using GameClasses;
 
 namespace ShakeAndBake
 {
@@ -10,9 +9,13 @@ namespace ShakeAndBake
     /// </summary>
     public class ShakeAndBakeGame : Game
     {
-        public static GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
+        public static Texture2D circle, player, playerBullet, enemyBullet;
+        private View.GameBoard gameBoard;
+        private Controller.GameController gameController;
+        private Model.GameData gameData;
+        //Constructor
         public ShakeAndBakeGame()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -20,6 +23,9 @@ namespace ShakeAndBake
             graphics.PreferredBackBufferHeight = 700;
             graphics.ApplyChanges();
             Content.RootDirectory = "Content";
+            GameConfig.Height = this.graphics.GraphicsDevice.Viewport.Height;
+            GameConfig.Width = this.graphics.GraphicsDevice.Viewport.Width;
+            this.Initialize();
         }
 
         /// <summary>
@@ -31,11 +37,11 @@ namespace ShakeAndBake
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
             base.Initialize();
+            this.gameData = new Model.GameData(ShakeAndBakeGame.player);
+            this.gameBoard = new View.GameBoard(this.gameData);
+            this.gameController = new Controller.GameController(data: this.gameData, board: this.gameBoard);
         }
-
-        public static Texture2D circle, player, playerBullet, enemyBullet;
 
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
@@ -44,8 +50,7 @@ namespace ShakeAndBake
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            
+            spriteBatch = new SpriteBatch(GraphicsDevice);        
             circle = Content.Load<Texture2D>("circle");
             player = Content.Load<Texture2D>("player");
             playerBullet = Content.Load<Texture2D>("player_bullet");
@@ -68,15 +73,25 @@ namespace ShakeAndBake
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
+                || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
                 Exit();
-
-            GameBoard.UpdateBoard(gameTime);
-
+            }
+            this.gameController.Update(gameTime);
+            if (this.gameController.State == GameState.GAMEOVER)
+            {
+                this.GameOver();
+            }
             // Check game after updating game board
-            GameController.CheckBoard(gameTime);
-
             base.Update(gameTime);
+        }
+
+        public void GameOver()
+        {
+            this.gameBoard.GameOver();
+            GraphicsDevice.Clear(Color.LimeGreen);
+            this.Initialize();
         }
 
         /// <summary>
@@ -85,19 +100,10 @@ namespace ShakeAndBake
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            if (GameController.State == GameController.GameState.GAMEOVER)
-            {
-                // TODO game over screen, handle in game board?
-                GraphicsDevice.Clear(Color.LimeGreen);
-                return;
-            }
-
             GraphicsDevice.Clear(Color.Black);
-
             spriteBatch.Begin();
-            GameBoard.Draw(spriteBatch);
+            gameBoard.Draw(spriteBatch);
             spriteBatch.End();
-
             base.Draw(gameTime);
         }
     }

@@ -1,8 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ShakeAndBake;
 
-namespace GameClasses
+namespace ShakeAndBake.Model.GameEntity
 {
     public class MidBoss : Enemy
     {
@@ -11,16 +10,16 @@ namespace GameClasses
         {
             sprite = ShakeAndBakeGame.circle;
         }
-        
-        public override void Update(GameTime gameTime)
+
+        public override void Update(GameTime gameTime, CollisionBoard cb)
         {
-            base.Update(gameTime);
-            
+            base.Update(gameTime, cb);
+
         }
-        
+
         public override void Draw(SpriteBatch spriteBatch)
         {
-            base.Draw(spriteBatch); 
+            base.Draw(spriteBatch);
             spriteBatch.Draw(sprite, position, Color.White);
         }
     }

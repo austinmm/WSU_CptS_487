@@ -1,4 +1,7 @@
-namespace GameClasses
+using System;
+using ShakeAndBake.Model.GameEntity;
+
+namespace ShakeAndBake.Model
 {
     public static class EnemeyFactory
     {

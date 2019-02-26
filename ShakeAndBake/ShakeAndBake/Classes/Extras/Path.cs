@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
-namespace GameClasses
+namespace ShakeAndBake
 {
     public abstract class Path
     {

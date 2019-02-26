@@ -7,7 +7,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 
-namespace GameClasses
+namespace ShakeAndBake.Model.GameEntity
 {
     public abstract class Character : GameObject
     {
@@ -74,12 +74,12 @@ namespace GameClasses
 
             projectiles.CollectionChanged += OnProjectileChange;
         }
-        
-        public override void Update(GameTime gameTime)
+
+        public override void Update(GameTime gameTime, CollisionBoard cb)
         {
             if (!this.isDestroyed)
             {
-                this.UpdateProjectiles(gameTime);
+                this.UpdateProjectiles(gameTime, cb);
             }
             // update character in derived enemy/player classes
         }
@@ -88,7 +88,8 @@ namespace GameClasses
         {
             foreach (Projectile projectile in projectiles)
             {
-                if (!projectile.IsDestroyed) {
+                if (!projectile.IsDestroyed)
+                {
                     projectile.Draw(spriteBatch);
                 }
             }
@@ -108,12 +109,12 @@ namespace GameClasses
             if (e.OldItems != null) { }
         }
 
-        public void UpdateProjectiles(GameTime gameTime)
+        public void UpdateProjectiles(GameTime gameTime, CollisionBoard cb)
         {
             //Update existing bullets already fired by the character
             foreach (Projectile projectile in this.projectiles)
             {
-                projectile.Update(gameTime);
+                projectile.Update(gameTime, cb);
             }
         }
 
@@ -123,7 +124,7 @@ namespace GameClasses
             //Type cast sender as a Projectile type
             Projectile projectile = sender as Projectile;
             //Checks if the projectile has hit the user's or enemies, dependant on inheriting classes, hitBoxRadius
-            this.CheckForHits(projectile);
+            //this.CheckForHits(projectile);
             if (this.ProjectilePropertyChanged != null)
             {
                 //Passes reference to projectile that changed
@@ -131,7 +132,7 @@ namespace GameClasses
             }
         }
 
-        public virtual void FireProjectile() {}
+        public virtual void FireProjectile() { }
 
         protected bool CanFire()
         {
@@ -149,6 +150,6 @@ namespace GameClasses
             return true;
         }
 
-        protected abstract void CheckForHits(Projectile projectile);
+       // protected abstract void CheckForHits(Projectile projectile);
     }
 }

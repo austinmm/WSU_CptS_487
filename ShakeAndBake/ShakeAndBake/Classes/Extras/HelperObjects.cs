@@ -1,8 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 
-namespace GameClasses
+namespace ShakeAndBake
 {
+    public enum EnemyType
+    {
+        Easy, Medium, Hard, MidBoss, FinalBoss
+    }
+
+    public enum GameState
+    {
+        PLAYING, GAMEOVER
+    }
+
     public static class Util
     {
         public static Random RANDOM = new Random();

@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ShakeAndBake.Controller.GameController" Collapsed="true">
+    <Position X="23" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAEAgAAAAAAAAAAAYAAAAAAAAAAAAAkhACABAA=</HashCode>
+      <FileName>Classes\Controller\GameController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShakeAndBake.GameConfig" Collapsed="true">
+    <Position X="21.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAABAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Extras\GameConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShakeAndBake.Util" Collapsed="true">
+    <Position X="24.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Classes\Extras\HelperObjects.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShakeAndBake.EnemyPaths" Collapsed="true">
+    <Position X="24.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Classes\Extras\HelperObjects.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShakeAndBake.ProjectilePaths" Collapsed="true">
+    <Position X="21.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Classes\Extras\HelperObjects.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShakeAndBake.Path" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Extras\Path.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShakeAndBake.StraightPath" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAAAAIAAAAAAAEAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Classes\Extras\Path.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShakeAndBake.ListPath" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Extras\Path.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShakeAndBake.Program" Collapsed="true">
+    <Position X="19.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShakeAndBake.ShakeAndBakeGame" Collapsed="true">
+    <Position X="23" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAkEAEAAAAQwAQAAAACQAAAAAAAAgBAAAAAAAAAAQ=</HashCode>
+      <FileName>ShakeAndBakeGame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShakeAndBake.Model.CollisionBoard" Collapsed="true">
+    <Position X="19.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgACAAAAAAAAAQAQAgAAAAAAABAAAoCAAQAAAAAAAA=</HashCode>
+      <FileName>Classes\Model\CollisionBoard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShakeAndBake.Model.CollisionBucket" Collapsed="true">
+    <Position X="21.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAABAAAAAAAAAAAAAQACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Model\CollisionBoard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShakeAndBake.Model.EnemeyFactory" Collapsed="true">
+    <Position X="23" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Model\EnemyFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShakeAndBake.Model.GameData">
+    <Position X="24.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAEAhAAAABQAAAAAAAAAAEAAAABAAACACAAABAQA=</HashCode>
+      <FileName>Classes\Model\GameData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShakeAndBake.Model.GameEntity.Character" Collapsed="true">
+    <Position X="6.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UAYACAAkAQIAAgECAAAAEAAAAAAAAEAEAABAEBAQAAg=</HashCode>
+      <FileName>Classes\Model\GameEntity\Character.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShakeAndBake.Model.GameEntity.Enemy" Collapsed="true">
+    <Position X="5.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAAAAAAIAAAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Model\GameEntity\Enemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShakeAndBake.Model.GameEntity.Easy" Collapsed="true">
+    <Position X="3.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Model\GameEntity\EnemyTypes\EasyEnemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShakeAndBake.Model.GameEntity.FinalBoss" Collapsed="true">
+    <Position X="5.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Model\GameEntity\EnemyTypes\FinalBoss.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShakeAndBake.Model.GameEntity.Hard" Collapsed="true">
+    <Position X="8" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Model\GameEntity\EnemyTypes\HardEnemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShakeAndBake.Model.GameEntity.Medium" Collapsed="true">
+    <Position X="10.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Model\GameEntity\EnemyTypes\MediumEnemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShakeAndBake.Model.GameEntity.MidBoss" Collapsed="true">
+    <Position X="1.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Model\GameEntity\EnemyTypes\MidBoss.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShakeAndBake.Model.GameEntity.GameObject" Collapsed="true">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAgAAABAAAgAwAAAAIAAQAhAAAAQTAAQEAAAEAAA=</HashCode>
+      <FileName>Classes\Model\GameEntity\GameObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShakeAndBake.Model.GameEntity.Player" Collapsed="true">
+    <Position X="12.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAIAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Model\GameEntity\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShakeAndBake.Model.GameEntity.Projectile" Collapsed="true">
+    <Position X="15.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAACAAAAAAIAYAACAAAAgAABAAAAQQAAAAAAAAA=</HashCode>
+      <FileName>Classes\Model\GameEntity\Projectile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ShakeAndBake.Model.GameEntity.PlayerBullet" Collapsed="true">
+    <Position X="14.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Model\GameEntity\Projectile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShakeAndBake.Model.GameEntity.EnemyBullet" Collapsed="true">
+    <Position X="17" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Model\GameEntity\Projectile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShakeAndBake.View.GameBoard" Collapsed="true">
+    <Position X="19.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgAAAAAAAAgAgAAgAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\View\GameBoard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="ShakeAndBake.EnemyType" Collapsed="true">
+    <Position X="19.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAECAAAAAAAAAAAAAAAAEAAAAAAAAAAAAkAAA=</HashCode>
+      <FileName>Classes\Extras\HelperObjects.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ShakeAndBake.GameState" Collapsed="true">
+    <Position X="23" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Extras\HelperObjects.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ShakeAndBake.GameBoardConfigs" Collapsed="true">
+    <Position X="21.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Classes\Extras\HelperObjects.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ShakeAndBake.ProjectileTypes" Collapsed="true">
+    <Position X="24.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAQAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Classes\Extras\HelperObjects.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

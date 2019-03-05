@@ -9,7 +9,7 @@ namespace ShakeAndBake.View
     public class GameBoard
     {
         //Contains a reference to the current GameData instance
-        private Model.GameData gameData;
+        private readonly Model.GameData gameData;
 
         //Constructor for GameBoard class
         public GameBoard(Model.GameData data)

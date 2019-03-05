@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace ShakeAndBake.Model.GameEntity
 {
@@ -8,165 +9,37 @@ namespace ShakeAndBake.Model.GameEntity
     {
         public Player() : base()
         {
-            Velocity = 3;
-            Acceleration = 2;
-            FireRate = 60;
-            sprite = ShakeAndBakeGame.player;
+            this.Velocity = 3;
+            this.Acceleration = 2;
+            this.FireRate = 60;
+            this.sprite = ShakeAndBakeGame.player;;
         }
 
+        public void Move(float newX, float newY)
+        {
+            float oldX = this.position.X, oldY = this.position.Y;
+            //Move Player
+            this.position.X = newX;
+            this.position.Y = newY;
+            //If newest user position updates moves the user out of the window 
+            if (!this.isInWindow())
+            {
+                if (!this.IsInWindowWidth())
+                {
+                    this.position.X = oldX;
+                }
+                if (!this.IsInWindowHeight())
+                {
+                    this.position.Y = oldY;
+                }
+            }
+        }
         public override void Update(GameTime gameTime, CollisionBoard cb)
         {
             //Remove player's collision bucket before update
             cb.RemoveFromBucketIfExists(this);
 
             base.Update(gameTime, cb);
-
-            KeyboardState state = Keyboard.GetState();//gets the state of the keyboard and checks the combos as follows
-            //utilizes the left control as the switch between speed modes essentially halving the speed when pressed.
-            if (state.IsKeyDown(Keys.S))
-            {
-                GameConfig.GameSpeed = 1;
-            }
-            if (state.IsKeyUp(Keys.S))
-            {
-                GameConfig.GameSpeed = 2;
-            }
-            //Spacebar fires user projectile
-            if (state.IsKeyDown(Keys.Space))
-            {
-                FireProjectile();
-            }
-
-            //variables to hold calculations preventing redundant calculations
-            float xChange = (float)(Velocity * Acceleration);
-            float yChange = (float)(Velocity * Acceleration);
-
-
-            //down right
-            if (state.IsKeyDown(Keys.Right) && state.IsKeyDown(Keys.Down) && !(state.IsKeyDown(Keys.Left)) && !(state.IsKeyDown(Keys.Up)))
-            {
-                //looking into better computation for diagonal cause this moves farther than it should
-                this.position.X = Position.X + xChange;
-                this.position.Y = Position.Y + yChange;
-
-                //if result is out of the window undo the change in position
-                if (!isInWindow())
-                {
-                    if (!IsInWindowHeight())
-                    {
-                        this.position.Y = Position.Y - yChange;
-                    }
-                    if (!IsInWindowWidth())
-                    {
-                        this.position.X = Position.X - xChange;
-                    }
-                }
-            }
-            //up right
-            if (state.IsKeyDown(Keys.Right) && state.IsKeyDown(Keys.Up) && !(state.IsKeyDown(Keys.Left)) && !(state.IsKeyDown(Keys.Down)))
-            {
-                //looking into better computation for diagonal cause this moves farther than it should
-                this.position.X = Position.X + xChange;
-                this.position.Y = Position.Y - yChange;
-
-                //if result is out of the window undo the change in position
-                if (!isInWindow())
-                {
-                    if (!IsInWindowHeight())
-                    {
-                        this.position.Y = Position.Y + yChange;
-                    }
-                    if (!IsInWindowWidth())
-                    {
-                        this.position.X = Position.X - xChange;
-                    }
-                }
-            }
-            //right
-            if (state.IsKeyDown(Keys.Right) && !(state.IsKeyDown(Keys.Up)) && !(state.IsKeyDown(Keys.Down)) && !(state.IsKeyDown(Keys.Left)))
-            {
-                this.position.X = Position.X + xChange;
-
-                //if result is out of the window undo the change in position
-                if (!isInWindow())
-                {
-                    this.position.X = Position.X - xChange;
-                }
-
-            }
-            //left down
-            if (state.IsKeyDown(Keys.Left) && state.IsKeyDown(Keys.Down) && !(state.IsKeyDown(Keys.Up)) && !(state.IsKeyDown(Keys.Right)))
-            {
-                //looking into better computation for diagonal cause this moves farther than it should
-                this.position.X = Position.X - xChange;
-                this.position.Y = Position.Y + yChange;
-
-                //if result is out of the window undo the change in position
-                if (!isInWindow())
-                {
-                    if (!IsInWindowHeight())
-                    {
-                        this.position.Y = Position.Y - yChange;
-                    }
-                    if (!IsInWindowWidth())
-                    {
-                        this.position.X = Position.X + xChange;
-                    }
-                }
-            }
-            //left up
-            if (state.IsKeyDown(Keys.Left) && state.IsKeyDown(Keys.Up) && !(state.IsKeyDown(Keys.Down)) && !(state.IsKeyDown(Keys.Right)))
-            {
-                //looking into better computation for diagonal cause this moves farther than it should
-                this.position.X = Position.X - xChange;
-                this.position.Y = Position.Y - yChange;
-
-                //if result is out of the window undo the change in position
-                if (!isInWindow())
-                {
-                    if (!IsInWindowHeight())
-                    {
-                        this.position.Y = Position.Y + yChange;
-                    }
-                    if (!IsInWindowWidth())
-                    {
-                        this.position.X = Position.X + xChange;
-                    }
-                }
-            }
-            //left
-            if (state.IsKeyDown(Keys.Left) && !(state.IsKeyDown(Keys.Up)) && !(state.IsKeyDown(Keys.Down)) && !(state.IsKeyDown(Keys.Right)))
-            {
-                this.position.X = Position.X - xChange;
-
-                //if result is out of the window undo the change in position
-                if (!isInWindow())
-                {
-                    this.position.X = Position.X + xChange;
-                }
-            }
-            //up
-            if (state.IsKeyDown(Keys.Up) && !(state.IsKeyDown(Keys.Left)) && !(state.IsKeyDown(Keys.Right)) && !(state.IsKeyDown(Keys.Down)))
-            {
-                this.position.Y = Position.Y - yChange;
-
-                //if result is out of the window undo the change in position
-                if (!isInWindow())
-                {
-                    this.position.Y = Position.Y + yChange;
-                }
-            }
-            //down
-            if (state.IsKeyDown(Keys.Down) && !(state.IsKeyDown(Keys.Left)) && !(state.IsKeyDown(Keys.Right)) && !(state.IsKeyDown(Keys.Up)))
-            {
-                this.position.Y = Position.Y + yChange;
-
-                //if result is out of the window undo the change in position
-                if (!isInWindow())
-                {
-                    this.position.Y = Position.Y - yChange;
-                }
-            }
 
             //Update collision board
             cb.FillBucket(this);

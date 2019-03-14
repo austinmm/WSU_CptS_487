@@ -65,6 +65,7 @@ namespace ShakeAndBake.Controller
             this.gameBoard.Update(gameTime);
             this.CheckBoard();
         }
+
         private void UpdateGameSpeed(KeyboardState state)
         {
             //utilizes the left control as the switch between speed modes essentially halving the speed when pressed.
@@ -77,6 +78,7 @@ namespace ShakeAndBake.Controller
                 GameConfig.GameSpeed = 1;
             }
         }
+
         private void FireUserProjectile(KeyboardState state)
         {
             //Spacebar fires user projectile
@@ -86,7 +88,7 @@ namespace ShakeAndBake.Controller
             }
         }
     
-        public bool DidUserMove (KeyboardState state, out float newX, out float newY)
+        public bool DidUserMove(KeyboardState state, out float newX, out float newY)
         {
             float originalX = this.gameData.User.Position.X;
             float originalY = this.gameData.User.Position.Y;

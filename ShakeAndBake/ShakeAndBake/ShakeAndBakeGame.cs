@@ -38,11 +38,11 @@ namespace ShakeAndBake
         {
             // TODO: Add your initialization logic here
             base.Initialize();
-            this.gameData = new Model.GameData(ShakeAndBakeGame.player);
-            this.gameBoard = new View.GameBoard(this.gameData);
-            this.gameController = new Controller.GameController(data: this.gameData, board: this.gameBoard);
+            gameData = new Model.GameData(ShakeAndBakeGame.player);
+            gameBoard = new View.GameBoard(gameData);
+            gameController = new Controller.GameController(gameData, gameBoard);
         }
-
+        
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.

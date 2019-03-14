@@ -7,12 +7,25 @@ namespace ShakeAndBake.Model.GameEntity
 {
     public class Player : Character
     {
-        public Player() : base()
+        private static Player instance;
+
+        // Player singleton.
+        public static Player Instance
+        {
+            get 
+            {
+                if (instance == null)
+                    instance = new Player();
+                return instance;    
+            }
+        }
+
+        private Player() : base()
         {
             this.Velocity = 3;
             this.Acceleration = 2;
             this.FireRate = 60;
-            this.sprite = ShakeAndBakeGame.player;;
+            this.sprite = ShakeAndBakeGame.player;
         }
 
         public void Move(float newX, float newY)

@@ -36,9 +36,8 @@ namespace ShakeAndBake
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             base.Initialize();
-            gameData = new Model.GameData(ShakeAndBakeGame.player);
+            gameData = new Model.GameData(player);
             gameBoard = new View.GameBoard(gameData);
             gameController = new Controller.GameController(gameData, gameBoard);
         }

@@ -2,13 +2,14 @@
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 using System;
+using ShakeAndBake.Model.GameEntity;
 
 namespace ShakeAndBake.Controller
 {
     // The "Controller" of our Game's MVC Architecture.
     public class GameController
     {
-        private ContentManager contentManager;
+        private AssetManager assetManager;
         private StageManager stageManager;
 
         private GameState gameState;
@@ -30,7 +31,7 @@ namespace ShakeAndBake.Controller
             this.gameData = gameData;
             this.gameBoard = gameBoard;
             gameState = GameState.PLAYING;
-            contentManager = new ContentManager();
+            assetManager = new AssetManager();
             stageManager = new StageManager();
             stageManager.ConfigureNextPhase(gameData);
         }
@@ -43,7 +44,7 @@ namespace ShakeAndBake.Controller
             FireUserProjectile(state);
             if (DidUserMove(state, out float newX, out float newY))
             {
-                gameData.User.Move(newX, newY);
+                Player.Instance.Move(newX, newY);
             }
             gameData.Update(gameTime);
             gameBoard.Update(gameTime);
@@ -66,18 +67,18 @@ namespace ShakeAndBake.Controller
             //Spacebar fires user projectile
             if (state.IsKeyDown(Keys.Space))
             {
-                gameData.User.FireProjectile();
+                Player.Instance.FireProjectile();
             }
         }
     
         public bool DidUserMove(KeyboardState state, out float newX, out float newY)
         {
-            float originalX = this.gameData.User.Position.X;
-            float originalY = this.gameData.User.Position.Y;
+            float originalX = Player.Instance.Position.X;
+            float originalY = Player.Instance.Position.Y;
             newX = originalX;
             newY = originalY;
             //variables to hold calculations preventing redundant calculations
-            float movementSpeed = (float)(this.gameData.User.Velocity * this.gameData.User.Acceleration);
+            float movementSpeed = (float)(Player.Instance.Velocity * Player.Instance.Acceleration);
             //down right
             if (state.IsKeyDown(Keys.Right) && state.IsKeyDown(Keys.Down) && !(state.IsKeyDown(Keys.Left)) && !(state.IsKeyDown(Keys.Up)))
             {

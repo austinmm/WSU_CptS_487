@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using ShakeAndBake.Model.GameEntity;
 
 namespace ShakeAndBake.View
 {
@@ -30,7 +31,7 @@ namespace ShakeAndBake.View
                 enemy.Draw(spriteBatch);
             }
             // draw player last
-            this.gameData.User.Draw(spriteBatch);
+            Player.Instance.Draw(spriteBatch);
         }
 
         public void NewPase()

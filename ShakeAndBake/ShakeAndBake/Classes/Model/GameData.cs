@@ -33,13 +33,6 @@ namespace ShakeAndBake.Model
             get { return deadEnemies; }
         }
 
-        //This is our one and only player that is controlled by the user (keyboard input)
-        private Player user;
-        public Player User
-        {
-            get { return user; }
-        }
-
         //Constructor for GameData class
         public GameData(Texture2D playerTexture)
         {
@@ -50,8 +43,7 @@ namespace ShakeAndBake.Model
             );
 
             this.Initialize();
-            this.user = new Player();
-            this.user.Position = new Vector2
+            Player.Instance.Position = new Vector2
             (
                 (GameConfig.Width / 2 - playerTexture.Width / 2),
                 (GameConfig.Height - playerTexture.Height)
@@ -109,7 +101,7 @@ namespace ShakeAndBake.Model
         //MultiThread this Method call
         public void Update(GameTime gameTime)
         {
-            this.user.Update(gameTime, collisionBoard);
+            Player.Instance.Update(gameTime, collisionBoard);
             //Call update on all our visible enemies, this will automatically update their projectiles as well
             for (int j = 0; j < this.visibleEnemies.Count; j++)
             {
@@ -129,12 +121,12 @@ namespace ShakeAndBake.Model
             }
 
             //Check if player bullets destroyed
-            for (int i = 0; i < user.Projectiles.Count; i++)
+            for (int i = 0; i < Player.Instance.Projectiles.Count; i++)
             {
-                Projectile p = user.Projectiles[i];
+                Projectile p = Player.Instance.Projectiles[i];
                 if (p.IsDestroyed)
                 {
-                    user.Projectiles.RemoveAt(i);
+                    Player.Instance.Projectiles.RemoveAt(i);
                     collisionBoard.RemoveFromBucketIfExists(p);
                     continue;
                 }
@@ -184,7 +176,7 @@ namespace ShakeAndBake.Model
         public void Reset()
         {
             // clear player bullets
-            this.user.Projectiles.Clear();
+            Player.Instance.Projectiles.Clear();
             this.Initialize();
         }
     }

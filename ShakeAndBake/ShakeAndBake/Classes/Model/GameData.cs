@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ShakeAndBake.Model.GameEntity;
+using ShakeAndBake.Model.Factories.EnemyFactory;
 
 namespace ShakeAndBake.Model
 {
@@ -72,11 +73,12 @@ namespace ShakeAndBake.Model
             //User
             this.isUserDead = false;
         }
-
+        
         public void AddEnemy(EnemyType type)
         {
             Random rand = new Random();
-            Enemy enemy = EnemeyFactory.CreateEnemy(type);
+            
+            Enemy enemy = EnemeyFactoryProducer.CreateEnemy(type);
             // spawn enemy on top of screen, randomly between the width of the screen
             enemy.Position = new Vector2(rand.Next(0, GameConfig.Width - enemy.Sprite.Width), -enemy.Sprite.Height);
             double velocity = Util.randDouble(1, 3);

@@ -2,11 +2,11 @@
 
 namespace ShakeAndBake.Model.Factories.EnemyFactory
 {
-    public class EasyEnemyFactory : EnemyAbstractFactory
+    public class FinalBossFactory : EnemyAbstractFactory
     {
         public override Enemy Create()
         {
-            return new Easy();
+            return new FinalBoss();
         }
     }
 }

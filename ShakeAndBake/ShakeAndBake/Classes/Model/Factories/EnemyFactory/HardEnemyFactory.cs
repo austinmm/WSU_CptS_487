@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ShakeAndBake.Model.GameEntity;
+﻿using ShakeAndBake.Model.GameEntity;
 
-namespace ShakeAndBake.Classes.Model.EnemyFactory
+namespace ShakeAndBake.Model.Factories.EnemyFactory
 {
-    class HardEnemyFactory
+    public class HardEnemyFactory : EnemyAbstractFactory
     {
-        public Enemy create()
+        public override Enemy Create()
         {
             return new Hard();
         }

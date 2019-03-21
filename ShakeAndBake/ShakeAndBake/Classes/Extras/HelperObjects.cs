@@ -7,7 +7,8 @@ namespace ShakeAndBake
         Easy, Medium, Hard, MidBoss, FinalBoss
     }
 
-    public enum ProjectileType {
+    public enum ProjectileType
+    {
         Bullet, Rocket, FireBall
     }
     

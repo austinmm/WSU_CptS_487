@@ -4,9 +4,51 @@ namespace ShakeAndBake.Controller
 {
     public enum GameStage { Stage1, Stage2, Stage3, Stage4 }
 
+    public class Wave
+    {
+        private EnemyType enemyType;
+        private int enemyAmount;
+
+        public EnemyType EnemyType
+        {
+            get { return enemyType; }
+        }
+
+        public int EnemyAmount
+        {
+            get { return enemyAmount; }
+        }
+
+        public Wave(EnemyType enemyType, int enemyAmount)
+        {
+            this.enemyType = enemyType;
+            this.enemyAmount = enemyAmount;
+        }
+    }
+
     public class StageData
     {
-        
+        private List<Wave> waves;
+        public List<Wave> Waves
+        {
+            get { return waves; }
+        }
+
+        public StageData(List<Wave> waves)
+        {
+            this.waves = waves;
+        }
+
+        public void Configure(Model.GameData gameData)
+        {
+            foreach (Wave wave in waves)
+            {
+                for (int i = 0; i < wave.EnemyAmount; i++)
+                {
+                    gameData.AddEnemy(wave.EnemyType);
+                }
+            }
+        }
     }
 
     // Manages loading stage information and switching stages.
@@ -20,31 +62,48 @@ namespace ShakeAndBake.Controller
             set { phases = value; }
         }
 
+        private Dictionary<GameStage, StageData> stages;
+
         //Contains the index of the current phase
-        private int currentPhase;
-        public int Currentphase
+        private int current;
+        public int CurrentStage
         {
-            get { return currentPhase; }
-            set { currentPhase = value; }
+            get { return current; }
+            set { current = value; }
         }
 
         public StageManager()
         {
-            phases = new List<GameStage>();
-            phases.Add(GameStage.Stage1);
-            phases.Add(GameStage.Stage2);
-            phases.Add(GameStage.Stage3);
-            phases.Add(GameStage.Stage4);
-            currentPhase = 0;
+            stages = new Dictionary<GameStage, StageData>();
+            initStages();      
+            current = 0;
         }
 
+        private void initStages()
+        {
+            stages[GameStage.Stage1] = new StageData(new List<Wave>(){
+                new Wave(EnemyType.Easy, 5),
+                new Wave(EnemyType.Medium, 2)
+            });
+            stages[GameStage.Stage2] = new StageData(new List<Wave>(){
+                new Wave(EnemyType.MidBoss, 2),
+            });
+            stages[GameStage.Stage3] = new StageData(new List<Wave>(){
+                new Wave(EnemyType.Medium, 3),
+                new Wave(EnemyType.Hard, 2),
+            });
+            stages[GameStage.Stage4] = new StageData(new List<Wave>(){
+                new Wave(EnemyType.FinalBoss, 1),
+            });  
+        }
+        
         public GameState CheckBoard(Model.GameData gameData, GameState currentState)
         {
             // If no enemies are left in this phase, then switch to next phase.
             if (gameData.VisibleEnemies.Count == 0)
             {
-                //New phase
-                if (++currentPhase >= phases.Count)
+                // Next stage.
+                if (++current >= phases.Count)
                 {
                     return GameState.GAMEOVER;
                 } else {
@@ -57,38 +116,13 @@ namespace ShakeAndBake.Controller
             return currentState;
         }
 
-        //Changes the GameBoard class to reflect the current phase
+        // Changes the GameBoard class to reflect the current stage.
         public void ConfigureNextPhase(Model.GameData gameData)
         {
-            gameData.Reset();
-            GameStage phase = phases[currentPhase];
-            switch (phase)
-            {
-                case GameStage.Stage1:
-                    for (int i = 0; i < 5; i++) {
-                        gameData.AddEnemy(EnemyType.Easy);
-                    }
-                    for (int i = 0; i < 2; i++) {
-                        gameData.AddEnemy(EnemyType.Medium);
-                    }
-                    break;
-                case GameStage.Stage2:
-                    for (int i = 0; i < 2; i++) {
-                        gameData.AddEnemy(EnemyType.MidBoss);
-                    }
-                    break;
-                case GameStage.Stage3:
-                    for (int i = 0; i < 3; i++) {
-                        gameData.AddEnemy(EnemyType.Medium);
-                    }
-                    for (int i = 0; i < 2; i++) {
-                        gameData.AddEnemy(EnemyType.Hard);
-                    }
-                    break;
-                case GameStage.Stage4:
-                    gameData.AddEnemy(EnemyType.FinalBoss);
-                    break;
-            }
+            gameData.Reset();       
+            GameStage stage = (GameStage) current;     
+            StageData data = stages[stage];
+            data.Configure(gameData);
         }
 
         public void loadJson(GameStage config)

@@ -38,12 +38,12 @@ namespace ShakeAndBake.Controller
         {
             this.waves = waves;
         }
-
+        
         public void Configure(Model.GameData gameData)
         {
             foreach (Wave wave in waves)
             {
-                for (int i = 0; i < wave.EnemyAmount; i++)
+                for (int i = 0; i < wave.EnemyAmount; ++i)
                 {
                     gameData.AddEnemy(wave.EnemyType);
                 }
@@ -55,11 +55,11 @@ namespace ShakeAndBake.Controller
     public class StageManager
     {
         //Contains a list of all different phases available
-        private List<GameStage> phases;
-        public List<GameStage> Phases
+        private List<GameStage> stageTypes;
+        public List<GameStage> StageTypes
         {
-            get { return phases; }
-            set { phases = value; }
+            get { return stageTypes; }
+            set { stageTypes = value; }
         }
 
         private Dictionary<GameStage, StageData> stages;
@@ -74,6 +74,9 @@ namespace ShakeAndBake.Controller
 
         public StageManager()
         {
+            stageTypes = new List<GameStage>() {
+                GameStage.Stage1, GameStage.Stage2, GameStage.Stage3, GameStage.Stage4 
+            };
             stages = new Dictionary<GameStage, StageData>();
             initStages();      
             current = 0;
@@ -103,11 +106,11 @@ namespace ShakeAndBake.Controller
             if (gameData.VisibleEnemies.Count == 0)
             {
                 // Next stage.
-                if (++current >= phases.Count)
+                if (++current >= stageTypes.Count)
                 {
                     return GameState.GAMEOVER;
                 } else {
-                    ConfigureNextPhase(gameData);
+                    ConfigureNextStage(gameData);
                 }
             } else if (gameData.IsUserDead)
             {
@@ -117,10 +120,10 @@ namespace ShakeAndBake.Controller
         }
 
         // Changes the GameBoard class to reflect the current stage.
-        public void ConfigureNextPhase(Model.GameData gameData)
+        public void ConfigureNextStage(Model.GameData gameData)
         {
             gameData.Reset();       
-            GameStage stage = (GameStage) current;     
+            GameStage stage = stageTypes[current];     
             StageData data = stages[stage];
             data.Configure(gameData);
         }

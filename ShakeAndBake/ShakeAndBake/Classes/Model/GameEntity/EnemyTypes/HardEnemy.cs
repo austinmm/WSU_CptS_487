@@ -10,7 +10,7 @@ namespace ShakeAndBake.Model.GameEntity
         public Hard() : base()
         {
             this.path = EnemyPaths.DefaultPath(this.position, new Vector2(0, 1));
-             sprite = ShakeAndBakeGame.AssetManager.GetTexture("circle");
+             sprite = ShakeAndBakeGame.GetTexture("circle");
         }
 
         public override void Update(GameTime gameTime, CollisionBoard cb)

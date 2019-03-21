@@ -26,7 +26,7 @@ namespace ShakeAndBake.Model.GameEntity
             this.Velocity = 3;
             this.Acceleration = 2;
             this.FireRate = 60;
-            this.sprite = ShakeAndBakeGame.AssetManager.GetTexture("player");
+            this.sprite = ShakeAndBakeGame.GetTexture("player");
         }
 
         public void Move(float newX, float newY)
@@ -62,15 +62,16 @@ namespace ShakeAndBake.Model.GameEntity
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
-            spriteBatch.Draw(ShakeAndBakeGame.AssetManager.GetTexture("player"), position, Color.White);
+            spriteBatch.Draw(ShakeAndBakeGame.GetTexture("player"), position, Color.White);
             //spriteBatch.DrawString(null, "" + this.health, position, Color.White);
         }
         
         public override void FireProjectile()
         {
             if (!this.CanFire()) return;
-            Vector2 pos = Vector2.Add(position, new Vector2((ShakeAndBakeGame.AssetManager.GetTexture("player").Width - ShakeAndBakeGame.AssetManager.GetTexture("player_bullet").Width) / 2,
-             -ShakeAndBakeGame.AssetManager.GetTexture("player_bullet").Height));
+            Vector2 pos = Vector2.Add(position, new Vector2((ShakeAndBakeGame.GetTexture("player").Width
+                - ShakeAndBakeGame.GetTexture("player_bullet").Width) / 2,
+                - ShakeAndBakeGame.GetTexture("player_bullet").Height));
             Projectile projectile = new PlayerBullet(new StraightPath(pos, new Vector2(0, -1), 3));
 
             //The projectiles position is set to the current character's position

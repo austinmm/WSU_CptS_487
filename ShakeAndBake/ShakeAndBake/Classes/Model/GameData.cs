@@ -47,13 +47,13 @@ namespace ShakeAndBake.Model
                 (GameConfig.Height - playerTexture.Height)
             );
         }
-
+        
         private void Initialize()
         {
             this.collisionBoard = new CollisionBoard(
                 GameConfig.Height,
                 GameConfig.Width,
-                ShakeAndBakeGame.AssetManager.GetTexture("player").Width
+                ShakeAndBakeGame.GetTexture("player").Width
             );
             //Enemies
             this.visibleEnemies = new ObservableCollection<Enemy>();

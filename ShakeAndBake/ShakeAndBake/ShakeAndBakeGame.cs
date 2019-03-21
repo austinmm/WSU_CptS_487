@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -10,7 +11,7 @@ namespace ShakeAndBake
     /// </summary>
     public class ShakeAndBakeGame : Game
     {
-        public static Controller.AssetManager AssetManager;
+        private static Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
 
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
@@ -27,6 +28,7 @@ namespace ShakeAndBake
             graphics.ApplyChanges();
 
             Content.RootDirectory = "Content";
+            spriteBatch = new SpriteBatch(GraphicsDevice);
 
             GameConfig.Height = graphics.GraphicsDevice.Viewport.Height;
             GameConfig.Width = graphics.GraphicsDevice.Viewport.Width;
@@ -42,19 +44,31 @@ namespace ShakeAndBake
         protected override void Initialize()
         {
             base.Initialize();
-            AssetManager = new Controller.AssetManager(Content);
-            gameData = new Model.GameData(AssetManager.GetTexture("player"));
-            gameBoard = new View.GameBoard(gameData);
-            gameController = new Controller.GameController(gameData, gameBoard);
         }
-
+        
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
         /// </summary>
         protected override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            LoadAndStoreTexture("player");
+            LoadAndStoreTexture("circle");
+            LoadAndStoreTexture("player_bullet");
+            LoadAndStoreTexture("enemy_bullet");
+
+            gameData = new Model.GameData(GetTexture("player"));
+            gameBoard = new View.GameBoard(gameData);
+            gameController = new Controller.GameController(gameData, gameBoard);
+        }
+        
+        private void LoadAndStoreTexture(string name) {
+            textures[name] = Content.Load<Texture2D>(name);
+        }
+        
+        public static Texture2D GetTexture(string name)
+        {
+            return textures[name];
         }
 
         /// <summary>

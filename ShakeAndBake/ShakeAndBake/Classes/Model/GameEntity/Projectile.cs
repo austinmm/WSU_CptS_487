@@ -116,7 +116,7 @@ namespace ShakeAndBake.Model.GameEntity
     {
         public PlayerBullet(Path path) : base(path)
         {
-            sprite = ShakeAndBakeGame.AssetManager.GetTexture("player_bullet");
+            sprite = ShakeAndBakeGame.GetTexture("player_bullet");
             this.hitBoxRadius = sprite.Width / 2;
         }
 
@@ -130,7 +130,7 @@ namespace ShakeAndBake.Model.GameEntity
     {
         public EnemyBullet(Path path) : base(path)
         {
-            sprite = ShakeAndBakeGame.AssetManager.GetTexture("enemy_bullet");
+            sprite = ShakeAndBakeGame.GetTexture("enemy_bullet");
             this.hitBoxRadius = sprite.Width / 2;
         }
 

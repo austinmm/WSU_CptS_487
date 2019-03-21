@@ -22,7 +22,19 @@ namespace ShakeAndBake.Controller
         public GameState State
         {
             get { return gameState; }
-            set { gameState = value; }
+            set {
+                gameState = value;
+                switch (gameState)
+                {
+                    case GameState.PLAYING:
+                        screenManager.SetScreen(ScreenType.INGAME);
+                        break;
+                    case GameState.GAMEOVER:
+                        // todo determine if lose or win
+                        screenManager.SetScreen(ScreenType.GAMEWIN);
+                        break;
+                }
+            }
         }
 
         // Contains a reference to the current this.gameData instance.
@@ -37,10 +49,13 @@ namespace ShakeAndBake.Controller
             this.gameData = gameData;
             this.gameBoard = gameBoard;
 
+            screenManager = new ScreenManager(gameData);
+            screenManager.SetScreen(ScreenType.INGAME);
+            
             gameState = GameState.PLAYING;
             inputHandler = new InputHandler();
             stageManager = new StageManager();
-            stageManager.ConfigureNextPhase(gameData);
+            stageManager.ConfigureNextStage(gameData);
         }
         
         public void Update(GameTime gameTime)
@@ -58,7 +73,7 @@ namespace ShakeAndBake.Controller
             //gameBoard.Update(gameTime);
             
             // Update the game state based on what the stage manager changes to.
-            gameState = stageManager.CheckBoard(gameData, gameState);
+            State = stageManager.CheckBoard(gameData, gameState);
         }
     }
 }

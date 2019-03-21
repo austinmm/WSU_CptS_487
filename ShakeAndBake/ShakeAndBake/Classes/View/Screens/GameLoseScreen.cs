@@ -8,7 +8,7 @@ namespace ShakeAndBake.View
     {
         public void Draw(GraphicsDeviceManager graphics, SpriteBatch spriteBatch)
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }

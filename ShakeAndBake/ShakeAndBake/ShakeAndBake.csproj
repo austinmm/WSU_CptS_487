@@ -45,7 +45,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShakeAndBakeGame.cs" />
-    <Compile Include="Classes\Controller\AssetManager.cs" />
     <Compile Include="Classes\Controller\GameController.cs" />
     <Compile Include="Classes\Controller\InputHandler.cs" />
     <Compile Include="Classes\Controller\StageManager.cs" />
@@ -140,7 +139,7 @@
     <None Include="Content\File.spritefont" />
     <None Include="Content\bullet.png" />
     <None Include="Content\circle.png" />
-    <None Include="Content\monster_bullet.png" />
+    <None Include="Content\enemy_bullet.png" />
     <None Include="Content\player.png" />
     <None Include="Content\player_bullet.png" />
     <None Include="Content\bin\DesktopGL\Content\circle.xnb" />

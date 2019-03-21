@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using ShakeAndBake.Model.GameEntity;
 using ShakeAndBake.Model.Factories.EnemyFactory;
+using ShakeAndBake.Extras.Paths;
 
 namespace ShakeAndBake.Model
 {
@@ -52,7 +53,7 @@ namespace ShakeAndBake.Model
             this.collisionBoard = new CollisionBoard(
                 GameConfig.Height,
                 GameConfig.Width,
-                ShakeAndBake.ShakeAndBakeGame.player.Width
+                ShakeAndBakeGame.AssetManager.GetTexture("player").Width
             );
             //Enemies
             this.visibleEnemies = new ObservableCollection<Enemy>();

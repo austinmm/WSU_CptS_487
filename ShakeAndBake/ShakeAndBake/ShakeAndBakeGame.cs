@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -9,22 +10,26 @@ namespace ShakeAndBake
     /// </summary>
     public class ShakeAndBakeGame : Game
     {
+        public static Controller.AssetManager AssetManager;
+
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
-        public static Texture2D circle, player, playerBullet, enemyBullet;
+
         private View.GameBoard gameBoard;
         private Controller.GameController gameController;
         private Model.GameData gameData;
-        //Constructor
+
         public ShakeAndBakeGame()
         {
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 900;
             graphics.PreferredBackBufferHeight = 700;
             graphics.ApplyChanges();
+
             Content.RootDirectory = "Content";
-            GameConfig.Height = this.graphics.GraphicsDevice.Viewport.Height;
-            GameConfig.Width = this.graphics.GraphicsDevice.Viewport.Width;
+
+            GameConfig.Height = graphics.GraphicsDevice.Viewport.Height;
+            GameConfig.Width = graphics.GraphicsDevice.Viewport.Width;
             Initialize();
         }
 
@@ -37,7 +42,8 @@ namespace ShakeAndBake
         protected override void Initialize()
         {
             base.Initialize();
-            gameData = new Model.GameData(player);
+            AssetManager = new Controller.AssetManager(Content);
+            gameData = new Model.GameData(AssetManager.GetTexture("player"));
             gameBoard = new View.GameBoard(gameData);
             gameController = new Controller.GameController(gameData, gameBoard);
         }
@@ -48,12 +54,7 @@ namespace ShakeAndBake
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            circle = Content.Load<Texture2D>("circle");
-            player = Content.Load<Texture2D>("player");
-            playerBullet = Content.Load<Texture2D>("player_bullet");
-            enemyBullet = Content.Load<Texture2D>("enemy_bullet");
         }
 
         /// <summary>
@@ -77,20 +78,8 @@ namespace ShakeAndBake
             {
                 Exit();
             }
-            this.gameController.Update(gameTime);
-            if (this.gameController.State == GameState.GAMEOVER)
-            {
-                this.GameOver();
-            }
-            // Check game after updating game board
+            gameController.Update(gameTime);
             base.Update(gameTime);
-        }
-
-        public void GameOver()
-        {
-            this.gameBoard.GameOver();
-            GraphicsDevice.Clear(Color.LimeGreen);
-            this.Initialize();
         }
 
         /// <summary>
@@ -101,7 +90,10 @@ namespace ShakeAndBake
         {
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
-            gameBoard.Draw(spriteBatch);
+            
+            // does this violate MVC?
+            gameController.ScreenManager.Draw(graphics, spriteBatch);
+            
             spriteBatch.End();
             base.Draw(gameTime);
         }

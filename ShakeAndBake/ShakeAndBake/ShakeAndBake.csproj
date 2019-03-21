@@ -47,10 +47,14 @@
     <Compile Include="ShakeAndBakeGame.cs" />
     <Compile Include="Classes\Controller\AssetManager.cs" />
     <Compile Include="Classes\Controller\GameController.cs" />
+    <Compile Include="Classes\Controller\InputHandler.cs" />
     <Compile Include="Classes\Controller\StageManager.cs" />
     <Compile Include="Classes\Extras\GameConfig.cs" />
     <Compile Include="Classes\Extras\HelperObjects.cs" />
-    <Compile Include="Classes\Extras\Path.cs" />
+    <Compile Include="Classes\Extras\Updatable.cs" />
+    <Compile Include="Classes\Extras\Path\Path.cs" />
+    <Compile Include="Classes\Extras\Path\Types\EnemyPath.cs" />
+    <Compile Include="Classes\Extras\Path\Types\ProjectilePath.cs" />
     <Compile Include="Classes\Model\CollisionBoard.cs" />
     <Compile Include="Classes\Model\GameData.cs" />
     <Compile Include="Classes\Model\Factories\EnemyFactory\EasyEnemyFactory.cs" />
@@ -69,7 +73,11 @@
     <Compile Include="Classes\Model\GameEntity\EnemyTypes\HardEnemy.cs" />
     <Compile Include="Classes\Model\GameEntity\EnemyTypes\MediumEnemy.cs" />
     <Compile Include="Classes\Model\GameEntity\EnemyTypes\MidBoss.cs" />
-    <Compile Include="Classes\View\GameBoard.cs" />
+    <Compile Include="Classes\View\ScreenManager.cs" />
+    <Compile Include="Classes\View\Screens\GameBoard.cs" />
+    <Compile Include="Classes\View\Screens\GameLoseScreen.cs" />
+    <Compile Include="Classes\View\Screens\GameWinScreen.cs" />
+    <Compile Include="Classes\View\Screens\StartScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -129,9 +137,23 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="app.manifest" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Classes\View\" />
+    <None Include="Content\File.spritefont" />
+    <None Include="Content\bullet.png" />
+    <None Include="Content\circle.png" />
+    <None Include="Content\monster_bullet.png" />
+    <None Include="Content\player.png" />
+    <None Include="Content\player_bullet.png" />
+    <None Include="Content\bin\DesktopGL\Content\circle.xnb" />
+    <None Include="Content\bin\DesktopGL\Content\enemy_bullet.xnb" />
+    <None Include="Content\bin\DesktopGL\Content\player.xnb" />
+    <None Include="Content\bin\DesktopGL\Content\player_bullet.xnb" />
+    <None Include="Content\obj\DesktopGL\Content\.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\.mgstats" />
+    <None Include="Content\obj\DesktopGL\Content\circle.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\enemy_bullet.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\player.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\player_bullet.mgcontent" />
+    <None Include="Classes\.DS_Store" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

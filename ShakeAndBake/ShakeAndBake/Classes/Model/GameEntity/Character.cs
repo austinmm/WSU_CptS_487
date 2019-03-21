@@ -48,8 +48,8 @@ namespace ShakeAndBake.Model.GameEntity
 
         //Tuple???
         //This contains a list of all the projectile types the character is allowed to fire
-        protected List<ProjectileTypes> projectileTypes;
-        public List<ProjectileTypes> ProjectileTypes
+        protected List<ProjectileType> projectileTypes;
+        public List<ProjectileType> ProjectileTypes
         {
             get { return this.projectileTypes; }
             set { this.projectileTypes = value; }
@@ -62,14 +62,14 @@ namespace ShakeAndBake.Model.GameEntity
             get { return this.projectiles; }
             set { this.projectiles = value; }
         }
-
+        
         public Character() : base()
         {
             //When projectiles are added or removed from the ObservableCollection then "OnProjectileChange" is automatically called
             this.health = 100;
             this.timeAlive = new Stopwatch();
             this.timeAlive.Start();
-            this.ProjectileTypes = new List<ProjectileTypes>();
+            this.ProjectileTypes = new List<ProjectileType>();
             this.projectiles = new ObservableCollection<Projectile>();
 
             projectiles.CollectionChanged += OnProjectileChange;

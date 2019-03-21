@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ShakeAndBake.Extras.Paths;
 
 namespace ShakeAndBake.Model.GameEntity
 {
@@ -9,7 +10,7 @@ namespace ShakeAndBake.Model.GameEntity
         public FinalBoss() : base()
         {
             this.path = EnemyPaths.DefaultPath(this.position, new Vector2(0, 1));
-            sprite = ShakeAndBakeGame.circle;
+             sprite = ShakeAndBakeGame.AssetManager.GetTexture("circle");
         }
 
         public override void Update(GameTime gameTime, CollisionBoard cb)

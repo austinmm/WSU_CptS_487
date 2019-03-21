@@ -8,7 +8,7 @@ namespace ShakeAndBake.Model.GameEntity
         //Boss Enemy Constructor
         public MidBoss() : base()
         {
-            sprite = ShakeAndBakeGame.circle;
+             sprite = ShakeAndBakeGame.AssetManager.GetTexture("circle");
         }
 
         public override void Update(GameTime gameTime, CollisionBoard cb)

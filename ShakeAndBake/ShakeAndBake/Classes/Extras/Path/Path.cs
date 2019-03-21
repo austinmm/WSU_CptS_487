@@ -1,15 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
-namespace ShakeAndBake
+namespace ShakeAndBake.Extras.Paths
 {
     public abstract class Path
     {
-        public Path()
-        {
-
-        }
-
         public abstract Vector2 NextPoint();
     }
 

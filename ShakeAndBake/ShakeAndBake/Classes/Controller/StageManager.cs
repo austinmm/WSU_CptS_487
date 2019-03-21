@@ -2,12 +2,19 @@ using System.Collections.Generic;
 
 namespace ShakeAndBake.Controller
 {
+    public enum GameStage { Stage1, Stage2, Stage3, Stage4 }
+
+    public class StageData
+    {
+        
+    }
+
     // Manages loading stage information and switching stages.
     public class StageManager
     {
         //Contains a list of all different phases available
-        private List<GameBoardConfigs> phases;
-        public List<GameBoardConfigs> Phases
+        private List<GameStage> phases;
+        public List<GameStage> Phases
         {
             get { return phases; }
             set { phases = value; }
@@ -23,11 +30,11 @@ namespace ShakeAndBake.Controller
 
         public StageManager()
         {
-            phases = new List<GameBoardConfigs>();
-            phases.Add(GameBoardConfigs.Phase1);
-            phases.Add(GameBoardConfigs.Phase2);
-            phases.Add(GameBoardConfigs.Phase3);
-            phases.Add(GameBoardConfigs.Phase4);
+            phases = new List<GameStage>();
+            phases.Add(GameStage.Stage1);
+            phases.Add(GameStage.Stage2);
+            phases.Add(GameStage.Stage3);
+            phases.Add(GameStage.Stage4);
             currentPhase = 0;
         }
 
@@ -54,10 +61,10 @@ namespace ShakeAndBake.Controller
         public void ConfigureNextPhase(Model.GameData gameData)
         {
             gameData.Reset();
-            GameBoardConfigs phase = phases[currentPhase];
+            GameStage phase = phases[currentPhase];
             switch (phase)
             {
-                case GameBoardConfigs.Phase1:
+                case GameStage.Stage1:
                     for (int i = 0; i < 5; i++) {
                         gameData.AddEnemy(EnemyType.Easy);
                     }
@@ -65,12 +72,12 @@ namespace ShakeAndBake.Controller
                         gameData.AddEnemy(EnemyType.Medium);
                     }
                     break;
-                case GameBoardConfigs.Phase2:
+                case GameStage.Stage2:
                     for (int i = 0; i < 2; i++) {
                         gameData.AddEnemy(EnemyType.MidBoss);
                     }
                     break;
-                case GameBoardConfigs.Phase3:
+                case GameStage.Stage3:
                     for (int i = 0; i < 3; i++) {
                         gameData.AddEnemy(EnemyType.Medium);
                     }
@@ -78,13 +85,13 @@ namespace ShakeAndBake.Controller
                         gameData.AddEnemy(EnemyType.Hard);
                     }
                     break;
-                case GameBoardConfigs.Phase4:
+                case GameStage.Stage4:
                     gameData.AddEnemy(EnemyType.FinalBoss);
                     break;
             }
         }
 
-        public void loadJson(GameBoardConfigs config)
+        public void loadJson(GameStage config)
         {
 
         }

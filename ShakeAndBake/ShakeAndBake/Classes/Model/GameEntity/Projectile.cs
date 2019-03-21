@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.ComponentModel;
 using System.Collections.Generic;
+using ShakeAndBake.Extras.Paths;
 
 namespace ShakeAndBake.Model.GameEntity
 {
@@ -18,8 +19,8 @@ namespace ShakeAndBake.Model.GameEntity
         }
 
         //This is the type of the projectile which will determine its image, path, hitDamage
-        private ProjectileTypes type;
-        public ProjectileTypes Type
+        private ProjectileType type;
+        public ProjectileType Type
         {
             get { return this.type; }
             set { this.type = value; }
@@ -115,7 +116,7 @@ namespace ShakeAndBake.Model.GameEntity
     {
         public PlayerBullet(Path path) : base(path)
         {
-            sprite = ShakeAndBakeGame.playerBullet;
+            sprite = ShakeAndBakeGame.AssetManager.GetTexture("player_bullet");
             this.hitBoxRadius = sprite.Width / 2;
         }
 
@@ -129,7 +130,7 @@ namespace ShakeAndBake.Model.GameEntity
     {
         public EnemyBullet(Path path) : base(path)
         {
-            sprite = ShakeAndBakeGame.enemyBullet;
+            sprite = ShakeAndBakeGame.AssetManager.GetTexture("enemy_bullet");
             this.hitBoxRadius = sprite.Width / 2;
         }
 

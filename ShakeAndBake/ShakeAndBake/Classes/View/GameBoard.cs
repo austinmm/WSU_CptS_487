@@ -1,7 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
 using ShakeAndBake.Model.GameEntity;
 
 namespace ShakeAndBake.View
@@ -47,8 +45,9 @@ namespace ShakeAndBake.View
             //Display game config options
             // set GameConfig.GameSpeed = double value;
         }
-        
-        public void GameOver() {
+
+        public void GameOver()
+        {
             // game over Screen
             //Display outcome of game, i.e. win or loose
             //Redirect to gameMenu

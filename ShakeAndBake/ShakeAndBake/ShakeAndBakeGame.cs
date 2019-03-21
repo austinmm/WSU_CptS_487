@@ -25,7 +25,7 @@ namespace ShakeAndBake
             Content.RootDirectory = "Content";
             GameConfig.Height = this.graphics.GraphicsDevice.Viewport.Height;
             GameConfig.Width = this.graphics.GraphicsDevice.Viewport.Width;
-            this.Initialize();
+            Initialize();
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace ShakeAndBake
             gameBoard = new View.GameBoard(gameData);
             gameController = new Controller.GameController(gameData, gameBoard);
         }
-        
+
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
@@ -49,13 +49,13 @@ namespace ShakeAndBake
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);        
+            spriteBatch = new SpriteBatch(GraphicsDevice);
             circle = Content.Load<Texture2D>("circle");
             player = Content.Load<Texture2D>("player");
             playerBullet = Content.Load<Texture2D>("player_bullet");
             enemyBullet = Content.Load<Texture2D>("enemy_bullet");
         }
-        
+
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
         /// game-specific content.

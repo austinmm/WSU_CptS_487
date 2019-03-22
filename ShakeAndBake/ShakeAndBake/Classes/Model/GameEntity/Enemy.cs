@@ -31,7 +31,8 @@ namespace ShakeAndBake.Model.GameEntity
             // enemy went off screen without dying, so destroy it
             if (position.Y > GameConfig.Height)
             {
-                isDestroyed = true;
+                // move back to start since the enemy didn't die
+                path.Reset();
                 return;
             }
 

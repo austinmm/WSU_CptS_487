@@ -33,7 +33,7 @@ namespace ShakeAndBake.Controller
                         screenManager.SetScreen(ScreenType.INGAME);
                         break;
                     case GameState.GAMEOVER:
-                        if (gameData.IsUserDead)
+                        if (Player.Instance.IsDestroyed)
                         {
                             screenManager.SetScreen(ScreenType.GAMELOSE);
                         }
@@ -97,24 +97,27 @@ namespace ShakeAndBake.Controller
                     }
 
                     gameData.Update(gameTime);
-                    //gameBoard.Update(gameTime);
-
-                    // Update the game state based on what the stage manager changes to.
-                    State = stageManager.CheckBoard(gameData, gameState);
+                    if (Player.Instance.IsDestroyed)
+                    {
+                        State = GameState.GAMEOVER;
+                    }
+                    else
+                    {
+                        // Update the game state based on what the stage manager changes to.
+                        State = stageManager.CheckBoard(gameData, gameState);
+                    }
                     break;
-
                 case GameState.MENU:
                     menuState = inputHandler.MenuMove(state, menuState, out gameState);
-                    gameData.Update(gameTime);
+                    //gameData.Update(gameTime);
                     break;
-
                 case GameState.GAMEOVER:
                     endMenuState = inputHandler.EndMenuMove(state, endMenuState, out gameState);
-                    if(endMenuState == EndMenuState.MAIN && state.IsKeyDown(Keys.Enter))
+                    if (endMenuState == EndMenuState.MAIN && state.IsKeyDown(Keys.Enter))
                     {
                         screenManager.SetScreen(ScreenType.START);
                     }
-                    gameData.Update(gameTime);
+                    //gameData.Update(gameTime);
                     break;
                 case GameState.EXIT:
                     System.Environment.Exit(0);

@@ -66,11 +66,11 @@ namespace ShakeAndBake.Model
         
         public void AddEnemy(EnemyType type)
         {
-            Random rand = new Random();
+            Random rand = new Random(this.visibleEnemies.Count);
             
             Enemy enemy = EnemeyFactoryProducer.CreateEnemy(type);
             // spawn enemy on top of screen, randomly between the width of the screen
-            enemy.Position = new Vector2(rand.Next(0, GameConfig.Width - enemy.Sprite.Width), -enemy.Sprite.Height);
+            enemy.Position = new Vector2(rand.Next(enemy.Sprite.Width, GameConfig.Width - enemy.Sprite.Width), -enemy.Sprite.Height);
             double velocity = Util.randDouble(1, 3);
             enemy.Velocity = velocity;
             enemy.Path = new StraightPath(enemy.Position, new Vector2(0, 1), (float)velocity);

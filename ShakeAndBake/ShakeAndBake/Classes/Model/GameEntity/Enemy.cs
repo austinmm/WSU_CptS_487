@@ -58,7 +58,7 @@ namespace ShakeAndBake.Model.GameEntity
             if (sprite == null) return;
             if (this.CanFire())
             {
-                fireRate = Util.randInt(3000, 4000);
+                fireRate = Util.randInt(500, 1000);
                 Vector2 pos = Vector2.Add(position, new Vector2((sprite.Width - ShakeAndBakeGame.GetTexture("enemy_bullet").Width) / 2, sprite.Height));
                 //Creates a new projectile to be added to the character's ObservableCollection of projectiles
 

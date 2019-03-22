@@ -9,9 +9,9 @@ namespace ShakeAndBake.Classes.Model.Factories.PathFactory
 {
     class EnemyBulletPathFactory : PathAbstractFactory
     {
-        public override Path Create(Vector2 origin)
+        public override Path Create(Vector2 origin, Vector2 direction, float speed)
         {
-            Path path = new StraightPath(origin, new Vector2(0, 1), 5);
+            Path path = new StraightPath(origin, direction, speed);
             return path;
         }
     }

@@ -10,6 +10,6 @@ namespace ShakeAndBake.Classes.Model.Factories.PathFactory
 {
     abstract class PathAbstractFactory
     {
-        public abstract Path Create(Vector2 origin);
+        public abstract Path Create(Vector2 origin, Vector2 direction, float speed);
     }
 }

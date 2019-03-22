@@ -27,7 +27,7 @@ namespace ShakeAndBake.View
             AddScreen(ScreenType.GAMEWIN, new GameWinScreen(gameController));
             AddScreen(ScreenType.GAMELOSE, new GameLoseScreen(gameController));
         }
-        
+
         public void AddScreen(ScreenType type, Screen screen)
         {
             screens[type] = screen;

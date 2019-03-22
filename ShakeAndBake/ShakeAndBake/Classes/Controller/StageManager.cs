@@ -72,8 +72,14 @@ namespace ShakeAndBake.Controller
             set { current = value; }
         }
 
+        public GameStage CurrentStageType
+        {
+            get { return this.stageTypes[this.current]; }
+        }
+
         public StageManager()
         {
+            //Load JSON Stage Data Here
             stageTypes = new List<GameStage>() {
                 GameStage.Stage1, GameStage.Stage2, GameStage.Stage3, GameStage.Stage4 
             };
@@ -99,22 +105,38 @@ namespace ShakeAndBake.Controller
                 new Wave(EnemyType.FinalBoss, 1),
             });  
         }
-        
-        public GameState CheckBoard(Model.GameData gameData, GameState currentState)
+
+        public bool IsCurrentStageCompleted(Model.GameData gameData)
+        {
+            if (gameData.AreAllEnemiesDestroyed)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool AreAllStagesCompleted()
+        {
+            if (++this.current >= this.stageTypes.Count)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public GameState CheckStageStatus(Model.GameData gameData, GameState currentState)
         {
             // If no enemies are left in this phase, then switch to next phase.
-            if (gameData.VisibleEnemies.Count == 0)
+            if (this.IsCurrentStageCompleted(gameData))
             {
-                // Next stage.
-                if (++current >= stageTypes.Count)
+                // Next stage
+                if (this.AreAllStagesCompleted())
                 {
                     return GameState.GAMEOVER;
                 } else {
-                    ConfigureNextStage(gameData);
+                    this.ConfigureNextStage(gameData);
+                    return GameState.PAUSE;
                 }
-            } else if (gameData.IsUserDead)
-            {
-                return GameState.GAMEOVER;
             }
             return currentState;
         }

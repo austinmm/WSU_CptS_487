@@ -17,6 +17,16 @@ namespace ShakeAndBake.Controller
             }
         }
 
+        public void HandleGamePlayInput(KeyboardState keyboardState)
+        {
+            this.UpdateGameSpeed(keyboardState);
+            this.FireUserProjectile(keyboardState);
+            if (this.DidUserMove(keyboardState, out float newX, out float newY))
+            {
+                Player.Instance.Move(newX, newY);
+            }
+        }
+
         public MenuState MenuMove(KeyboardState state, KeyboardState previousState, MenuState menuStateIn, out GameState newGameState)
         {
             if (state.IsKeyDown(Keys.Down))

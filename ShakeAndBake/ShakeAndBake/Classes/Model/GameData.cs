@@ -16,13 +16,17 @@ namespace ShakeAndBake.Model
     {
         private CollisionBoard collisionBoard;
 
-        private bool isUserDead;
-        public bool IsUserDead { get { return Player.Instance.IsDestroyed; } }//this.isUserDead; } }
+        public bool IsUserDead { get { return Player.Instance.IsDestroyed; } }
         //Contains a list of all enemies currently visible on the gameboard
         private ObservableCollection<Enemy> visibleEnemies;
         public ObservableCollection<Enemy> VisibleEnemies
         {
             get { return visibleEnemies; }
+        }
+
+        public bool AreAllEnemiesDestroyed
+        {
+            get { return visibleEnemies.Count == 0; }
         }
 
         //Contains a list of all enemies that have dies but still have projectiles on the gameboard
@@ -62,7 +66,6 @@ namespace ShakeAndBake.Model
             this.visibleEnemies.CollectionChanged += UpdateEnemies;
             this.deadEnemies = new List<Enemy>();
             //User
-            this.isUserDead = false;
         }
 
         public void AddEnemy(EnemyType type)
@@ -155,41 +158,22 @@ namespace ShakeAndBake.Model
                 }
             }
         }
-
-        public bool IsHit(Character character, Projectile projectile)
-        {
-            if (character != null && projectile != null)
-            {
-                if (character.BoundsContains(projectile.Position))
-                {
-                    character.Health -= projectile.HitDamage;
-                    //Check if character is dead
-                    if (character.Health < 0)
-                    {
-                        //if character is the player
-                        if (character is Player)
-                        {
-                            this.isUserDead = true;
-                        }
-                        //if character is an enemy
-                        else if (character is Enemy)
-                        {
-                            this.visibleEnemies.Remove((Enemy)character);
-                        }
-                        return true;
-                    }
-                    return true;
-                }
-            }
-            return false;
-        }
         
         // called before configuring a phase
         public void Reset()
         {
-            // clear player bullets
             Player.Instance.Projectiles.Clear();
+            this.ResetPlayerPosition();
             this.Initialize();
+        }
+
+        private void ResetPlayerPosition()
+        {
+            Player.Instance.Position = new Vector2
+            (
+                (GameConfig.Width / 2 - Player.Instance.Sprite.Width / 2),
+                (GameConfig.Height - Player.Instance.Sprite.Height)
+            );
         }
     }
 }

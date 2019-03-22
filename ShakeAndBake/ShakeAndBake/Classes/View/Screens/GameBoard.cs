@@ -25,21 +25,29 @@ namespace ShakeAndBake.View
                 enemy.Draw(spriteBatch);
             }
             Player.Instance.Draw(spriteBatch);
+            this.DrawPlayerHealth(graphics, spriteBatch);
+            this.DrawNewStageGraphic(graphics, spriteBatch);
+        }
+
+        public void DrawNewStageGraphic(GraphicsDeviceManager graphics, SpriteBatch spriteBatch)
+        {
+            spriteBatch.DrawString(ShakeAndBakeGame.GetFont("Default"), "Stage 1", new Vector2(0, 0), Color.Gold);
+        }
+
+        public void DrawPlayerHealth(GraphicsDeviceManager graphics, SpriteBatch spriteBatch)
+        {
             int xOffset = 60, yOffset = 5;
             for (int lives = 1; lives <= Player.Instance.Health; lives++)
             {
-                if(lives % 4 == 0)
+                if (lives % 4 == 0) //Displays three lives per row
                 {
                     yOffset += 60;
                     xOffset = 60;
                 }
-                Rectangle destinationRectangle = new Rectangle(x: GameConfig.Width-xOffset, y:yOffset, width:50, height:50);
+                Rectangle destinationRectangle = new Rectangle(x: GameConfig.Width - xOffset, y: yOffset, width: 50, height: 50);
                 spriteBatch.Draw(ShakeAndBakeGame.GetTexture("trophy"), destinationRectangle, Color.White);
                 xOffset += 60;
             }
-
-
-            // draw game menu/status here (to overlap everything)
         }
     }
 }

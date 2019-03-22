@@ -71,8 +71,6 @@ namespace ShakeAndBake.Model.GameEntity
             this.timeAlive.Start();
             this.ProjectileTypes = new List<ProjectileType>();
             this.projectiles = new ObservableCollection<Projectile>();
-
-            projectiles.CollectionChanged += OnProjectileChange;
         }
 
         public override void Update(GameTime gameTime, CollisionBoard cb)
@@ -108,19 +106,6 @@ namespace ShakeAndBake.Model.GameEntity
                 this.health = 0;
             }
             return overflow;
-        }
-
-        private void OnProjectileChange(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems != null)
-            {
-                //When a new Enemy is created it
-                foreach (Projectile projectile in e.NewItems)
-                {
-                    projectile.PropertyChanged += Projectile_PropertyChanged;
-                }
-            }
-            if (e.OldItems != null) { }
         }
 
         public void UpdateProjectiles(GameTime gameTime, CollisionBoard cb)

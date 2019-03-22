@@ -6,10 +6,8 @@ using ShakeAndBake.Extras.Paths;
 
 namespace ShakeAndBake.Model.GameEntity
 {
-    public class Projectile : GameObject, INotifyPropertyChanged
+    public class Projectile : GameObject
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         //This is a set path that the projectile objects will travel when update is called
         protected Path path;
         public Path Path
@@ -63,9 +61,6 @@ namespace ShakeAndBake.Model.GameEntity
             //Update the position of the projectile based off of its spritePath
             position = path.NextPoint();
 
-            //Tell the event handler that the projectile has moved and thus it needs to check if it has hit an enemy or player
-            RaisePropertyChanged("Projectile_Position_Changed");
-
             //Fill bucket on collision board
             cb.FillBucket(this);
 
@@ -109,21 +104,6 @@ namespace ShakeAndBake.Model.GameEntity
             if (this.IsDestroyed)
             {
                 cb.RemoveFromBucketIfExists(this);
-            }
-        }
-
-        //https://github.com/jbe2277/waf/wiki/Implementing-and-usage-of-INotifyPropertyChanged
-        protected void RaisePropertyChanged(string propertyName)
-        {
-            OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
-        }
-
-        //Create the OnPropertyChanged method to raise the event
-        protected void OnPropertyChanged(PropertyChangedEventArgs property)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, property);
             }
         }
     }

@@ -145,6 +145,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="app.manifest" />
+    <None Include="Content\Default.spritefont" />
     <None Include="Content\File.spritefont" />
     <None Include="Content\bullet.png" />
     <None Include="Content\circle.png" />
@@ -165,6 +166,7 @@
     <None Include="Content\obj\DesktopGL\Content\player_bullet.mgcontent" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\generic_stage_notice.PNG" />
     <Content Include="Content\Trophy.png" />
     <Content Include="Content\Trophy2.png" />
   </ItemGroup>

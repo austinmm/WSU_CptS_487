@@ -29,7 +29,7 @@ namespace ShakeAndBake
 
     public enum GameState
     {
-        PLAYING, GAMEOVER, MENU, EXIT, RESET
+        PLAYING, GAMEOVER, MENU, EXIT, RESET, PAUSE
     }
 
     public static class Util

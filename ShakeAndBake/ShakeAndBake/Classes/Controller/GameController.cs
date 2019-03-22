@@ -10,6 +10,7 @@ namespace ShakeAndBake.Controller
     {
         private InputHandler inputHandler;
 
+        //This property controlls which screen to load 
         private ScreenManager screenManager;
         public ScreenManager ScreenManager
         {
@@ -18,30 +19,40 @@ namespace ShakeAndBake.Controller
         
         private StageManager stageManager;
 
-        private GameState gameState;
-        public GameState State
+        private double timePaused;
+        private GameTime timeElapsed;
+
+        private GameState currentGameState;
+        private GameState CurrentGameState
         {
-            get { return gameState; }
+            get { return this.currentGameState; }
             set {
-                gameState = value;
-                switch (gameState)
+                if (this.currentGameState != value)
                 {
-                    case GameState.MENU:
-                        screenManager.SetScreen(ScreenType.START);
-                        break;
-                    case GameState.PLAYING:
-                        screenManager.SetScreen(ScreenType.INGAME);
-                        break;
-                    case GameState.GAMEOVER:
-                        if (Player.Instance.IsDestroyed)
-                        {
-                            screenManager.SetScreen(ScreenType.GAMELOSE);
-                        }
-                        else
-                        {
-                            screenManager.SetScreen(ScreenType.GAMEWIN);
-                        }
-                        break;
+                    this.currentGameState = value;
+                    switch (this.currentGameState)
+                    {
+                        case GameState.MENU:
+                            screenManager.SetScreen(ScreenType.START);
+                            break;
+                        case GameState.PLAYING:
+                            screenManager.SetScreen(ScreenType.INGAME);
+                            break;
+                        case GameState.GAMEOVER:
+                            if (Player.Instance.IsDestroyed)
+                            {
+                                screenManager.SetScreen(ScreenType.GAMELOSE);
+                            }
+                            else
+                            {
+                                screenManager.SetScreen(ScreenType.GAMEWIN);
+                            }
+                            break;
+                        case GameState.PAUSE:
+                            this.timePaused = this.timeElapsed.TotalGameTime.TotalSeconds;
+                            break;
+                        default: break;
+                    }
                 }
             }
         }
@@ -78,58 +89,52 @@ namespace ShakeAndBake.Controller
             screenManager = new ScreenManager(gameData,this);
             screenManager.SetScreen(ScreenType.START);
             
-            gameState = GameState.MENU;
-            menuState = MenuState.START;
-            inputHandler = new InputHandler();
-            stageManager = new StageManager();
-            stageManager.ConfigureNextStage(gameData);
+            this.CurrentGameState = GameState.MENU;
+            this.menuState = MenuState.START;
+            this.inputHandler = new InputHandler();
+            this.stageManager = new StageManager();
+            this.stageManager.ConfigureNextStage(gameData);
         }
 
         public void Update(GameTime gameTime)
         {
+            this.timeElapsed = gameTime;
             // Gets the state of the keyboard and checks the combos as follows.
             KeyboardState keyboardState = Keyboard.GetState();
-            switch (gameState) {
-                case GameState.PLAYING:
-                    inputHandler.UpdateGameSpeed(keyboardState);
-                    inputHandler.FireUserProjectile(keyboardState);
-                    if (inputHandler.DidUserMove(keyboardState, out float newX, out float newY))
+            switch (this.CurrentGameState) {
+                case GameState.PAUSE:
+                    if(timePaused + 3 < timeElapsed.TotalGameTime.TotalSeconds)
                     {
-                        Player.Instance.Move(newX, newY);
+                        this.CurrentGameState = GameState.PLAYING;
                     }
-
-                    gameData.Update(gameTime);
+                    break;
+                case GameState.PLAYING:
+                    this.inputHandler.HandleGamePlayInput(keyboardState);
+                    this.gameData.Update(gameTime);
                     if (Player.Instance.IsDestroyed)
                     {
-                        State = GameState.GAMEOVER;
+                        this.CurrentGameState = GameState.GAMEOVER;
                     }
                     else
                     {
                         // Update the game state based on what the stage manager changes to.
-                        State = stageManager.CheckBoard(gameData, gameState);
+                        this.CurrentGameState = stageManager.CheckStageStatus(this.gameData, this.CurrentGameState);
                     }
                     break;
                 case GameState.MENU:
                     GameState newGameState;
-                    menuState = inputHandler.MenuMove(keyboardState, previousKeyboardState, menuState, out newGameState);
-                    State = newGameState;
+                    this.menuState = inputHandler.MenuMove(keyboardState, previousKeyboardState, menuState, out newGameState);
+                    this.CurrentGameState = newGameState;
                     break;
                 case GameState.GAMEOVER:
-                    endMenuState = inputHandler.EndMenuMove(keyboardState, endMenuState, out newGameState);
-                    State = newGameState;
+                    this.endMenuState = inputHandler.EndMenuMove(keyboardState, endMenuState, out newGameState);
+                    this.CurrentGameState = newGameState;
                     break;
                 case GameState.RESET:
-                    stageManager.CurrentStage = 0;
-                    Player.Instance.IsDestroyed = false;
-                    Player.Instance.Health = 5;
-                    Player.Instance.Position = new Vector2
-                        (
-                            (GameConfig.Width / 2 - Player.Instance.Sprite.Width / 2),
-                            (GameConfig.Height - Player.Instance.Sprite.Height)
-                        );
-                    stageManager.ConfigureNextStage(gameData);
-                    State = GameState.MENU;
-                    
+                    this.stageManager.CurrentStage = 0;
+                    Player.Reset();
+                    this.stageManager.ConfigureNextStage(gameData);
+                    this.CurrentGameState = GameState.MENU;                
                     break;
                 case GameState.EXIT:
                     System.Environment.Exit(0);

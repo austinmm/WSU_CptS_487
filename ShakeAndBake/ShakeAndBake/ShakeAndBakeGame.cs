@@ -12,6 +12,7 @@ namespace ShakeAndBake
     public class ShakeAndBakeGame : Game
     {
         private static Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
+        private static Dictionary<string, SpriteFont> fonts = new Dictionary<string, SpriteFont>();
 
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
@@ -52,6 +53,7 @@ namespace ShakeAndBake
         /// </summary>
         protected override void LoadContent()
         {
+            LoadAndStoreTexture("generic_stage_notice");
             LoadAndStoreTexture("player");
             LoadAndStoreTexture("circle");
             LoadAndStoreTexture("trophy");
@@ -67,6 +69,7 @@ namespace ShakeAndBake
             LoadAndStoreTexture("lifeIcon");
             LoadAndStoreTexture("loseScreen");
             LoadAndStoreTexture("winScreen");
+            LoadAndStoreFont("Default");
 
             gameData = new Model.GameData(GetTexture("player"));
             gameBoard = new View.GameBoard(gameData);
@@ -81,6 +84,15 @@ namespace ShakeAndBake
         {
             return textures[name];
         }
+        public static SpriteFont GetFont(string name)
+        {
+            return fonts[name];
+        }
+        private void LoadAndStoreFont(string name)
+        {
+            fonts[name] = Content.Load<SpriteFont>(name);
+        }
+
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload

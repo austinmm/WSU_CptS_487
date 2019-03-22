@@ -23,6 +23,11 @@ namespace ShakeAndBake.Model.GameEntity
             }
         }
 
+        public static void Reset()
+        {
+            instance = new Player();
+        }
+
         private Player() : base()
         {
             this.ProjectileTypes = new List<ProjectileType>();

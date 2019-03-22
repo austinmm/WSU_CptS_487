@@ -40,8 +40,16 @@ namespace ShakeAndBake.Model.GameEntity
             this.path = path;
         }
 
+        /***
+         * TODO: Make this abstract. Have each inheriting class handle this differently
+         ***/
         public override void Update(GameTime gameTime, CollisionBoard cb)
         {
+            if (this.IsDestroyed)
+            {
+                return;
+            }
+
             if (position.Y + this.sprite.Height < 0 ||
                 position.Y > GameConfig.Height)
             {
@@ -63,6 +71,11 @@ namespace ShakeAndBake.Model.GameEntity
 
             if (this.GetType().Equals(typeof(EnemyBullet)))
             {
+                if (Player.Instance.BoundsContains(this.Position) || this.BoundsContains(Player.Instance.Position))
+                {
+                    Player.Instance.TakeDamage(this.HitDamage);
+                    this.isDestroyed = true;
+                }
             }
             else if (this.GetType().Equals(typeof(PlayerBullet)))
             {
@@ -93,7 +106,10 @@ namespace ShakeAndBake.Model.GameEntity
                 }
             }
 
-            //cb.GetObjectsCollided(this, GameObject)
+            if (this.IsDestroyed)
+            {
+                cb.RemoveFromBucketIfExists(this);
+            }
         }
 
         //https://github.com/jbe2277/waf/wiki/Implementing-and-usage-of-INotifyPropertyChanged

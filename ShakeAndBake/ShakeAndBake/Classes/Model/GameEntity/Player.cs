@@ -61,6 +61,11 @@ namespace ShakeAndBake.Model.GameEntity
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            if (this.isDestroyed)
+            {
+                return;
+            }
+
             base.Draw(spriteBatch);
             spriteBatch.Draw(ShakeAndBakeGame.GetTexture("player"), position, Color.White);
             //spriteBatch.DrawString(null, "" + this.health, position, Color.White);

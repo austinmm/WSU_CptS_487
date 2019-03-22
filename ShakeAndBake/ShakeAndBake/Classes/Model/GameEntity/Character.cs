@@ -96,6 +96,20 @@ namespace ShakeAndBake.Model.GameEntity
             // draw character in derived enemy/player classes
         }
 
+        /* Returns the remaining amount after it is delt to the character */
+        public double TakeDamage(double amount)
+        {
+            double overflow = 0;
+            this.health -= amount;
+            if (this.health <= 0)
+            {
+                overflow = Math.Abs(this.health);
+                this.isDestroyed = true;
+                this.health = 0;
+            }
+            return overflow;
+        }
+
         private void OnProjectileChange(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
@@ -112,9 +126,19 @@ namespace ShakeAndBake.Model.GameEntity
         public void UpdateProjectiles(GameTime gameTime, CollisionBoard cb)
         {
             //Update existing bullets already fired by the character
+            List<Projectile> deadProjectiles = new List<Projectile>();
             foreach (Projectile projectile in this.projectiles)
             {
                 projectile.Update(gameTime, cb);
+                if (projectile.IsDestroyed)
+                {
+                    deadProjectiles.Add(projectile);
+                }
+            }
+
+            foreach (Projectile projectile in deadProjectiles)
+            {
+                this.projectiles.Remove(projectile);
             }
         }
 

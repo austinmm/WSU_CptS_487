@@ -19,4 +19,20 @@ namespace ShakeAndBake.Model.Factories.ProjectileFactory
             return ret;
         }
     }
+
+    public class PlayerBulletProjectileFactory : ProjectileAbstractFactory
+    {
+        public override Projectile Create(Vector2 origin)
+        {
+            PathAbstractFactory factory = new PlayerBulletPathFactory();
+            Path path = factory.Create(origin);
+            Projectile ret = new PlayerBullet(path);
+
+            /***
+             * TODO: Have this value set according to a config option 
+             ***/
+            ret.HitDamage = 10;
+            return ret;
+        }
+    }
 }

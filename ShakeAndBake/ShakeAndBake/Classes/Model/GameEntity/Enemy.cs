@@ -28,16 +28,6 @@ namespace ShakeAndBake.Model.GameEntity
             //Move Enemy to new position in its set path
             position = path.NextPoint();
 
-            // random shake effect for bosses, just to add variety right now (move to appropriate classes later)
-            if (this is MidBoss)
-            {
-                position.X = position.X + (float)Util.randDouble(1, 25);
-            }
-            else if (this is FinalBoss)
-            {
-                position.X = position.X + (float)Util.randDouble(1, 50);
-            }
-
             // enemy went off screen without dying, so destroy it
             if (position.Y > GameConfig.Height)
             {
@@ -51,24 +41,6 @@ namespace ShakeAndBake.Model.GameEntity
             this.FireProjectile();
 
             base.Update(gameTime, cb);
-        }
-
-        public override void FireProjectile()
-        {
-            if (sprite == null) return;
-            if (this.CanFire())
-            {
-                fireRate = Util.randInt(500, 1000);
-                Vector2 pos = Vector2.Add(position, new Vector2((sprite.Width - ShakeAndBakeGame.GetTexture("enemy_bullet").Width) / 2, sprite.Height));
-                //Creates a new projectile to be added to the character's ObservableCollection of projectiles
-
-                ProjectileAbstractFactory factory = new EnemyBulletProjectileFactory();
-                Projectile projectile = factory.Create(this.position);
-                //The projectiles position is set to the current character's position
-                projectile.Position = this.position;
-                projectile.Velocity += this.Velocity;
-                this.projectiles.Add(projectile);
-            }
         }
     }
 }

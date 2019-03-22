@@ -7,6 +7,7 @@ using System.Collections.Specialized;
 using ShakeAndBake.Model.GameEntity;
 using ShakeAndBake.Model.Factories.EnemyFactory;
 using ShakeAndBake.Extras.Paths;
+using ShakeAndBake.Classes.Model.Factories.PathFactory;
 
 namespace ShakeAndBake.Model
 {
@@ -73,7 +74,21 @@ namespace ShakeAndBake.Model
             enemy.Position = new Vector2(rand.Next(enemy.Sprite.Width, GameConfig.Width - enemy.Sprite.Width), -enemy.Sprite.Height);
             double velocity = Util.randDouble(1, 3);
             enemy.Velocity = velocity;
-            enemy.Path = new StraightPath(enemy.Position, new Vector2(0, 1), (float)velocity);
+
+
+            /***
+             * TODO: This should be handled by enemy factory
+             ***/
+            if (enemy is MidBoss || enemy is FinalBoss)
+            {
+                PathAbstractFactory factory = new WavePath();
+                Path path = factory.Create(enemy.Position, new Vector2(0, 1), (float)velocity);
+                enemy.Path = path;
+            }
+            else
+            {
+                enemy.Path = new StraightPath(enemy.Position, new Vector2(0, 1), (float)velocity);
+            }
             this.visibleEnemies.Add(enemy);
         }
 

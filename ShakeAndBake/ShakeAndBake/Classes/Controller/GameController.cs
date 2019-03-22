@@ -120,9 +120,16 @@ namespace ShakeAndBake.Controller
                     break;
                 case GameState.RESET:
                     stageManager.CurrentStage = 0;
+                    Player.Instance.IsDestroyed = false;
+                    Player.Instance.Health = 5;
+                    Player.Instance.Position = new Vector2
+                        (
+                            (GameConfig.Width / 2 - Player.Instance.Sprite.Width / 2),
+                            (GameConfig.Height - Player.Instance.Sprite.Height)
+                        );
                     stageManager.ConfigureNextStage(gameData);
                     State = GameState.MENU;
-                    Player.Instance.Health = 5;
+                    
                     break;
                 case GameState.EXIT:
                     System.Environment.Exit(0);

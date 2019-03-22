@@ -14,7 +14,7 @@ namespace ShakeAndBake.Model.GameEntity
             fireRate = Util.randDouble(500, 600);
             this.ProjectileTypes = new System.Collections.Generic.List<ProjectileType>();
             this.ProjectileTypes.Add(ProjectileType.BossWaveProjectile);
-            sprite = ShakeAndBakeGame.GetTexture("mid_boss");
+            sprite = ShakeAndBakeGame.GetTexture("circle");
         }
 
         public override void Update(GameTime gameTime, CollisionBoard cb)

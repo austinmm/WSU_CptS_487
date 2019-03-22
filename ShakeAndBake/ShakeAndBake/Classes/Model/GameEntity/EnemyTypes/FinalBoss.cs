@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ShakeAndBake.Extras.Paths;
+using ShakeAndBake.Model.Factories.ProjectileFactory;
 
 namespace ShakeAndBake.Model.GameEntity
 {
@@ -9,6 +10,9 @@ namespace ShakeAndBake.Model.GameEntity
         //Boss Enemy Constructor
         public FinalBoss() : base()
         {
+            fireRate = Util.randDouble(100, 200);
+            this.ProjectileTypes = new System.Collections.Generic.List<ProjectileType>();
+            this.ProjectileTypes.Add(ProjectileType.EnemyBullet);
             this.path = EnemyPaths.DefaultPath(this.position, new Vector2(0, 1));
              sprite = ShakeAndBakeGame.GetTexture("circle");
         }

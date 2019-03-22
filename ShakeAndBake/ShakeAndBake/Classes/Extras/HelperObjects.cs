@@ -9,7 +9,7 @@ namespace ShakeAndBake
 
     public enum ProjectileType
     {
-        Bullet, Rocket, FireBall
+        Bullet, Rocket, FireBall, EnemyBullet, PlayerBullet, BossWaveProjectile
     }
 
     public enum MenuState
@@ -22,6 +22,11 @@ namespace ShakeAndBake
         MAIN, EXIT
     }
     
+    public enum PathType
+    {
+        WavePath, StraightPath, RandomWavePath
+    }
+
     public enum GameState
     {
         PLAYING, GAMEOVER, MENU, EXIT

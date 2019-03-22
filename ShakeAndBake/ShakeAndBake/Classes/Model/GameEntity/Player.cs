@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using ShakeAndBake.Extras.Paths;
+using ShakeAndBake.Model.Factories.ProjectileFactory;
+using System.Collections.Generic;
 
 namespace ShakeAndBake.Model.GameEntity
 {
@@ -23,6 +25,8 @@ namespace ShakeAndBake.Model.GameEntity
 
         private Player() : base()
         {
+            this.ProjectileTypes = new List<ProjectileType>();
+            this.ProjectileTypes.Add(ProjectileType.PlayerBullet);
             this.Velocity = 3;
             this.Acceleration = 2;
             this.FireRate = 60;
@@ -61,6 +65,11 @@ namespace ShakeAndBake.Model.GameEntity
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            if (this.isDestroyed)
+            {
+                return;
+            }
+
             base.Draw(spriteBatch);
             spriteBatch.Draw(ShakeAndBakeGame.GetTexture("player"), position, Color.White);
             //spriteBatch.DrawString(null, "" + this.health, position, Color.White);
@@ -72,11 +81,12 @@ namespace ShakeAndBake.Model.GameEntity
             Vector2 pos = Vector2.Add(position, new Vector2((ShakeAndBakeGame.GetTexture("player").Width
                 - ShakeAndBakeGame.GetTexture("player_bullet").Width) / 2,
                 - ShakeAndBakeGame.GetTexture("player_bullet").Height));
-            Projectile projectile = new PlayerBullet(new StraightPath(pos, new Vector2(0, -1), 3));
-
+            //Projectile projectile = new PlayerBullet(new StraightPath(pos, new Vector2(0, -1), 3));
+            ProjectileAbstractFactory factory = new PlayerBulletProjectileFactory();
+            Projectile projectile = factory.Create(this.position);
             //The projectiles position is set to the current character's position
-            projectile.Position = pos;
             this.projectiles.Add(projectile);
+            projectile.Velocity += this.Velocity;
         }
     }
 }

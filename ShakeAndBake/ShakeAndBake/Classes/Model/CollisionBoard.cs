@@ -58,22 +58,26 @@ namespace ShakeAndBake.Model
             /* Check all neighboring cells */
             for (int i = 0; i < 9; ++i)
             {
-                int xOffset = dirs[i, 0];
-                int yOffset = dirs[i, 1];
-
-                CollisionBucket cb = FetchBucket(gameObject, xOffset, yOffset);
-                /* null indicates that the coordinates were invalid */
-                if (cb != null)
+                /* In the future, we can use j to expand the radius of our checks if needed */
+                for (int j = 1; j <= 1; ++j)
                 {
-                    /* For all game objects in the bucket, if within the collision region add to return set */
-                    foreach (GameObject go in cb.GetObjects())
+                    int xOffset = dirs[i, 0];
+                    int yOffset = dirs[i, 1];
+
+                    CollisionBucket cb = FetchBucket(gameObject, xOffset, yOffset);
+                    /* null indicates that the coordinates were invalid */
+                    if (cb != null)
                     {
-                        if (!go.GetType().IsSubclassOf(type) && !go.GetType().Equals(type))
-                            continue;
-                        if (gameObject.BoundsContains(go.Position)
-                            || go.BoundsContains(gameObject.Position))
+                        /* For all game objects in the bucket, if within the collision region add to return set */
+                        foreach (GameObject go in cb.GetObjects())
                         {
-                            ret.Add(go);
+                            if (!go.GetType().IsSubclassOf(type) && !go.GetType().Equals(type))
+                                continue;
+                            if (gameObject.BoundsContains(go.Position)
+                                || go.BoundsContains(gameObject.Position))
+                            {
+                                ret.Add(go);
+                            }
                         }
                     }
                 }

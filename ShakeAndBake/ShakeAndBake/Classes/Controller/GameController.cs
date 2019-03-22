@@ -122,6 +122,7 @@ namespace ShakeAndBake.Controller
                     stageManager.CurrentStage = 0;
                     stageManager.ConfigureNextStage(gameData);
                     State = GameState.MENU;
+                    Player.Instance.Health = 5;
                     break;
                 case GameState.EXIT:
                     System.Environment.Exit(0);

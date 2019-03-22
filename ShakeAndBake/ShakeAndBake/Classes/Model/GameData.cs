@@ -81,7 +81,7 @@ namespace ShakeAndBake.Model
              ***/
             if (enemy is MidBoss || enemy is FinalBoss)
             {
-                PathAbstractFactory factory = new WavePath();
+                PathAbstractFactory factory = new WavePathFactory();
                 Path path = factory.Create(enemy.Position, new Vector2(0, 1), (float)velocity);
                 enemy.Path = path;
             }

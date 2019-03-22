@@ -8,7 +8,7 @@ namespace ShakeAndBake.Model.Factories.ProjectileFactory
     {
         public override Projectile Create(Vector2 origin)
         {
-            PathAbstractFactory factory = new RandomWavePath();
+            PathAbstractFactory factory = new RandomWavePathFactory();
             Path path = factory.Create(origin, new Vector2(0, 1), 5);
             Projectile ret = new EnemyBullet(path);
 

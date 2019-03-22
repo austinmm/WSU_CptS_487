@@ -5,35 +5,31 @@ namespace ShakeAndBake.Model.Factories.ProjectileFactory
 {
     public static class ProjectileFactoryProducer
     {
-        public static Projectile CreateEnemy(ProjectileType type)
+        public static Projectile CreateEnemy(ProjectileType type, Vector2 origin)
         {
-            /***
-             * TODO: Implement this
-             ***/
-
-           /* ProjectileAbstractFactory factory = ProduceFactory(type);
+           ProjectileAbstractFactory factory = ProduceFactory(type);
             if (factory != null)
-                return factory.Create();*/
+                return factory.Create(origin);
             return null;
         }
 
         public static ProjectileAbstractFactory ProduceFactory(ProjectileType type)
         {
-            /*ProjectileAbstractFactory factory = null;
+            ProjectileAbstractFactory factory = null;
             switch (type)
             {
                 case ProjectileType.EnemyBullet:
-                    factory = new BulletProjectileFactory();
+                    factory = new EnemyBulletProjectileFactory();
+                    break;
+                case ProjectileType.PlayerBullet:
+                    factory = new PlayerBulletProjectileFactory();
+                    break;
+                case ProjectileType.BossWaveProjectile:
+                    factory = new BossWaveProjectileFactory();
                     break;
                
             }
-            return factory;*/
-            
-            /***
-             * TODO: Implement this 
-             * 
-             ***/
-            return null;
+            return factory;
         }
     }
 

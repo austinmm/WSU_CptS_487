@@ -54,6 +54,8 @@ namespace ShakeAndBake
         {
             LoadAndStoreTexture("player");
             LoadAndStoreTexture("circle");
+            LoadAndStoreTexture("trophy");
+            LoadAndStoreTexture("trophy2");
             LoadAndStoreTexture("player_bullet");
             LoadAndStoreTexture("enemy_bullet");
             LoadAndStoreTexture("titleScreen");

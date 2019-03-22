@@ -15,7 +15,7 @@ namespace ShakeAndBake.Model.Factories.ProjectileFactory
             /***
              * TODO: Have this value set according to a config option 
              ***/
-            ret.HitDamage = 10;
+            ret.HitDamage = 1;
             return ret;
         }
     }

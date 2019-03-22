@@ -16,8 +16,8 @@ namespace ShakeAndBake.Model.GameEntity
         //Enemy Constructor
         public Enemy() : base()
         {
-            HitBoxRadius = 50;
-            fireRate = 1250;
+            this.HitBoxRadius = 50;
+            this.fireRate = 1250;
         }
 
         //Updates the 

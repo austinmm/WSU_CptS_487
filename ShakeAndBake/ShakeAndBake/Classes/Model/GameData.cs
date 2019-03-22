@@ -17,7 +17,7 @@ namespace ShakeAndBake.Model
         private CollisionBoard collisionBoard;
 
         private bool isUserDead;
-        public bool IsUserDead { get { return this.isUserDead; } }
+        public bool IsUserDead { get { return Player.Instance.IsDestroyed; } }//this.isUserDead; } }
         //Contains a list of all enemies currently visible on the gameboard
         private ObservableCollection<Enemy> visibleEnemies;
         public ObservableCollection<Enemy> VisibleEnemies
@@ -64,7 +64,7 @@ namespace ShakeAndBake.Model
             //User
             this.isUserDead = false;
         }
-        
+
         public void AddEnemy(EnemyType type)
         {
             Random rand = new Random(this.visibleEnemies.Count);
@@ -111,7 +111,6 @@ namespace ShakeAndBake.Model
             }
         }
 
-        //MultiThread this Method call
         public void Update(GameTime gameTime)
         {
             Player.Instance.Update(gameTime, collisionBoard);

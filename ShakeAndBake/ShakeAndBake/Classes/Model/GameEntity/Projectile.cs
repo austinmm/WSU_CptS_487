@@ -27,8 +27,8 @@ namespace ShakeAndBake.Model.GameEntity
         }
 
         //This is the amount of damage an enemy or player will take if hit by this projectile
-        private double hitDamage;
-        public double HitDamage
+        private int hitDamage;
+        public int HitDamage
         {
             get { return this.hitDamage; }
             set { this.hitDamage = value; }

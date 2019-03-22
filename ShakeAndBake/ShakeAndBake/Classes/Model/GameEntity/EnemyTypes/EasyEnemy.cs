@@ -16,12 +16,12 @@ namespace ShakeAndBake.Model.GameEntity
             this.ProjectileTypes = new List<ProjectileType>();
             this.ProjectileTypes.Add(ProjectileType.EnemyBullet);
             sprite = ShakeAndBakeGame.GetTexture("circle");
+            this.health = 1;
         }
 
         public override void Update(GameTime gameTime, CollisionBoard cb)
         {
             base.Update(gameTime, cb);
-
         }
 
         public override void Draw(SpriteBatch spriteBatch)

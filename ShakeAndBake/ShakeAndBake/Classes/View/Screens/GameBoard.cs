@@ -25,6 +25,19 @@ namespace ShakeAndBake.View
                 enemy.Draw(spriteBatch);
             }
             Player.Instance.Draw(spriteBatch);
+            int xOffset = 60, yOffset = 5;
+            for (int lives = 1; lives <= Player.Instance.Health; lives++)
+            {
+                if(lives % 4 == 0)
+                {
+                    yOffset += 60;
+                    xOffset = 60;
+                }
+                Rectangle destinationRectangle = new Rectangle(x: GameConfig.Width-xOffset, y:yOffset, width:50, height:50);
+                spriteBatch.Draw(ShakeAndBakeGame.GetTexture("trophy"), destinationRectangle, Color.White);
+                xOffset += 60;
+            }
+
 
             // draw game menu/status here (to overlap everything)
         }

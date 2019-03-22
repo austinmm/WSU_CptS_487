@@ -15,6 +15,7 @@ namespace ShakeAndBake.Model.GameEntity
             this.ProjectileTypes = new System.Collections.Generic.List<ProjectileType>();
             this.ProjectileTypes.Add(ProjectileType.BossWaveProjectile);
             sprite = ShakeAndBakeGame.GetTexture("circle");
+            this.health = 5;
         }
 
         public override void Update(GameTime gameTime, CollisionBoard cb)

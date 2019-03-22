@@ -39,8 +39,8 @@ namespace ShakeAndBake.Model.GameEntity
         }
 
         //This contains the amount of health a character has left
-        protected double health;
-        public double Health
+        protected int health;
+        public int Health
         {
             get { return this.health; }
             set { this.health = value; }
@@ -66,7 +66,7 @@ namespace ShakeAndBake.Model.GameEntity
         public Character() : base()
         {
             //When projectiles are added or removed from the ObservableCollection then "OnProjectileChange" is automatically called
-            this.health = 100;
+            this.health = 5;
             this.timeAlive = new Stopwatch();
             this.timeAlive.Start();
             this.ProjectileTypes = new List<ProjectileType>();
@@ -97,9 +97,9 @@ namespace ShakeAndBake.Model.GameEntity
         }
 
         /* Returns the remaining amount after it is delt to the character */
-        public double TakeDamage(double amount)
+        public double TakeDamage(int amount)
         {
-            double overflow = 0;
+            int overflow = 0;
             this.health -= amount;
             if (this.health <= 0)
             {

@@ -69,7 +69,6 @@ namespace ShakeAndBake.Model.GameEntity
             {
                 return;
             }
-
             base.Draw(spriteBatch);
             spriteBatch.Draw(ShakeAndBakeGame.GetTexture("player"), position, Color.White);
             //spriteBatch.DrawString(null, "" + this.health, position, Color.White);

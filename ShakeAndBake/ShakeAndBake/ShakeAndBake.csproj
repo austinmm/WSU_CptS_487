@@ -155,13 +155,19 @@
     <None Include="Content\bin\DesktopGL\Content\enemy_bullet.xnb" />
     <None Include="Content\bin\DesktopGL\Content\player.xnb" />
     <None Include="Content\bin\DesktopGL\Content\player_bullet.xnb" />
-    <None Include="Content\obj\DesktopGL\Content\.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\.mgcontent">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Content\obj\DesktopGL\Content\.mgstats" />
     <None Include="Content\obj\DesktopGL\Content\circle.mgcontent" />
     <None Include="Content\obj\DesktopGL\Content\enemy_bullet.mgcontent" />
     <None Include="Content\obj\DesktopGL\Content\player.mgcontent" />
     <None Include="Content\obj\DesktopGL\Content\player_bullet.mgcontent" />
     <None Include="Classes\.DS_Store" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Trophy.png" />
+    <Content Include="Content\Trophy2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

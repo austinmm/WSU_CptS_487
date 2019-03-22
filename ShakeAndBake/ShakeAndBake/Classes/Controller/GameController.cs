@@ -46,7 +46,6 @@ namespace ShakeAndBake.Controller
             }
         }
 
-        //
         private MenuState menuState;
         public MenuState MenuState
         {
@@ -108,16 +107,17 @@ namespace ShakeAndBake.Controller
                     }
                     break;
                 case GameState.MENU:
-                    menuState = inputHandler.MenuMove(state, menuState, out gameState);
-                    //gameData.Update(gameTime);
+                    GameState newGameState;
+                    menuState = inputHandler.MenuMove(state, menuState, out newGameState);
+                    State = newGameState;
                     break;
                 case GameState.GAMEOVER:
-                    endMenuState = inputHandler.EndMenuMove(state, endMenuState, out gameState);
+                    endMenuState = inputHandler.EndMenuMove(state, endMenuState, out newGameState);
                     if (endMenuState == EndMenuState.MAIN && state.IsKeyDown(Keys.Enter))
+
                     {
-                        screenManager.SetScreen(ScreenType.START);
+                        State = newGameState;
                     }
-                    //gameData.Update(gameTime);
                     break;
                 case GameState.EXIT:
                     System.Environment.Exit(0);

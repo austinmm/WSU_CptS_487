@@ -113,10 +113,7 @@ namespace ShakeAndBake
         {
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
-            
-            // does this violate MVC?
             gameController.ScreenManager.Draw(graphics, spriteBatch);
-            
             spriteBatch.End();
             base.Draw(gameTime);
         }

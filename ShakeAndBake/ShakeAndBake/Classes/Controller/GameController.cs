@@ -116,11 +116,7 @@ namespace ShakeAndBake.Controller
                     break;
                 case GameState.GAMEOVER:
                     endMenuState = inputHandler.EndMenuMove(keyboardState, endMenuState, out newGameState);
-                    if (endMenuState == EndMenuState.MAIN && keyboardState.IsKeyDown(Keys.Enter))
-
-                    {
-                        State = newGameState;
-                    }
+                    State = newGameState;
                     break;
                 case GameState.RESET:
                     stageManager.CurrentStage = 0;

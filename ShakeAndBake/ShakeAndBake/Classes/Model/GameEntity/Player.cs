@@ -31,6 +31,11 @@ namespace ShakeAndBake.Model.GameEntity
             this.Acceleration = 2;
             this.FireRate = 60;
             this.sprite = ShakeAndBakeGame.GetTexture("player");
+            this.position = new Vector2
+            (
+                (GameConfig.Width / 2 - this.sprite.Width / 2),
+                (GameConfig.Height - this.sprite.Height)
+            );
         }
 
         public void Move(float newX, float newY)

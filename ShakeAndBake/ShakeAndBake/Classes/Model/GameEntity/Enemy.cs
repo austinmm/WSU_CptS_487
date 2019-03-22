@@ -42,5 +42,21 @@ namespace ShakeAndBake.Model.GameEntity
 
             base.Update(gameTime, cb);
         }
+
+        public override void FireProjectile()
+        {
+            if (this.CanFire())
+            {
+                Vector2 pos = Vector2.Add(position, new Vector2((sprite.Width - ShakeAndBakeGame.GetTexture("enemy_bullet").Width) / 2, sprite.Height));
+                //Creates a new projectile to be added to the character's ObservableCollection of projectiles
+
+                ProjectileAbstractFactory factory = ProjectileFactoryProducer.ProduceFactory(this.ProjectileTypes[0]);
+                Projectile projectile = factory.Create(this.position);
+                //The projectiles position is set to the current character's position
+                projectile.Position = this.position;
+                projectile.Velocity += this.Velocity;
+                this.projectiles.Add(projectile);
+            }
+        }
     }
 }

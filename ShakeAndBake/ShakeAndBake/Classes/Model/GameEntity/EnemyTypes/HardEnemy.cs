@@ -11,6 +11,7 @@ namespace ShakeAndBake.Model.GameEntity
         //Hard Enemy Constructor
         public Hard() : base()
         {
+            fireRate = Util.randDouble(400, 600);
             this.ProjectileTypes = new List<ProjectileType>();
             this.ProjectileTypes.Add(ProjectileType.EnemyBullet);
             this.path = EnemyPaths.DefaultPath(this.position, new Vector2(0, 1));
@@ -27,23 +28,6 @@ namespace ShakeAndBake.Model.GameEntity
         {
             base.Draw(spriteBatch);
             spriteBatch.Draw(sprite, position, Color.White);
-        }
-
-        public override void FireProjectile()
-        {
-            if (this.CanFire())
-            {
-                fireRate = Util.randInt(300, 500);
-                Vector2 pos = Vector2.Add(position, new Vector2((sprite.Width - ShakeAndBakeGame.GetTexture("enemy_bullet").Width) / 2, sprite.Height));
-                //Creates a new projectile to be added to the character's ObservableCollection of projectiles
-
-                ProjectileAbstractFactory factory = ProjectileFactoryProducer.ProduceFactory(this.ProjectileTypes[0]);
-                Projectile projectile = factory.Create(this.position);
-                //The projectiles position is set to the current character's position
-                projectile.Position = this.position;
-                projectile.Velocity += this.Velocity;
-                this.projectiles.Add(projectile);
-            }
         }
     }
 }

@@ -17,11 +17,11 @@ namespace ShakeAndBake.Controller
             }
         }
 
-        public MenuState MenuMove(KeyboardState state, MenuState menuStateIn, out GameState gameState)
+        public MenuState MenuMove(KeyboardState state, MenuState menuStateIn, out GameState newGameState)
         {
             if (state.IsKeyDown(Keys.Down))
             {
-                gameState = GameState.MENU;
+                newGameState = GameState.MENU;
                 switch (menuStateIn)
                 {
                     case MenuState.START:
@@ -32,7 +32,7 @@ namespace ShakeAndBake.Controller
             }
             else if(state.IsKeyDown(Keys.Up))
             {
-                gameState = GameState.MENU;
+                newGameState = GameState.MENU;
                 switch (menuStateIn)
                 {
                     case MenuState.START:
@@ -46,22 +46,22 @@ namespace ShakeAndBake.Controller
                 switch (menuStateIn)
                 {
                     case MenuState.START:
-                        gameState = GameState.PLAYING;
+                        newGameState = GameState.PLAYING;
                         return MenuState.START;
                     case MenuState.EXIT:
-                        gameState = GameState.EXIT;
+                        newGameState = GameState.EXIT;
                         return MenuState.EXIT;
                 }
             }
 
-                gameState = GameState.MENU;
+            newGameState = GameState.MENU;
                 return menuStateIn;
 
         }
         
-        public EndMenuState EndMenuMove(KeyboardState state, EndMenuState endMenuStateIn, out GameState gameState)
+        public EndMenuState EndMenuMove(KeyboardState state, EndMenuState endMenuStateIn, out GameState newGameState)
         {
-            gameState = GameState.GAMEOVER;
+            newGameState = GameState.GAMEOVER;
             if (state.IsKeyDown(Keys.Down))
             {
                 switch (endMenuStateIn)
@@ -87,10 +87,10 @@ namespace ShakeAndBake.Controller
                 switch (endMenuStateIn)
                 {
                     case EndMenuState.MAIN:
-                        gameState = GameState.MENU;
+                        newGameState = GameState.MENU;
                         return EndMenuState.MAIN;
                     case EndMenuState.EXIT:
-                        gameState = GameState.EXIT;
+                        newGameState = GameState.EXIT;
                         return EndMenuState.EXIT;
                 }
             }

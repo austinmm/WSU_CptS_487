@@ -10,6 +10,8 @@ namespace ShakeAndBake.Model.GameEntity
         //Boss Enemy Constructor
         public FinalBoss() : base()
         {
+            this.ProjectileTypes = new System.Collections.Generic.List<ProjectileType>();
+            this.ProjectileTypes.Add(ProjectileType.EnemyBullet);
             this.path = EnemyPaths.DefaultPath(this.position, new Vector2(0, 1));
              sprite = ShakeAndBakeGame.GetTexture("circle");
         }
@@ -34,7 +36,7 @@ namespace ShakeAndBake.Model.GameEntity
                 Vector2 pos = Vector2.Add(position, new Vector2((sprite.Width - ShakeAndBakeGame.GetTexture("enemy_bullet").Width) / 2, sprite.Height));
                 //Creates a new projectile to be added to the character's ObservableCollection of projectiles
 
-                ProjectileAbstractFactory factory = new BossWaveProjectileFactory();
+                ProjectileAbstractFactory factory = ProjectileFactoryProducer.ProduceFactory(this.ProjectileTypes[0]);
                 Projectile projectile = factory.Create(this.position);
                 //The projectiles position is set to the current character's position
                 projectile.Position = this.position;

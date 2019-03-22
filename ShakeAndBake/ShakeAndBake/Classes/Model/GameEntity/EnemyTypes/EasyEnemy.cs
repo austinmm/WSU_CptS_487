@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using ShakeAndBake.Extras.Paths;
 using ShakeAndBake.Model.Factories.ProjectileFactory;
-
+using System.Collections.Generic;
 
 namespace ShakeAndBake.Model.GameEntity
 {
@@ -12,6 +12,8 @@ namespace ShakeAndBake.Model.GameEntity
         public Easy() : base()
         {
             this.path = EnemyPaths.DefaultPath(this.position, new Vector2(0, 1));
+            this.ProjectileTypes = new List<ProjectileType>();
+            this.ProjectileTypes.Add(ProjectileType.EnemyBullet);
             sprite = ShakeAndBakeGame.GetTexture("circle");
         }
 
@@ -35,7 +37,7 @@ namespace ShakeAndBake.Model.GameEntity
                 Vector2 pos = Vector2.Add(position, new Vector2((sprite.Width - ShakeAndBakeGame.GetTexture("enemy_bullet").Width) / 2, sprite.Height));
                 //Creates a new projectile to be added to the character's ObservableCollection of projectiles
 
-                ProjectileAbstractFactory factory = new EnemyBulletProjectileFactory();
+                ProjectileAbstractFactory factory = ProjectileFactoryProducer.ProduceFactory(this.ProjectileTypes[0]);
                 Projectile projectile = factory.Create(this.position);
                 //The projectiles position is set to the current character's position
                 projectile.Position = this.position;

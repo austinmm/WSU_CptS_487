@@ -12,13 +12,13 @@ namespace ShakeAndBake.Classes.Model.Factories.PathFactory
     {
         public static Path CreatePath(PathType type, Vector2 origin, Vector2 direction, float speed)
         {
-            PathAbstractFactory factory = ProduceFactory(type, origin, direction, speed);
+            PathAbstractFactory factory = ProduceFactory(type);
             if (factory != null)
                 return factory.Create(origin, direction, speed);
             return null;
         }
 
-        public static PathAbstractFactory ProduceFactory(PathType type, Vector2 origin, Vector2 direction, float speed)
+        public static PathAbstractFactory ProduceFactory(PathType type)
         {
             PathAbstractFactory factory = null;
             switch (type)

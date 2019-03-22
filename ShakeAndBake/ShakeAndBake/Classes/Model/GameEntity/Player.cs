@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using ShakeAndBake.Extras.Paths;
 using ShakeAndBake.Model.Factories.ProjectileFactory;
+using System.Collections.Generic;
 
 namespace ShakeAndBake.Model.GameEntity
 {
@@ -24,6 +25,8 @@ namespace ShakeAndBake.Model.GameEntity
 
         private Player() : base()
         {
+            this.ProjectileTypes = new List<ProjectileType>();
+            this.ProjectileTypes.Add(ProjectileType.PlayerBullet);
             this.Velocity = 3;
             this.Acceleration = 2;
             this.FireRate = 60;

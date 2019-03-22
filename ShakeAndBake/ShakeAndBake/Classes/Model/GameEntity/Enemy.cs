@@ -25,21 +25,38 @@ namespace ShakeAndBake.Model.GameEntity
         {
             cb.RemoveFromBucketIfExists(this);
 
-            //Move Enemy to new position in its set path
-            position = path.NextPoint();
-
-            // enemy went off screen without dying, so destroy it
-            if (position.Y > GameConfig.Height)
+            if (!this.IsDestroyed)
             {
-                isDestroyed = true;
-                return;
+
+                if (this.BoundsContains(Player.Instance.Position) || Player.Instance.BoundsContains(this.Position))
+                {
+                    /* Apply melee damage */
+                    /***
+                     * We need a function to DEAL MELEE DAMAGE because not
+                     * all enemies should immediately die upon contact with
+                     * main player
+                     ***/
+                    Player.Instance.TakeDamage(1);
+                    this.IsDestroyed = true;
+                    return;
+                }
+
+                //Move Enemy to new position in its set path
+                position = path.NextPoint();
+
+                // enemy went off screen without dying, so destroy it
+                if (position.Y > GameConfig.Height)
+                {
+                    isDestroyed = true;
+                }
+                else
+                {
+                    cb.FillBucket(this);
+
+                    //Fire a new projectile if firerate field will allow
+                    this.FireProjectile();
+                }
             }
-
-            cb.FillBucket(this);
-
-            //Fire a new projectile if firerate field will allow
-            this.FireProjectile();
-
             base.Update(gameTime, cb);
         }
 

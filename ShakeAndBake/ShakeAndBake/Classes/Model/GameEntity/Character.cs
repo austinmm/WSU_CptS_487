@@ -77,10 +77,7 @@ namespace ShakeAndBake.Model.GameEntity
 
         public override void Update(GameTime gameTime, CollisionBoard cb)
         {
-            if (!this.isDestroyed)
-            {
-                this.UpdateProjectiles(gameTime, cb);
-            }
+            this.UpdateProjectiles(gameTime, cb);
             // update character in derived enemy/player classes
         }
 

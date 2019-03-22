@@ -115,25 +115,21 @@ namespace ShakeAndBake.Model
         {
             Player.Instance.Update(gameTime, collisionBoard);
             //Call update on all our visible enemies, this will automatically update their projectiles as well
-            for (int j = 0; j < this.visibleEnemies.Count; j++)
+            for (int j = this.visibleEnemies.Count - 1; j >= 0; --j)
             {
                 Enemy enemy = this.visibleEnemies[j];
                 if (enemy.IsDestroyed)
                 {
-                    this.visibleEnemies.RemoveAt(j);
-                    this.deadEnemies.Add(enemy);
+                    this.visibleEnemies.RemoveAt(j); // This adds an enemy to deadEnemies? Why would we implment it like this??? Very confusing
+                    //this.deadEnemies.Add(enemy);
                     this.collisionBoard.RemoveFromBucketIfExists(enemy);
                     continue;
                 }
-
-                if (!enemy.IsDestroyed)
-                {
-                    enemy.Update(gameTime, this.collisionBoard);
-                }
+                enemy.Update(gameTime, this.collisionBoard);
             }
 
             //Check if player bullets destroyed
-            for (int i = 0; i < Player.Instance.Projectiles.Count; i++)
+            for (int i = Player.Instance.Projectiles.Count - 1; i >=0; --i)
             {
                 Projectile p = Player.Instance.Projectiles[i];
                 if (p.IsDestroyed)
@@ -145,7 +141,7 @@ namespace ShakeAndBake.Model
             }
 
             //check deadEnimies list to see if they have any projectiles left on the board
-            for (int i = 0; i < this.deadEnemies.Count; i++)
+            for (int i = this.deadEnemies.Count - 1; i >= 0; --i)
             {
                 Enemy enemy = deadEnemies[i];
                 enemy.Update(gameTime, collisionBoard);

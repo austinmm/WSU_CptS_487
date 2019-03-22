@@ -56,6 +56,15 @@ namespace ShakeAndBake
             LoadAndStoreTexture("circle");
             LoadAndStoreTexture("player_bullet");
             LoadAndStoreTexture("enemy_bullet");
+            LoadAndStoreTexture("titleScreen");
+            LoadAndStoreTexture("background");
+            LoadAndStoreTexture("startIcon");
+            LoadAndStoreTexture("selectionIcon");
+            LoadAndStoreTexture("exitIcon");
+            LoadAndStoreTexture("mainMenuIcon");
+            LoadAndStoreTexture("lifeIcon");
+            LoadAndStoreTexture("loseScreen");
+            LoadAndStoreTexture("winScreen");
 
             gameData = new Model.GameData(GetTexture("player"));
             gameBoard = new View.GameBoard(gameData);

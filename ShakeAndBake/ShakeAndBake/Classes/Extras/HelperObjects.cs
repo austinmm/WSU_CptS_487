@@ -11,10 +11,20 @@ namespace ShakeAndBake
     {
         Bullet, Rocket, FireBall
     }
+
+    public enum MenuState
+    {
+        START, EXIT
+    }
+
+    public enum EndMenuState
+    {
+        MAIN, EXIT
+    }
     
     public enum GameState
     {
-        PLAYING, GAMEOVER
+        PLAYING, GAMEOVER, MENU, EXIT
     }
 
     public static class Util

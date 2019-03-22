@@ -19,6 +19,7 @@ namespace ShakeAndBake.View
         
         public void Draw(GraphicsDeviceManager graphics, SpriteBatch spriteBatch)
         {
+            spriteBatch.Draw(ShakeAndBakeGame.GetTexture("background"), new Vector2(0,0), Color.White);
             foreach (Model.GameEntity.Enemy enemy in gameData.VisibleEnemies)
             {
                 enemy.Draw(spriteBatch);

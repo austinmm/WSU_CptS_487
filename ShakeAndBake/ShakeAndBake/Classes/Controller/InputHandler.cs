@@ -16,7 +16,87 @@ namespace ShakeAndBake.Controller
                 GameConfig.GameSpeed = 1;
             }
         }
+
+        public MenuState MenuMove(KeyboardState state, MenuState menuStateIn, out GameState gameState)
+        {
+            if (state.IsKeyDown(Keys.Down))
+            {
+                gameState = GameState.MENU;
+                switch (menuStateIn)
+                {
+                    case MenuState.START:
+                        return MenuState.EXIT;
+                    case MenuState.EXIT:
+                        return MenuState.EXIT;
+                }
+            }
+            else if(state.IsKeyDown(Keys.Up))
+            {
+                gameState = GameState.MENU;
+                switch (menuStateIn)
+                {
+                    case MenuState.START:
+                        return MenuState.START;
+                    case MenuState.EXIT:
+                        return MenuState.START;
+                }
+            }
+            else if (state.IsKeyDown(Keys.Enter))
+            {
+                switch (menuStateIn)
+                {
+                    case MenuState.START:
+                        gameState = GameState.PLAYING;
+                        return MenuState.START;
+                    case MenuState.EXIT:
+                        gameState = GameState.EXIT;
+                        return MenuState.EXIT;
+                }
+            }
+
+                gameState = GameState.MENU;
+                return menuStateIn;
+
+        }
         
+        public EndMenuState EndMenuMove(KeyboardState state, EndMenuState endMenuStateIn, out GameState gameState)
+        {
+            gameState = GameState.GAMEOVER;
+            if (state.IsKeyDown(Keys.Down))
+            {
+                switch (endMenuStateIn)
+                {
+                    case EndMenuState.MAIN:
+                        return EndMenuState.EXIT;
+                    case EndMenuState.EXIT:
+                        return EndMenuState.EXIT;
+                }
+            }
+            else if (state.IsKeyDown(Keys.Up))
+            {
+                switch (endMenuStateIn)
+                {
+                    case EndMenuState.MAIN:
+                        return EndMenuState.MAIN;
+                    case EndMenuState.EXIT:
+                        return EndMenuState.MAIN;
+                }
+            }
+            else if (state.IsKeyDown(Keys.Enter))
+            {
+                switch (endMenuStateIn)
+                {
+                    case EndMenuState.MAIN:
+                        gameState = GameState.MENU;
+                        return EndMenuState.MAIN;
+                    case EndMenuState.EXIT:
+                        gameState = GameState.EXIT;
+                        return EndMenuState.EXIT;
+                }
+            }
+            return endMenuStateIn;
+        }
+
         public void FireUserProjectile(KeyboardState state)
         {
             // Spacebar fires user projectile.

@@ -26,15 +26,39 @@ namespace ShakeAndBake.Controller
                 gameState = value;
                 switch (gameState)
                 {
+                    case GameState.MENU:
+                        screenManager.SetScreen(ScreenType.START);
+                        break;
                     case GameState.PLAYING:
                         screenManager.SetScreen(ScreenType.INGAME);
                         break;
                     case GameState.GAMEOVER:
-                        // todo determine if lose or win
-                        screenManager.SetScreen(ScreenType.GAMEWIN);
+                        if (gameData.IsUserDead)
+                        {
+                            screenManager.SetScreen(ScreenType.GAMELOSE);
+                        }
+                        else
+                        {
+                            screenManager.SetScreen(ScreenType.GAMEWIN);
+                        }
                         break;
                 }
             }
+        }
+
+        //
+        private MenuState menuState;
+        public MenuState MenuState
+        {
+            get { return menuState; }
+            set { menuState = value; }
+        }
+
+        private EndMenuState endMenuState;
+        public EndMenuState EndMenuState
+        {
+            get { return endMenuState; }
+            set { endMenuState = value; }
         }
 
         // Contains a reference to the current this.gameData instance.
@@ -49,31 +73,53 @@ namespace ShakeAndBake.Controller
             this.gameData = gameData;
             this.gameBoard = gameBoard;
 
-            screenManager = new ScreenManager(gameData);
-            screenManager.SetScreen(ScreenType.INGAME);
+            screenManager = new ScreenManager(gameData,this);
+            screenManager.SetScreen(ScreenType.START);
             
-            gameState = GameState.PLAYING;
+            gameState = GameState.MENU;
+            menuState = MenuState.START;
             inputHandler = new InputHandler();
             stageManager = new StageManager();
             stageManager.ConfigureNextStage(gameData);
         }
-        
+
         public void Update(GameTime gameTime)
         {
             // Gets the state of the keyboard and checks the combos as follows.
             KeyboardState state = Keyboard.GetState();
-            inputHandler.UpdateGameSpeed(state);
-            inputHandler.FireUserProjectile(state);
-            if (inputHandler.DidUserMove(state, out float newX, out float newY))
-            {
-                Player.Instance.Move(newX, newY);
-            }
+            switch (gameState) {
+                case GameState.PLAYING:
+                    inputHandler.UpdateGameSpeed(state);
+                    inputHandler.FireUserProjectile(state);
+                    if (inputHandler.DidUserMove(state, out float newX, out float newY))
+                    {
+                        Player.Instance.Move(newX, newY);
+                    }
 
-            gameData.Update(gameTime);
-            //gameBoard.Update(gameTime);
-            
-            // Update the game state based on what the stage manager changes to.
-            State = stageManager.CheckBoard(gameData, gameState);
+                    gameData.Update(gameTime);
+                    //gameBoard.Update(gameTime);
+
+                    // Update the game state based on what the stage manager changes to.
+                    State = stageManager.CheckBoard(gameData, gameState);
+                    break;
+
+                case GameState.MENU:
+                    menuState = inputHandler.MenuMove(state, menuState, out gameState);
+                    gameData.Update(gameTime);
+                    break;
+
+                case GameState.GAMEOVER:
+                    endMenuState = inputHandler.EndMenuMove(state, endMenuState, out gameState);
+                    if(endMenuState == EndMenuState.MAIN && state.IsKeyDown(Keys.Enter))
+                    {
+                        screenManager.SetScreen(ScreenType.START);
+                    }
+                    gameData.Update(gameTime);
+                    break;
+                case GameState.EXIT:
+                    System.Environment.Exit(0);
+                    break;
+            }
         }
     }
 }

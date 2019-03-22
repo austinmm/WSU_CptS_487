@@ -19,13 +19,13 @@ namespace ShakeAndBake.View
         private ScreenType current;
         private Dictionary<ScreenType, Screen> screens;
 
-        public ScreenManager(Model.GameData gameData)
+        public ScreenManager(Model.GameData gameData, Controller.GameController gameController)
         {
             screens = new Dictionary<ScreenType, Screen>();
-            AddScreen(ScreenType.START, new StartScreen());
+            AddScreen(ScreenType.START, new StartScreen(gameController));
             AddScreen(ScreenType.INGAME, new GameBoard(gameData));
-            AddScreen(ScreenType.GAMEWIN, new GameWinScreen());
-            AddScreen(ScreenType.GAMELOSE, new GameLoseScreen());
+            AddScreen(ScreenType.GAMEWIN, new GameWinScreen(gameController));
+            AddScreen(ScreenType.GAMELOSE, new GameLoseScreen(gameController));
         }
         
         public void AddScreen(ScreenType type, Screen screen)

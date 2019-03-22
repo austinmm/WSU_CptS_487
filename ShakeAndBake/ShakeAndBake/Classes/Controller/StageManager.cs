@@ -54,6 +54,8 @@ namespace ShakeAndBake.Controller
     // Manages loading stage information and switching stages.
     public class StageManager
     {
+        public static int STAGE;
+
         //Contains a list of all different phases available
         private List<GameStage> stageTypes;
         public List<GameStage> StageTypes
@@ -69,7 +71,11 @@ namespace ShakeAndBake.Controller
         public int CurrentStage
         {
             get { return current; }
-            set { current = value; }
+            set
+            {
+                STAGE = value; 
+                current = value;
+           }
         }
 
         public StageManager()
@@ -106,7 +112,8 @@ namespace ShakeAndBake.Controller
             if (gameData.VisibleEnemies.Count == 0)
             {
                 // Next stage.
-                if (++current >= stageTypes.Count)
+                CurrentStage = CurrentStage + 1;
+                if (CurrentStage >= stageTypes.Count)
                 {
                     return GameState.GAMEOVER;
                 } else {

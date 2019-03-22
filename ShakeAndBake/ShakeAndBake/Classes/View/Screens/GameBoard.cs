@@ -38,8 +38,7 @@ namespace ShakeAndBake.View
                 xOffset += 60;
             }
 
-
-            // draw game menu/status here (to overlap everything)
+            spriteBatch.DrawString(ShakeAndBakeGame.f, "Stage " + (StageManager.STAGE+1), new Vector2(10, 10), Color.White);
         }
     }
 }

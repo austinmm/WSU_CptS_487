@@ -50,6 +50,7 @@
     <Compile Include="Classes\Model\Factories\PathFactory\WavePathFactory.cs" />
     <Compile Include="Classes\Model\Factories\ProjectileFactory\BossWaveProjectileFactory.cs" />
     <Compile Include="Classes\Model\Factories\ProjectileFactory\BulletProjectileFactory.cs" />
+    <Compile Include="Classes\Model\Factories\ProjectileFactory\CircleBulletEnemyProjectileFactory.cs" />
     <Compile Include="Classes\Model\Factories\ProjectileFactory\ProjectileAbstractFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

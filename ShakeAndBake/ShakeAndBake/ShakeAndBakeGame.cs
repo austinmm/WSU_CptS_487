@@ -70,6 +70,7 @@ namespace ShakeAndBake
             LoadAndStoreTexture("loseScreen");
             LoadAndStoreTexture("winScreen");
             LoadAndStoreFont("Default");
+            LoadAndStoreFont("File");
 
             gameData = new Model.GameData(GetTexture("player"));
             gameBoard = new View.GameBoard(gameData);

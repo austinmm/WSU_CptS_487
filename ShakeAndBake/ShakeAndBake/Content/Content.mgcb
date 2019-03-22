@@ -91,6 +91,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:generic_stage_notice.PNG
+#begin File.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:File.spritefont
 
 #begin lifeIcon.png
 /importer:TextureImporter

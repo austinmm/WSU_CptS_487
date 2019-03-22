@@ -54,6 +54,8 @@ namespace ShakeAndBake.Controller
     // Manages loading stage information and switching stages.
     public class StageManager
     {
+        public static int STAGE;
+
         //Contains a list of all different phases available
         private List<GameStage> stageTypes;
         public List<GameStage> StageTypes
@@ -65,16 +67,19 @@ namespace ShakeAndBake.Controller
         private Dictionary<GameStage, StageData> stages;
 
         //Contains the index of the current phase
-        private int current;
+        private int currentStage;
         public int CurrentStage
         {
-            get { return current; }
-            set { current = value; }
+            get { return currentStage; }
+            set
+            {
+                STAGE = this.currentStage = value;
+           }
         }
 
         public GameStage CurrentStageType
         {
-            get { return this.stageTypes[this.current]; }
+            get { return this.stageTypes[this.CurrentStage]; }
         }
 
         public StageManager()
@@ -84,8 +89,8 @@ namespace ShakeAndBake.Controller
                 GameStage.Stage1, GameStage.Stage2, GameStage.Stage3, GameStage.Stage4 
             };
             stages = new Dictionary<GameStage, StageData>();
-            initStages();      
-            current = 0;
+            initStages();
+            currentStage = 0;
         }
 
         private void initStages()
@@ -117,7 +122,7 @@ namespace ShakeAndBake.Controller
 
         public bool AreAllStagesCompleted()
         {
-            if (++this.current >= this.stageTypes.Count)
+            if (this.currentStage >= this.stageTypes.Count)
             {
                 return true;
             }
@@ -129,9 +134,10 @@ namespace ShakeAndBake.Controller
             // If no enemies are left in this phase, then switch to next phase.
             if (this.IsCurrentStageCompleted(gameData))
             {
+                //Incrament to next stage;
+                this.CurrentStage = this.CurrentStage + 1;
                 // Next stage
-                if (this.AreAllStagesCompleted())
-                {
+                if (this.AreAllStagesCompleted()) {
                     return GameState.GAMEOVER;
                 } else {
                     this.ConfigureNextStage(gameData);
@@ -145,8 +151,7 @@ namespace ShakeAndBake.Controller
         public void ConfigureNextStage(Model.GameData gameData)
         {
             gameData.Reset();       
-            GameStage stage = stageTypes[current];     
-            StageData data = stages[stage];
+            StageData data = stages[this.CurrentStageType];
             data.Configure(gameData);
         }
 

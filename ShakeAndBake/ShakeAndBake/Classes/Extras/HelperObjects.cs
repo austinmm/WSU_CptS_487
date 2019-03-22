@@ -9,7 +9,7 @@ namespace ShakeAndBake
 
     public enum ProjectileType
     {
-        Bullet, Rocket, FireBall, EnemyBullet, PlayerBullet, BossWaveProjectile
+        Bullet, Rocket, FireBall, EnemyBullet, PlayerBullet, BossWaveProjectile, EnemyCircleBullet
     }
 
     public enum MenuState

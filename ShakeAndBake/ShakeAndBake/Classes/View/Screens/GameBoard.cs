@@ -24,6 +24,12 @@ namespace ShakeAndBake.View
             {
                 enemy.Draw(spriteBatch);
             }
+
+            foreach (Model.GameEntity.Enemy enemy in gameData.DeadEnemies)
+            {
+                enemy.Draw(spriteBatch);
+            }
+
             Player.Instance.Draw(spriteBatch);
             this.DrawPlayerHealth(graphics, spriteBatch);
             this.DrawNewStageGraphic(graphics, spriteBatch);
@@ -31,7 +37,7 @@ namespace ShakeAndBake.View
 
         public void DrawNewStageGraphic(GraphicsDeviceManager graphics, SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(ShakeAndBakeGame.GetFont("Default"), "Stage 1", new Vector2(0, 0), Color.Gold);
+            spriteBatch.DrawString(ShakeAndBakeGame.GetFont("Default"), $"Stage {StageManager.STAGE + 1}", new Vector2(10, 10), Color.Gold);
         }
 
         public void DrawPlayerHealth(GraphicsDeviceManager graphics, SpriteBatch spriteBatch)

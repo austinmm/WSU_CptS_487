@@ -5,19 +5,27 @@ namespace ShakeAndBake.Extras.Paths
 {
     public abstract class Path
     {
+        public virtual void Reset() { }
         public abstract Vector2 NextPoint();
     }
 
     public class StraightPath : Path
     {
+        private Vector2 savedOriginal;
         private Vector2 position, direction;
         private float velocity;
 
         public StraightPath(Vector2 origin, Vector2 direction, float velocity)
         {
+            this.savedOriginal = origin;
             this.position = origin;
             this.direction = direction;
             this.velocity = velocity;
+        }
+
+        public override void Reset()
+        {
+            position = savedOriginal;
         }
 
         public override Vector2 NextPoint()
@@ -42,6 +50,11 @@ namespace ShakeAndBake.Extras.Paths
         {
             get { return points; }
             set { this.points = value; }
+        }
+
+        public override void Reset()
+        {
+            pointIndex = 0;
         }
 
         public override Vector2 NextPoint()

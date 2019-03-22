@@ -27,7 +27,14 @@ namespace ShakeAndBake.Model.GameEntity
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
-            spriteBatch.Draw(sprite, position, Color.White);
+            if (!IsDestroyed)
+            {
+                spriteBatch.Draw(sprite, position, Color.White);
+            }
+            else
+            {
+                int a = 3;
+            }
         }
     }
 }

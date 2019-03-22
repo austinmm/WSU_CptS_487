@@ -86,12 +86,12 @@ namespace ShakeAndBake.Model.GameEntity
         public override void FireProjectile()
         {
             if (!this.CanFire()) return;
-            Vector2 pos = Vector2.Add(position, new Vector2((ShakeAndBakeGame.GetTexture("player").Width
-                - ShakeAndBakeGame.GetTexture("player_bullet").Width) / 2,
-                - ShakeAndBakeGame.GetTexture("player_bullet").Height));
+            Vector2 pos = Vector2.Add(position, new Vector2(
+                (ShakeAndBakeGame.GetTexture("player").Width - ShakeAndBakeGame.GetTexture("player_bullet").Width) / 2,
+                -ShakeAndBakeGame.GetTexture("player_bullet").Height));
             //Projectile projectile = new PlayerBullet(new StraightPath(pos, new Vector2(0, -1), 3));
             ProjectileAbstractFactory factory = new PlayerBulletProjectileFactory();
-            Projectile projectile = factory.Create(this.position);
+            Projectile projectile = factory.Create(pos);
             //The projectiles position is set to the current character's position
             this.projectiles.Add(projectile);
             projectile.Velocity += this.Velocity;

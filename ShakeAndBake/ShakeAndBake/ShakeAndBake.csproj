@@ -163,7 +163,6 @@
     <None Include="Content\obj\DesktopGL\Content\enemy_bullet.mgcontent" />
     <None Include="Content\obj\DesktopGL\Content\player.mgcontent" />
     <None Include="Content\obj\DesktopGL\Content\player_bullet.mgcontent" />
-    <None Include="Classes\.DS_Store" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Trophy.png" />

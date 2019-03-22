@@ -85,18 +85,18 @@ namespace ShakeAndBake.Controller
         private void initStages()
         {
             stages[GameStage.Stage1] = new StageData(new List<Wave>(){
-                new Wave(EnemyType.Easy, 5),
-                new Wave(EnemyType.Medium, 2)
+                new Wave(EnemyType.Easy, 10),
+                new Wave(EnemyType.Medium, 5)
             });
             stages[GameStage.Stage2] = new StageData(new List<Wave>(){
-                new Wave(EnemyType.MidBoss, 2),
+                new Wave(EnemyType.MidBoss, 5),
             });
             stages[GameStage.Stage3] = new StageData(new List<Wave>(){
-                new Wave(EnemyType.Medium, 3),
-                new Wave(EnemyType.Hard, 2),
+                new Wave(EnemyType.Medium, 10),
+                new Wave(EnemyType.Hard, 5),
             });
             stages[GameStage.Stage4] = new StageData(new List<Wave>(){
-                new Wave(EnemyType.FinalBoss, 1),
+                new Wave(EnemyType.FinalBoss, 5),
             });  
         }
         

@@ -45,6 +45,8 @@ namespace ShakeAndBake
         {
             base.Initialize();
         }
+
+        public static SpriteFont f;
         
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
@@ -52,6 +54,8 @@ namespace ShakeAndBake
         /// </summary>
         protected override void LoadContent()
         {
+            f = Content.Load<SpriteFont>("File");
+
             LoadAndStoreTexture("player");
             LoadAndStoreTexture("circle");
             LoadAndStoreTexture("trophy");

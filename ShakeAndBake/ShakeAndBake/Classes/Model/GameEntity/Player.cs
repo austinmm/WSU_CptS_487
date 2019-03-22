@@ -67,6 +67,10 @@ namespace ShakeAndBake.Model.GameEntity
         {
             if (this.isDestroyed)
             {
+                if(this.Health == 0)
+                {
+                    instance = null;
+                }
                 return;
             }
             base.Draw(spriteBatch);

@@ -66,11 +66,14 @@ namespace ShakeAndBake.Controller
         // Contains a reference to the current GameBoard instance.
         private View.GameBoard gameBoard;
 
+        private KeyboardState previousKeyboardState;
+
         //Constructor
         public GameController(Model.GameData gameData, View.GameBoard gameBoard)
         {
             this.gameData = gameData;
             this.gameBoard = gameBoard;
+            this.previousKeyboardState = Keyboard.GetState();//initialize with blank state
 
             screenManager = new ScreenManager(gameData,this);
             screenManager.SetScreen(ScreenType.START);
@@ -85,12 +88,12 @@ namespace ShakeAndBake.Controller
         public void Update(GameTime gameTime)
         {
             // Gets the state of the keyboard and checks the combos as follows.
-            KeyboardState state = Keyboard.GetState();
+            KeyboardState keyboardState = Keyboard.GetState();
             switch (gameState) {
                 case GameState.PLAYING:
-                    inputHandler.UpdateGameSpeed(state);
-                    inputHandler.FireUserProjectile(state);
-                    if (inputHandler.DidUserMove(state, out float newX, out float newY))
+                    inputHandler.UpdateGameSpeed(keyboardState);
+                    inputHandler.FireUserProjectile(keyboardState);
+                    if (inputHandler.DidUserMove(keyboardState, out float newX, out float newY))
                     {
                         Player.Instance.Move(newX, newY);
                     }
@@ -108,21 +111,27 @@ namespace ShakeAndBake.Controller
                     break;
                 case GameState.MENU:
                     GameState newGameState;
-                    menuState = inputHandler.MenuMove(state, menuState, out newGameState);
+                    menuState = inputHandler.MenuMove(keyboardState, previousKeyboardState, menuState, out newGameState);
                     State = newGameState;
                     break;
                 case GameState.GAMEOVER:
-                    endMenuState = inputHandler.EndMenuMove(state, endMenuState, out newGameState);
-                    if (endMenuState == EndMenuState.MAIN && state.IsKeyDown(Keys.Enter))
+                    endMenuState = inputHandler.EndMenuMove(keyboardState, endMenuState, out newGameState);
+                    if (endMenuState == EndMenuState.MAIN && keyboardState.IsKeyDown(Keys.Enter))
 
                     {
                         State = newGameState;
                     }
                     break;
+                case GameState.RESET:
+                    stageManager.CurrentStage = 0;
+                    stageManager.ConfigureNextStage(gameData);
+                    State = GameState.MENU;
+                    break;
                 case GameState.EXIT:
                     System.Environment.Exit(0);
                     break;
             }
+            previousKeyboardState = keyboardState;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace ShakeAndBake.Controller
             }
         }
 
-        public MenuState MenuMove(KeyboardState state, MenuState menuStateIn, out GameState newGameState)
+        public MenuState MenuMove(KeyboardState state, KeyboardState previousState, MenuState menuStateIn, out GameState newGameState)
         {
             if (state.IsKeyDown(Keys.Down))
             {
@@ -41,7 +41,7 @@ namespace ShakeAndBake.Controller
                         return MenuState.START;
                 }
             }
-            else if (state.IsKeyDown(Keys.Enter))
+            else if (state.IsKeyDown(Keys.Enter) & !previousState.IsKeyDown(Keys.Enter))
             {
                 switch (menuStateIn)
                 {
@@ -55,7 +55,7 @@ namespace ShakeAndBake.Controller
             }
 
             newGameState = GameState.MENU;
-                return menuStateIn;
+            return menuStateIn;
 
         }
         
@@ -87,7 +87,7 @@ namespace ShakeAndBake.Controller
                 switch (endMenuStateIn)
                 {
                     case EndMenuState.MAIN:
-                        newGameState = GameState.MENU;
+                        newGameState = GameState.RESET;
                         return EndMenuState.MAIN;
                     case EndMenuState.EXIT:
                         newGameState = GameState.EXIT;

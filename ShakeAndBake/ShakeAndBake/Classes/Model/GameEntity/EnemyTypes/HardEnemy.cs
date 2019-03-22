@@ -15,7 +15,7 @@ namespace ShakeAndBake.Model.GameEntity
             this.ProjectileTypes = new List<ProjectileType>();
             this.ProjectileTypes.Add(ProjectileType.EnemyBullet);
             this.path = EnemyPaths.DefaultPath(this.position, new Vector2(0, 1));
-             sprite = ShakeAndBakeGame.GetTexture("circle");
+             sprite = ShakeAndBakeGame.GetTexture("hard_enemy");
         }
 
         public override void Update(GameTime gameTime, CollisionBoard cb)

@@ -53,9 +53,16 @@ namespace ShakeAndBake
         protected override void LoadContent()
         {
             LoadAndStoreTexture("player");
-            LoadAndStoreTexture("circle");
             LoadAndStoreTexture("player_bullet");
             LoadAndStoreTexture("enemy_bullet");
+
+            LoadAndStoreTexture("circle");
+            LoadAndStoreTexture("final_boss");
+            LoadAndStoreTexture("mid_boss");
+            LoadAndStoreTexture("easy_enemy");
+            LoadAndStoreTexture("medium_enemy");
+            LoadAndStoreTexture("hard_enemy");
+
 
             gameData = new Model.GameData(GetTexture("player"));
             gameBoard = new View.GameBoard(gameData);

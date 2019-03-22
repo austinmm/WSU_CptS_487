@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace ShakeAndBake.Model.GameEntity
@@ -52,8 +53,34 @@ namespace ShakeAndBake.Model.GameEntity
             set { this.hitBoxRadius = value; }
         }
 
+        //This is for our composite structural design pattern.
+        private List<GameObject> children;
+        public List<GameObject> Children
+        {
+            get { return children; }
+        }
+
+        public void AddChild(GameObject obj)
+        {
+            children.Add(obj);
+        }
+
+        public void RemoveChild(GameObject obj)
+        {
+            children.Remove(obj);
+        }
+
+        public GameObject GetChild(int index)
+        {
+            return children[index];
+        }
+
         //constructor
-        public GameObject() { }
+        public GameObject()
+        {
+            children = new List<GameObject>();
+        }
+
 
         public virtual void Draw(SpriteBatch spriteBatch) { }
 

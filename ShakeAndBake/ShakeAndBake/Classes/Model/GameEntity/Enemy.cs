@@ -26,7 +26,7 @@ namespace ShakeAndBake.Model.GameEntity
 
         public Vector2 GetRandomSpawnPosition()
         {
-            enemySpawnSeed = Math.Abs(enemySpawnSeed * enemySpawnSeed * DateTime.Now.Millisecond);
+            enemySpawnSeed = Math.Abs(enemySpawnSeed * enemySpawnSeed);
             Random rand = new Random(Math.Abs(enemySpawnSeed));
             Vector2 ret = new Vector2(rand.Next(0, GameConfig.Width - Sprite.Width), -this.Sprite.Height);
             return ret;
@@ -39,7 +39,7 @@ namespace ShakeAndBake.Model.GameEntity
             if (!this.IsDestroyed)
             {
 
-                if (this.BoundsContains(Player.Instance.Position) || Player.Instance.BoundsContains(this.Position))
+                if (this.BoundsContains(Player.Instance) || Player.Instance.BoundsContains(this))
                 {
                     /* Apply melee damage */
                     /***

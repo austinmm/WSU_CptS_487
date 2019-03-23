@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.ComponentModel;
 using System.Collections.Generic;
 using ShakeAndBake.Extras.Paths;
+using ShakeAndBake.Classes.Model.GameEntity.EnemyProjectiles;
 
 namespace ShakeAndBake.Model.GameEntity
 {
@@ -64,9 +65,9 @@ namespace ShakeAndBake.Model.GameEntity
             //Fill bucket on collision board
             cb.FillBucket(this);
 
-            if (this.GetType().Equals(typeof(EnemyBullet)))
+            if (this.GetType().Equals(typeof(EnemyBullet)) || this.GetType().IsSubclassOf(typeof(EnemyBullet)))
             {
-                if (Player.Instance.BoundsContains(this.Position) || this.BoundsContains(Player.Instance.Position))
+                if (Player.Instance.BoundsContains(this) || this.BoundsContains(Player.Instance))
                 {
                     Player.Instance.TakeDamage(this.HitDamage);
                     this.isDestroyed = true;

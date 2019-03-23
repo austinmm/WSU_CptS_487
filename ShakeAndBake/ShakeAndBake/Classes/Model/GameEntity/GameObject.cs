@@ -123,11 +123,32 @@ namespace ShakeAndBake.Model.GameEntity
             return true;
         }
 
+        public Vector2 GetCenterCoordinates()
+        {
+            return new Vector2(this.Position.X + (float)this.Sprite.Width/2, this.Position.Y + (float)this.Sprite.Height/2);
+        }
+
+        public bool BoundsContains(GameObject obj)
+        {
+            Vector2 centerCoordinates = obj.GetCenterCoordinates();
+            return BoundsContains(obj.GetCenterCoordinates())
+                || BoundsContains(new Vector2(centerCoordinates.X + obj.Sprite.Width / 2, centerCoordinates.Y))
+                || BoundsContains(new Vector2(centerCoordinates.X - obj.Sprite.Width / 2, centerCoordinates.Y))
+                || BoundsContains(new Vector2(centerCoordinates.X, centerCoordinates.Y + obj.Sprite.Height / 2))
+                || BoundsContains(new Vector2(centerCoordinates.X, centerCoordinates.Y - obj.Sprite.Height / 2));
+
+
+
+
+        }
         // checks if pos is in the sprite texture bounds
         public bool BoundsContains(Vector2 coords)
         {
-            if (coords.X >= position.X && coords.X <= position.X + sprite.Width &&
-                coords.Y >= position.Y && coords.Y <= position.Y + sprite.Height)
+            if (((coords.X >= GetCenterCoordinates().X && coords.X <= GetCenterCoordinates().X + sprite.Width/2)
+                || (coords.X <= GetCenterCoordinates().X && coords.X >= GetCenterCoordinates().X - sprite.Width/2))
+                &&
+                ((coords.Y >= GetCenterCoordinates().Y && coords.Y <= GetCenterCoordinates().Y + sprite.Height/2)
+                || coords.Y <= GetCenterCoordinates().Y && coords.Y >= GetCenterCoordinates().Y - sprite.Height/2))
             {
                 return true;
             }

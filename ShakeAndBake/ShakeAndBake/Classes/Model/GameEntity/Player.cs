@@ -87,7 +87,7 @@ namespace ShakeAndBake.Model.GameEntity
             spriteBatch.Draw(ShakeAndBakeGame.GetTexture("player"), position, Color.White);
             //spriteBatch.DrawString(null, "" + this.health, position, Color.White);
         }
-        
+
         public override void FireProjectile()
         {
             if (!this.CanFire()) return;

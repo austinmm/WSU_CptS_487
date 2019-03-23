@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using ShakeAndBake.Model.GameEntity;
+using ShakeAndBake.Classes.Model.GameEntity.EnemyProjectiles;
 
 namespace ShakeAndBake.Model
 {
@@ -73,8 +74,8 @@ namespace ShakeAndBake.Model
                         {
                             if (!go.GetType().IsSubclassOf(type) && !go.GetType().Equals(type))
                                 continue;
-                            if (gameObject.BoundsContains(go.Position)
-                                || go.BoundsContains(gameObject.Position))
+                            if (gameObject.BoundsContains(go)
+                                || go.BoundsContains(gameObject))
                             {
                                 ret.Add(go);
                             }

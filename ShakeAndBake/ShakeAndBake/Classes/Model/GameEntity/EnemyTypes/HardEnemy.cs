@@ -13,7 +13,7 @@ namespace ShakeAndBake.Model.GameEntity
         public Hard() : base()
         {
             this.ProjectileTypes = new List<ProjectileType>();
-            this.ProjectileTypes.Add(ProjectileType.EnemyBullet);
+            this.ProjectileTypes.Add(ProjectileType.EnemyCircleBullet);
             sprite = ShakeAndBakeGame.GetTexture("circle");
         }
 

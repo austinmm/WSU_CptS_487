@@ -53,6 +53,7 @@
     <Compile Include="Classes\Model\Factories\ProjectileFactory\BossWaveProjectileFactory.cs" />
     <Compile Include="Classes\Model\Factories\ProjectileFactory\BulletProjectileFactory.cs" />
     <Compile Include="Classes\Model\Factories\ProjectileFactory\CircleBulletEnemyProjectileFactory.cs" />
+    <Compile Include="Classes\Model\Factories\ProjectileFactory\EnemySmallBulletProjectileFactory.cs" />
     <Compile Include="Classes\Model\Factories\ProjectileFactory\ProjectileAbstractFactory.cs" />
     <Compile Include="Classes\Model\GameEntity\EnemyProjectiles\SmallBallProjectile.cs" />
     <Compile Include="Program.cs" />

@@ -6,11 +6,11 @@ using ShakeAndBake.Classes.Model.GameEntity.EnemyProjectiles;
 
 namespace ShakeAndBake.Model.Factories.ProjectileFactory
 {
-    public class BossWaveProjectileFactory : ProjectileAbstractFactory
+    public class EnemySmallBulletProjectileFactory : ProjectileAbstractFactory
     {
         public override Projectile Create(Vector2 origin)
         {
-            PathAbstractFactory factory = new RandomWavePathFactory();
+            PathAbstractFactory factory = new EnemyBulletPathFactory();
             Path path = factory.Create(origin, new Vector2(0, 1), 5);
             Projectile ret = new SmallBallProjectile(path);
 

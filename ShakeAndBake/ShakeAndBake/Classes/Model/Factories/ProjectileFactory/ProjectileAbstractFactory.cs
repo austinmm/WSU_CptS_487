@@ -30,6 +30,9 @@ namespace ShakeAndBake.Model.Factories.ProjectileFactory
                 case ProjectileType.EnemyCircleBullet:
                     factory = new CircleBulletEnemyProjectileFactory();
                     break;
+                case ProjectileType.EnemySmallBullet:
+                    factory = new EnemySmallBulletProjectileFactory();
+                    break;
                
             }
             return factory;

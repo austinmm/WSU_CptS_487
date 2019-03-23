@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework.Input;
 using ShakeAndBake.Model.GameEntity;
+using System;
 
 namespace ShakeAndBake.Controller
 {
@@ -127,16 +128,29 @@ namespace ShakeAndBake.Controller
             //down right
             if (state.IsKeyDown(Keys.Right) && state.IsKeyDown(Keys.Down) && !(state.IsKeyDown(Keys.Left)) && !(state.IsKeyDown(Keys.Up)))
             {
-                //looking into better computation for diagonal cause this moves farther than it should
-                newX = originalX + movementSpeed;
-                newY = originalY + movementSpeed;
+                /***
+                 * Magnitude of net velocity should be = movementSpeed
+                 * 
+                 * |      /   <--- magnitude
+                 * |    /
+                 * |  /      theta = 45 degrees
+                 * |/_______
+                 * 
+                 * Sin(45) = yComp/magnitude
+                 * yComp = magnitude * Sin(45)
+                 * 
+                 * Cos(45) = xComp/magnitude
+                 * xComp = magnitude * Cos(45)
+                 ***/
+                newX = originalX + movementSpeed * (float)Math.Cos(Math.PI/4);
+                newY = originalY + movementSpeed * (float)Math.Sin(Math.PI / 4);
+                
             }
             //up right
             if (state.IsKeyDown(Keys.Right) && state.IsKeyDown(Keys.Up) && !(state.IsKeyDown(Keys.Left)) && !(state.IsKeyDown(Keys.Down)))
             {
-                //looking into better computation for diagonal cause this moves farther than it should
-                newX = originalX + movementSpeed;
-                newY = originalY - movementSpeed;
+                newX = originalX + movementSpeed * (float)Math.Cos(Math.PI / 4);
+                newY = originalY - movementSpeed * (float)Math.Sin(Math.PI / 4);
             }
             //right
             if (state.IsKeyDown(Keys.Right) && !(state.IsKeyDown(Keys.Up)) && !(state.IsKeyDown(Keys.Down)) && !(state.IsKeyDown(Keys.Left)))
@@ -146,16 +160,14 @@ namespace ShakeAndBake.Controller
             //left down
             if (state.IsKeyDown(Keys.Left) && state.IsKeyDown(Keys.Down) && !(state.IsKeyDown(Keys.Up)) && !(state.IsKeyDown(Keys.Right)))
             {
-                //looking into better computation for diagonal cause this moves farther than it should
-                newX = originalX - movementSpeed;
-                newY = originalY + movementSpeed;
+                newX = originalX - movementSpeed * (float)Math.Cos(Math.PI / 4);
+                newY = originalY + movementSpeed * (float)Math.Sin(Math.PI / 4);
             }
             //left up
             if (state.IsKeyDown(Keys.Left) && state.IsKeyDown(Keys.Up) && !(state.IsKeyDown(Keys.Down)) && !(state.IsKeyDown(Keys.Right)))
             {
-                //looking into better computation for diagonal cause this moves farther than it should
-                newX = originalX - movementSpeed;
-                newY = originalY - movementSpeed;
+                newX = originalX - movementSpeed * (float)Math.Cos(Math.PI / 4);
+                newY = originalY - movementSpeed * (float)Math.Sin(Math.PI / 4);
             }
             //left
             if (state.IsKeyDown(Keys.Left) && !(state.IsKeyDown(Keys.Up)) && !(state.IsKeyDown(Keys.Down)) && !(state.IsKeyDown(Keys.Right)))

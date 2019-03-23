@@ -13,7 +13,7 @@ namespace ShakeAndBake.Model.GameEntity
             fireRate = 10;
             this.ProjectileTypes = new System.Collections.Generic.List<ProjectileType>();
             this.ProjectileTypes.Add(ProjectileType.EnemyCircleBullet);
-            this.path = EnemyPaths.DefaultPath(this.position, new Vector2(0, 1));
+            this.path = EnemyPaths.DefaultPath(this.position, new Vector2(0, 0));
              sprite = ShakeAndBakeGame.GetTexture("circle");
             this.health = 10;
         }

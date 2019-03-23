@@ -5,6 +5,7 @@ using ShakeAndBake.Extras.Paths;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ShakeAndBake.Classes.Model.GameEntity.EnemyProjectiles;
 
 namespace ShakeAndBake.Model.Factories.ProjectileFactory
 {
@@ -25,7 +26,7 @@ namespace ShakeAndBake.Model.Factories.ProjectileFactory
             
             PathAbstractFactory factory = new EnemyBulletPathFactory();
             Path path = factory.Create(origin, new Vector2(xComp, yComp), 5);
-            Projectile ret = new EnemyBullet(path);
+            Projectile ret = new SmallBallProjectile(path);
             
 
             /***

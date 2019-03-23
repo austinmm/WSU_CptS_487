@@ -71,7 +71,7 @@ namespace ShakeAndBake.Model.GameEntity
                 //Creates a new projectile to be added to the character's ObservableCollection of projectiles
 
                 ProjectileAbstractFactory factory = ProjectileFactoryProducer.ProduceFactory(this.ProjectileTypes[0]);
-                Projectile projectile = factory.Create(this.position);
+                Projectile projectile = factory.Create(new Vector2((float)(this.position.X + this.hitBoxRadius/2), (float)(this.position.Y + this.hitBoxRadius/2)));
                 //The projectiles position is set to the current character's position
                 projectile.Position = this.position;
                 projectile.Velocity += this.Velocity;

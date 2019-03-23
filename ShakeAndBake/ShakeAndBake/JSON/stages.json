@@ -1,0 +1,117 @@
+﻿{
+  "Stage1": {
+    "waves": [
+      /* Wave 1 */
+      [
+        {
+          "stringType": "Easy",
+          "pathType": "SweepRight",
+          "formation": "leftDiagonalLine",
+          "speed": 5,
+          "startPosition": {
+            "X": 0,
+            "Y": -100
+          },
+          "fireRate": 900,
+          "moveDirection": {
+            "X": 0,
+            "Y": 1
+          },
+          "count": 5
+        }
+      ]
+    ]
+  },
+
+  "Stage2": {
+    "waves": [
+      /* Wave 1 */
+      [
+        {
+          "stringType": "MidBoss",
+          "pathType": "WavePath",
+          "speed": 3,
+          "startPosition": {
+            "random": true
+          },
+          "fireRate": 100,
+          "moveDirection": {
+            "X": 0,
+            "Y": 1
+          },
+          "count": 3
+        }
+      ]
+    ]
+  },
+
+
+
+
+
+  "Stage3": {
+    "waves": [
+      /* Wave 1 */
+      [
+        {
+          "stringType": "Medium",
+          "pathType": "WavePath",
+          "speed": 2,
+          "startPosition": {
+            "X": 0,
+            "Y": 0,
+            "random": true
+          },
+          "fireRate": 300,
+          "moveDirection": {
+            "X": 0,
+            "Y": 1
+          },
+          "count": 5
+        },
+
+        {
+          "stringType": "Hard",
+          "pathType": "SweepRight",
+          "formation": "leftDiagonalLine",
+          "speed": 4,
+          "startPosition": {
+            "X": -50,
+            "Y": 0,
+            "random": false
+          },
+          "fireRate": 200,
+          "moveDirection": {
+            "X": 0,
+            "Y": 1
+          },
+          "count": 3
+        }
+      ]
+    ]
+  },
+
+  "Stage4": {
+    "waves": [
+      /* Wave 1 */
+      [
+        {
+          "stringType": "FinalBoss",
+          "pathType": "StraightPath",
+          "speed": 2,
+          "startPosition": {
+            "X": 0,
+            "Y": 0,
+            "random": true
+          },
+          "fireRate": 10,
+          "moveDirection": {
+            "X": 0,
+            "Y": 1
+          },
+          "count": 1
+        }
+      ]
+    ]
+  }
+}

@@ -42,16 +42,19 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Classes\Controller\POCOs\ConfigObjects.cs" />
     <Compile Include="Classes\Model\Factories\PathFactory\EnemyBulletPathFactory.cs" />
     <Compile Include="Classes\Model\Factories\PathFactory\PathAbstractFactory.cs" />
     <Compile Include="Classes\Model\Factories\PathFactory\PlayerBulletPathFactory.cs" />
     <Compile Include="Classes\Model\Factories\PathFactory\RandomWavePathFactory.cs" />
     <Compile Include="Classes\Model\Factories\PathFactory\StraightPathFactory.cs" />
+    <Compile Include="Classes\Model\Factories\PathFactory\SweepRightPathFactory.cs" />
     <Compile Include="Classes\Model\Factories\PathFactory\WavePathFactory.cs" />
     <Compile Include="Classes\Model\Factories\ProjectileFactory\BossWaveProjectileFactory.cs" />
     <Compile Include="Classes\Model\Factories\ProjectileFactory\BulletProjectileFactory.cs" />
     <Compile Include="Classes\Model\Factories\ProjectileFactory\CircleBulletEnemyProjectileFactory.cs" />
     <Compile Include="Classes\Model\Factories\ProjectileFactory\ProjectileAbstractFactory.cs" />
+    <Compile Include="Classes\Model\GameEntity\EnemyProjectiles\SmallBallProjectile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShakeAndBakeGame.cs" />
@@ -91,6 +94,9 @@
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
@@ -146,6 +152,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="app.manifest" />
+    <None Include="JSON\stages.json" />
     <None Include="Content\Default.spritefont" />
     <None Include="Content\File.spritefont" />
     <None Include="Content\bullet.png" />
@@ -165,9 +172,11 @@
     <None Include="Content\obj\DesktopGL\Content\enemy_bullet.mgcontent" />
     <None Include="Content\obj\DesktopGL\Content\player.mgcontent" />
     <None Include="Content\obj\DesktopGL\Content\player_bullet.mgcontent" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\generic_stage_notice.PNG" />
+    <None Include="Content\small_black_ball.png" />
     <Content Include="Content\Trophy.png" />
     <Content Include="Content\Trophy2.png" />
   </ItemGroup>

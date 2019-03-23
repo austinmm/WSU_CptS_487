@@ -80,6 +80,13 @@
 /processorParam:TextureFormat=Color
 /build:exitIcon.png
 
+#begin File.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:File.spritefont
+
 #begin generic_stage_notice.PNG
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -91,12 +98,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:generic_stage_notice.PNG
-#begin File.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:File.spritefont
 
 #begin lifeIcon.png
 /importer:TextureImporter
@@ -157,6 +158,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:selectionIcon.png
+
+#begin small_black_ball.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:small_black_ball.png
 
 #begin startIcon.png
 /importer:TextureImporter

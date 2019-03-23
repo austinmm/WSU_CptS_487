@@ -1,12 +1,16 @@
 ﻿using Microsoft.Xna.Framework;
 using ShakeAndBake.Extras.Paths;
 using ShakeAndBake.Model.Factories.ProjectileFactory;
+using System;
+
 namespace ShakeAndBake.Model.GameEntity
 {
     public class Enemy : Character
     {
         //This is a set path that the enemy objects will travel when update is called
         protected Path path;
+        protected static int enemySpawnSeed = 5;
+
         public Path Path
         {
             get { return this.path; }
@@ -20,6 +24,13 @@ namespace ShakeAndBake.Model.GameEntity
             this.fireRate = 1250;
         }
 
+        public Vector2 GetRandomSpawnPosition()
+        {
+            enemySpawnSeed = Math.Abs(enemySpawnSeed * enemySpawnSeed * DateTime.Now.Millisecond);
+            Random rand = new Random(Math.Abs(enemySpawnSeed));
+            Vector2 ret = new Vector2(rand.Next(0, GameConfig.Width - Sprite.Width), -this.Sprite.Height);
+            return ret;
+        }
         //Updates the 
         public override void Update(GameTime gameTime, CollisionBoard cb)
         {

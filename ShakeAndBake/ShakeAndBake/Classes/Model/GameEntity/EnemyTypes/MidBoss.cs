@@ -2,7 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using ShakeAndBake.Model.Factories.ProjectileFactory;
 using ShakeAndBake.Classes.Model.Factories.PathFactory;
-
+using ShakeAndBake.Extras.Paths;
+using System;
 
 namespace ShakeAndBake.Model.GameEntity
 {
@@ -11,11 +12,9 @@ namespace ShakeAndBake.Model.GameEntity
         //Boss Enemy Constructor
         public MidBoss() : base()
         {
-            fireRate = Util.randDouble(500, 600);
             this.ProjectileTypes = new System.Collections.Generic.List<ProjectileType>();
             this.ProjectileTypes.Add(ProjectileType.BossWaveProjectile);
             sprite = ShakeAndBakeGame.GetTexture("circle");
-            this.health = 5;
         }
 
         public override void Update(GameTime gameTime, CollisionBoard cb)

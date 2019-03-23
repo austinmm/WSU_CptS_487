@@ -1,12 +1,15 @@
-﻿using ShakeAndBake.Model.GameEntity;
+﻿using ShakeAndBake.Classes.Controller;
+using ShakeAndBake.Model.GameEntity;
 
 namespace ShakeAndBake.Model.Factories.EnemyFactory
 {
     public class MidBossFactory : EnemyAbstractFactory
     {
-        public override Enemy Create()
+        public override Enemy Create(EnemyConfig config)
         {
-            return new MidBoss();
+            MidBoss ret = new MidBoss();
+            Configure(ret, config);
+            return ret;
         }
     }
 }

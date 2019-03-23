@@ -1,4 +1,8 @@
+using ShakeAndBake.Classes.Controller;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using System.IO;
+using ShakeAndBake.Model;
 
 namespace ShakeAndBake.Controller
 {
@@ -9,6 +13,7 @@ namespace ShakeAndBake.Controller
         private EnemyType enemyType;
         private int enemyAmount;
 
+        private List<EnemyConfig> enemyConfigs;
         public EnemyType EnemyType
         {
             get { return enemyType; }
@@ -19,10 +24,14 @@ namespace ShakeAndBake.Controller
             get { return enemyAmount; }
         }
 
-        public Wave(EnemyType enemyType, int enemyAmount)
+        public List<EnemyConfig> EnemyConfigs
         {
-            this.enemyType = enemyType;
-            this.enemyAmount = enemyAmount;
+            get { return this.enemyConfigs;  }
+        }
+
+        public Wave(List<EnemyConfig> enemyConfigs)
+        {
+            this.enemyConfigs = enemyConfigs;
         }
     }
 
@@ -43,9 +52,9 @@ namespace ShakeAndBake.Controller
         {
             foreach (Wave wave in waves)
             {
-                for (int i = 0; i < wave.EnemyAmount; ++i)
+                foreach (EnemyConfig config in wave.EnemyConfigs)
                 {
-                    gameData.AddEnemy(wave.EnemyType);
+                    gameData.AddEnemy(config);
                 }
             }
         }
@@ -64,7 +73,7 @@ namespace ShakeAndBake.Controller
             set { stageTypes = value; }
         }
 
-        private Dictionary<GameStage, StageData> stages;
+        private List<StageData> stages;
 
         //Contains the index of the current phase
         private int currentStage;
@@ -77,38 +86,65 @@ namespace ShakeAndBake.Controller
            }
         }
 
-        public GameStage CurrentStageType
-        {
-            get { return this.stageTypes[this.CurrentStage]; }
-        }
 
         public StageManager()
         {
             //Load JSON Stage Data Here
-            stageTypes = new List<GameStage>() {
-                GameStage.Stage1, GameStage.Stage2, GameStage.Stage3, GameStage.Stage4 
-            };
-            stages = new Dictionary<GameStage, StageData>();
             initStages();
-            currentStage = 0;
+
+            /* stageTypes = new List<GameStage>() {
+                 GameStage.Stage1
+             };
+
+
+             stages = new Dictionary<GameStage, StageData>();
+             initStages();
+             currentStage = 0;*/
         }
 
         private void initStages()
         {
-            stages[GameStage.Stage1] = new StageData(new List<Wave>(){
-                new Wave(EnemyType.Easy, 5),
-                new Wave(EnemyType.Medium, 2)
-            });
-            stages[GameStage.Stage2] = new StageData(new List<Wave>(){
-                new Wave(EnemyType.MidBoss, 2),
-            });
-            stages[GameStage.Stage3] = new StageData(new List<Wave>(){
-                new Wave(EnemyType.Medium, 3),
-                new Wave(EnemyType.Hard, 2),
-            });
-            stages[GameStage.Stage4] = new StageData(new List<Wave>(){
-                new Wave(EnemyType.FinalBoss, 1),
-            });  
+            stages = new List<StageData>();
+            StreamReader r = GameData.GetStagesConfigStreamReader();
+            string json = r.ReadToEnd();
+            Dictionary<string, WaveConfigs> stageDict = JsonConvert.DeserializeObject<Dictionary<string, WaveConfigs>>(json);
+
+            foreach (string stageName in stageDict.Keys)
+            {
+                WaveConfigs waveConfigs = stageDict[stageName];
+                List<Wave> waves = new List<Wave>();
+
+                for (int i = 0; i < waveConfigs.waves.Count; ++i)
+                {
+
+                    List<EnemyConfig> waveConfig = waveConfigs.waves[i];
+                    List<EnemyConfig> wave = new List<EnemyConfig>();
+                    for (int j = 0; j < waveConfig.Count; ++j)
+                    {
+                        EnemyConfig enemyConfig = waveConfig[j];
+
+                        double xOffset = 0;
+                        double yOffset = 0;
+
+                        for (int k = 0; k < enemyConfig.count; ++k)
+                        {
+                            /* Hard coded formations */
+                            // TODO: This should be handled by some other class!
+                            EnemyConfig copyConfig = new EnemyConfig(enemyConfig);
+                            if (copyConfig.formation != null && enemyConfig.formation.Equals("leftDiagonalLine"))
+                            {
+                                xOffset = xOffset - 75; 
+                                yOffset = yOffset - 75;
+                            }
+                            copyConfig.startPosition.X += xOffset;
+                            copyConfig.startPosition.Y += yOffset;
+                            wave.Add(copyConfig);
+                        }
+                    }
+                    waves.Add(new Wave(wave));
+                }
+                stages.Add(new StageData(waves));
+            }
         }
 
         public bool IsCurrentStageCompleted(Model.GameData gameData)
@@ -122,7 +158,7 @@ namespace ShakeAndBake.Controller
 
         public bool AreAllStagesCompleted()
         {
-            if (this.currentStage >= this.stageTypes.Count)
+            if (this.currentStage >= this.stages.Count)
             {
                 return true;
             }
@@ -151,7 +187,7 @@ namespace ShakeAndBake.Controller
         public void ConfigureNextStage(Model.GameData gameData)
         {
             gameData.Reset();       
-            StageData data = stages[this.CurrentStageType];
+            StageData data = stages[this.CurrentStage];
             data.Configure(gameData);
         }
 

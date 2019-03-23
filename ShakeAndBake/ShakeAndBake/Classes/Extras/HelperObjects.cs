@@ -24,7 +24,7 @@ namespace ShakeAndBake
     
     public enum PathType
     {
-        WavePath, StraightPath, RandomWavePath
+        WavePath, StraightPath, RandomWavePath, SweepRight
     }
 
     public enum GameState
@@ -44,6 +44,32 @@ namespace ShakeAndBake
         public static double randDouble(double min, double max)
         {
             return RANDOM.NextDouble() * (max - min) + min;
+        }
+
+        public static EnemyType stringToEnemyType(string type)
+        {
+            EnemyType ret;
+            switch (type)
+            {
+                case "Easy": ret = EnemyType.Easy;
+                        break;
+                case "Medium":
+                    ret = EnemyType.Medium;
+                    break;
+                case "Hard":
+                    ret = EnemyType.Hard;
+                    break;
+                case "MidBoss":
+                    ret = EnemyType.MidBoss;
+                    break;
+                case "FinalBoss":
+                    ret = EnemyType.FinalBoss;
+                    break;
+                default:
+                    ret = EnemyType.Easy;
+                    break;
+            }
+            return ret;
         }
     }
 }

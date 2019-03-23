@@ -32,6 +32,9 @@ namespace ShakeAndBake.Classes.Model.Factories.PathFactory
                 case PathType.RandomWavePath:
                     factory = new RandomWavePathFactory();
                     break;
+                case PathType.SweepRight:
+                    factory = new SweepRightPathFactory();
+                    break;
 
             }
             return factory;

@@ -2,8 +2,9 @@
 
 Bullet hell game written in C# using MonoGame.
 
-* [Project Vision](ProjectVision.md)
-* [Design Document](SoftwareDesignDocument.pdf)
+* [Secret Feature Plan](docs/SecretFeaturePlan.md)
+* [Project Vision](docs/ProjectVision.md)
+* [Design Document](docs/SoftwareDesignDocument.pdf)
 
 ## Team Members
 * Austin Marino

@@ -1,4 +1,4 @@
-# Secret Feature Plan (Incomplete)
+# Secret Feature Plan
 ## Attack Option: 
 #### Option B, Implementing necessary collision detections among different bullets.
 ## Design Impacts:

@@ -1,38 +1,13 @@
 # Secret Feature Plan (Incomplete)
+## Attack Option: 
+#### Option B, Implementing necessary collision detections among different bullets.
+## Design Impacts:
+#### Existing Infrastructure: 
+Our existing code allows for projectile collision detection between the enemies and users bullets. This allows us to handle collisions between all projectile types. We do this by treating the entire game screen as a matrix. Then, every time a game object (player, projectile, enemy) enters a new “bucket”, row and column of the matrix, then their existence is erased from the old bucket it was in and entered into the new bucket. Then every time the “Update” method is called on a game object the object will check if other game objects are currently inside it bucket and take the appropriate action. The current appropriate action for projectiles is to destroy each other if opposing types and ignore each other if the same type. Currently, we do not have the ability for the projectiles to “push” one another like shown in the video for option B and that will be the main change that will be implemented for our secret feature.
+#### Necessary Changes: 
+##### What: 
+In order to implement the feature described for option B, we will need to add a projectile mass property so that larger massed projectiles can push its fellow projectiles out of its way when a collision is detected. The mass of the projectile can also be used to calculate how much health it has so if a small-massed user projectile hits a large-masses enemy projectile the users will die and the enemies will simply lose part of its mass. The mass will also be used to conduct the necessary physics in order to know the path offset the collision has on both projectiles.
+##### How:
+We will add a “mass” property to our projectiles. Using this new mass property and the existing projectile path and velocity we will be able to calculate how two objects will reflect off one another. There is no need to use any design patterns for the changes needed as these changes will not affect existing code and will simply allow for the extension of the projectiles features rather than any alteration. Then we will add a new method in the projectile class that will be used for specifically handling the condition when two “friendly” projectiles collide, i.e. two enemy projectiles colliding. This method will be called in the existing update method and will not alter the way existing code in the update method. Instead, it will just extend the ability of the update method to not only check for destruction type collision but also allow for “push” type collisions where two of the same projectile types collide and push one another away.
 
-## Attack Option Chosen
-`Option B` Implementing necessary collision detections among different bullets.
 
-## Design Impacts
-
-### Partial Implementation
-Our existing code allows for projectile collision detection between the enemies
-and player bullets. This allows us to destroy both projectiles when they collide
-with one and other. However, we do not have the ability for the projectiles to
-have different mass or health at the moment to simulate the physics of projects
-bouncing off of each other, or pushing each other.
-
-### Necessary Changes
-In order to implement the feature described for `Option B`, we will need to add
-a mass property to our Projectile class so that larger massed projectiles can
-push its fellow projectiles out of its way when a collision is detected. The
-mass of the projectile can also be used to calculate how much health it has,
-so if a small-massed user projectile hits a large-mass enemy projectile the
-player’s projectile will be destroyed and the enemy's will simply lose part of
-its mass.
-
-Pertaining to the final boss fight, if two projectiles belonging to the final
-boss collide, then the projectile with the least mass out of the two will
-be pushed in its current direction. This behavior will be achieved by applying
-a multiplyer to the pushed projectile's velocity attribute, which then is
-reflected by its currently assigned path object (note that the path object
-in our project is responsible for determining where exactly the game object
-moves to next).
-
-Also, we also are planning to move our collision board to the controller (of
-our MVC architecture). After moving our collision board, additional logic
-to handle checking the mass of projectiles will need to be added. For instance,
-determining the behavior of two colliding projectiles based on their
-respective mass values. The collision board will update our model in the event
-of a collision by modifying projectile mass and velocity values, or simply
-removing projectiles if it determines they should be destroyed.

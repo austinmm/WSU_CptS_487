@@ -2,6 +2,7 @@
 using ShakeAndBake.Extras.Paths;
 using ShakeAndBake.Model.Factories.ProjectileFactory;
 using System;
+using System.Diagnostics;
 
 namespace ShakeAndBake.Model.GameEntity
 {
@@ -18,11 +19,7 @@ namespace ShakeAndBake.Model.GameEntity
         }
 
         //Enemy Constructor
-        public Enemy() : base()
-        {
-            this.HitBoxRadius = 50;
-            this.fireRate = 1250;
-        }
+        public Enemy() : base() { }
 
         public Vector2 GetRandomSpawnPosition()
         {
@@ -31,61 +28,43 @@ namespace ShakeAndBake.Model.GameEntity
             Vector2 ret = new Vector2(rand.Next(0, GameConfig.Width - Sprite.Width), -this.Sprite.Height);
             return ret;
         }
-        //Updates the 
+
         public override void Update(GameTime gameTime, CollisionBoard cb)
         {
             cb.RemoveFromBucketIfExists(this);
 
             if (!this.IsDestroyed)
             {
-
                 if (this.BoundsContains(Player.Instance) || Player.Instance.BoundsContains(this))
                 {
-                    /* Apply melee damage */
-                    /***
-                     * We need a function to DEAL MELEE DAMAGE because not
-                     * all enemies should immediately die upon contact with
-                     * main player
-                     ***/
                     Player.Instance.TakeDamage(1);
-                    this.IsDestroyed = true;
-                    return;
+                    this.TakeDamage(1);
                 }
-
                 //Move Enemy to new position in its set path
                 position = path.NextPoint();
-
                 // enemy went off screen without dying, so destroy it
                 if (position.Y > GameConfig.Height)
                 {
-                    //isDestroyed = true;
-                    // move back to start since the enemy didn't die
                     path.Reset();
                 }
                 else
                 {
                     cb.FillBucket(this);
-
                     //Fire a new projectile if firerate field will allow
                     this.FireProjectile();
                 }
             }
-
             base.Update(gameTime, cb);
         }
 
         public override void FireProjectile()
         {
-            if (this.CanFire())
+            if (this.CanFire() && this.isInWindow())
             {
-                Vector2 pos = Vector2.Add(position, new Vector2((sprite.Width - ShakeAndBakeGame.GetTexture("enemy_bullet").Width) / 2, sprite.Height));
                 //Creates a new projectile to be added to the character's ObservableCollection of projectiles
-
-                ProjectileAbstractFactory factory = ProjectileFactoryProducer.ProduceFactory(this.ProjectileTypes[0]);
-                Projectile projectile = factory.Create(new Vector2((float)(this.position.X + this.hitBoxRadius/2), (float)(this.position.Y + this.hitBoxRadius/2)));
-                //The projectiles position is set to the current character's position
-                projectile.Position = this.position;
-                projectile.Velocity += this.Velocity;
+                Vector2 origin = this.GetCenterCoordinates();
+                Projectile projectile = this.ProjectileFactory.Create(origin);
+                Debug.Print("The hash code stored: {0}", projectile.GetHashCode());
                 this.projectiles.Add(projectile);
             }
         }

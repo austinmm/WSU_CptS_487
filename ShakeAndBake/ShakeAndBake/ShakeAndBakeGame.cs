@@ -34,6 +34,11 @@ namespace ShakeAndBake
             GameConfig.Height = graphics.GraphicsDevice.Viewport.Height;
             GameConfig.Width = graphics.GraphicsDevice.Viewport.Width;
             Initialize();
+
+            //Initializes the MVC layers
+            gameData = new Model.GameData(GetTexture("player_default"));
+            gameBoard = new View.GameBoard(gameData);
+            gameController = new Controller.GameController(gameData, gameBoard);
         }
 
         /// <summary>
@@ -53,29 +58,30 @@ namespace ShakeAndBake
         /// </summary>
         protected override void LoadContent()
         {
-            LoadAndStoreTexture("generic_stage_notice");
-            LoadAndStoreTexture("player");
-            LoadAndStoreTexture("circle");
-            LoadAndStoreTexture("trophy");
-            LoadAndStoreTexture("trophy2");
-            LoadAndStoreTexture("player_bullet");
-            LoadAndStoreTexture("enemy_bullet");
+            //Player images
+            LoadAndStoreTexture("player_default");
+            LoadAndStoreTexture("player_default_bullet");
+            //Enemy Images
+            LoadAndStoreTexture("enemy_default");
+            LoadAndStoreTexture("enemy_default_bullet");
+            //Generic Bullet Images
+            LoadAndStoreTexture("small_ball_bullet");
+            LoadAndStoreTexture("small_square_bullet");
+            //Menu,Loose and Win Screen Images
             LoadAndStoreTexture("titleScreen");
             LoadAndStoreTexture("background");
             LoadAndStoreTexture("startIcon");
             LoadAndStoreTexture("selectionIcon");
             LoadAndStoreTexture("exitIcon");
             LoadAndStoreTexture("mainMenuIcon");
-            LoadAndStoreTexture("lifeIcon");
             LoadAndStoreTexture("loseScreen");
             LoadAndStoreTexture("winScreen");
+            //Game Play Screen Images
+            LoadAndStoreTexture("lives_left");
+            //Fonts
             LoadAndStoreFont("Default");
             LoadAndStoreFont("File");
-            LoadAndStoreTexture("small_black_ball");
-
-            gameData = new Model.GameData(GetTexture("player"));
-            gameBoard = new View.GameBoard(gameData);
-            gameController = new Controller.GameController(gameData, gameBoard);
+            //LoadAndStoreTexture("lifeIcon");
         }
         
         private void LoadAndStoreTexture(string name) {
@@ -86,15 +92,16 @@ namespace ShakeAndBake
         {
             return textures[name];
         }
+
         public static SpriteFont GetFont(string name)
         {
             return fonts[name];
         }
+
         private void LoadAndStoreFont(string name)
         {
             fonts[name] = Content.Load<SpriteFont>(name);
         }
-
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload

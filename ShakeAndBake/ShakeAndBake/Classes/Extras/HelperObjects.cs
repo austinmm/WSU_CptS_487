@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 
 namespace ShakeAndBake
 {
@@ -7,10 +8,10 @@ namespace ShakeAndBake
         Easy, Medium, Hard, MidBoss, FinalBoss
     }
 
-    public enum ProjectileType
-    {
-        Bullet, Rocket, FireBall, EnemyBullet, PlayerBullet, BossWaveProjectile, EnemyCircleBullet, EnemySmallBullet
-    }
+    //public enum EnemyProjectileType
+    //{
+    //    Bullet, Rocket, FireBall, EnemyBullet, PlayerBullet, BossWaveProjectile, EnemyCircleBullet, EnemySmallBullet
+    //}
 
     public enum MenuState
     {

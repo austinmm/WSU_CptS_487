@@ -1,0 +1,18 @@
+﻿[
+  {
+    "Acceleration": 1,
+    "HitDamage": 1,
+    "Mass": 2,
+    "velocity": 1,
+    "texture": "small_ball_bullet",
+    "pathType": "StraightPath"
+  },
+  {
+    "Acceleration": 1,
+    "HitDamage": 1,
+    "Mass": 2,
+    "velocity": 1,
+    "texture": "enemy_default_bullet",
+    "pathType": "SweepRight"
+  }
+]

@@ -10,20 +10,20 @@ namespace ShakeAndBake.Controller
 
     public class Wave
     {
-        private EnemyType enemyType;
-        private int enemyAmount;
 
-        private List<EnemyConfig> enemyConfigs;
+        private EnemyType enemyType;
         public EnemyType EnemyType
         {
             get { return enemyType; }
         }
 
+        private int enemyAmount;
         public int EnemyAmount
         {
             get { return enemyAmount; }
         }
 
+        private List<EnemyConfig> enemyConfigs;
         public List<EnemyConfig> EnemyConfigs
         {
             get { return this.enemyConfigs;  }
@@ -91,15 +91,6 @@ namespace ShakeAndBake.Controller
         {
             //Load JSON Stage Data Here
             initStages();
-
-            /* stageTypes = new List<GameStage>() {
-                 GameStage.Stage1
-             };
-
-
-             stages = new Dictionary<GameStage, StageData>();
-             initStages();
-             currentStage = 0;*/
         }
 
         private void initStages()
@@ -189,11 +180,6 @@ namespace ShakeAndBake.Controller
             gameData.Reset();       
             StageData data = stages[this.CurrentStage];
             data.Configure(gameData);
-        }
-
-        public void loadJson(GameStage config)
-        {
-
         }
     }
 }

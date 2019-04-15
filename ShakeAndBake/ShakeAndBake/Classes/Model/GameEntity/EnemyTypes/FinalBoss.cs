@@ -12,9 +12,8 @@ namespace ShakeAndBake.Model.GameEntity
         //Boss Enemy Constructor
         public FinalBoss() : base()
         {
-            this.ProjectileTypes = new System.Collections.Generic.List<ProjectileType>();
-            this.ProjectileTypes.Add(ProjectileType.EnemyCircleBullet);
-            sprite = ShakeAndBakeGame.GetTexture("circle");
+            this.ProjectileFactory = new FinalBossProjectileFactory();
+            this.Sprite = ShakeAndBakeGame.GetTexture("enemy_default");
         }
 
         public override void Update(GameTime gameTime, CollisionBoard cb)
@@ -28,7 +27,7 @@ namespace ShakeAndBake.Model.GameEntity
             base.Draw(spriteBatch);
             if (!IsDestroyed)
             {
-                spriteBatch.Draw(sprite, position, Color.White);
+                spriteBatch.Draw(this.Sprite, position, Color.White);
             }
         }
     }

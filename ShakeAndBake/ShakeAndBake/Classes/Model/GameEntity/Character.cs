@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ShakeAndBake.Model.Factories.ProjectileFactory;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,9 +12,6 @@ namespace ShakeAndBake.Model.GameEntity
 {
     public abstract class Character : GameObject
     {
-        //Used to invoke the characters update 
-        private event PropertyChangedEventHandler ProjectilePropertyChanged;
-
         //This contains the amount of time the character has been alive for
         protected Stopwatch timeAlive;
         public Stopwatch TimeAlive
@@ -46,18 +44,12 @@ namespace ShakeAndBake.Model.GameEntity
             set { this.health = value; }
         }
 
-        //Tuple???
-        //This contains a list of all the projectile types the character is allowed to fire
-        protected List<ProjectileType> projectileTypes;
-        public List<ProjectileType> ProjectileTypes
-        {
-            get { return this.projectileTypes; }
-            set { this.projectileTypes = value; }
-        }
+        //This will be used and set by sub classes for further specification of which factory to invoke 
+        protected ProjectileAbstractFactory ProjectileFactory;
 
         //This contains a ObservableCollection of all the projectiles the character currently has
-        protected ObservableCollection<Projectile> projectiles;
-        public ObservableCollection<Projectile> Projectiles
+        protected List<Projectile> projectiles;
+        public List<Projectile> Projectiles
         {
             get { return this.projectiles; }
             set { this.projectiles = value; }
@@ -69,8 +61,7 @@ namespace ShakeAndBake.Model.GameEntity
             this.health = 5;
             this.timeAlive = new Stopwatch();
             this.timeAlive.Start();
-            this.ProjectileTypes = new List<ProjectileType>();
-            this.projectiles = new ObservableCollection<Projectile>();
+            this.projectiles = new List<Projectile>();
         }
 
         public override void Update(GameTime gameTime, CollisionBoard cb)
@@ -88,7 +79,6 @@ namespace ShakeAndBake.Model.GameEntity
                     projectile.Draw(spriteBatch);
                 }
             }
-            // draw character in derived enemy/player classes
         }
 
         /* Returns the remaining amount after it is delt to the character */
@@ -111,12 +101,20 @@ namespace ShakeAndBake.Model.GameEntity
             List<Projectile> deadProjectiles = new List<Projectile>();
             foreach (Projectile projectile in this.projectiles)
             {
-                projectile.Update(gameTime, cb);
                 if (projectile.IsDestroyed)
                 {
                     deadProjectiles.Add(projectile);
+                    continue;
                 }
+                //resets the position of the projectile of the gameobject if it hasn't been fired yet
+                //if (!projectile.HasBeenFired())
+                //{
+                //    projectile.Position = this.GetCenterCoordinates();
+                //    projectile.Path.Reset(projectile.Position);
+                //}
+                projectile.Update(gameTime, cb);
             }
+                
 
             foreach (Projectile projectile in deadProjectiles)
             {
@@ -124,21 +122,7 @@ namespace ShakeAndBake.Model.GameEntity
             }
         }
 
-        //Invoked when a projectile is updated
-        private void Projectile_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            //Type cast sender as a Projectile type
-            Projectile projectile = sender as Projectile;
-            //Checks if the projectile has hit the user's or enemies, dependant on inheriting classes, hitBoxRadius
-            //this.CheckForHits(projectile);
-            if (this.ProjectilePropertyChanged != null)
-            {
-                //Passes reference to projectile that changed
-                this.ProjectilePropertyChanged(sender, e);
-            }
-        }
-
-        public virtual void FireProjectile() { }
+        public abstract void FireProjectile();
 
         protected bool CanFire()
         {
@@ -155,7 +139,5 @@ namespace ShakeAndBake.Model.GameEntity
             this.lastFiredTime = this.timeAlive.ElapsedMilliseconds;
             return true;
         }
-
-       // protected abstract void CheckForHits(Projectile projectile);
     }
 }

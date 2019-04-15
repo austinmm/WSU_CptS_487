@@ -51,7 +51,7 @@ namespace ShakeAndBake.View
                     xOffset = 60;
                 }
                 Rectangle destinationRectangle = new Rectangle(x: GameConfig.Width - xOffset, y: yOffset, width: 50, height: 50);
-                spriteBatch.Draw(ShakeAndBakeGame.GetTexture("trophy"), destinationRectangle, Color.White);
+                spriteBatch.Draw(ShakeAndBakeGame.GetTexture("lives_left"), destinationRectangle, Color.White);
                 xOffset += 60;
             }
         }

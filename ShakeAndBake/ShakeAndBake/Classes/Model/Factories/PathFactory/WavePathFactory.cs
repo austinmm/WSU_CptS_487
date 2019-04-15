@@ -20,7 +20,6 @@ namespace ShakeAndBake.Classes.Model.Factories.PathFactory
                 Vector2 point = new Vector2(prevX + (float)Math.Sin(i*.1) * radius, speed + prevY );
                 points.Add(point);
             }
-            //Path path = new ListPath(origin, direction, speed);
             return new ListPath(points);
         }
     }

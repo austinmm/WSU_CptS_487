@@ -7,10 +7,14 @@ namespace ShakeAndBake.Model.GameEntity
     public abstract class GameObject
     {
         protected Texture2D sprite;
-        public Texture2D Sprite
+        public virtual Texture2D Sprite
         {
             get { return this.sprite; }
-            set { this.sprite = value; }
+            set
+            {
+                this.sprite = value;
+                this.hitBoxRadius = sprite.Width / 2;
+            }
         }
 
         //Used to determine if object has been destroyed or not
@@ -89,23 +93,14 @@ namespace ShakeAndBake.Model.GameEntity
         // checks if the game object is in the game window
         public bool isInWindow()
         {
-            if (sprite == null) return false;
-            int windowWidth = GameConfig.Width;
-            int windowHeight = GameConfig.Height;
-            if (position.X < 0 || position.Y < 0
-                || position.X + sprite.Width > windowWidth
-                || position.Y + sprite.Height > windowHeight)
-            {
-                return false;
-            }
-            return true;
+            return this.IsInWindowWidth() && this.IsInWindowHeight();
         }
 
         public bool IsInWindowWidth()
         {
             if (sprite == null) return false;
-            int windowWidth = GameConfig.Width;
-            if (position.X < 0 || position.X + sprite.Width > windowWidth)
+            float adjustedWidth = position.X + sprite.Width;
+            if (position.X  < 0 || (adjustedWidth > GameConfig.Width))
             {
                 return false;
             }
@@ -115,8 +110,8 @@ namespace ShakeAndBake.Model.GameEntity
         public bool IsInWindowHeight()
         {
             if (sprite == null) return false;
-            int windowHeight = GameConfig.Height;
-            if (position.Y < 0 || position.Y + sprite.Height > windowHeight)
+            float adjustedHeight = position.Y + sprite.Height;
+            if (position.Y < 0 || (adjustedHeight > GameConfig.Height))
             {
                 return false;
             }
@@ -125,7 +120,7 @@ namespace ShakeAndBake.Model.GameEntity
 
         public Vector2 GetCenterCoordinates()
         {
-            return new Vector2(this.Position.X + (float)this.Sprite.Width/2, this.Position.Y + (float)this.Sprite.Height/2);
+            return new Vector2(this.Position.X + (float)this.Sprite.Width/2, this.Position.Y - this.Sprite.Height/2);
         }
 
         public bool BoundsContains(GameObject obj)
@@ -136,10 +131,6 @@ namespace ShakeAndBake.Model.GameEntity
                 || BoundsContains(new Vector2(centerCoordinates.X - obj.Sprite.Width / 2, centerCoordinates.Y))
                 || BoundsContains(new Vector2(centerCoordinates.X, centerCoordinates.Y + obj.Sprite.Height / 2))
                 || BoundsContains(new Vector2(centerCoordinates.X, centerCoordinates.Y - obj.Sprite.Height / 2));
-
-
-
-
         }
         // checks if pos is in the sprite texture bounds
         public bool BoundsContains(Vector2 coords)

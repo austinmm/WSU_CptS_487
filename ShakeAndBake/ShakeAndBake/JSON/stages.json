@@ -34,7 +34,7 @@
           "startPosition": {
             "random": true
           },
-          "fireRate": 100,
+          "fireRate": 200,
           "moveDirection": {
             "X": 0,
             "Y": 1
@@ -44,11 +44,6 @@
       ]
     ]
   },
-
-
-
-
-
   "Stage3": {
     "waves": [
       /* Wave 1 */
@@ -62,7 +57,7 @@
             "Y": 0,
             "random": true
           },
-          "fireRate": 300,
+          "fireRate": 500,
           "moveDirection": {
             "X": 0,
             "Y": 1
@@ -80,7 +75,7 @@
             "Y": 0,
             "random": false
           },
-          "fireRate": 60,
+          "fireRate": 300,
           "moveDirection": {
             "X": 0,
             "Y": 1

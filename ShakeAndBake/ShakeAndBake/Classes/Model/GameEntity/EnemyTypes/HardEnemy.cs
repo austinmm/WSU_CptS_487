@@ -12,9 +12,8 @@ namespace ShakeAndBake.Model.GameEntity
         //Hard Enemy Constructor
         public Hard() : base()
         {
-            this.ProjectileTypes = new List<ProjectileType>();
-            this.ProjectileTypes.Add(ProjectileType.EnemyCircleBullet);
-            sprite = ShakeAndBakeGame.GetTexture("circle");
+            this.ProjectileFactory = new HardProjectileFactory();
+            this.Sprite = ShakeAndBakeGame.GetTexture("enemy_default");
         }
 
         public override void Update(GameTime gameTime, CollisionBoard cb)
@@ -28,7 +27,7 @@ namespace ShakeAndBake.Model.GameEntity
             base.Draw(spriteBatch);
             if (!IsDestroyed)
             {
-                spriteBatch.Draw(sprite, position, Color.White);
+                spriteBatch.Draw(this.Sprite, position, Color.White);
             }
         }
     }

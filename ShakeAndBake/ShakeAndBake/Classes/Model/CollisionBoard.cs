@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using ShakeAndBake.Model.GameEntity;
-using ShakeAndBake.Classes.Model.GameEntity.EnemyProjectiles;
 
 namespace ShakeAndBake.Model
 {

@@ -11,7 +11,7 @@ namespace ShakeAndBake.Classes.Model.Factories.PathFactory
     {
         public override Path Create(Vector2 origin, Vector2 direction, float speed)
         {
-            Path path = new StraightPath(origin, direction, speed);
+            Path path = new StraightPath(origin, direction, 1);
             return path;
         }
     }

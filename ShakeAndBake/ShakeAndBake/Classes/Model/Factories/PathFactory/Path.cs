@@ -1,12 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 
 namespace ShakeAndBake.Extras.Paths
 {
     public abstract class Path
     {
-        public virtual void Reset() { }
+        public virtual void Reset(Nullable<Vector2> origin = null) { }
         public abstract Vector2 NextPoint();
+        public abstract bool HasMoved();
     }
 
     public class StraightPath : Path
@@ -23,9 +25,16 @@ namespace ShakeAndBake.Extras.Paths
             this.velocity = velocity;
         }
 
-        public override void Reset()
+        public override void Reset(Nullable<Vector2> origin = null)
         {
-            position = savedOriginal;
+            if (origin == null)
+            {
+                position = savedOriginal;
+            }
+            else
+            {
+                position = savedOriginal = origin.Value;
+            }
         }
 
         public override Vector2 NextPoint()
@@ -33,6 +42,11 @@ namespace ShakeAndBake.Extras.Paths
             // GameBoard should check if objects go out of bounds.
             position += direction * velocity;
             return position;   
+        }
+
+        public override bool HasMoved()
+        {
+            return this.position != this.savedOriginal;
         }
     }
 
@@ -52,7 +66,7 @@ namespace ShakeAndBake.Extras.Paths
             set { this.points = value; }
         }
 
-        public override void Reset()
+        public override void Reset(Nullable<Vector2> origin = null)
         {
             pointIndex = 0;
         }
@@ -64,6 +78,11 @@ namespace ShakeAndBake.Extras.Paths
                 pointIndex = 0;
             }
             return point;
+        }
+
+        public override bool HasMoved()
+        {
+            return this.pointIndex == 0;
         }
     }
 }

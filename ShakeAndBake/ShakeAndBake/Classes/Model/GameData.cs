@@ -18,7 +18,6 @@ namespace ShakeAndBake.Model
     {
         private CollisionBoard collisionBoard;
 
-        public bool IsUserDead { get { return Player.Instance.IsDestroyed; } }
         //Contains a list of all enemies currently visible on the gameboard
         private ObservableCollection<Enemy> visibleEnemies;
         public ObservableCollection<Enemy> VisibleEnemies
@@ -38,10 +37,18 @@ namespace ShakeAndBake.Model
             get { return deadEnemies; }
         }
 
+        #region JSON Stream Readers
         public static StreamReader GetStagesConfigStreamReader()
         {
             return new StreamReader("../../../../JSON/stages.json");
         }
+
+        public static StreamReader GetPlayerStreamReader()
+        {
+            return new StreamReader("../../../../JSON/player.json");
+        }
+        #endregion
+
         //Constructor for GameData class
         public GameData(Texture2D playerTexture)
         {
@@ -64,7 +71,7 @@ namespace ShakeAndBake.Model
             this.collisionBoard = new CollisionBoard(
                 GameConfig.Height,
                 GameConfig.Width,
-                ShakeAndBakeGame.GetTexture("player").Width
+                ShakeAndBakeGame.GetTexture("player_default").Width
             );
             //Enemies
             this.visibleEnemies = new ObservableCollection<Enemy>();
@@ -155,7 +162,7 @@ namespace ShakeAndBake.Model
         {
             Player.Instance.Position = new Vector2
             (
-                (GameConfig.Width / 2 - Player.Instance.Sprite.Width / 2),
+                (GameConfig.Width / 2 - (float)Player.Instance.HitBoxRadius),
                 (GameConfig.Height - Player.Instance.Sprite.Height)
             );
         }

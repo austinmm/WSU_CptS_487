@@ -13,9 +13,8 @@ namespace ShakeAndBake.Model.GameEntity
         //Easy Enemy Constructor
         public Easy() : base()
         {
-            this.ProjectileTypes = new List<ProjectileType>();
-            this.ProjectileTypes.Add(ProjectileType.EnemyBullet);
-            sprite = ShakeAndBakeGame.GetTexture("circle");
+            this.ProjectileFactory = new EasyProjectileFactory();
+            this.Sprite = ShakeAndBakeGame.GetTexture("enemy_default");
         }
 
         public override void Update(GameTime gameTime, CollisionBoard cb)
@@ -26,10 +25,9 @@ namespace ShakeAndBake.Model.GameEntity
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
-
             if (!IsDestroyed)
             {
-                spriteBatch.Draw(sprite, position, Color.White);
+                spriteBatch.Draw(this.Sprite, position, Color.White);
             }
         }
     }

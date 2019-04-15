@@ -5,6 +5,8 @@ using System;
 using ShakeAndBake.Extras.Paths;
 using ShakeAndBake.Model.Factories.ProjectileFactory;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace ShakeAndBake.Model.GameEntity
 {
@@ -12,34 +14,37 @@ namespace ShakeAndBake.Model.GameEntity
     {
         private static Player instance;
 
-        // Player singleton.
+        // Player singleton
         public static Player Instance
         {
             get 
             {
-                if (instance == null)
-                    instance = new Player();
+                if (instance == null) {
+                    instance = init();
+                }
                 return instance;    
             }
         }
 
+        private static Player init()
+        {
+            StreamReader reader = GameData.GetPlayerStreamReader();
+            string json = reader.ReadToEnd();
+            return JsonConvert.DeserializeObject<Player>(json);
+        }
+
         public static void Reset()
         {
-            instance = new Player();
+            instance = null;
         }
 
         private Player() : base()
         {
-            this.ProjectileTypes = new List<ProjectileType>();
-            this.ProjectileTypes.Add(ProjectileType.PlayerBullet);
-            this.Velocity = 3;
-            this.Acceleration = 2;
-            this.FireRate = 60;
-            this.sprite = ShakeAndBakeGame.GetTexture("player");
+            this.Sprite = ShakeAndBakeGame.GetTexture("player_default");
             this.position = new Vector2
             (
-                (GameConfig.Width / 2 - this.sprite.Width / 2),
-                (GameConfig.Height - this.sprite.Height)
+                (GameConfig.Width / 2 - (float)this.hitBoxRadius),
+                (GameConfig.Height - this.Sprite.Height)
             );
         }
 
@@ -84,22 +89,20 @@ namespace ShakeAndBake.Model.GameEntity
                 return;
             }
             base.Draw(spriteBatch);
-            spriteBatch.Draw(ShakeAndBakeGame.GetTexture("player"), position, Color.White);
-            //spriteBatch.DrawString(null, "" + this.health, position, Color.White);
+            spriteBatch.Draw(this.Sprite, position, Color.White);
         }
 
         public override void FireProjectile()
         {
-            if (!this.CanFire()) return;
-            Vector2 pos = Vector2.Add(position, new Vector2(
-                (ShakeAndBakeGame.GetTexture("player").Width - ShakeAndBakeGame.GetTexture("player_bullet").Width) / 2,
-                -ShakeAndBakeGame.GetTexture("player_bullet").Height));
+            if (!this.CanFire()) { return; }
+            //Vector2 pos = Vector2.Add(position, new Vector2(
+            //    (ShakeAndBakeGame.GetTexture("player_default").Width - ShakeAndBakeGame.GetTexture("player_default_bullet").Width) / 2,
+            //    -ShakeAndBakeGame.GetTexture("player_default_bullet").Height));
             //Projectile projectile = new PlayerBullet(new StraightPath(pos, new Vector2(0, -1), 3));
-            ProjectileAbstractFactory factory = new PlayerBulletProjectileFactory();
-            Projectile projectile = factory.Create(pos);
+            this.ProjectileFactory = new DefaultPlayerProjectileFactory();
+            Projectile projectile = this.ProjectileFactory.Create(this.GetCenterCoordinates());
             //The projectiles position is set to the current character's position
             this.projectiles.Add(projectile);
-            projectile.Velocity += this.Velocity;
         }
     }
 }

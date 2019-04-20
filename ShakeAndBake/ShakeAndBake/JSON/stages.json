@@ -99,7 +99,7 @@
             "Y": 0,
             "random": true
           },
-          "fireRate": 10,
+          "fireRate": 100,
           "moveDirection": {
             "X": 0,
             "Y": 1

@@ -126,6 +126,7 @@ namespace ShakeAndBake.Model.GameEntity
 
             HashSet<GameObject> collidedEnemies = cb.GetObjectsCollided(this, typeof(Enemy));
             HashSet<GameObject> collidedBullets = cb.GetObjectsCollided(this, typeof(EnemyBullet));
+
             //collision with enemy
             foreach (Enemy enemyObject in collidedEnemies)
             {
@@ -149,6 +150,7 @@ namespace ShakeAndBake.Model.GameEntity
 
         protected override void HandleProjectileCollision(EnemyBullet other)
         {
+            /*
             //Destoy smaller massed projectile and reduce mass of larger projectile
             if (this.mass > other.Mass)
             {
@@ -164,6 +166,42 @@ namespace ShakeAndBake.Model.GameEntity
             {
                 this.IsDestroyed = other.IsDestroyed = true;
             }
+            */
+
+            float m1 = (float)this.HitBoxRadius;
+            float m2 = (float)other.HitBoxRadius;
+            Vector2 P =m1 * this.Path.GetVelocityVector()
+                + m2 * other.Path.GetVelocityVector();
+
+            Vector2 C = this.Path.GetVelocityVector()
+                - other.Path.GetVelocityVector();
+
+            // P = m1v1' + m2v2'
+            // v1 - v2 = v2' - v1'
+            // let c = v1 - v2
+
+            // m1v1' + m2v2' = P
+            // -v1'  +  v2'  = C
+
+            // m1v1' + m2v2' = P
+            // -m1v1'+ m1v2' = m1C
+
+            // (m1 + m2)v2' = P + m1C
+
+            // v2' = (P + m1C)/(m1 + m2)
+
+            Vector2 v2f = (P + m1 * C) / (m1 + m2);
+
+            // c = v2' - v1'
+
+            // v1' = v2' - c
+
+            Vector2 v1f = v2f - C;
+
+            float heatLoss = .7f;
+
+            other.Path.velocityOffset = v2f * heatLoss;
+            this.Path.velocityOffset = v1f * heatLoss;
         }
 
     }

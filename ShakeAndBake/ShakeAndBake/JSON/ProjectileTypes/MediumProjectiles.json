@@ -13,6 +13,6 @@
     "Mass": 2,
     "velocity": 1,
     "texture": "enemy_default_bullet",
-    "pathType": "SweepRight"
+    "pathType": "StraightPath"
   }
 ]

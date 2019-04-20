@@ -8,6 +8,8 @@ namespace ShakeAndBake.Extras.Paths
     {
         public virtual void Reset(Nullable<Vector2> origin = null) { }
         public abstract Vector2 NextPoint();
+        public abstract Vector2 GetVelocityVector();
+        public Vector2 velocityOffset = new Vector2(0, 0);
         public abstract bool HasMoved();
     }
 
@@ -21,7 +23,7 @@ namespace ShakeAndBake.Extras.Paths
         {
             this.savedOriginal = origin;
             this.position = origin;
-            this.direction = direction;
+            this.velocityOffset = direction;
             this.velocity = velocity;
         }
 
@@ -40,8 +42,13 @@ namespace ShakeAndBake.Extras.Paths
         public override Vector2 NextPoint()
         {
             // GameBoard should check if objects go out of bounds.
-            position += direction * velocity;
+            position += (this.velocityOffset) * velocity;
             return position;   
+        }
+
+        public override Vector2 GetVelocityVector()
+        {
+            return (this.velocityOffset) * velocity;
         }
 
         public override bool HasMoved()
@@ -73,11 +80,33 @@ namespace ShakeAndBake.Extras.Paths
 
         public override Vector2 NextPoint()
         {
+            /* Collision makes path break */
+            if (this.velocityOffset.X != 0 && this.velocityOffset.Y != 0)
+            {
+                return this.velocityOffset;
+            }
+
             Vector2 point = points[pointIndex++];
             if (pointIndex >= points.Count) {
                 pointIndex = 0;
             }
             return point;
+        }
+
+        public override Vector2 GetVelocityVector()
+        {
+            // change in position is velocity
+            Vector2 ret;
+            if (pointIndex > 0)
+            {
+
+                ret = (points[pointIndex] - points[pointIndex - 1]);
+            }
+            else
+            {
+                ret = points[pointIndex] - points[points.Count - 1];
+            }
+            return ret;
         }
 
         public override bool HasMoved()

@@ -5,7 +5,7 @@
     "Mass": 2,
     "velocity": 2,
     "texture": "small_square_bullet",
-    "pathType": "RandomWavePath"
+    "pathType": "StraightPath"
   },
   {
     "Acceleration": 1,
@@ -13,6 +13,6 @@
     "Mass": 2,
     "velocity": 1,
     "texture": "small_ball_bullet",
-    "pathType": "SweepRight"
+    "pathType": "StraightPath"
   }
 ]

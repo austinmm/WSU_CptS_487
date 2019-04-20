@@ -3,8 +3,8 @@
     "Acceleration": 1,
     "HitDamage": 1,
     "Mass": 2,
-    "velocity": 1,
+    "velocity": 6,
     "texture": "small_ball_bullet",
-    "pathType": "RandomWavePath"
+    "pathType": "StraightPath"
   }
 ]

@@ -29,12 +29,12 @@
       [
         {
           "stringType": "MidBoss",
-          "pathType": "WavePath",
+          "pathType": "SweepRight",
           "speed": 3,
           "startPosition": {
             "random": true
           },
-          "fireRate": 200,
+          "fireRate": 300,
           "moveDirection": {
             "X": 0,
             "Y": 1
@@ -92,17 +92,16 @@
       [
         {
           "stringType": "FinalBoss",
-          "pathType": "StraightPath",
-          "speed": 2,
+          "pathType": "SweepRight",
+          "speed": 1,
           "startPosition": {
-            "X": 0,
-            "Y": 0,
-            "random": true
+            "X": -50,
+            "Y": -50
           },
-          "fireRate": 100,
+          "fireRate": 25,
           "moveDirection": {
             "X": 0,
-            "Y": 1
+            "Y": 0
           },
           "count": 1
         }

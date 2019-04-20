@@ -11,6 +11,12 @@ namespace ShakeAndBake.Model.GameEntity
     {
         //This is a set path that the projectile objects will travel when update is called
         protected Path path;
+        protected Boolean isBouncy;
+        public Boolean IsBouncy
+        {
+            get { return this.isBouncy; }
+            set { this.isBouncy = value; }
+        }
         public Path Path
         {
             get { return this.path; }
@@ -70,6 +76,7 @@ namespace ShakeAndBake.Model.GameEntity
             this.path = path;
             this.texture = texture;
             this.Sprite = ShakeAndBakeGame.GetTexture(this.texture);
+            this.IsBouncy = false;
         }
 
         public override void Update(GameTime gameTime, CollisionBoard cb)
@@ -90,8 +97,54 @@ namespace ShakeAndBake.Model.GameEntity
         }
         public bool HasBeenFired() { return this.path.HasMoved(); }
 
-        protected virtual void HandleProjectileCollision(PlayerBullet other) { return; }
-        protected virtual void HandleProjectileCollision(EnemyBullet other) { return; }
+        protected void HandleProjectileCollision(Projectile other)
+        {
+            if (other.IsBouncy || this.IsBouncy)
+            {
+                float m1 = (float)(this.HitBoxRadius * this.HitBoxRadius * Math.PI);
+                float m2 = (float)(other.HitBoxRadius * other.HitBoxRadius * Math.PI);
+
+                Vector2 P = m1 * this.Path.GetVelocityVector()
+                    + m2 * other.Path.GetVelocityVector();
+
+                Vector2 C = this.Path.GetVelocityVector()
+                    - other.Path.GetVelocityVector();
+
+                // P = m1v1' + m2v2'
+                // v1 - v2 = v2' - v1'
+                // let c = v1 - v2
+
+                // m1v1' + m2v2' = P
+                // -v1'  +  v2'  = C
+
+                // m1v1' + m2v2' = P
+                // -m1v1'+ m1v2' = m1C
+
+                // (m1 + m2)v2' = P + m1C
+
+                // v2' = (P + m1C)/(m1 + m2)
+
+                Vector2 v2f = (P + m1 * C) / (m1 + m2);
+
+                // c = v2' - v1'
+
+                // v1' = v2' - c
+
+                Vector2 v1f = v2f - C;
+
+               
+
+                float heatLoss = .9f;
+
+                other.Path.velocityOffset = v2f * heatLoss;
+                this.Path.velocityOffset = v1f * heatLoss;
+            }
+            else
+            {
+                this.isDestroyed = true;
+                other.isDestroyed = true;
+            }
+        }
 
         public abstract Projectile Clone();
     }
@@ -148,62 +201,6 @@ namespace ShakeAndBake.Model.GameEntity
             }
         }
 
-        protected override void HandleProjectileCollision(EnemyBullet other)
-        {
-            /*
-            //Destoy smaller massed projectile and reduce mass of larger projectile
-            if (this.mass > other.Mass)
-            {
-                other.IsDestroyed = true;
-                this.mass -= other.Mass;
-            }
-            else if (this.mass < other.Mass)
-            {
-                this.IsDestroyed = true;
-                other.Mass -= this.mass;
-            }
-            else
-            {
-                this.IsDestroyed = other.IsDestroyed = true;
-            }
-            */
-
-            float m1 = (float)this.HitBoxRadius;
-            float m2 = (float)other.HitBoxRadius;
-            Vector2 P =m1 * this.Path.GetVelocityVector()
-                + m2 * other.Path.GetVelocityVector();
-
-            Vector2 C = this.Path.GetVelocityVector()
-                - other.Path.GetVelocityVector();
-
-            // P = m1v1' + m2v2'
-            // v1 - v2 = v2' - v1'
-            // let c = v1 - v2
-
-            // m1v1' + m2v2' = P
-            // -v1'  +  v2'  = C
-
-            // m1v1' + m2v2' = P
-            // -m1v1'+ m1v2' = m1C
-
-            // (m1 + m2)v2' = P + m1C
-
-            // v2' = (P + m1C)/(m1 + m2)
-
-            Vector2 v2f = (P + m1 * C) / (m1 + m2);
-
-            // c = v2' - v1'
-
-            // v1' = v2' - c
-
-            Vector2 v1f = v2f - C;
-
-            float heatLoss = .7f;
-
-            other.Path.velocityOffset = v2f * heatLoss;
-            this.Path.velocityOffset = v1f * heatLoss;
-        }
-
     }
 
     public class EnemyBullet : Projectile
@@ -245,20 +242,15 @@ namespace ShakeAndBake.Model.GameEntity
             {
                 if (this.isDestroyed) { break; }
                 else if (go.IsDestroyed) { continue; }
+                if (go == this)
+                {
+                    continue;
+                }
                 this.HandleProjectileCollision(go);
             }
             if (this.IsDestroyed)
             {
                 cb.RemoveFromBucketIfExists(this);
-            }
-        }
-
-        protected override void HandleProjectileCollision(EnemyBullet other)
-        {
-            //Push smaller massed projectile out of way
-            if (this.mass > other.Mass)
-            {
-                other.path = new StraightPath(other.Position, this.path.NextPoint(), (float)this.velocity);
             }
         }
     }

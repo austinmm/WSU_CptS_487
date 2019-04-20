@@ -106,12 +106,6 @@ namespace ShakeAndBake.Model.GameEntity
                     deadProjectiles.Add(projectile);
                     continue;
                 }
-                //resets the position of the projectile of the gameobject if it hasn't been fired yet
-                //if (!projectile.HasBeenFired())
-                //{
-                //    projectile.Position = this.GetCenterCoordinates();
-                //    projectile.Path.Reset(projectile.Position);
-                //}
                 projectile.Update(gameTime, cb);
             }
                 

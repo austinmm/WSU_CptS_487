@@ -20,10 +20,7 @@ namespace ShakeAndBake.Model.Factories.ProjectileFactory
 
         public override Projectile Create(Vector2 origin)
         {
-            // hypotenuse is 1
             angle += .1;
-            // sin (angle) = ycomp / hyp
-            // sin (angle) = ycomp
             float yComp = (float)Math.Sin(angle);
             float xComp = (float)Math.Cos(angle);
             int num = Util.randInt(0, this.projectiles.Count);

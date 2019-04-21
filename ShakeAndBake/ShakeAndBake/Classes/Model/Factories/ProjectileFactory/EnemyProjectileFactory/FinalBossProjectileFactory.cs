@@ -21,7 +21,27 @@ namespace ShakeAndBake.Model.Factories.ProjectileFactory
 
         public override Projectile Create(Vector2 origin)
         {
-            Projectile projectile = base.Create(origin);
+            int rand = Util.randInt(0, 100);
+            Projectile projectile;
+
+            if (rand < 10 && this.projectiles.Count > 1)
+            {
+                projectile = this.projectiles[1].Clone();
+            }
+            else
+            {
+                projectile = this.projectiles[0].Clone();
+            }
+
+            this.factory = PathFactoryProducer.ProduceFactory(projectile.PathType);
+
+            if (projectile.Texture.Equals("enemy_default_bullet"))
+            {
+                projectile.IsBouncy = true;
+            }
+
+
+
             angle += angularVelocity;
             float yComp = (float)Math.Sin(angle);
             float xComp = (float)Math.Cos(angle);

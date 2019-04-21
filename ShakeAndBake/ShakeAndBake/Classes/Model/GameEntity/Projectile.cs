@@ -146,7 +146,7 @@ namespace ShakeAndBake.Model.GameEntity
                 // perfecly elastic for now
                 float heatLoss = 1f;
 
-                float maxLength = Math.Max(other.Path.GetVelocityVector().Length(), this.Path.GetVelocityVector().Length()) * 1.5f;
+                float maxLength = Math.Min(other.Path.GetVelocityVector().Length(), this.Path.GetVelocityVector().Length()) * 1.5f;
                 // normalize vectors if too fast!
                 if (v2f.Length() > maxLength)
                 {

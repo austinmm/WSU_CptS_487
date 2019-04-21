@@ -11,7 +11,7 @@
     "Acceleration": 1,
     "HitDamage": 1,
     "Mass": 2,
-    "velocity": 2,
+    "velocity": 1,
     "texture": "enemy_default_bullet",
     "pathType": "StraightPath"
   }

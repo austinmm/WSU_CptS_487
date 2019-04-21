@@ -93,7 +93,7 @@
         {
           "stringType": "FinalBoss",
           "pathType": "SweepRight",
-          "speed": 1,
+          "speed": 2,
           "startPosition": {
             "X": -50,
             "Y": -50

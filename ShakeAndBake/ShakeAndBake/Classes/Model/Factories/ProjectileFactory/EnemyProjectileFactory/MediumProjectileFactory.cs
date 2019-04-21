@@ -20,11 +20,11 @@ namespace ShakeAndBake.Model.Factories.ProjectileFactory
 
         public override Projectile Create(Vector2 origin)
         {
+            Projectile projectile = base.Create(origin);
             angle += .1;
             float yComp = (float)Math.Sin(angle);
             float xComp = (float)Math.Cos(angle);
             int num = Util.randInt(0, this.projectiles.Count);
-            Projectile projectile = this.projectiles[num].Clone();
             this.factory = PathFactoryProducer.ProduceFactory(projectile.PathType);
             Path path = this.factory.Create(origin, new Vector2(xComp, yComp), (float)projectile.Velocity);
             projectile.Path = path;

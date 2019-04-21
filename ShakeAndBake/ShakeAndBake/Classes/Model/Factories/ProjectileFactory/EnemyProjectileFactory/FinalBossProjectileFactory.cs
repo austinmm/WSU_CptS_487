@@ -10,7 +10,7 @@ namespace ShakeAndBake.Model.Factories.ProjectileFactory
     public class FinalBossProjectileFactory : EnemyProjectileAbstractFactory
     {
         static double angle = 0;
-        double angularVelocity = .01;
+        double angularVelocity = .0001;
       
         public FinalBossProjectileFactory()
         {
@@ -21,7 +21,7 @@ namespace ShakeAndBake.Model.Factories.ProjectileFactory
 
         public override Projectile Create(Vector2 origin)
         {
-
+            Projectile projectile = base.Create(origin);
             angle += angularVelocity;
             float yComp = (float)Math.Sin(angle);
             float xComp = (float)Math.Cos(angle);
@@ -29,15 +29,10 @@ namespace ShakeAndBake.Model.Factories.ProjectileFactory
             origin.X += xComp * 100;
             origin.Y += yComp * 100;
 
-            int random = Util.randInt(0, 100);
-            int num = Util.randInt(0, this.projectiles.Count);
-
-            Projectile projectile = this.projectiles[0].Clone();
             this.factory = PathFactoryProducer.ProduceFactory(projectile.PathType);
             Path path = this.factory.Create(origin, new Vector2(xComp, yComp), (float)projectile.Velocity);
             projectile.Path = path;
             angle += 1;
-            projectile.IsBouncy = true;
             return projectile;
         }
     }

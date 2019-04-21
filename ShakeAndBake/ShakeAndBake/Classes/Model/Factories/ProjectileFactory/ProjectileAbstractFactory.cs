@@ -130,6 +130,11 @@ namespace ShakeAndBake.Model.Factories.ProjectileFactory
             Path path = this.factory.Create(origin, new Vector2(0, 1), (float)projectile.Velocity);
             projectile.Path = path;
             projectile.Position = origin;
+
+            if (projectile.Texture.Equals("enemy_default_bullet"))
+            {
+                projectile.IsBouncy = true;
+            }
             return projectile;
         }
 

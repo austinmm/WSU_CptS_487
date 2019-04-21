@@ -9,8 +9,22 @@ namespace ShakeAndBake.Extras.Paths
         public virtual void Reset(Nullable<Vector2> origin = null) { }
         public abstract Vector2 NextPoint();
         public abstract Vector2 GetVelocityVector();
+        public void SetVelocityVector(Vector2 vector)
+        {
+            this.velocityOffset = vector;
+
+            // new velocity vector breaks path, deflected bullet
+            this.wasDeflected = true;
+        }
         public Vector2 velocityOffset = new Vector2(0, 0);
         public abstract bool HasMoved();
+        protected Boolean wasDeflected = false;
+        public Boolean WasDeflected
+        {
+            get { return this.wasDeflected; }
+            set { this.wasDeflected = value; }
+        }
+       
     }
 
     public class StraightPath : Path
@@ -81,7 +95,7 @@ namespace ShakeAndBake.Extras.Paths
         public override Vector2 NextPoint()
         {
             /* Collision makes path break */
-            if (this.velocityOffset.X != 0 && this.velocityOffset.Y != 0)
+            if (!(this.velocityOffset.X == 0 && this.velocityOffset.Y == 0))
             {
                 return this.velocityOffset;
             }

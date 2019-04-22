@@ -131,10 +131,10 @@ namespace ShakeAndBake.Model.Factories.ProjectileFactory
             projectile.Path = path;
             projectile.Position = origin;
 
-            if (projectile.Texture.Equals("enemy_default_bullet"))
-            {
-                projectile.IsBouncy = true;
-            }
+            //if (projectile.Texture.Equals("enemy_default_bullet"))
+            //{
+            //    projectile.IsBouncy = true;
+            //}
             return projectile;
         }
 

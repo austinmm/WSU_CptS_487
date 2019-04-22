@@ -11,12 +11,21 @@ namespace ShakeAndBake.Model.GameEntity
     {
         //This is a set path that the projectile objects will travel when update is called
         protected Path path;
-        protected Boolean isBouncy;
-        public Boolean IsBouncy
+
+        protected bool isBouncy;
+        public bool IsBouncy
         {
             get { return this.isBouncy; }
             set { this.isBouncy = value; }
         }
+
+        protected double density;
+        public double Density
+        {
+            get { return this.density; }
+            set { this.density = value; }
+        }
+
         public Path Path
         {
             get { return this.path; }
@@ -110,8 +119,8 @@ namespace ShakeAndBake.Model.GameEntity
                     this.isDestroyed = true;
                     other.isDestroyed = true;
                 }
-                float m1 = (float)(this.Sprite.Width * this.Sprite.Height);
-                float m2 = (float)(other.Sprite.Width * other.Sprite.Height);
+                float m1 = (float)(this.Sprite.Width * this.Sprite.Height) * (float)this.density;
+                float m2 = (float)(other.Sprite.Width * other.Sprite.Height) * (float)this.density;
 
                 Vector2 P = m1 * this.Path.GetVelocityVector()
                     + m2 * other.Path.GetVelocityVector();
@@ -182,6 +191,8 @@ namespace ShakeAndBake.Model.GameEntity
             copy.Velocity = this.velocity;
             copy.position = this.position;
             copy.Path = this.path;
+            copy.IsBouncy = this.isBouncy;
+            copy.Density = this.density;
             return copy;
         }
 
@@ -248,6 +259,8 @@ namespace ShakeAndBake.Model.GameEntity
             copy.Velocity = this.velocity;
             copy.position = this.position;
             copy.Path = this.path;
+            copy.IsBouncy = this.isBouncy;
+            copy.Density = this.density;
             return copy;
         }
 

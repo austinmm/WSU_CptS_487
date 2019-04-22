@@ -59,7 +59,7 @@ namespace ShakeAndBake.Model.GameEntity
 
         public override void FireProjectile()
         {
-            if (this.CanFire() && this.isInWindow())
+            if (this.CanFire())
             {
                 //Creates a new projectile to be added to the character's ObservableCollection of projectiles
                 Vector2 origin = this.GetCenterCoordinates();

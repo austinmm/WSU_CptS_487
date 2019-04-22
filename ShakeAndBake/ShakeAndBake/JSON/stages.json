@@ -17,20 +17,43 @@
             "X": 0,
             "Y": 1
           },
+          "count": 2
+        }
+      ]
+    ]
+  },
+  "Stage2": {
+    "waves": [
+      /* Wave 1 */
+      [
+        {
+          "stringType": "Easy",
+          "pathType": "SweepRight",
+          "formation": "leftDiagonalLine",
+          "speed": 5,
+          "startPosition": {
+            "X": 0,
+            "Y": -100
+          },
+          "fireRate": 900,
+          "moveDirection": {
+            "X": 0,
+            "Y": 1
+          },
           "count": 5
         }
       ]
     ]
   },
 
-  "Stage2": {
+  "Stage3": {
     "waves": [
       /* Wave 1 */
       [
         {
           "stringType": "MidBoss",
-          "pathType": "SweepRight",
-          "speed": 3,
+          "pathType": "WavePath",
+          "speed": 2,
           "startPosition": {
             "random": true
           },
@@ -44,14 +67,14 @@
       ]
     ]
   },
-  "Stage3": {
+  "Stage4": {
     "waves": [
       /* Wave 1 */
       [
         {
           "stringType": "Medium",
-          "pathType": "WavePath",
-          "speed": 2,
+          "pathType": "SweepRight",
+          "speed": 1,
           "startPosition": {
             "X": 0,
             "Y": 0,
@@ -86,19 +109,19 @@
     ]
   },
 
-  "Stage4": {
+  "Stage5": {
     "waves": [
       /* Wave 1 */
       [
         {
           "stringType": "FinalBoss",
           "pathType": "SweepRight",
-          "speed": 2,
+          "speed": 6,
           "startPosition": {
-            "X": -50,
-            "Y": -50
+            "X": -200,
+            "Y": -500
           },
-          "fireRate": 25,
+          "fireRate": 30,
           "moveDirection": {
             "X": 0,
             "Y": 0

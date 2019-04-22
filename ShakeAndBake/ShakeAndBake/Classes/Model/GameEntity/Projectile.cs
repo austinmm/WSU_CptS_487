@@ -99,11 +99,10 @@ namespace ShakeAndBake.Model.GameEntity
 
         protected void HandleProjectileCollision(Projectile other)
         {
-                /* Deflect once */
+                /* Deflect once only */
                 if (this.Path.WasDeflected)
                 {
-                   
-                    return;
+                    this.isDestroyed = true;
                 }
 
                 if (!other.isBouncy && !this.isBouncy)
@@ -273,8 +272,7 @@ namespace ShakeAndBake.Model.GameEntity
                 else if (go.IsDestroyed || go == this) { continue; }
                 if (this.Path.WasDeflected)
                 {
-                    this.isDestroyed = true;
-                    go.isDestroyed = true;
+                    HandleProjectileCollision(go);
                 }
 
             }

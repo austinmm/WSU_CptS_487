@@ -117,8 +117,8 @@ namespace ShakeAndBake.Model.GameEntity
             }
             return true;
         }
-
-        public Vector2 GetCenterCoordinates()
+        
+        public virtual Vector2 GetCenterCoordinates()
         {
             return new Vector2(this.Position.X + (float)this.Sprite.Width/2, this.Position.Y - this.Sprite.Height/2);
         }

@@ -92,13 +92,17 @@ namespace ShakeAndBake.Model.GameEntity
             spriteBatch.Draw(this.Sprite, position, Color.White);
         }
 
+        public override Vector2 GetCenterCoordinates()
+        {
+            Vector2 pos = Vector2.Add(position, new Vector2(
+               (ShakeAndBakeGame.GetTexture("player_default").Width - ShakeAndBakeGame.GetTexture("player_default_bullet").Width) / 2,
+               -ShakeAndBakeGame.GetTexture("player_default_bullet").Height));
+            return pos;
+        }
+        
         public override void FireProjectile()
         {
             if (!this.CanFire()) { return; }
-            //Vector2 pos = Vector2.Add(position, new Vector2(
-            //    (ShakeAndBakeGame.GetTexture("player_default").Width - ShakeAndBakeGame.GetTexture("player_default_bullet").Width) / 2,
-            //    -ShakeAndBakeGame.GetTexture("player_default_bullet").Height));
-            //Projectile projectile = new PlayerBullet(new StraightPath(pos, new Vector2(0, -1), 3));
             this.ProjectileFactory = new DefaultPlayerProjectileFactory();
             Projectile projectile = this.ProjectileFactory.Create(this.GetCenterCoordinates());
             //The projectiles position is set to the current character's position

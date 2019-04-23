@@ -42,7 +42,7 @@ namespace ShakeAndBake.Model.GameEntity
         }
 
         //The value that determines the acceleration of the object moving from postion A to position B
-        protected double acceleration;
+        protected double acceleration = 1;
         public double Acceleration
         {
             get { return this.acceleration; }

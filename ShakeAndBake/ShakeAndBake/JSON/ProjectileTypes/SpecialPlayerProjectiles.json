@@ -1,8 +1,8 @@
 ﻿[
   {
-    "Acceleration": 1,
     "HitDamage": 1,
-    "Mass": 2,
+    "density": 2.0,
+    "isBouncy": true,
     "velocity": 1,
     "texture": "small_ball_bullet",
     "pathType": "StraightPath"

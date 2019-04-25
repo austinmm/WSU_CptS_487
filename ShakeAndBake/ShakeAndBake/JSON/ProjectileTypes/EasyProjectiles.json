@@ -2,7 +2,7 @@
   {
     "HitDamage": 1,
     "density": 1.0,
-    "isBouncy": false,
+    "isBouncy": true,
     "velocity": 5,
     "texture": "enemy_default_bullet",
     "pathType": "StraightPath"

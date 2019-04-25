@@ -108,11 +108,7 @@ namespace ShakeAndBake.Model.GameEntity
 
         protected void HandleProjectileCollision(Projectile other)
         {
-                /* Deflect once only */
-                if (this.Path.WasDeflected)
-                {
-                    this.isDestroyed = true;
-                }
+
 
                 if (!other.isBouncy && !this.isBouncy)
                 {
@@ -120,7 +116,7 @@ namespace ShakeAndBake.Model.GameEntity
                     other.isDestroyed = true;
                 }
                 float m1 = (float)(this.Sprite.Width * this.Sprite.Height) * (float)this.density;
-                float m2 = (float)(other.Sprite.Width * other.Sprite.Height) * (float)this.density;
+                float m2 = (float)(other.Sprite.Width * other.Sprite.Height) * (float)other.density;
 
                 Vector2 P = m1 * this.Path.GetVelocityVector()
                     + m2 * other.Path.GetVelocityVector();
@@ -154,22 +150,14 @@ namespace ShakeAndBake.Model.GameEntity
                 // perfecly elastic for now
                 float heatLoss = 1f;
 
-                float maxLength = Math.Min(other.Path.GetVelocityVector().Length(), this.Path.GetVelocityVector().Length()) * 1.5f;
                 // normalize vectors if too fast!
-                if (v2f.Length() > maxLength)
-                {
-                    v2f.Normalize();
-                    v2f = v2f * maxLength;
-                }
-
-                if (v1f.Length() > maxLength)
-                {
-                    v1f.Normalize();
-                    v1f = v1f * maxLength;
-                }
+                v2f.Normalize();
+                v1f.Normalize();
 
                 other.Path.SetVelocityVector(v2f * heatLoss);
+                other.Velocity = v2f.Length();
                 this.Path.SetVelocityVector(v1f * heatLoss);
+                this.Velocity = v1f.Length();
         }
 
         public abstract Projectile Clone();

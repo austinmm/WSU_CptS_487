@@ -2,16 +2,184 @@
   {
     "HitDamage": 1,
     "density": 2.0,
-    "isBouncy": true,
+    "isBouncy": false,
     "velocity": 1,
     "texture": "small_ball_bullet",
     "pathType": "StraightPath"
   },
   {
     "HitDamage": 1,
-    "density": 2.5,
+    "density": 2.0,
     "isBouncy": false,
     "velocity": 1,
+    "texture": "small_ball_bullet",
+    "pathType": "StraightPath"
+  },
+  {
+    "HitDamage": 1,
+    "density": 2.0,
+    "isBouncy": false,
+    "velocity": 1,
+    "texture": "small_ball_bullet",
+    "pathType": "StraightPath"
+  },
+  {
+    "HitDamage": 1,
+    "density": 2.0,
+    "isBouncy": false,
+    "velocity": 1,
+    "texture": "small_ball_bullet",
+    "pathType": "StraightPath"
+  },
+  {
+    "HitDamage": 1,
+    "density": 2.0,
+    "isBouncy": false,
+    "velocity": 1,
+    "texture": "small_ball_bullet",
+    "pathType": "StraightPath"
+  },
+  {
+    "HitDamage": 1,
+    "density": 2.0,
+    "isBouncy": false,
+    "velocity": 1,
+    "texture": "small_ball_bullet",
+    "pathType": "StraightPath"
+  },
+  {
+    "HitDamage": 1,
+    "density": 2.0,
+    "isBouncy": false,
+    "velocity": 1,
+    "texture": "small_ball_bullet",
+    "pathType": "StraightPath"
+  },
+  {
+    "HitDamage": 1,
+    "density": 2.0,
+    "isBouncy": false,
+    "velocity": 1,
+    "texture": "small_ball_bullet",
+    "pathType": "StraightPath"
+  },
+  {
+    "HitDamage": 1,
+    "density": 2.0,
+    "isBouncy": false,
+    "velocity": 1,
+    "texture": "small_ball_bullet",
+    "pathType": "StraightPath"
+  },
+  {
+    "HitDamage": 1,
+    "density": 2.0,
+    "isBouncy": false,
+    "velocity": 1,
+    "texture": "small_ball_bullet",
+    "pathType": "StraightPath"
+  },
+  {
+    "HitDamage": 1,
+    "density": 2.0,
+    "isBouncy": false,
+    "velocity": 1,
+    "texture": "small_ball_bullet",
+    "pathType": "StraightPath"
+  },
+  {
+    "HitDamage": 1,
+    "density": 2.0,
+    "isBouncy": false,
+    "velocity": 1,
+    "texture": "small_ball_bullet",
+    "pathType": "StraightPath"
+  },
+  {
+    "HitDamage": 1,
+    "density": 2.0,
+    "isBouncy": false,
+    "velocity": 1,
+    "texture": "small_ball_bullet",
+    "pathType": "StraightPath"
+  },
+  {
+    "HitDamage": 1,
+    "density": 2.0,
+    "isBouncy": false,
+    "velocity": 1,
+    "texture": "small_ball_bullet",
+    "pathType": "StraightPath"
+  },
+  {
+    "HitDamage": 1,
+    "density": 2.0,
+    "isBouncy": false,
+    "velocity": 1,
+    "texture": "small_ball_bullet",
+    "pathType": "StraightPath"
+  },
+  {
+    "HitDamage": 1,
+    "density": 2.0,
+    "isBouncy": false,
+    "velocity": 1,
+    "texture": "small_ball_bullet",
+    "pathType": "StraightPath"
+  },
+  {
+    "HitDamage": 1,
+    "density": 1000,
+    "isBouncy": false,
+    "velocity": 1,
+    "texture": "small_square_bullet",
+    "pathType": "StraightPath"
+  },
+  {
+    "HitDamage": 1,
+    "density": 1000,
+    "isBouncy": false,
+    "velocity": 1,
+    "texture": "small_square_bullet",
+    "pathType": "StraightPath"
+  },
+  {
+    "HitDamage": 1,
+    "density": 1000,
+    "isBouncy": false,
+    "velocity": 1,
+    "texture": "small_square_bullet",
+    "pathType": "StraightPath"
+  },
+  {
+    "HitDamage": 1,
+    "density": 1000,
+    "isBouncy": false,
+    "velocity": 1,
+    "texture": "small_square_bullet",
+    "pathType": "StraightPath"
+  },
+  {
+    "HitDamage": 1,
+    "density": 1,
+    "isBouncy": true,
+    "velocity": 4,
+    "texture": "enemy_default_bullet",
+    "pathType": "StraightPath"
+  },
+  {
+    "HitDamage": 1,
+    "density": 1,
+    "isBouncy": true,
+    "velocity": 4,
+    "texture": "enemy_default_bullet",
+    "pathType": "StraightPath"
+  },
+  {
+    "HitDamage": 1,
+    "density": 1,
+    "isBouncy": true,
+    "velocity": 4,
     "texture": "enemy_default_bullet",
     "pathType": "StraightPath"
   }

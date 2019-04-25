@@ -52,17 +52,18 @@
       [
         {
           "stringType": "MidBoss",
-          "pathType": "WavePath",
+          "pathType": "SweepRight",
           "speed": 2,
           "startPosition": {
-            "random": true
+            "X": 0,
+            "Y": -100
           },
-          "fireRate": 300,
+          "fireRate": 200,
           "moveDirection": {
             "X": 0,
             "Y": 1
           },
-          "count": 3
+          "count": 1
         }
       ]
     ]

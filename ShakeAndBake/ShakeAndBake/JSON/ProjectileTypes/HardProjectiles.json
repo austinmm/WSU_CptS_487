@@ -1,8 +1,8 @@
 ﻿[
   {
     "HitDamage": 1,
-    "density": 2.0,
-    "isBouncy": false,
+    "density": 1.0,
+    "isBouncy": true,
     "velocity": 1,
     "texture": "enemy_default_bullet",
     "pathType": "StraightPath"
@@ -10,15 +10,15 @@
   },
   {
     "HitDamage": 1,
-    "density": 1.5,
-    "isBouncy": true,
+    "density": 2,
+    "isBouncy": false,
     "velocity": 1,
     "texture": "small_ball_bullet",
     "pathType": "WavePath"
   },
   {
     "HitDamage": 1,
-    "density": 1.75,
+    "density": 1000,
     "isBouncy": false,
     "velocity": 1,
     "texture": "small_square_bullet",

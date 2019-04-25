@@ -106,62 +106,6 @@ namespace ShakeAndBake.Model.GameEntity
         }
         public bool HasBeenFired() { return this.path.HasMoved(); }
 
-        protected void HandleProjectileCollision(Projectile other)
-        {
-                if (this.Path.WasDeflected)
-                {
-                    this.IsDestroyed = true;
-                }
-                if (!other.isBouncy && !this.isBouncy)
-                {
-                    this.isDestroyed = true;
-                    other.isDestroyed = true;
-                }
-                float m1 = (float)(this.Sprite.Width * this.Sprite.Height) * (float)this.density;
-                float m2 = (float)(other.Sprite.Width * other.Sprite.Height) * (float)other.density;
-
-                Vector2 P = m1 * this.Path.GetVelocityVector()
-                    + m2 * other.Path.GetVelocityVector();
-
-                Vector2 C = this.Path.GetVelocityVector()
-                    - other.Path.GetVelocityVector();
-
-                // P = m1v1' + m2v2'
-                // v1 - v2 = v2' - v1'
-                // let c = v1 - v2
-
-                // m1v1' + m2v2' = P
-                // -v1'  +  v2'  = C
-
-                // m1v1' + m2v2' = P
-                // -m1v1'+ m1v2' = m1C
-
-                // (m1 + m2)v2' = P + m1C
-
-                // v2' = (P + m1C)/(m1 + m2)
-
-                Vector2 v2f = (P + m1 * C) / (m1 + m2);
-
-                // c = v2' - v1'
-
-                // v1' = v2' - c
-
-                Vector2 v1f = v2f - C;
-
-               
-                // perfecly elastic for now
-                float heatLoss = 1f;
-
-                // normalize vectors if too fast!
-                v2f.Normalize();
-                v1f.Normalize();
-
-                other.Path.SetVelocityVector(v2f * heatLoss);
-                other.Velocity = v2f.Length();
-                this.Path.SetVelocityVector(v1f * heatLoss);
-                this.Velocity = v1f.Length();
-        }
-
         public abstract Projectile Clone();
     }
 
@@ -194,36 +138,7 @@ namespace ShakeAndBake.Model.GameEntity
         public override void Update(GameTime gameTime, CollisionBoard cb)
         {
             base.Update(gameTime, cb);
-
-            // player hits itself from defelcted bullet
-            if ((Player.Instance.BoundsContains(this) || this.BoundsContains(Player.Instance)) && this.Path.WasDeflected == true)
-            {
-                Player.Instance.TakeDamage(this.HitDamage);
-                this.isDestroyed = true;
-            }
-
-            HashSet<GameObject> collidedEnemies = cb.GetObjectsCollided(this, typeof(Enemy));
-            HashSet<GameObject> collidedBullets = cb.GetObjectsCollided(this, typeof(EnemyBullet));
-
-            //collision with enemy
-            foreach (Enemy enemyObject in collidedEnemies)
-            {
-                if (enemyObject.IsDestroyed) { continue; }
-                enemyObject.TakeDamage(this.HitDamage);
-                this.IsDestroyed = true;
-            }
-            //collision with enemy bullets
-            foreach (EnemyBullet enemyBullet in collidedBullets)
-            {
-                if (this.isDestroyed) { break; }
-                else if (enemyBullet.IsDestroyed) { continue; }
-                this.HandleProjectileCollision(enemyBullet);
-            }
-
-            if (this.IsDestroyed)
-            {
-                cb.RemoveFromBucketIfExists(this);
-            }
+            cb.HandlePlayerBulletCollisions(this);
         }
 
     }
@@ -257,44 +172,7 @@ namespace ShakeAndBake.Model.GameEntity
         public override void Update(GameTime gameTime, CollisionBoard cb)
         {
             base.Update(gameTime, cb);
-            HashSet<GameObject> collidedBullets = cb.GetObjectsCollided(this, typeof(EnemyBullet));
-            HashSet<GameObject> collidedEnemies = cb.GetObjectsCollided(this, typeof(Enemy));
-
-
-            //player takes damage from enemy bullet
-            if (Player.Instance.BoundsContains(this) || this.BoundsContains(Player.Instance))
-            {
-                Player.Instance.TakeDamage(this.HitDamage);
-                this.isDestroyed = true;
-            }
-
-            // see if deflected bullet hits enemy bullet
-            foreach (EnemyBullet go in collidedBullets)
-            {
-                if (this.isDestroyed) { break; }
-                else if (go.IsDestroyed || go == this) { continue; }
-                if (this.Path.WasDeflected)
-                {
-                    HandleProjectileCollision(go);
-                }
-
-            }
-            // see if deflected enemy bullet hits an enemy
-            foreach (Enemy go in collidedEnemies)
-            {
-                if (this.isDestroyed) { break; }
-                else if (go.IsDestroyed) { continue; }
-                if (this.Path.WasDeflected)
-                {
-                    go.TakeDamage(this.HitDamage);
-                    this.isDestroyed = true;
-                }
-
-            }
-            if (this.IsDestroyed)
-            {
-                cb.RemoveFromBucketIfExists(this);
-            }
+            cb.HandleEnemyBulletCollisions(this);
         }
     }
 }

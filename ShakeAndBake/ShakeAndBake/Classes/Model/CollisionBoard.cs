@@ -136,6 +136,136 @@ namespace ShakeAndBake.Model
 
             return bucket.RemoveElement(gameObject);
         }
+
+        public void HandleEnemyBulletCollisions(EnemyBullet bullet)
+        {
+            HashSet<GameObject> collidedBullets = GetObjectsCollided(bullet, typeof(EnemyBullet));
+            HashSet<GameObject> collidedEnemies = GetObjectsCollided(bullet, typeof(Enemy));
+
+
+            //player takes damage from enemy bullet
+            if (Player.Instance.BoundsContains(bullet) || bullet.BoundsContains(Player.Instance))
+            {
+                Player.Instance.TakeDamage(bullet.HitDamage);
+                bullet.IsDestroyed = true;
+            }
+
+            // see if deflected bullet hits enemy bullet
+            foreach (EnemyBullet go in collidedBullets)
+            {
+                if (bullet.IsDestroyed) { break; }
+                else if (go.IsDestroyed || go == bullet) { continue; }
+                if (bullet.Path.WasDeflected)
+                {
+                    HandleProjectileCollision(bullet, go);
+                }
+
+            }
+            // see if deflected enemy bullet hits an enemy
+            foreach (Enemy go in collidedEnemies)
+            {
+                if (bullet.IsDestroyed) { break; }
+                else if (go.IsDestroyed) { continue; }
+                if (bullet.Path.WasDeflected)
+                {
+                    go.TakeDamage(bullet.HitDamage);
+                    bullet.IsDestroyed = true;
+                }
+
+            }
+            if (bullet.IsDestroyed)
+            {
+                RemoveFromBucketIfExists(bullet);
+            }
+        }
+        public void HandlePlayerBulletCollisions(PlayerBullet bullet)
+        {
+            // player hits itself from defelcted bullet
+            if ((Player.Instance.BoundsContains(bullet) || bullet.BoundsContains(Player.Instance)) && bullet.Path.WasDeflected == true)
+            {
+                Player.Instance.TakeDamage(bullet.HitDamage);
+                bullet.IsDestroyed = true;
+            }
+
+            HashSet<GameObject> collidedEnemies = GetObjectsCollided(bullet, typeof(Enemy));
+            HashSet<GameObject> collidedBullets = GetObjectsCollided(bullet, typeof(EnemyBullet));
+
+            //collision with enemy
+            foreach (Enemy enemyObject in collidedEnemies)
+            {
+                if (enemyObject.IsDestroyed) { continue; }
+                enemyObject.TakeDamage(bullet.HitDamage);
+                bullet.IsDestroyed = true;
+            }
+            //collision with enemy bullets
+            foreach (EnemyBullet enemyBullet in collidedBullets)
+            {
+                if (bullet.IsDestroyed) { break; }
+                else if (enemyBullet.IsDestroyed) { continue; }
+                HandleProjectileCollision(bullet, enemyBullet);
+            }
+
+            if (bullet.IsDestroyed)
+            {
+                RemoveFromBucketIfExists(bullet);
+            }
+        }
+
+        private void HandleProjectileCollision(Projectile bullet, Projectile other)
+        {
+            if (bullet.Path.WasDeflected)
+            {
+                bullet.IsDestroyed = true;
+            }
+            if (!other.IsBouncy && !bullet.IsBouncy)
+            {
+                bullet.IsDestroyed = true;
+                other.IsDestroyed = true;
+            }
+            float m1 = (float)(bullet.Sprite.Width * bullet.Sprite.Height) * (float)bullet.Density;
+            float m2 = (float)(other.Sprite.Width * other.Sprite.Height) * (float)other.Density;
+
+            Vector2 P = m1 * bullet.Path.GetVelocityVector()
+                + m2 * other.Path.GetVelocityVector();
+
+            Vector2 C = bullet.Path.GetVelocityVector()
+                - other.Path.GetVelocityVector();
+
+            // P = m1v1' + m2v2'
+            // v1 - v2 = v2' - v1'
+            // let c = v1 - v2
+
+            // m1v1' + m2v2' = P
+            // -v1'  +  v2'  = C
+
+            // m1v1' + m2v2' = P
+            // -m1v1'+ m1v2' = m1C
+
+            // (m1 + m2)v2' = P + m1C
+
+            // v2' = (P + m1C)/(m1 + m2)
+
+            Vector2 v2f = (P + m1 * C) / (m1 + m2);
+
+            // c = v2' - v1'
+
+            // v1' = v2' - c
+
+            Vector2 v1f = v2f - C;
+
+
+            // perfecly elastic for now
+            float heatLoss = 1f;
+
+            // normalize vectors if too fast!
+            v2f.Normalize();
+            v1f.Normalize();
+
+            other.Path.SetVelocityVector(v2f * heatLoss);
+            other.Velocity = v2f.Length();
+            bullet.Path.SetVelocityVector(v1f * heatLoss);
+            bullet.Velocity = v1f.Length();
+        }
     }
 
     public class CollisionBucket

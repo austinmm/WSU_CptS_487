@@ -174,13 +174,5 @@
     "velocity": 4,
     "texture": "enemy_default_bullet",
     "pathType": "StraightPath"
-  },
-  {
-    "HitDamage": 1,
-    "density": 1,
-    "isBouncy": true,
-    "velocity": 4,
-    "texture": "enemy_default_bullet",
-    "pathType": "StraightPath"
   }
 ]

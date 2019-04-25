@@ -18,7 +18,7 @@
   },
   {
     "HitDamage": 1,
-    "density": 1000,
+    "density": 5,
     "isBouncy": false,
     "velocity": 1,
     "texture": "small_square_bullet",

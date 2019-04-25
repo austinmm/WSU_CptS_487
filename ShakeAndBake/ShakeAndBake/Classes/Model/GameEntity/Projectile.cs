@@ -108,8 +108,10 @@ namespace ShakeAndBake.Model.GameEntity
 
         protected void HandleProjectileCollision(Projectile other)
         {
-
-
+                if (this.Path.WasDeflected)
+                {
+                    this.IsDestroyed = true;
+                }
                 if (!other.isBouncy && !this.isBouncy)
                 {
                     this.isDestroyed = true;

@@ -53,12 +53,12 @@
         {
           "stringType": "MidBoss",
           "pathType": "SweepRight",
-          "speed": 2,
+          "speed": 5,
           "startPosition": {
             "X": 0,
-            "Y": -100
+            "Y": -300
           },
-          "fireRate": 200,
+          "fireRate": 150,
           "moveDirection": {
             "X": 0,
             "Y": 1

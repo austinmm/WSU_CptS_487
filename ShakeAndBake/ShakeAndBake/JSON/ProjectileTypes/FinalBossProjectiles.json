@@ -130,6 +130,14 @@
   {
     "HitDamage": 1,
     "density": 1000,
+    "isBouncy": true,
+    "velocity": 1,
+    "texture": "small_square_bullet",
+    "pathType": "StraightPath"
+  },
+  {
+    "HitDamage": 1,
+    "density": 5,
     "isBouncy": false,
     "velocity": 1,
     "texture": "small_square_bullet",
@@ -137,7 +145,7 @@
   },
   {
     "HitDamage": 1,
-    "density": 1000,
+    "density": 5,
     "isBouncy": false,
     "velocity": 1,
     "texture": "small_square_bullet",
@@ -145,15 +153,7 @@
   },
   {
     "HitDamage": 1,
-    "density": 1000,
-    "isBouncy": false,
-    "velocity": 1,
-    "texture": "small_square_bullet",
-    "pathType": "StraightPath"
-  },
-  {
-    "HitDamage": 1,
-    "density": 1000,
+    "density": 5,
     "isBouncy": false,
     "velocity": 1,
     "texture": "small_square_bullet",

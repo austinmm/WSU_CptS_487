@@ -129,6 +129,14 @@ namespace ShakeAndBake.Model.GameEntity
             return pos;
         }
 
+        private Vector2 GetSpecialCenterCoordinates()
+        {
+            Vector2 pos = Vector2.Add(position, new Vector2(
+               (ShakeAndBakeGame.GetTexture("player_default").Width - ShakeAndBakeGame.GetTexture("player_special_bullet").Width) / 2,
+               -ShakeAndBakeGame.GetTexture("player_special_bullet").Height));
+            return pos;
+        }
+
         private bool CanFireSpecialProjectile()
         {
             //if the character has to wait longer until they can fire another projectile
@@ -144,10 +152,10 @@ namespace ShakeAndBake.Model.GameEntity
         {
             if (!this.CanFire()) { return; }
             this.ProjectileFactory = new DefaultPlayerProjectileFactory();
-            Projectile projectile = this.ProjectileFactory.Create(this.GetCenterCoordinates());
+            Projectile projectile = this.ProjectileFactory.Create(new Vector2(this.GetCenterCoordinates().X - ShakeAndBakeGame.GetTexture("player_default_bullet").Width/2, this.GetCenterCoordinates().Y - ShakeAndBakeGame.GetTexture("player_default_bullet").Height));
             //The projectiles position is set to the current character's position
             this.projectiles.Add(projectile);
-            ShakeAndBakeGame.GetSoundEffect("player_shot").CreateInstance().Play();
+            ShakeAndBakeGame.GetSoundEffect("shot").CreateInstance().Play();
         }
 
         public void FireSpecialProjectile()
@@ -155,9 +163,9 @@ namespace ShakeAndBake.Model.GameEntity
             if (this.CanFireSpecialProjectile())
             {
                 this.ProjectileFactory = new SpecialPlayerProjectileFactory();
-                Projectile projectile = this.ProjectileFactory.Create(this.GetCenterCoordinates());
+                Projectile projectile = this.ProjectileFactory.Create(this.GetSpecialCenterCoordinates());
                 this.projectiles.Add(projectile);
-                ShakeAndBakeGame.GetSoundEffect("player_shot").CreateInstance().Play();
+                ShakeAndBakeGame.GetSoundEffect("shot").CreateInstance().Play();
             }
         }
     }

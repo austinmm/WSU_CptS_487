@@ -65,7 +65,7 @@ namespace ShakeAndBake.View
 
         public void DrawPlayerSpecialProjectileCountdown(GraphicsDeviceManager graphics, SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(ShakeAndBakeGame.GetFont("Default"), $"SPC: {Player.Instance.SpecialProjectileCountdown}", new Vector2(10, 130), Color.Red);
+            spriteBatch.DrawString(ShakeAndBakeGame.GetFont("Small"), $"SPC: {Player.Instance.SpecialProjectileCountdown}", new Vector2(10, 130), Color.Red);
         }
     }
 }

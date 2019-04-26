@@ -93,6 +93,24 @@
 /processorParam:TextureFormat=Compressed
 /build:File.spritefont
 
+#begin final.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:final.png
+
+#begin final_dead.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:final_dead.wav
+
 #begin lifeIcon.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -177,11 +195,24 @@
 /processorParam:TextureFormat=Color
 /build:settingsIcon.png
 
+#begin shakeandbake.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:shakeandbake.wav
+
 #begin shot.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:shot.wav
+
+#begin Small.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Small.spritefont
 
 #begin small_ball_bullet.png
 /importer:TextureImporter

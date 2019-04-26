@@ -43,6 +43,7 @@ namespace ShakeAndBake.Model.Factories.EnemyFactory
     public abstract class EnemyAbstractFactory
     {
         public abstract Enemy Create(EnemyConfig config);
+        
         protected void Configure(Enemy enemy, EnemyConfig config)
         {
             if (config.startPosition.random == true)
@@ -53,6 +54,7 @@ namespace ShakeAndBake.Model.Factories.EnemyFactory
             {
                 enemy.Position = new Vector2((float)config.startPosition.X, (float)config.startPosition.Y);
             }
+            enemy.MaxHealth = config.health; // enemy.Health is set to MaxHealth on spawn
             enemy.FireRate = config.fireRate;
             enemy.Velocity = config.speed;
             enemy.Health = config.health;

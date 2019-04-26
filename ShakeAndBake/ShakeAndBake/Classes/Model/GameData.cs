@@ -121,7 +121,7 @@ namespace ShakeAndBake.Model
                     //this.deadEnemies.Add(enemy);
                     this.collisionBoard.RemoveFromBucketIfExists(enemy);
 
-                    Player.Instance.Score += 10; // TODO move to the right place and configurable score per enemy type
+                    Player.Instance.Score += (int) enemy.MaxHealth; // TODO move to the right place and configurable score per enemy type
                     continue;
                 }
                 enemy.Update(gameTime, this.collisionBoard);

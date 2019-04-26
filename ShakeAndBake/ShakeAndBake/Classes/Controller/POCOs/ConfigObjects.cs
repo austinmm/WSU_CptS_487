@@ -26,6 +26,7 @@ namespace ShakeAndBake.Classes.Controller
 
         public EnemyConfig(EnemyConfig copy)
         {
+            this.health = copy.health;
             this.pathType = copy.pathType;
             this.startPosition = new PositionConfig(copy.startPosition);
             this.speed = copy.speed;
@@ -63,8 +64,7 @@ namespace ShakeAndBake.Classes.Controller
             public Boolean random;
         }
     }
-
-
+    
     public class WaveConfigs
     {
         public List<List<EnemyConfig>> waves;

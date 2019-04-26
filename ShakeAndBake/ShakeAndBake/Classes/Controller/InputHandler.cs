@@ -21,6 +21,10 @@ namespace ShakeAndBake.Controller
 
         public void HandleGamePlayInput(KeyboardState keyboardState)
         {
+            if (keyboardState.IsKeyDown(Keys.C))
+            {
+                Player.Instance.Invincible = true;
+            }
             this.UpdateGameSpeed(keyboardState);
             this.FireUserProjectile(keyboardState);
             if (this.DidUserMove(keyboardState, out float newX, out float newY))
@@ -121,7 +125,7 @@ namespace ShakeAndBake.Controller
             {
                 Player.Instance.FireProjectile();
             }
-            else if (state.IsKeyDown(Keys.Enter))
+            else if (state.IsKeyDown(Keys.S))
             {
                 Player.Instance.FireSpecialProjectile();
             }

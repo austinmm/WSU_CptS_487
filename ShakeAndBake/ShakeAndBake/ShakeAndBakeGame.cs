@@ -44,9 +44,9 @@ namespace ShakeAndBake
             Initialize();
             
             //starts music
-            var instance = songs["music"].CreateInstance();
-            instance.IsLooped = true;
-            instance.Play();
+            // var instance = songs["music"].CreateInstance();
+            // instance.IsLooped = true;
+            // instance.Play();
 
             //Initializes the MVC layers
             gameData = new Model.GameData(GetTexture("player_default"));
@@ -92,21 +92,38 @@ namespace ShakeAndBake
             LoadAndStoreTexture("loseScreen");
             LoadAndStoreTexture("winScreen");
             LoadAndStoreTexture("settingsIcon");
+            LoadAndStoreTexture("final");
             //Game Play Screen Images
             LoadAndStoreTexture("lives_left");
             //Fonts
             LoadAndStoreFont("Default");
+            LoadAndStoreFont("Small");
             LoadAndStoreFont("File");
             //LoadAndStoreTexture("lifeIcon");
-            //sounds
-            soundEffects["player_shot"] =  Content.Load<SoundEffect>("shot");
-            soundEffects["enemy_shot"] = Content.Load<SoundEffect>("enemy_shot");
 
+            //sounds
+            LoadAndStoreSoundEffect("final_dead");
+            LoadAndStoreSoundEffect("shakeandbake");
+            LoadAndStoreSoundEffect("shot");
+            LoadAndStoreSoundEffect("enemy_shot");
+            
             songs["music"] = Content.Load<SoundEffect>("song");
         }
-        
+
+        private void LoadAndStoreSoundEffect(string name) {
+            soundEffects[name] = Content.Load<SoundEffect>(name);
+        }
+
         private void LoadAndStoreTexture(string name) {
             textures[name] = Content.Load<Texture2D>(name);
+        }
+
+        public static void PlaySoundEffect(string name)
+        {
+            SoundEffect effect = soundEffects[name];
+            if (effect != null) {
+                effect.CreateInstance().Play();
+            }
         }
         
         public static Texture2D GetTexture(string name)

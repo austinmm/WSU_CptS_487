@@ -112,6 +112,7 @@ namespace ShakeAndBake
             LoadAndStoreSoundEffect("shakeandbake");
             LoadAndStoreSoundEffect("shot");
             LoadAndStoreSoundEffect("enemy_shot");
+            LoadAndStoreSoundEffect("playerhit");
             LoadAndStoreSoundEffect("explosion");
             
             songs["music"] = Content.Load<SoundEffect>("song");

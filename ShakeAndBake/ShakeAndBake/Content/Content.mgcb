@@ -177,6 +177,12 @@
 /processorParam:TextureFormat=Color
 /build:mainMenuIcon.png
 
+#begin playerhit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:playerhit.wav
+
 #begin player.png
 /importer:TextureImporter
 /processor:TextureProcessor

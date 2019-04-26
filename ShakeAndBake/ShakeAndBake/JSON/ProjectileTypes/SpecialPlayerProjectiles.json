@@ -1,6 +1,6 @@
 ﻿[
   {
-    "HitDamage": 100,
+    "HitDamage": 10,
     "density": 10,
     "isBouncy": true,
     "velocity": 2,

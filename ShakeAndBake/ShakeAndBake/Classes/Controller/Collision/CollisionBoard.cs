@@ -226,6 +226,12 @@ namespace ShakeAndBake.Controller.Collision
                 bullet.IsDestroyed = true;
                 other.IsDestroyed = true;
             }
+
+            if (bullet.Texture.Equals("player_special_bullet"))
+            {
+                bullet.IsDestroyed = false;
+            }
+
             float m1 = (float)(bullet.Sprite.Width * bullet.Sprite.Height) * (float)bullet.Density;
             float m2 = (float)(other.Sprite.Width * other.Sprite.Height) * (float)other.Density;
 

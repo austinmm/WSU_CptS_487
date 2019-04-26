@@ -63,8 +63,7 @@ namespace ShakeAndBake.Classes.Controller
             public Boolean random;
         }
     }
-
-
+    
     public class WaveConfigs
     {
         public List<List<EnemyConfig>> waves;

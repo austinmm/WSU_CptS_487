@@ -72,13 +72,13 @@
             "pathType": "SweepRight",
             "formation": "leftDiagonalLine",
             "health": 10,
-            "speed": 7,
+            "speed": 6,
             "startPosition": {
               "X": 0,
               "Y": -100,
               "random":  true
             },
-            "fireRate": 300,
+            "fireRate": 400,
             "moveDirection": {
               "X": 0,
               "Y": 1
@@ -98,10 +98,10 @@
             "health": 25,
             "speed": 5,
             "startPosition": {
-              "X": 0,
+              "X": -100,
               "Y": -300
             },
-            "fireRate": 150,
+            "fireRate": 200,
             "moveDirection": {
               "X": 0,
               "Y": 1
@@ -606,7 +606,7 @@
               "X": 0,
               "Y": 1
             },
-            "count": 5
+            "count": 3
           },
           {
             "stringType": "Hard",
@@ -620,6 +620,25 @@
               "random": false
             },
             "fireRate": 300,
+            "moveDirection": {
+              "X": 0,
+              "Y": 1
+            },
+            "count": 4
+          }
+        ],
+        [
+          {
+            "stringType": "Easy",
+            "pathType": "SweepRight",
+            "formation": "leftDiagonalLine",
+            "health": 8,
+            "speed": 6,
+            "startPosition": {
+              "X": 100,
+              "Y": -100
+            },
+            "fireRate": 400,
             "moveDirection": {
               "X": 0,
               "Y": 1

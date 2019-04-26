@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Newtonsoft.Json;
-using ShakeAndBake.Classes.Model.Factories.PathFactory;
 using ShakeAndBake.Extras.Paths;
 using ShakeAndBake.Model.GameEntity;
 using System.Collections.Generic;

@@ -1,7 +1,7 @@
 ﻿[
   {
     "HitDamage": 10,
-    "density": 1,
+    "density": 10,
     "isBouncy": true,
     "velocity": 2,
     "texture": "player_special_bullet",

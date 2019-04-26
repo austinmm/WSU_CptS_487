@@ -93,6 +93,8 @@ namespace ShakeAndBake
             LoadAndStoreTexture("winScreen");
             LoadAndStoreTexture("settingsIcon");
             LoadAndStoreTexture("final");
+            LoadAndStoreTexture("arrowsIcon");
+            LoadAndStoreTexture("wasdIcon");
             //Game Play Screen Images
             LoadAndStoreTexture("lives_left");
             //Fonts

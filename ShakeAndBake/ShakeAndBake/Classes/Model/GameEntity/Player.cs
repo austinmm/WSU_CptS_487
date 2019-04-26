@@ -48,6 +48,13 @@ namespace ShakeAndBake.Model.GameEntity
         {
             instance = null;
         }
+
+        private bool cheatMode;
+        public bool CheatMode
+        {
+            get { return cheatMode; }
+            set { this.cheatMode = value; }
+        }
         
         private bool invincible;
         public bool Invincible
@@ -155,7 +162,7 @@ namespace ShakeAndBake.Model.GameEntity
 
         public override double TakeDamage(double d)
         {
-            if (invincible) return 0;
+            if (invincible || cheatMode) return 0;
             ShakeAndBakeGame.PlaySoundEffect("playerhit");
             return base.TakeDamage(d);
         }

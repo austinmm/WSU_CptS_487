@@ -35,8 +35,8 @@ namespace ShakeAndBake.View
             this.DrawCurrentStageGraphic(graphics, spriteBatch);
             this.DrawScoreGraphic(graphics, spriteBatch);
             this.DrawPlayerSpecialProjectileCountdown(graphics, spriteBatch);
-
-            if (Player.Instance.Invincible) {
+            
+            if (Player.Instance.CheatMode) {
                 spriteBatch.DrawString(ShakeAndBakeGame.GetFont("Small"), "Cheating Mode", new Vector2(10, GameConfig.Height - 40), Color.Lime);
             }
         }

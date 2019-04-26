@@ -61,13 +61,6 @@ namespace ShakeAndBake.Model.GameEntity
             }
         }
 
-        //This will be used to determine if and how this projectile will move other projectiles during a collision
-        protected int mass = 1;//default
-        public int Mass
-        {
-            get { return this.mass; }
-            set { this.mass = value; }
-        }
 
         //This is the amount of damage an enemy or player will take if hit by this projectile
         private int hitDamage;

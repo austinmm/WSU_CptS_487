@@ -14,7 +14,6 @@ namespace ShakeAndBake.Model.GameEntity
             PlayerBullet copy = new PlayerBullet(this.path, this.texture);
             copy.Acceleration = this.acceleration;
             copy.HitDamage = this.HitDamage;
-            copy.Mass = this.mass;
             copy.PathType = this.pathType;
             copy.Sprite = this.sprite;
             copy.Texture = this.texture;

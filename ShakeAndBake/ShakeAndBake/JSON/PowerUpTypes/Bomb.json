@@ -1,0 +1,15 @@
+﻿{
+  "acceleration": 3,
+  "velocity": 2,
+  "powerUpReady": false,
+  "powerUpActivated": false,
+  "texture": "bomb_powerup",
+  "pathType": "StraightPath",
+  "pointsNeeded": 10
+}
+/*
+  "position": {
+    "X": 20,
+    "Y": 70
+  }
+*/

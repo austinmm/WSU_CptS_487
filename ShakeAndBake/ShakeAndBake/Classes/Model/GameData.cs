@@ -17,6 +17,12 @@ namespace ShakeAndBake.Model
     {
         private CollisionBoard collisionBoard;
 
+        //this is the power up that our player can achieve
+        private PowerUp powerUp;
+        public PowerUp PlayerPowerUp
+        {
+            get { return this.powerUp; }
+        }
         //Contains a list of all enemies currently visible on the gameboard
         private ObservableCollection<Enemy> visibleEnemies;
         public ObservableCollection<Enemy> VisibleEnemies
@@ -56,7 +62,6 @@ namespace ShakeAndBake.Model
                 GameConfig.Width,
                 playerTexture.Width
             );
-
             this.Initialize();
             Player.Instance.Position = new Vector2
             (
@@ -77,6 +82,7 @@ namespace ShakeAndBake.Model
             //When enemy is added or removed from collection "updateEnimies" is automatically called
             this.visibleEnemies.CollectionChanged += UpdateEnemies;
             this.deadEnemies = new List<Enemy>();
+            this.powerUp = new Factories.PowerUpFactory.BombPowerUpFactory().Create();
             //User
         }
         
@@ -148,8 +154,27 @@ namespace ShakeAndBake.Model
                     this.deadEnemies.RemoveAt(i);
                 }
             }
+            this.HandlePowerUps(gameTime);
         }
 
+        private void HandlePowerUps(GameTime gameTime)
+        {
+            this.powerUp.AttemptActivation(Player.Instance.Score);
+            this.powerUp.Update(gameTime, collisionBoard);
+            if (this.powerUp.PowerUpActivated)
+            {
+                for (int i = 0; i < this.VisibleEnemies.Count; i++)
+                {
+                    Enemy enemy = this.visibleEnemies[i];
+                    if (!enemy.IsDestroyed && enemy.isInWindow())
+                    {
+                        this.visibleEnemies.RemoveAt(i);
+                        this.collisionBoard.RemoveFromBucketIfExists(enemy);
+                        Player.Instance.Score += (int)enemy.MaxHealth; // TODO move to the right place and configurable score per enemy type
+                    }
+                }
+            }
+        }
         // called before configuring a stage
         public void Reset()
         {

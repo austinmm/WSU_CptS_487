@@ -29,7 +29,7 @@ namespace ShakeAndBake.View
             {
                 enemy.Draw(spriteBatch);
             }
-
+            this.gameData.PlayerPowerUp.Draw(spriteBatch);
             Player.Instance.Draw(spriteBatch);
             this.DrawPlayerHealth(graphics, spriteBatch);
             this.DrawCurrentStageGraphic(graphics, spriteBatch);
@@ -69,7 +69,8 @@ namespace ShakeAndBake.View
 
         public void DrawPlayerSpecialProjectileCountdown(GraphicsDeviceManager graphics, SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(ShakeAndBakeGame.GetFont("Small"), $"SPC: {Player.Instance.SpecialProjectileCountdown}", new Vector2(10, 110), Color.OrangeRed);
+            string count = Player.Instance.SpecialProjectileCountdown == 0 ? "Ready" : $"{Player.Instance.SpecialProjectileCountdown}";
+            spriteBatch.DrawString(ShakeAndBakeGame.GetFont("Small"), $"SW: {count}", new Vector2(10, 110), Color.OrangeRed);
         }
     }
 }

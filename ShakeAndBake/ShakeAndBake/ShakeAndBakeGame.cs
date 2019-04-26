@@ -73,8 +73,10 @@ namespace ShakeAndBake
         {
             //Player images
             LoadAndStoreTexture("player_default");
-            LoadAndStoreTexture("player_default_bullet"); LoadAndStoreTexture("player_default_bullet");
-
+            LoadAndStoreTexture("player_default_bullet");
+            LoadAndStoreTexture("player_default_bullet");
+            //player powerup images
+            LoadAndStoreTexture("bomb_powerup");
             //Enemy Images
             LoadAndStoreTexture("enemy_default");
             LoadAndStoreTexture("enemy_default_bullet");

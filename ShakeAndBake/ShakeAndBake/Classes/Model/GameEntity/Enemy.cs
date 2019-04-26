@@ -67,7 +67,6 @@ namespace ShakeAndBake.Model.GameEntity
                 //Creates a new projectile to be added to the character's ObservableCollection of projectiles
                 Vector2 origin = this.GetCenterCoordinates();
                 Projectile projectile = this.ProjectileFactory.Create(origin);
-                Debug.Print("The hash code stored: {0}", projectile.GetHashCode());
                 this.projectiles.Add(projectile);
                 //ShakeAndBakeGame.GetSoundEffect("enemy_shot").CreateInstance().Play();
             }

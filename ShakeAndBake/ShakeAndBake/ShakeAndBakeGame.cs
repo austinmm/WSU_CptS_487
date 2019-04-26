@@ -95,6 +95,8 @@ namespace ShakeAndBake
             LoadAndStoreTexture("wasdIcon");
             LoadAndStoreTexture("arrowsIcon");
             LoadAndStoreTexture("final");
+            LoadAndStoreTexture("arrowsIcon");
+            LoadAndStoreTexture("wasdIcon");
             //Game Play Screen Images
             LoadAndStoreTexture("lives_left");
             //Fonts
@@ -109,6 +111,7 @@ namespace ShakeAndBake
             LoadAndStoreSoundEffect("shot");
             LoadAndStoreSoundEffect("enemy_shot");
             LoadAndStoreSoundEffect("playerhit");
+            LoadAndStoreSoundEffect("explosion");
             
             songs["music"] = Content.Load<SoundEffect>("song");
         }

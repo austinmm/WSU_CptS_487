@@ -117,12 +117,11 @@ namespace ShakeAndBake.Model
                 Enemy enemy = this.visibleEnemies[j];
                 if (enemy.IsDestroyed)
                 {
-
                     this.visibleEnemies.RemoveAt(j); // This adds an enemy to deadEnemies? Why would we implment it like this??? Very confusing
                     //this.deadEnemies.Add(enemy);
                     this.collisionBoard.RemoveFromBucketIfExists(enemy);
 
-                    Player.Instance.Score += 10; // TODO move to the right place and configurable score per enemy type
+                    Player.Instance.Score += (int) enemy.MaxHealth; // TODO move to the right place and configurable score per enemy type
                     continue;
                 }
                 enemy.Update(gameTime, this.collisionBoard);

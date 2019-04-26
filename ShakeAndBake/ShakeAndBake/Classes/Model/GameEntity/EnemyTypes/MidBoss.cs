@@ -27,7 +27,7 @@ namespace ShakeAndBake.Model.GameEntity
             base.Draw(spriteBatch);
             if (!IsDestroyed)
             {
-                DrawHealthBar(spriteBatch, 100, 15); // smaller than final boss health bar
+                DrawHealthBar(spriteBatch, 100);
                 spriteBatch.Draw(this.Sprite, position, Color.White);
             }
         }

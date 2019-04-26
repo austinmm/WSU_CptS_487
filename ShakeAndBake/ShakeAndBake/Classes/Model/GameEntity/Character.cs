@@ -142,9 +142,10 @@ namespace ShakeAndBake.Model.GameEntity
             return true;
         }
         
-        public void DrawHealthBar(SpriteBatch spriteBatch, int barWidth, int barHeight)
+        public void DrawHealthBar(SpriteBatch spriteBatch, int barWidth)
         {
             if (maxHealth == 0) return;
+            int barHeight = (int) ((double)barWidth * 0.15); // scale based on width
             double perc = (health / maxHealth);
             int divider = (int) (barWidth * perc); // end position of green section
 

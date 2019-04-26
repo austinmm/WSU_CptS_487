@@ -27,6 +27,7 @@ namespace ShakeAndBake.Model.GameEntity
             base.Draw(spriteBatch);
             if (!IsDestroyed)
             {
+                DrawHealthBar(spriteBatch, 75);
                 spriteBatch.Draw(this.Sprite, position, Color.White);
             }
         }

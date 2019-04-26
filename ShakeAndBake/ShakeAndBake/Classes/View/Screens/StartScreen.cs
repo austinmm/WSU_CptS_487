@@ -19,7 +19,7 @@ namespace ShakeAndBake.View
             spriteBatch.Draw(ShakeAndBakeGame.GetTexture("background"), new Vector2(0, 0), Color.White);
             spriteBatch.Draw(ShakeAndBakeGame.GetTexture("titleScreen"), new Vector2(0, 0), Color.White);
             spriteBatch.Draw(ShakeAndBakeGame.GetTexture("startIcon"), new Vector2(50, 375), Color.White);
-            spriteBatch.Draw(ShakeAndBakeGame.GetTexture("startIcon"), new Vector2(50, 450), Color.White); // todo settingsIcon
+            spriteBatch.Draw(ShakeAndBakeGame.GetTexture("settingsIcon"), new Vector2(50, 450), Color.White); 
             spriteBatch.Draw(ShakeAndBakeGame.GetTexture("exitIcon"), new Vector2(50, 525), Color.White);
             float selectionY = 0;
             switch (gameController.MenuState)

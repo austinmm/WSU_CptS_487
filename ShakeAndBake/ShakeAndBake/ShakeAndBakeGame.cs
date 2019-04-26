@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace ShakeAndBake
 {
@@ -15,9 +17,12 @@ namespace ShakeAndBake
 
         private static Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
         private static Dictionary<string, SpriteFont> fonts = new Dictionary<string, SpriteFont>();
+        private static Dictionary<string, SoundEffect> songs = new Dictionary<string, SoundEffect>();//because they are wav files it only recognizes them as soundeffects
+        private static Dictionary<string, SoundEffect> soundEffects = new Dictionary<string, SoundEffect>();
 
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
+
 
         private View.GameBoard gameBoard;
         private Controller.GameController gameController;
@@ -37,6 +42,11 @@ namespace ShakeAndBake
             GameConfig.Height = graphics.GraphicsDevice.Viewport.Height;
             GameConfig.Width = graphics.GraphicsDevice.Viewport.Width;
             Initialize();
+            
+            //starts music
+            var instance = songs["music"].CreateInstance();
+            instance.IsLooped = true;
+            instance.Play();
 
             //Initializes the MVC layers
             gameData = new Model.GameData(GetTexture("player_default"));
@@ -70,7 +80,7 @@ namespace ShakeAndBake
             //Generic Bullet Images
             LoadAndStoreTexture("small_ball_bullet");
             LoadAndStoreTexture("small_square_bullet");
-            //Menu,Loose and Win Screen Images
+            //Menu,Lose and Win Screen Images
             LoadAndStoreTexture("titleScreen");
             LoadAndStoreTexture("background");
             LoadAndStoreTexture("startIcon");
@@ -79,12 +89,18 @@ namespace ShakeAndBake
             LoadAndStoreTexture("mainMenuIcon");
             LoadAndStoreTexture("loseScreen");
             LoadAndStoreTexture("winScreen");
+            LoadAndStoreTexture("settingsIcon");
             //Game Play Screen Images
             LoadAndStoreTexture("lives_left");
             //Fonts
             LoadAndStoreFont("Default");
             LoadAndStoreFont("File");
             //LoadAndStoreTexture("lifeIcon");
+            //sounds
+            soundEffects["player_shot"] =  Content.Load<SoundEffect>("shot");
+            soundEffects["enemy_shot"] = Content.Load<SoundEffect>("enemy_shot");
+
+            songs["music"] = Content.Load<SoundEffect>("song");
         }
         
         private void LoadAndStoreTexture(string name) {
@@ -100,7 +116,10 @@ namespace ShakeAndBake
         {
             return fonts[name];
         }
-
+        public static SoundEffect GetSoundEffect(string name)
+        {
+            return soundEffects[name];
+        }
         private void LoadAndStoreFont(string name)
         {
             fonts[name] = Content.Load<SpriteFont>(name);

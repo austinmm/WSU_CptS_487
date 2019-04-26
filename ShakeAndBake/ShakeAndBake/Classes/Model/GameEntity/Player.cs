@@ -122,6 +122,7 @@ namespace ShakeAndBake.Model.GameEntity
             Projectile projectile = this.ProjectileFactory.Create(this.GetCenterCoordinates());
             //The projectiles position is set to the current character's position
             this.projectiles.Add(projectile);
+            ShakeAndBakeGame.GetSoundEffect("player_shot").CreateInstance().Play();
         }
     }
 }

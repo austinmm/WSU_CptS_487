@@ -68,6 +68,12 @@
 /processorParam:TextureFormat=Color
 /build:enemy_bullet.png;enemy_default_bullet.png
 
+#begin enemy_shot.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:enemy_shot.wav
+
 #begin exitIcon.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -147,6 +153,24 @@
 /processorParam:TextureFormat=Color
 /build:selectionIcon.png
 
+#begin settingsIcon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:settingsIcon.png
+
+#begin shot.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:shot.wav
+
 #begin small_ball_bullet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -170,6 +194,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:small_square_bullet.png
+
+#begin song.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:song.wav
 
 #begin startIcon.png
 /importer:TextureImporter

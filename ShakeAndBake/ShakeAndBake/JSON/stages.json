@@ -98,19 +98,21 @@
           {
             "stringType": "Medium",
             "pathType": "SweepRight",
+            "formation": "leftDiagonalLine",
+
             "health": 15,
-            "speed": 1,
+            "speed": 3,
             "startPosition": {
-              "X": 0,
-              "Y": 0,
-              "random": true
+              "X": -100,
+              "Y": -50,
+              "random": false
             },
-            "fireRate": 500,
+            "fireRate": 1000,
             "moveDirection": {
               "X": 0,
               "Y": 1
             },
-            "count": 5
+            "count": 4
           },
           {
             "stringType": "Hard",
@@ -123,12 +125,12 @@
               "Y": 0,
               "random": false
             },
-            "fireRate": 300,
+            "fireRate": 700,
             "moveDirection": {
               "X": 0,
               "Y": 1
             },
-            "count": 3
+            "count": 2
           }
         ]
       ]

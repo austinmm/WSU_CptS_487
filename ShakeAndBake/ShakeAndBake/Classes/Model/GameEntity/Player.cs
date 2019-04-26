@@ -40,6 +40,7 @@ namespace ShakeAndBake.Model.GameEntity
         {
             StreamReader reader = GameData.GetPlayerStreamReader();
             string json = reader.ReadToEnd();
+
             return JsonConvert.DeserializeObject<Player>(json);
         }
 

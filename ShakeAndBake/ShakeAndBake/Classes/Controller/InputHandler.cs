@@ -21,7 +21,7 @@ namespace ShakeAndBake.Controller
         
         public void HandleGamePlayInput(KeyboardState keyboardState)
         {
-            Player.Instance.Invincible = keyboardState.IsKeyDown(Keys.C);
+            Player.Instance.Invincible = keyboardState.IsKeyDown(Keys.C) || Player.Instance.Invincible;
             
             this.UpdateGameSpeed(keyboardState);
             this.FireUserProjectile(keyboardState);

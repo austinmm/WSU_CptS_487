@@ -10,7 +10,6 @@ namespace ShakeAndBake.Model.GameEntity
         //Easy Enemy Constructor
         public Easy() : base()
         {
-            this.health = 10;
             this.ProjectileFactory = new EasyProjectileFactory();
             this.Sprite = ShakeAndBakeGame.GetTexture("enemy_default");
         }

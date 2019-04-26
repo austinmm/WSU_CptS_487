@@ -40,6 +40,7 @@ namespace ShakeAndBake.Model.GameEntity
         {
             StreamReader reader = GameData.GetPlayerStreamReader();
             string json = reader.ReadToEnd();
+
             return JsonConvert.DeserializeObject<Player>(json);
         }
 
@@ -96,12 +97,7 @@ namespace ShakeAndBake.Model.GameEntity
 
         public override void Update(GameTime gameTime, CollisionBoard cb)
         {
-            //Remove player's collision bucket before update
-            cb.RemoveFromBucketIfExists(this);
-
-            base.Update(gameTime, cb);
-            //Update collision board
-            cb.FillBucket(this);
+            cb.UdateObjectPositionWithFunction(this, () => { base.Update(gameTime, cb); return true; });
         }
         
         public override void Draw(SpriteBatch spriteBatch)
@@ -118,20 +114,11 @@ namespace ShakeAndBake.Model.GameEntity
             spriteBatch.Draw(this.Sprite, position, Color.White);
         }
 
-        public override Vector2 GetCenterCoordinates()
-        {
-            Vector2 pos = Vector2.Add(position, new Vector2(
-               (ShakeAndBakeGame.GetTexture("player_default").Width - ShakeAndBakeGame.GetTexture("player_default_bullet").Width) / 2,
-               -ShakeAndBakeGame.GetTexture("player_default_bullet").Height));
-            return pos;
-        }
 
         private Vector2 GetSpecialCenterCoordinates()
         {
-            Vector2 pos = Vector2.Add(position, new Vector2(
-               (ShakeAndBakeGame.GetTexture("player_default").Width - ShakeAndBakeGame.GetTexture("player_special_bullet").Width) / 2,
-               -ShakeAndBakeGame.GetTexture("player_special_bullet").Height));
-            return pos;
+            return new Vector2(this.GetCenterCoordinates().X - ShakeAndBakeGame.GetTexture("player_special_bullet").Width / 2,
+                this.GetCenterCoordinates().Y - ShakeAndBakeGame.GetTexture("player_special_bullet").Height);
         }
 
         private bool CanFireSpecialProjectile()

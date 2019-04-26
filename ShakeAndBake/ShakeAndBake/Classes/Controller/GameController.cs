@@ -27,7 +27,7 @@ namespace ShakeAndBake.Controller
         private GameTime timeElapsed;
 
         private GameState currentGameState;
-        private GameState CurrentGameState
+        public GameState CurrentGameState
         {
             get { return this.currentGameState; }
             set {
@@ -126,10 +126,15 @@ namespace ShakeAndBake.Controller
                     break;
                 case GameState.MENU:
                     GameState newGameState;
-                    this.menuState = inputHandler.MenuMove(this, keyboardState, previousKeyboardState, menuState, out newGameState);
-                    if (currentGameState != GameState.PLAYING && newGameState == GameState.PLAYING)
-                    {
-                        this.stageManager.ConfigureNextStage(gameData);
+                    if (screenManager.Current == ScreenType.SETTINGS) {
+                        inputHandler.SettingsMenuMove(this, keyboardState, previousKeyboardState);
+                        newGameState = GameState.MENU;
+                    } else {
+                        this.menuState = inputHandler.MenuMove(this, keyboardState, previousKeyboardState, menuState, out newGameState);
+                        if (currentGameState != GameState.PLAYING && newGameState == GameState.PLAYING)
+                        {
+                            this.stageManager.ConfigureNextStage(gameData);
+                        }
                     }
                     this.CurrentGameState = newGameState;
                     break;

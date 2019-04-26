@@ -92,6 +92,8 @@ namespace ShakeAndBake
             LoadAndStoreTexture("loseScreen");
             LoadAndStoreTexture("winScreen");
             LoadAndStoreTexture("settingsIcon");
+            LoadAndStoreTexture("wasdIcon");
+            LoadAndStoreTexture("arrowsIcon");
             LoadAndStoreTexture("final");
             LoadAndStoreTexture("arrowsIcon");
             LoadAndStoreTexture("wasdIcon");
@@ -108,6 +110,7 @@ namespace ShakeAndBake
             LoadAndStoreSoundEffect("shakeandbake");
             LoadAndStoreSoundEffect("shot");
             LoadAndStoreSoundEffect("enemy_shot");
+            LoadAndStoreSoundEffect("explosion");
             
             songs["music"] = Content.Load<SoundEffect>("song");
         }

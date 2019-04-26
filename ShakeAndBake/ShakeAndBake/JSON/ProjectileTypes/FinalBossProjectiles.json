@@ -137,7 +137,7 @@
   },
   {
     "HitDamage": 1,
-    "density": 5,
+    "density": 1000,
     "isBouncy": false,
     "velocity": 1,
     "texture": "small_square_bullet",
@@ -145,7 +145,7 @@
   },
   {
     "HitDamage": 1,
-    "density": 5,
+    "density": 1000,
     "isBouncy": false,
     "velocity": 1,
     "texture": "small_square_bullet",
@@ -153,7 +153,7 @@
   },
   {
     "HitDamage": 1,
-    "density": 5,
+    "density": 1000,
     "isBouncy": false,
     "velocity": 1,
     "texture": "small_square_bullet",

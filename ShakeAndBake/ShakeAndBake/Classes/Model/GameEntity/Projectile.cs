@@ -95,12 +95,8 @@ namespace ShakeAndBake.Model.GameEntity
                 IsDestroyed = true;
                 return;
             }
-            //Before updating position, remove current bucket position on collision board
-            cb.RemoveFromBucketIfExists(this);
-            //Update the position of the projectile based off of its spritePath
-            position = path.NextPoint();
-            //Fill bucket on collision board
-            cb.FillBucket(this);
+
+            cb.UdateObjectPositionWithFunction(this, () => { position = path.NextPoint(); return true; });
         }
         public bool HasBeenFired() { return this.path.HasMoved(); }
 

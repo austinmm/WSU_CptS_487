@@ -15,6 +15,11 @@
         Easy, Normal, Hard, Lunatic
     }
     
+    public enum MoveKeys
+    {
+        ARROW, WASD
+    }
+
     public enum MenuState
     {
         START, SETTINGS, EXIT

@@ -92,7 +92,7 @@ namespace ShakeAndBake.Controller
 
         //Index of the current wave in the current stage
         private int currentWave;
-
+        
         public StageManager()
         {
             //Load JSON Stage Data Here

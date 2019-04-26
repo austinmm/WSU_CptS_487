@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework.Input;
 using ShakeAndBake.Model.GameEntity;
+using ShakeAndBake.View;
 using System;
 
 namespace ShakeAndBake.Controller
@@ -30,9 +31,37 @@ namespace ShakeAndBake.Controller
             }
         }
 
-        public MenuState MenuMove(KeyboardState state, KeyboardState previousState, MenuState menuStateIn, out GameState newGameState)
+        public MenuState MenuMove(GameController controller, KeyboardState state, KeyboardState previousState, MenuState menuStateIn, out GameState newGameState)
         {
-            if (state.IsKeyDown(Keys.Down))
+            if (state.IsKeyDown(Keys.Right) && previousState.IsKeyUp(Keys.Right)) {
+                DifficultyLevel newlvl = DifficultyLevel.Easy;
+                DifficultyLevel curlvl = controller.StageManager.CurrentLevel;
+                if (curlvl == DifficultyLevel.Easy) {
+                    newlvl = DifficultyLevel.Normal;
+                } else if (curlvl == DifficultyLevel.Normal) {
+                    newlvl = DifficultyLevel.Hard;
+                } else if (curlvl == DifficultyLevel.Hard) {
+                    newlvl = DifficultyLevel.Lunatic;
+                } else if (curlvl == DifficultyLevel.Lunatic) {
+                    newlvl = DifficultyLevel.Lunatic;
+                }
+                controller.StageManager.CurrentLevel = newlvl;
+            }
+            else if (state.IsKeyDown(Keys.Left) && previousState.IsKeyUp(Keys.Left)) {
+                DifficultyLevel newlvl = DifficultyLevel.Easy;
+                DifficultyLevel curlvl = controller.StageManager.CurrentLevel;
+                if (curlvl == DifficultyLevel.Easy) {
+                    newlvl = DifficultyLevel.Easy;
+                } else if (curlvl == DifficultyLevel.Normal) {
+                    newlvl = DifficultyLevel.Easy;
+                } else if (curlvl == DifficultyLevel.Hard) {
+                    newlvl = DifficultyLevel.Normal;
+                } else if (curlvl == DifficultyLevel.Lunatic) {
+                    newlvl = DifficultyLevel.Hard;
+                }
+                controller.StageManager.CurrentLevel = newlvl;
+            }
+            else if (state.IsKeyDown(Keys.Down) && previousState.IsKeyUp(Keys.Down))
             {
                 newGameState = GameState.MENU;
                 switch (menuStateIn)
@@ -45,7 +74,7 @@ namespace ShakeAndBake.Controller
                         return MenuState.EXIT;
                 }
             }
-            else if(state.IsKeyDown(Keys.Up))
+            else if(state.IsKeyDown(Keys.Up) && previousState.IsKeyUp(Keys.Up))
             {
                 newGameState = GameState.MENU;
                 switch (menuStateIn)
@@ -66,7 +95,8 @@ namespace ShakeAndBake.Controller
                         newGameState = GameState.PLAYING;
                         return MenuState.START;
                     case MenuState.SETTINGS:
-                        newGameState = GameState.PLAYING;
+                        newGameState = GameState.MENU;
+                        controller.ScreenManager.SetScreen(ScreenType.SETTINGS);
                         return MenuState.SETTINGS;                      
                     case MenuState.EXIT:
                         newGameState = GameState.EXIT;

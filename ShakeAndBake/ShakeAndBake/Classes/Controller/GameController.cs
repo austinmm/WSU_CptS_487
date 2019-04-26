@@ -18,6 +18,10 @@ namespace ShakeAndBake.Controller
         }
         
         private StageManager stageManager;
+        public StageManager StageManager
+        {
+            get { return stageManager; }
+        }
 
         private double timePaused;
         private GameTime timeElapsed;
@@ -93,7 +97,6 @@ namespace ShakeAndBake.Controller
             this.menuState = MenuState.START;
             this.inputHandler = new InputHandler();
             this.stageManager = new StageManager();
-            this.stageManager.ConfigureNextStage(gameData);
         }
 
         public void Update(GameTime gameTime)
@@ -103,7 +106,7 @@ namespace ShakeAndBake.Controller
             KeyboardState keyboardState = Keyboard.GetState();
             switch (this.CurrentGameState) {
                 case GameState.PAUSE:
-                    if(timePaused + 3 < timeElapsed.TotalGameTime.TotalSeconds)
+                    if (timePaused + 3 < timeElapsed.TotalGameTime.TotalSeconds)
                     {
                         this.CurrentGameState = GameState.PLAYING;
                     }
@@ -123,7 +126,11 @@ namespace ShakeAndBake.Controller
                     break;
                 case GameState.MENU:
                     GameState newGameState;
-                    this.menuState = inputHandler.MenuMove(keyboardState, previousKeyboardState, menuState, out newGameState);
+                    this.menuState = inputHandler.MenuMove(this, keyboardState, previousKeyboardState, menuState, out newGameState);
+                    if (currentGameState != GameState.PLAYING && newGameState == GameState.PLAYING)
+                    {
+                        this.stageManager.ConfigureNextStage(gameData);
+                    }
                     this.CurrentGameState = newGameState;
                     break;
                 case GameState.GAMEOVER:

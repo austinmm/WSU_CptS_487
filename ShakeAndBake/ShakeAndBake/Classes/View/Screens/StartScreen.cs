@@ -35,6 +35,9 @@ namespace ShakeAndBake.View
                     break;
             }
             spriteBatch.Draw(ShakeAndBakeGame.GetTexture("selectionIcon"), new Vector2(150, selectionY), Color.White);
+
+            string level = gameController.StageManager.CurrentLevel.ToString();
+            spriteBatch.DrawString(ShakeAndBakeGame.GetFont("Small"), "Difficulty: " + level, new Vector2(10, GameConfig.Height - 40), Color.Gold);
         }
     }
 }

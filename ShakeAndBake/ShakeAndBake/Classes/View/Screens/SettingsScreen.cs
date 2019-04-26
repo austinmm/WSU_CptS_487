@@ -19,19 +19,19 @@ namespace ShakeAndBake.View
             spriteBatch.Draw(ShakeAndBakeGame.GetTexture("background"), new Vector2(0, 0), Color.White);
             spriteBatch.Draw(ShakeAndBakeGame.GetTexture("titleScreen"), new Vector2(0, 0), Color.White);
 
-            
+            spriteBatch.DrawString(ShakeAndBakeGame.GetFont("Small"), "Arrows", new Vector2(10, 250), Color.Gold);
+            spriteBatch.DrawString(ShakeAndBakeGame.GetFont("Small"), "WASD", new Vector2(10, 280), Color.Gold);
+
             spriteBatch.Draw(ShakeAndBakeGame.GetTexture("exitIcon"), new Vector2(50, 525), Color.White);
+            
             float selectionY = 0;
-            switch (gameController.MenuState)
+            switch (GameConfig.MoveKeys)
             {
-                case MenuState.START:
-                    selectionY = 365;
+                case MoveKeys.ARROW:
+                    selectionY = 250;
                     break;
-                case MenuState.SETTINGS:
-                    selectionY = 440;
-                    break;
-                case MenuState.EXIT:
-                    selectionY = 515;
+                case MoveKeys.WASD:
+                    selectionY = 280;
                     break;
             }
             spriteBatch.Draw(ShakeAndBakeGame.GetTexture("selectionIcon"), new Vector2(150, selectionY), Color.White);

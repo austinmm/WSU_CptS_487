@@ -191,6 +191,7 @@
     <None Include="Classes\.DS_Store" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\player_special_bullet.png" />
     <Content Include="Content\small_ball_bullet.png" />
     <Content Include="Content\small_square_bullet.png" />
     <Content Include="Content\Trophy.png" />

@@ -3,5 +3,6 @@
   "Velocity": 3,
   "FireRate": 200,
   "Health": 10,
-  "Invincible": true
+  "Invincible": true,
+  "sp_fireRate": 500
 }

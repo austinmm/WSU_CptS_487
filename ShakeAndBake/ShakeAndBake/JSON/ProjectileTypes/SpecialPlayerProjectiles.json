@@ -1,10 +1,10 @@
 ﻿[
   {
-    "HitDamage": 1,
-    "density": 2.0,
+    "HitDamage": 100,
+    "density": 10,
     "isBouncy": true,
-    "velocity": 1,
-    "texture": "small_ball_bullet",
+    "velocity": 2,
+    "texture": "player_special_bullet",
     "pathType": "StraightPath"
   }
 ]

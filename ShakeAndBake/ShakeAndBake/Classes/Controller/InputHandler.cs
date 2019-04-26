@@ -18,6 +18,7 @@ namespace ShakeAndBake.Controller
             }
         }
 
+
         public void HandleGamePlayInput(KeyboardState keyboardState)
         {
             this.UpdateGameSpeed(keyboardState);
@@ -119,6 +120,10 @@ namespace ShakeAndBake.Controller
             if (state.IsKeyDown(Keys.Space))
             {
                 Player.Instance.FireProjectile();
+            }
+            else if (state.IsKeyDown(Keys.Enter))
+            {
+                Player.Instance.FireSpecialProjectile();
             }
         }
 

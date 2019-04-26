@@ -148,7 +148,7 @@ namespace ShakeAndBake.Model.GameEntity
             double perc = (health / maxHealth);
             int divider = (int) (barWidth * perc); // end position of green section
 
-            Texture2D rect = new Texture2D(ShakeAndBakeGame.INSTANCE.GraphicsDevice, 1, 1);
+            Texture2D rect = new Texture2D(ShakeAndBakeGame.Instance.GraphicsDevice, 1, 1);
             rect.SetData(new[] { Color.White });
 
             Vector2 center = GetCenterCoordinates();

@@ -120,6 +120,8 @@ namespace ShakeAndBake.Model
                     this.visibleEnemies.RemoveAt(j); // This adds an enemy to deadEnemies? Why would we implment it like this??? Very confusing
                     //this.deadEnemies.Add(enemy);
                     this.collisionBoard.RemoveFromBucketIfExists(enemy);
+
+                    Player.Instance.Score += 10; // TODO move to the right place and configurable score per enemy type
                     continue;
                 }
                 enemy.Update(gameTime, this.collisionBoard);
@@ -148,8 +150,8 @@ namespace ShakeAndBake.Model
                 }
             }
         }
-        
-        // called before configuring a phase
+
+        // called before configuring a stage
         public void Reset()
         {
             Player.Instance.Projectiles.Clear();

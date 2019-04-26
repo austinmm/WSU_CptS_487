@@ -11,7 +11,7 @@ namespace ShakeAndBake
     /// </summary>
     public class ShakeAndBakeGame : Game
     {
-        public static ShakeAndBakeGame INSTANCE;
+        public static ShakeAndBakeGame Instance;
 
         private static Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
         private static Dictionary<string, SpriteFont> fonts = new Dictionary<string, SpriteFont>();
@@ -25,7 +25,7 @@ namespace ShakeAndBake
 
         public ShakeAndBakeGame()
         {
-            INSTANCE = this;
+            Instance = this;
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 900;
             graphics.PreferredBackBufferHeight = 700;

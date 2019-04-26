@@ -38,6 +38,13 @@ namespace ShakeAndBake.Model.GameEntity
             instance = null;
         }
 
+        private int score;
+        public int Score
+        {
+            get { return score; }
+            set { this.score = value; }
+        }
+
         private Player() : base()
         {
             this.Sprite = ShakeAndBakeGame.GetTexture("player_default");

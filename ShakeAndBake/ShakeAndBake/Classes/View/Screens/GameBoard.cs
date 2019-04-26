@@ -32,12 +32,18 @@ namespace ShakeAndBake.View
 
             Player.Instance.Draw(spriteBatch);
             this.DrawPlayerHealth(graphics, spriteBatch);
-            this.DrawNewStageGraphic(graphics, spriteBatch);
+            this.DrawCurrentStageGraphic(graphics, spriteBatch);
+            this.DrawScoreGraphic(graphics, spriteBatch);
         }
 
-        public void DrawNewStageGraphic(GraphicsDeviceManager graphics, SpriteBatch spriteBatch)
+        public void DrawCurrentStageGraphic(GraphicsDeviceManager graphics, SpriteBatch spriteBatch)
         {
             spriteBatch.DrawString(ShakeAndBakeGame.GetFont("Default"), $"Stage {StageManager.STAGE + 1}", new Vector2(10, 10), Color.Gold);
+        }
+
+        public void DrawScoreGraphic(GraphicsDeviceManager graphics, SpriteBatch spriteBatch)
+        {
+            spriteBatch.DrawString(ShakeAndBakeGame.GetFont("Default"), $"Score: {Player.Instance.Score}", new Vector2(10, 70), Color.Gold);
         }
         
         public void DrawPlayerHealth(GraphicsDeviceManager graphics, SpriteBatch spriteBatch)

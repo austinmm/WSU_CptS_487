@@ -9,6 +9,11 @@ namespace ShakeAndBake.Model.GameEntity
 {
     class BombPowerUp: PowerUp
     {
-        public BombPowerUp(Path path, string texture) : base(path, texture) { }
+        public BombPowerUp(Path path, string texture) : base(path, texture) { }                    
+        protected override void PlaySoundEffect()
+        {
+            ShakeAndBakeGame.GetSoundEffect("explosion").CreateInstance().Play();
+        }
+
     }
 }

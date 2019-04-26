@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ShakeAndBake.Model.GameEntity
 {
-    public class PowerUp : GameObject
+    public abstract class PowerUp : GameObject
     {
         protected Path path;
         public Path Path
@@ -88,7 +88,7 @@ namespace ShakeAndBake.Model.GameEntity
                 position = this.path.NextPoint();
                 if (this.BoundsContains(Player.Instance) || Player.Instance.BoundsContains(this))
                 {
-                    ShakeAndBakeGame.GetSoundEffect("shot").CreateInstance().Play();
+                    this.PlaySoundEffect();
                     this.powerUpActivated = true;
                     this.Reset();
                 }
@@ -96,6 +96,8 @@ namespace ShakeAndBake.Model.GameEntity
             });
             //cb.UdateObjectPositionWithFunction(this, () => { position = this.path.NextPoint(); return true; });
         }
+
+        protected abstract void PlaySoundEffect();
 
         public override void Draw(SpriteBatch spriteBatch) {
             if (this.powerUpReady)
@@ -108,7 +110,6 @@ namespace ShakeAndBake.Model.GameEntity
         {
             if(points >= this.pointsNeeded)
             {
-                this.pointsNeeded += points;
                 this.powerUpReady = true;
             }
         }
@@ -125,6 +126,10 @@ namespace ShakeAndBake.Model.GameEntity
             this.powerUpReady = false;
             this.path.Reset();
             this.position = this.path.CurrentPosition(); ;
+        }
+        public void UpdatePowerUpPoints(int points)
+        {
+            this.pointsNeeded += points;
         }
         //            
     }

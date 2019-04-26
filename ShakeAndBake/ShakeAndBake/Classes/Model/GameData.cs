@@ -174,6 +174,7 @@ namespace ShakeAndBake.Model
                     }
                 }
             }
+            this.powerUp.UpdatePowerUpPoints(Player.Instance.Score);
         }
         // called before configuring a stage
         public void Reset()

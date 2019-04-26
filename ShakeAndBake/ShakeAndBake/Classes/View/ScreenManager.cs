@@ -6,7 +6,7 @@ namespace ShakeAndBake.View
 {
     public enum ScreenType
     {
-        START, INGAME, GAMEWIN, GAMELOSE
+        START, SETTINGS, INGAME, GAMEWIN, GAMELOSE
     }
     
     public interface Screen
@@ -23,11 +23,12 @@ namespace ShakeAndBake.View
         {
             screens = new Dictionary<ScreenType, Screen>();
             AddScreen(ScreenType.START, new StartScreen(gameController));
+            AddScreen(ScreenType.SETTINGS, new SettingsScreen(gameController));
             AddScreen(ScreenType.INGAME, new GameBoard(gameData));
             AddScreen(ScreenType.GAMEWIN, new GameWinScreen(gameController));
             AddScreen(ScreenType.GAMELOSE, new GameLoseScreen(gameController));
         }
-
+        
         public void AddScreen(ScreenType type, Screen screen)
         {
             screens[type] = screen;

@@ -14,6 +14,7 @@ namespace ShakeAndBake.Model.GameEntity
         {
             this.ProjectileFactory = new MidBossProjectileFactory();
             this.Sprite = ShakeAndBakeGame.GetTexture("enemy_default");
+            maxHealth = 50; // temp, move to Health in config file
         }
 
         public override void Update(GameTime gameTime, CollisionBoard cb)
@@ -26,6 +27,7 @@ namespace ShakeAndBake.Model.GameEntity
             base.Draw(spriteBatch);
             if (!IsDestroyed)
             {
+                DrawHealthBar(spriteBatch, 100, 15); // smaller than final boss health bar
                 spriteBatch.Draw(this.Sprite, position, Color.White);
             }
         }

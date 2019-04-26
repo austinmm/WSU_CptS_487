@@ -39,7 +39,7 @@ namespace ShakeAndBake.View
         {
             spriteBatch.DrawString(ShakeAndBakeGame.GetFont("Default"), $"Stage {StageManager.STAGE + 1}", new Vector2(10, 10), Color.Gold);
         }
-
+        
         public void DrawPlayerHealth(GraphicsDeviceManager graphics, SpriteBatch spriteBatch)
         {
             int xOffset = 60, yOffset = 5;

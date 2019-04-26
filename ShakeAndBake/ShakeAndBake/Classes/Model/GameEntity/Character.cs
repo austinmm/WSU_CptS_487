@@ -141,7 +141,7 @@ namespace ShakeAndBake.Model.GameEntity
             this.lastFiredTime = this.timeAlive.ElapsedMilliseconds;
             return true;
         }
-
+        
         public void DrawHealthBar(SpriteBatch spriteBatch, int barWidth, int barHeight)
         {
             if (maxHealth == 0) return;

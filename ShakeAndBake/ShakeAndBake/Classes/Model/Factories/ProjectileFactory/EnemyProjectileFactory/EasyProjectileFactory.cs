@@ -1,8 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using ShakeAndBake.Model.GameEntity;
-using ShakeAndBake.Classes.Model.Factories.PathFactory;
-using ShakeAndBake.Extras.Paths;
-using Newtonsoft.Json;
 
 namespace ShakeAndBake.Model.Factories.ProjectileFactory
 {

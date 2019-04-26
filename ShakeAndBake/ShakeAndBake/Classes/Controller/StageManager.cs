@@ -1,4 +1,4 @@
-using ShakeAndBake.Classes.Controller;
+using ShakeAndBake.Controller;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.IO;

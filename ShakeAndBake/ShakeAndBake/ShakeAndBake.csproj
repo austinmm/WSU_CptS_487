@@ -258,6 +258,14 @@
     <None Include="Content\shakeandbake.wav" />
     <None Include="Content\bin\DesktopGL\Content\final_dead.xnb" />
     <None Include="Content\obj\DesktopGL\Content\final_dead.mgcontent" />
+    <None Include="Content\bin\DesktopGL\Content\Small.xnb" />
+    <None Include="Content\bin\DesktopGL\Content\cheater.xnb" />
+    <None Include="Content\bin\DesktopGL\Content\player_special_bullet.xnb" />
+    <None Include="Content\bin\DesktopGL\Content\shakeandbake.xnb" />
+    <None Include="Content\obj\DesktopGL\Content\Small.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\cheater.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\player_special_bullet.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\shakeandbake.mgcontent" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\player_special_bullet.png" />

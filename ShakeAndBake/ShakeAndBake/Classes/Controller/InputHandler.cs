@@ -11,7 +11,7 @@ namespace ShakeAndBake.Controller
         {
             // Utilizes the left control as the switch between speed
             // modes essentially halving the speed when pressed.
-            if (state.IsKeyDown(Keys.S))
+            if (state.IsKeyDown(Keys.G))
             {
                 GameConfig.GameSpeed = 2;
             } else {

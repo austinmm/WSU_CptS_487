@@ -1,10 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ShakeAndBake.Classes.Model.Factories.PathFactory;
-using ShakeAndBake.Extras.Paths;
 using ShakeAndBake.Model.Factories.ProjectileFactory;
 using ShakeAndBake.Controller.Collision;
-using System;
 
 namespace ShakeAndBake.Model.GameEntity
 {

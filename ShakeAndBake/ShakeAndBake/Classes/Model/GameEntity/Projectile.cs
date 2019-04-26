@@ -1,9 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.ComponentModel;
-using System.Collections.Generic;
 using ShakeAndBake.Extras.Paths;
-using System;
 using ShakeAndBake.Controller.Collision;
 
 namespace ShakeAndBake.Model.GameEntity

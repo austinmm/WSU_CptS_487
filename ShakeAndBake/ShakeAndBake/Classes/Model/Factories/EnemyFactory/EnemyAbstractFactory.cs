@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using ShakeAndBake.Classes.Controller;
+using ShakeAndBake.Controller;
 using ShakeAndBake.Classes.Model.Factories.PathFactory;
 using ShakeAndBake.Model.GameEntity;
 

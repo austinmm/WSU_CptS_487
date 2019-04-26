@@ -2,6 +2,7 @@
 using ShakeAndBake.Model.GameEntity;
 using ShakeAndBake.Classes.Model.Factories.PathFactory;
 using ShakeAndBake.Extras.Paths;
+
 namespace ShakeAndBake.Model.Factories.ProjectileFactory
 {
     public class ProjectileFactory : ProjectileAbstractFactory

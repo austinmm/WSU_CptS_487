@@ -1,5 +1,4 @@
-﻿using ShakeAndBake.Classes.Controller;
-using ShakeAndBake.Classes.Model.Factories.PathFactory;
+﻿using ShakeAndBake.Controller;
 using ShakeAndBake.Model.GameEntity;
 
 namespace ShakeAndBake.Model.Factories.EnemyFactory

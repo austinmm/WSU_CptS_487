@@ -1,11 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System;
-using ShakeAndBake.Extras.Paths;
 using ShakeAndBake.Model.Factories.ProjectileFactory;
 using ShakeAndBake.Controller.Collision;
-using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.IO;
 

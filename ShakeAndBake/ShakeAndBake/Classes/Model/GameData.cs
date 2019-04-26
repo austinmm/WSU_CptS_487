@@ -6,9 +6,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using ShakeAndBake.Model.GameEntity;
 using ShakeAndBake.Model.Factories.EnemyFactory;
-using ShakeAndBake.Extras.Paths;
-using ShakeAndBake.Classes.Model.Factories.PathFactory;
-using ShakeAndBake.Classes.Controller;
+using ShakeAndBake.Controller;
 using ShakeAndBake.Controller.Collision;
 using System.IO;
 

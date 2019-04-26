@@ -151,5 +151,4 @@ namespace ShakeAndBake.Model.Factories.ProjectileFactory
             this.projectiles = JsonConvert.DeserializeObject<List<PlayerBullet>>(this.jsonObject);
         }
     }
-
 }

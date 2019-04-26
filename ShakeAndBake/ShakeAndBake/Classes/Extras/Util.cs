@@ -21,8 +21,9 @@ namespace ShakeAndBake
             EnemyType ret;
             switch (type)
             {
-                case "Easy": ret = EnemyType.Easy;
-                        break;
+                case "Easy":
+                    ret = EnemyType.Easy;
+                    break;
                 case "Medium":
                     ret = EnemyType.Medium;
                     break;

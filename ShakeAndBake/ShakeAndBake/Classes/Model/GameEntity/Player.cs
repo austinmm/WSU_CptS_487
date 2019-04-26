@@ -118,13 +118,6 @@ namespace ShakeAndBake.Model.GameEntity
             spriteBatch.Draw(this.Sprite, position, Color.White);
         }
 
-        public override Vector2 GetCenterCoordinates()
-        {
-            Vector2 pos = Vector2.Add(position, new Vector2(
-               (ShakeAndBakeGame.GetTexture("player_default").Width - ShakeAndBakeGame.GetTexture("player_default_bullet").Width) / 2,
-               -ShakeAndBakeGame.GetTexture("player_default_bullet").Height));
-            return pos;
-        }
 
         private Vector2 GetSpecialCenterCoordinates()
         {

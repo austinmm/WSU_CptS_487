@@ -221,10 +221,15 @@ namespace ShakeAndBake.Model
             {
                 bullet.IsDestroyed = true;
             }
+            if (other.Path.WasDeflected)
+            {
+                other.IsDestroyed = true;
+            }
             if (!other.IsBouncy && !bullet.IsBouncy)
             {
                 bullet.IsDestroyed = true;
                 other.IsDestroyed = true;
+                return;
             }
             float m1 = (float)(bullet.Sprite.Width * bullet.Sprite.Height) * (float)bullet.Density;
             float m2 = (float)(other.Sprite.Width * other.Sprite.Height) * (float)other.Density;

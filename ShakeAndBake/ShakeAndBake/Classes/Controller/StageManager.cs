@@ -47,14 +47,12 @@ namespace ShakeAndBake.Controller
             this.waves = waves;
         }
         
-        public void Configure(Model.GameData gameData)
+        public void Configure(Model.GameData gameData, int waveIndex)
         {
-            foreach (Wave wave in waves)
+            Wave wave = waves[waveIndex];
+            foreach (EnemyConfig config in wave.EnemyConfigs)
             {
-                foreach (EnemyConfig config in wave.EnemyConfigs)
-                {
-                    gameData.AddEnemy(config);
-                }
+                gameData.AddEnemy(config);
             }
         }
     }
@@ -91,6 +89,9 @@ namespace ShakeAndBake.Controller
                 STAGE = this.currentStage = value;
            }
         }
+
+        //Index of the current wave in the current stage
+        private int currentWave;
 
         public StageManager()
         {
@@ -147,23 +148,21 @@ namespace ShakeAndBake.Controller
             }
         }
 
+        public bool isCurrentStageWaveCompleted(Model.GameData gameData)
+        {
+            return gameData.AreAllEnemiesDestroyed;
+        }
+
         public bool IsCurrentStageCompleted(Model.GameData gameData)
         {
-            if (gameData.AreAllEnemiesDestroyed)
-            {
-                return true;
-            }
-            return false;
+            StageData stage = difficultyLevels[currentLevel][currentStage];
+            return isCurrentStageWaveCompleted(gameData) && currentWave == stage.Waves.Count - 1;
         }
 
         public bool AreAllStagesCompleted()
         {
             List<StageData> stages = difficultyLevels[currentLevel];
-            if (this.currentStage >= stages.Count)
-            {
-                return true;
-            }
-            return false;
+            return currentStage >= stages.Count;
         }
 
         public GameState CheckStageStatus(Model.GameData gameData, GameState currentState)
@@ -180,18 +179,32 @@ namespace ShakeAndBake.Controller
                     this.ConfigureNextStage(gameData);
                     return GameState.PAUSE;
                 }
+            } else {
+                if (isCurrentStageWaveCompleted(gameData)) {
+                    currentWave++;
+                    StageData stage = difficultyLevels[currentLevel][currentStage];
+                    if (currentWave < stage.Waves.Count) {
+                        ConfigureWave(gameData, stage);
+                    }
+                }
             }
             return currentState;
+        }
+        
+        public void ConfigureWave(Model.GameData gameData, StageData stage)
+        {
+            stage.Configure(gameData, currentWave);
         }
 
         // Changes the GameBoard class to reflect the current stage.
         public void ConfigureNextStage(Model.GameData gameData)
         {
-            ShakeAndBakeGame.GetSoundEffect("shakeandbake").CreateInstance().Play();
             gameData.Reset();
             List<StageData> stages = difficultyLevels[currentLevel];       
-            StageData data = stages[this.CurrentStage];
-            data.Configure(gameData);
+            StageData stage = stages[this.CurrentStage];
+            currentWave = 0;
+            ConfigureWave(gameData, stage);
+            ShakeAndBakeGame.PlaySoundEffect("shakeandbake");
         }
     }
 }

@@ -8,7 +8,7 @@
             "stringType": "Easy",
             "pathType": "SweepRight",
             "formation": "leftDiagonalLine",
-            "health": 10,
+            "health": 5,
             "speed": 5,
             "startPosition": {
               "X": 0,
@@ -19,8 +19,28 @@
               "X": 0,
               "Y": 1
             },
-            "count": 2
+            "count": 3
           }
+        ],
+        /* Wave 2 */
+        [
+          {
+            "stringType": "Easy",
+            "pathType": "SweepRight",
+            "formation": "leftDiagonalLine",
+            "health": 10,
+            "speed": 6,
+            "startPosition": {
+              "X": 0,
+              "Y": -100
+            },
+            "fireRate": 500,
+            "moveDirection": {
+              "X": 0,
+              "Y": 1
+            },
+            "count": 1
+          } 
         ]
       ]
     },

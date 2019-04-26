@@ -176,6 +176,7 @@ namespace ShakeAndBake.Controller
         // Changes the GameBoard class to reflect the current stage.
         public void ConfigureNextStage(Model.GameData gameData)
         {
+            ShakeAndBakeGame.GetSoundEffect("shakeandbake").CreateInstance().Play();
             gameData.Reset();       
             StageData data = stages[this.CurrentStage];
             data.Configure(gameData);

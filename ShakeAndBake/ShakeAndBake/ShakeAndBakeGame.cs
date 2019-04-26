@@ -99,6 +99,7 @@ namespace ShakeAndBake
             //LoadAndStoreTexture("lifeIcon");
             //sounds
             soundEffects["final_dead"] = Content.Load<SoundEffect>("final_dead");
+            soundEffects["shakeandbake"] = Content.Load<SoundEffect>("shakeandbake");
             soundEffects["player_shot"] =  Content.Load<SoundEffect>("shot");
             soundEffects["enemy_shot"] = Content.Load<SoundEffect>("enemy_shot");
 

@@ -183,6 +183,12 @@
 /processorParam:TextureFormat=Color
 /build:settingsIcon.png
 
+#begin shakeandbake.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:shakeandbake.wav
+
 #begin shot.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

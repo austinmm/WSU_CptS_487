@@ -114,7 +114,6 @@ namespace ShakeAndBake.Model.GameEntity
             }
         }
 
-
         protected virtual void InitPowerUp()
         {
             this.powerUpReady = false;
@@ -127,10 +126,10 @@ namespace ShakeAndBake.Model.GameEntity
             this.path.Reset();
             this.position = this.path.CurrentPosition(); ;
         }
+
         public void UpdatePowerUpPoints(int points)
         {
             this.pointsNeeded += points;
         }
-        //            
     }
 }

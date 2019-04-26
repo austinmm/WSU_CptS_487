@@ -57,7 +57,6 @@ namespace ShakeAndBake.Model.GameEntity
                 base.Update(gameTime, cb);
                 return true;
             });
-            
         }
 
         public override void FireProjectile()

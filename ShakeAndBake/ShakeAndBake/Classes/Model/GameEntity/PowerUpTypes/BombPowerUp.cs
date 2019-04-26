@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShakeAndBake.Model.GameEntity
 {
-    class BombPowerUp: PowerUp
+    public class BombPowerUp: PowerUp
     {
         public BombPowerUp(Path path, string texture) : base(path, texture) { }                    
         protected override void PlaySoundEffect()

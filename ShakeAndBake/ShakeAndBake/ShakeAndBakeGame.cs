@@ -44,9 +44,9 @@ namespace ShakeAndBake
             Initialize();
             
             //starts music
-            var instance = songs["music"].CreateInstance();
-            instance.IsLooped = true;
-            instance.Play();
+            // var instance = songs["music"].CreateInstance();
+            // instance.IsLooped = true;
+            // instance.Play();
 
             //Initializes the MVC layers
             gameData = new Model.GameData(GetTexture("player_default"));
@@ -90,6 +90,7 @@ namespace ShakeAndBake
             LoadAndStoreTexture("loseScreen");
             LoadAndStoreTexture("winScreen");
             LoadAndStoreTexture("settingsIcon");
+            LoadAndStoreTexture("final");
             //Game Play Screen Images
             LoadAndStoreTexture("lives_left");
             //Fonts
@@ -97,6 +98,7 @@ namespace ShakeAndBake
             LoadAndStoreFont("File");
             //LoadAndStoreTexture("lifeIcon");
             //sounds
+            soundEffects["final_dead"] = Content.Load<SoundEffect>("final_dead");
             soundEffects["player_shot"] =  Content.Load<SoundEffect>("shot");
             soundEffects["enemy_shot"] = Content.Load<SoundEffect>("enemy_shot");
 

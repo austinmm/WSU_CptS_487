@@ -117,6 +117,7 @@ namespace ShakeAndBake.Model
                 Enemy enemy = this.visibleEnemies[j];
                 if (enemy.IsDestroyed)
                 {
+
                     this.visibleEnemies.RemoveAt(j); // This adds an enemy to deadEnemies? Why would we implment it like this??? Very confusing
                     //this.deadEnemies.Add(enemy);
                     this.collisionBoard.RemoveFromBucketIfExists(enemy);

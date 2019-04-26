@@ -13,15 +13,24 @@ namespace ShakeAndBake.Model.GameEntity
         public FinalBoss() : base()
         {
             this.ProjectileFactory = new FinalBossProjectileFactory();
-            this.Sprite = ShakeAndBakeGame.GetTexture("enemy_default");
+            this.Sprite = ShakeAndBakeGame.GetTexture("final");
 
-            maxHealth = 100;
+            maxHealth = 5;
             health = maxHealth; // temp; add to config
         }
         
+        bool started = false;
+
         public override void Update(GameTime gameTime, CollisionBoard cb)
         {
             base.Update(gameTime, cb);
+
+            if (health < 3) {     
+                if (!started) {
+                    started = true;
+                    ShakeAndBakeGame.GetSoundEffect("final_dead").CreateInstance().Play(); 
+                }        
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)

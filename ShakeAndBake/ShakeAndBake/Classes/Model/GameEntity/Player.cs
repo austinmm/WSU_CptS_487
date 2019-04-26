@@ -117,10 +117,8 @@ namespace ShakeAndBake.Model.GameEntity
 
         private Vector2 GetSpecialCenterCoordinates()
         {
-            Vector2 pos = Vector2.Add(position, new Vector2(
-               (ShakeAndBakeGame.GetTexture("player_default").Width - ShakeAndBakeGame.GetTexture("player_special_bullet").Width) / 2,
-               -ShakeAndBakeGame.GetTexture("player_special_bullet").Height));
-            return pos;
+            return new Vector2(this.GetCenterCoordinates().X - ShakeAndBakeGame.GetTexture("player_special_bullet").Width / 2,
+                this.GetCenterCoordinates().Y - ShakeAndBakeGame.GetTexture("player_special_bullet").Height);
         }
 
         private bool CanFireSpecialProjectile()

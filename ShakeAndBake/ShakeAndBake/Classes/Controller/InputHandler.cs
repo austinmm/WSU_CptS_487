@@ -74,7 +74,7 @@ namespace ShakeAndBake.Controller
                         return MenuState.EXIT;
                 }
             }
-            else if(state.IsKeyDown(Keys.Up) && previousState.IsKeyUp(Keys.Up))
+            else if (state.IsKeyDown(Keys.Up) && previousState.IsKeyUp(Keys.Up))
             {
                 newGameState = GameState.MENU;
                 switch (menuStateIn)
@@ -87,7 +87,7 @@ namespace ShakeAndBake.Controller
                         return MenuState.SETTINGS;
                 }
             }
-            else if (state.IsKeyDown(Keys.Enter) & !previousState.IsKeyDown(Keys.Enter))
+            else if (state.IsKeyDown(Keys.Enter) && previousState.IsKeyUp(Keys.Enter))
             {
                 switch (menuStateIn)
                 {
@@ -105,6 +105,22 @@ namespace ShakeAndBake.Controller
             }
             newGameState = GameState.MENU;
             return menuStateIn;
+        }
+
+        public void SettingsMenuMove(GameController controller, KeyboardState state, KeyboardState previousState)
+        {
+            if (state.IsKeyDown(Keys.Up))
+            {
+                GameConfig.MoveKeys = MoveKeys.ARROW;
+            }
+            else if (state.IsKeyDown(Keys.Down))
+            {
+                GameConfig.MoveKeys = MoveKeys.WASD;
+            }
+            else if (state.IsKeyDown(Keys.Enter) && previousState.IsKeyUp(Keys.Enter))
+            {
+                controller.ScreenManager.SetScreen(ScreenType.START);
+            }
         }
         
         public EndMenuState EndMenuMove(KeyboardState state, EndMenuState endMenuStateIn, out GameState newGameState)
@@ -152,7 +168,7 @@ namespace ShakeAndBake.Controller
             {
                 Player.Instance.FireProjectile();
             }
-            else if (state.IsKeyDown(Keys.S))
+            else if (state.IsKeyDown(Keys.P))
             {
                 Player.Instance.FireSpecialProjectile();
             }
@@ -167,7 +183,19 @@ namespace ShakeAndBake.Controller
             //variables to hold calculations preventing redundant calculations
             float movementSpeed = (float)(Player.Instance.Velocity * Player.Instance.Acceleration);
             //down right
-            if (state.IsKeyDown(Keys.Right) && state.IsKeyDown(Keys.Down) && !(state.IsKeyDown(Keys.Left)) && !(state.IsKeyDown(Keys.Up)))
+            Keys leftKey = Keys.Space, rightKey = Keys.Space, upKey = Keys.Space, downKey = Keys.Space;
+            if (GameConfig.MoveKeys == MoveKeys.ARROW) {
+                leftKey = Keys.Left;
+                rightKey = Keys.Right;
+                upKey = Keys.Up;
+                downKey = Keys.Down;
+            } else if (GameConfig.MoveKeys == MoveKeys.WASD) {
+                leftKey = Keys.A;
+                rightKey = Keys.D;
+                upKey = Keys.W;
+                downKey = Keys.S;
+            }
+            if (state.IsKeyDown(rightKey) && state.IsKeyDown(downKey) && !(state.IsKeyDown(leftKey)) && !(state.IsKeyDown(upKey)))
             {
                 /***
                  * Magnitude of net velocity should be = movementSpeed
@@ -188,40 +216,40 @@ namespace ShakeAndBake.Controller
                 
             }
             //up right
-            if (state.IsKeyDown(Keys.Right) && state.IsKeyDown(Keys.Up) && !(state.IsKeyDown(Keys.Left)) && !(state.IsKeyDown(Keys.Down)))
+            if (state.IsKeyDown(rightKey) && state.IsKeyDown(upKey) && !(state.IsKeyDown(leftKey)) && !(state.IsKeyDown(downKey)))
             {
                 newX = originalX + movementSpeed * (float)Math.Cos(Math.PI / 4);
                 newY = originalY - movementSpeed * (float)Math.Sin(Math.PI / 4);
             }
             //right
-            if (state.IsKeyDown(Keys.Right) && !(state.IsKeyDown(Keys.Up)) && !(state.IsKeyDown(Keys.Down)) && !(state.IsKeyDown(Keys.Left)))
+            if (state.IsKeyDown(rightKey) && !(state.IsKeyDown(upKey)) && !(state.IsKeyDown(downKey)) && !(state.IsKeyDown(leftKey)))
             {
                 newX = originalX + movementSpeed;
             }
             //left down
-            if (state.IsKeyDown(Keys.Left) && state.IsKeyDown(Keys.Down) && !(state.IsKeyDown(Keys.Up)) && !(state.IsKeyDown(Keys.Right)))
+            if (state.IsKeyDown(leftKey) && state.IsKeyDown(downKey) && !(state.IsKeyDown(upKey)) && !(state.IsKeyDown(rightKey)))
             {
                 newX = originalX - movementSpeed * (float)Math.Cos(Math.PI / 4);
                 newY = originalY + movementSpeed * (float)Math.Sin(Math.PI / 4);
             }
             //left up
-            if (state.IsKeyDown(Keys.Left) && state.IsKeyDown(Keys.Up) && !(state.IsKeyDown(Keys.Down)) && !(state.IsKeyDown(Keys.Right)))
+            if (state.IsKeyDown(leftKey) && state.IsKeyDown(upKey) && !(state.IsKeyDown(Keys.Down)) && !(state.IsKeyDown(rightKey)))
             {
                 newX = originalX - movementSpeed * (float)Math.Cos(Math.PI / 4);
                 newY = originalY - movementSpeed * (float)Math.Sin(Math.PI / 4);
             }
             //left
-            if (state.IsKeyDown(Keys.Left) && !(state.IsKeyDown(Keys.Up)) && !(state.IsKeyDown(Keys.Down)) && !(state.IsKeyDown(Keys.Right)))
+            if (state.IsKeyDown(leftKey) && !(state.IsKeyDown(upKey)) && !(state.IsKeyDown(downKey)) && !(state.IsKeyDown(rightKey)))
             {
                 newX = originalX - movementSpeed;
             }
             //up
-            if (state.IsKeyDown(Keys.Up) && !(state.IsKeyDown(Keys.Left)) && !(state.IsKeyDown(Keys.Right)) && !(state.IsKeyDown(Keys.Down)))
+            if (state.IsKeyDown(upKey) && !(state.IsKeyDown(leftKey)) && !(state.IsKeyDown(rightKey)) && !(state.IsKeyDown(downKey)))
             {
                 newY = originalY - movementSpeed;
             }
             //down
-            if (state.IsKeyDown(Keys.Down) && !(state.IsKeyDown(Keys.Left)) && !(state.IsKeyDown(Keys.Right)) && !(state.IsKeyDown(Keys.Up)))
+            if (state.IsKeyDown(downKey) && !(state.IsKeyDown(leftKey)) && !(state.IsKeyDown(rightKey)) && !(state.IsKeyDown(upKey)))
             {
                 newY = originalY + movementSpeed;
             }

@@ -92,6 +92,8 @@ namespace ShakeAndBake
             LoadAndStoreTexture("loseScreen");
             LoadAndStoreTexture("winScreen");
             LoadAndStoreTexture("settingsIcon");
+            LoadAndStoreTexture("wasdIcon");
+            LoadAndStoreTexture("arrowsIcon");
             LoadAndStoreTexture("final");
             //Game Play Screen Images
             LoadAndStoreTexture("lives_left");

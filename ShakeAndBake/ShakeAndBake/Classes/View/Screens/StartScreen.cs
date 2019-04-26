@@ -7,7 +7,6 @@ namespace ShakeAndBake.View
     {
         private readonly Controller.GameController gameController;
 
-        // Constructor for GameBoard class.
         public StartScreen(Controller.GameController data)
         {
             this.gameController = data;

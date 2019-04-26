@@ -17,6 +17,11 @@ namespace ShakeAndBake.View
     public class ScreenManager
     {
         private ScreenType current;
+        public ScreenType Current
+        {
+            get { return current; }
+        }
+
         private Dictionary<ScreenType, Screen> screens;
 
         public ScreenManager(Model.GameData gameData, Controller.GameController gameController)

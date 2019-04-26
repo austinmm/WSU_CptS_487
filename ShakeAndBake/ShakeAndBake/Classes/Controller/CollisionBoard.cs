@@ -147,7 +147,6 @@ namespace ShakeAndBake.Model
             if (Player.Instance.BoundsContains(bullet) || bullet.BoundsContains(Player.Instance))
             {
                 Player.Instance.TakeDamage(bullet.HitDamage);
-                Boolean a = Player.Instance.BoundsContains(bullet) || bullet.BoundsContains(Player.Instance);
                 bullet.IsDestroyed = true;
             }
 

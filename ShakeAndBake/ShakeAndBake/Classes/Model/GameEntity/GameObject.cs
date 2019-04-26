@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -126,7 +127,8 @@ namespace ShakeAndBake.Model.GameEntity
         public bool BoundsContains(GameObject obj)
         {
             Vector2 centerCoordinates = obj.GetCenterCoordinates();
-            return BoundsContains(obj.GetCenterCoordinates())
+
+            return BoundsContains(centerCoordinates)
                 || BoundsContains(new Vector2(centerCoordinates.X + obj.Sprite.Width / 2, centerCoordinates.Y))
                 || BoundsContains(new Vector2(centerCoordinates.X - obj.Sprite.Width / 2, centerCoordinates.Y))
                 || BoundsContains(new Vector2(centerCoordinates.X, centerCoordinates.Y + obj.Sprite.Height / 2))
@@ -135,11 +137,11 @@ namespace ShakeAndBake.Model.GameEntity
         // checks if pos is in the sprite texture bounds
         public bool BoundsContains(Vector2 coords)
         {
-            if (((coords.X >= GetCenterCoordinates().X && coords.X <= GetCenterCoordinates().X + sprite.Width/2)
-                || (coords.X <= GetCenterCoordinates().X && coords.X >= GetCenterCoordinates().X - sprite.Width/2))
+            if (
+                (coords.X >= GetCenterCoordinates().X - sprite.Width/2 && coords.X <= GetCenterCoordinates().X + sprite.Width/2)
                 &&
-                ((coords.Y >= GetCenterCoordinates().Y && coords.Y <= GetCenterCoordinates().Y + sprite.Height/2)
-                || coords.Y <= GetCenterCoordinates().Y && coords.Y >= GetCenterCoordinates().Y - sprite.Height/2))
+                (coords.Y >= GetCenterCoordinates().Y - sprite.Height/2 && coords.Y <= GetCenterCoordinates().Y + sprite.Height/2)
+                )
             {
                 return true;
             }

@@ -179,12 +179,15 @@ namespace ShakeAndBake.Model
                 RemoveFromBucketIfExists(bullet);
             }
         }
+        
         public void HandlePlayerBulletCollisions(PlayerBullet bullet)
         {
             // player hits itself from defelcted bullet
             if ((Player.Instance.BoundsContains(bullet) || bullet.BoundsContains(Player.Instance)) && bullet.Path.WasDeflected == true)
             {
-                Player.Instance.TakeDamage(bullet.HitDamage);
+                if (!Player.Instance.Invincible) {
+                    Player.Instance.TakeDamage(bullet.HitDamage);
+                }
                 bullet.IsDestroyed = true;
             }
 

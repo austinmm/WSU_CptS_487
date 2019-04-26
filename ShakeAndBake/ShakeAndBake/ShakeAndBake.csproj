@@ -43,6 +43,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Classes\Controller\POCOs\ConfigObjects.cs" />
+    <Compile Include="Classes\Model\Factories\PowerUpFactory\PowerUpAbstractFactory.cs" />
     <Compile Include="Classes\Model\Factories\ProjectileFactory\EnemyProjectileFactory\EasyProjectileFactory.cs" />
     <Compile Include="Classes\Model\Factories\ProjectileFactory\EnemyProjectileFactory\MediumProjectileFactory.cs" />
     <Compile Include="Classes\Model\Factories\ProjectileFactory\EnemyProjectileFactory\HardProjectileFactory.cs" />
@@ -51,6 +52,8 @@
     <Compile Include="Classes\Model\Factories\ProjectileFactory\PlayerProjectileFactory\SpecialPlayerProjectileFactory.cs" />
     <Compile Include="Classes\Model\Factories\ProjectileFactory\PlayerProjectileFactory\DefaultPlayerProjectileFactory.cs" />
     <Compile Include="Classes\Model\Factories\ProjectileFactory\ProjectileAbstractFactory.cs" />
+    <Compile Include="Classes\Model\GameEntity\PowerUp.cs" />
+    <Compile Include="Classes\Model\GameEntity\PowerUpTypes\BombPowerUp.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShakeAndBakeGame.cs" />
@@ -163,6 +166,7 @@
     <None Include="app.manifest" />
     <None Include="Content\Small.spritefont" />
     <None Include="JSON\player.json" />
+    <None Include="JSON\PowerUpTypes\Bomb.json" />
     <None Include="JSON\ProjectileTypes\EasyProjectiles.json" />
     <None Include="JSON\ProjectileTypes\HardProjectiles.json" />
     <None Include="JSON\ProjectileTypes\FinalBossProjectiles.json" />
@@ -268,6 +272,7 @@
     <None Include="Content\obj\DesktopGL\Content\shakeandbake.mgcontent" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bomb_powerup.png" />
     <Content Include="Content\player_special_bullet.png" />
     <Content Include="Content\small_ball_bullet.png" />
     <Content Include="Content\small_square_bullet.png" />

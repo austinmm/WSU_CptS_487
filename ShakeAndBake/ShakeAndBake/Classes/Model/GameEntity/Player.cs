@@ -4,6 +4,7 @@ using ShakeAndBake.Model.Factories.ProjectileFactory;
 using ShakeAndBake.Controller.Collision;
 using Newtonsoft.Json;
 using System.IO;
+using System;
 
 namespace ShakeAndBake.Model.GameEntity
 {
@@ -16,10 +17,11 @@ namespace ShakeAndBake.Model.GameEntity
         //This contains the speed at which the character can fire their special projectiles (Milliseconds)
         private double sp_fireRate = 10000;
         //this is the amount of time until the user can fire their special projectile again (Seconds)
-        public int SpecialProjectileCountdown
+        public double SpecialProjectileCountdown
         {
             get {
-                int val = (int)(this.sp_lastFiredTime + this.sp_fireRate - this.timeAlive.ElapsedMilliseconds) / 1000;
+                double p_val = (this.sp_lastFiredTime + this.sp_fireRate - this.timeAlive.ElapsedMilliseconds) / 1000.0;
+                double val = Math.Round(p_val, 1); //rounds to one decimal place
                 return val > 0 ? val : 0;
             }
         }

@@ -24,21 +24,29 @@ namespace ShakeAndBake.Extras.Paths
             get { return this.wasDeflected; }
             set { this.wasDeflected = value; }
         }
-       
+        public virtual Vector2 CurrentPosition()
+        {
+            return new Vector2(0, 0);
+        }
     }
 
     public class StraightPath : Path
     {
         private Vector2 savedOriginal;
         private Vector2 position, direction;
+       
         private float velocity;
-
         public StraightPath(Vector2 origin, Vector2 direction, float velocity)
         {
             this.savedOriginal = origin;
             this.position = origin;
             this.velocityOffset = direction;
             this.velocity = velocity;
+        }
+
+        public override Vector2 CurrentPosition()
+        {
+            return this.position;
         }
 
         public override void Reset(Nullable<Vector2> origin = null)

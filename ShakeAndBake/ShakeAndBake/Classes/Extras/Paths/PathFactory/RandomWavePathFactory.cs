@@ -19,7 +19,6 @@ namespace ShakeAndBake.Extras.Paths
                 Vector2 point = new Vector2(prevX + (float)Math.Sin(i * .1) * radius * (float)random.NextDouble(), speed + prevY);
                 points.Add(point);
             }
-            //Path path = new ListPath(origin, direction, speed);
             return new ListPath(points);
         }
     }

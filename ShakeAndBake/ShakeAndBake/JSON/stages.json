@@ -65,6 +65,26 @@
             },
             "count": 5
           }
+        ],
+        [
+          {
+            "stringType": "Easy",
+            "pathType": "SweepRight",
+            "formation": "leftDiagonalLine",
+            "health": 10,
+            "speed": 7,
+            "startPosition": {
+              "X": 0,
+              "Y": -100,
+              "random":  true
+            },
+            "fireRate": 300,
+            "moveDirection": {
+              "X": 0,
+              "Y": 1
+            },
+            "count": 2
+          }
         ]
       ]
     },

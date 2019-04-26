@@ -16,9 +16,11 @@ namespace ShakeAndBake.View
         {
             spriteBatch.Draw(ShakeAndBakeGame.GetTexture("background"), new Vector2(0, 0), Color.White);
             spriteBatch.Draw(ShakeAndBakeGame.GetTexture("titleScreen"), new Vector2(0, 0), Color.White);
+
             spriteBatch.Draw(ShakeAndBakeGame.GetTexture("arrowsIcon"), new Vector2(50, 375), Color.White);
             spriteBatch.Draw(ShakeAndBakeGame.GetTexture("wasdIcon"), new Vector2(50, 450), Color.White);
             // spriteBatch.Draw(ShakeAndBakeGame.GetTexture("exitIcon"), new Vector2(50, 525), Color.White);
+
             
             float selectionY = 0;
             switch (GameConfig.MoveKeys)

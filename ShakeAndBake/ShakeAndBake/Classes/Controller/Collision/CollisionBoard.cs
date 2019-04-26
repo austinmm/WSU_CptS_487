@@ -217,15 +217,16 @@ namespace ShakeAndBake.Controller.Collision
 
         private void HandleProjectileCollision(Projectile bullet, Projectile other)
         {
-            if (bullet.Path.WasDeflected)
-            {
-                bullet.IsDestroyed = true;
-            }
+
+
             if (!other.IsBouncy && !bullet.IsBouncy)
             {
                 bullet.IsDestroyed = true;
                 other.IsDestroyed = true;
             }
+
+
+
             float m1 = (float)(bullet.Sprite.Width * bullet.Sprite.Height) * (float)bullet.Density;
             float m2 = (float)(other.Sprite.Width * other.Sprite.Height) * (float)other.Density;
 
@@ -261,14 +262,26 @@ namespace ShakeAndBake.Controller.Collision
             // perfecly elastic for now
             float heatLoss = 1f;
 
-            // normalize vectors if too fast!
             v2f.Normalize();
             v1f.Normalize();
 
-            other.Path.SetVelocityVector(v2f * heatLoss);
-            other.Velocity = v2f.Length();
-            bullet.Path.SetVelocityVector(v1f * heatLoss);
-            bullet.Velocity = v1f.Length();
+            if (!bullet.Texture.Equals("player_special_bullet"))
+            {
+                if (!(bullet.Path.WasDeflected && other.Texture.Equals("player_special_bullet")))
+                {
+                    bullet.Path.SetVelocityVector(v1f * heatLoss);
+                    bullet.Velocity = v1f.Length();
+                }
+            }
+            if (!other.Texture.Equals("player_special_bullet"))
+            {
+                if (!(other.Path.WasDeflected && bullet.Texture.Equals("player_special_bullet")))
+                {
+                    other.Path.SetVelocityVector(v2f * heatLoss);
+                    other.Velocity = v2f.Length();
+                }
+            }
+            
         }
     }
 }

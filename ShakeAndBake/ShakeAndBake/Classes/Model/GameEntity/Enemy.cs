@@ -66,6 +66,7 @@ namespace ShakeAndBake.Model.GameEntity
                 Projectile projectile = this.ProjectileFactory.Create(origin);
                 Debug.Print("The hash code stored: {0}", projectile.GetHashCode());
                 this.projectiles.Add(projectile);
+                ShakeAndBakeGame.GetSoundEffect("enemy_shot").CreateInstance().Play();
             }
         }
     }

@@ -159,6 +159,12 @@
 /processorParam:TextureFormat=Color
 /build:mainMenuIcon.png
 
+#begin Metal Bang-SoundBible.com-672025076.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Metal Bang-SoundBible.com-672025076.wav;playerhit.wav
+
 #begin player.png
 /importer:TextureImporter
 /processor:TextureProcessor

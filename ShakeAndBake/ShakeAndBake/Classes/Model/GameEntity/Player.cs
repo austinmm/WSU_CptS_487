@@ -139,7 +139,7 @@ namespace ShakeAndBake.Model.GameEntity
             Projectile projectile = this.ProjectileFactory.Create(new Vector2(this.GetCenterCoordinates().X - ShakeAndBakeGame.GetTexture("player_default_bullet").Width/2, this.GetCenterCoordinates().Y - ShakeAndBakeGame.GetTexture("player_default_bullet").Height));
             //The projectiles position is set to the current character's position
             this.projectiles.Add(projectile);
-            ShakeAndBakeGame.GetSoundEffect("shot").CreateInstance().Play();
+            ShakeAndBakeGame.PlaySoundEffect("shot");
         }
 
         public void FireSpecialProjectile()
@@ -149,13 +149,14 @@ namespace ShakeAndBake.Model.GameEntity
                 this.ProjectileFactory = new SpecialPlayerProjectileFactory();
                 Projectile projectile = this.ProjectileFactory.Create(this.GetSpecialCenterCoordinates());
                 this.projectiles.Add(projectile);
-                ShakeAndBakeGame.GetSoundEffect("shot").CreateInstance().Play();
+                ShakeAndBakeGame.PlaySoundEffect("shot");
             }
         }
 
         public override double TakeDamage(double d)
         {
             if (invincible) return 0;
+            ShakeAndBakeGame.PlaySoundEffect("playerhit");
             return base.TakeDamage(d);
         }
     }

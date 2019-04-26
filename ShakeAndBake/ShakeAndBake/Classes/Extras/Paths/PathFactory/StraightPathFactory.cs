@@ -1,9 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using ShakeAndBake.Extras.Paths;
 
-namespace ShakeAndBake.Classes.Model.Factories.PathFactory
+namespace ShakeAndBake.Extras.Paths
 {
-    class StraightPathFactory : PathAbstractFactory
+    public class StraightPathFactory : PathAbstractFactory
     {
         public override Path Create(Vector2 origin, Vector2 direction, float speed)
         {

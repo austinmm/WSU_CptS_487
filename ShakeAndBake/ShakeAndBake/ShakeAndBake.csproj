@@ -43,12 +43,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Classes\Controller\POCOs\ConfigObjects.cs" />
-    <Compile Include="Classes\Model\Factories\PathFactory\EnemyBulletPathFactory.cs" />
-    <Compile Include="Classes\Model\Factories\PathFactory\PathAbstractFactory.cs" />
-    <Compile Include="Classes\Model\Factories\PathFactory\RandomWavePathFactory.cs" />
-    <Compile Include="Classes\Model\Factories\PathFactory\StraightPathFactory.cs" />
-    <Compile Include="Classes\Model\Factories\PathFactory\SweepRightPathFactory.cs" />
-    <Compile Include="Classes\Model\Factories\PathFactory\WavePathFactory.cs" />
     <Compile Include="Classes\Model\Factories\ProjectileFactory\EnemyProjectileFactory\EasyProjectileFactory.cs" />
     <Compile Include="Classes\Model\Factories\ProjectileFactory\EnemyProjectileFactory\MediumProjectileFactory.cs" />
     <Compile Include="Classes\Model\Factories\ProjectileFactory\EnemyProjectileFactory\HardProjectileFactory.cs" />
@@ -65,7 +59,6 @@
     <Compile Include="Classes\Controller\StageManager.cs" />
     <Compile Include="Classes\Extras\GameConfig.cs" />
     <Compile Include="Classes\Extras\Updatable.cs" />
-    <Compile Include="Classes\Model\Factories\PathFactory\Path.cs" />
     <Compile Include="Classes\Model\GameData.cs" />
     <Compile Include="Classes\Model\Factories\EnemyFactory\EasyEnemyFactory.cs" />
     <Compile Include="Classes\Model\Factories\EnemyFactory\EnemyAbstractFactory.cs" />
@@ -96,6 +89,13 @@
     <Compile Include="Classes\View\Screens\SettingsScreen.cs" />
     <Compile Include="Classes\Controller\Collision\CollisionBoard.cs" />
     <Compile Include="Classes\Controller\Collision\CollisionBucket.cs" />
+    <Compile Include="Classes\Extras\Paths\Path.cs" />
+    <Compile Include="Classes\Extras\Paths\PathFactory\EnemyBulletPathFactory.cs" />
+    <Compile Include="Classes\Extras\Paths\PathFactory\PathAbstractFactory.cs" />
+    <Compile Include="Classes\Extras\Paths\PathFactory\RandomWavePathFactory.cs" />
+    <Compile Include="Classes\Extras\Paths\PathFactory\StraightPathFactory.cs" />
+    <Compile Include="Classes\Extras\Paths\PathFactory\SweepRightPathFactory.cs" />
+    <Compile Include="Classes\Extras\Paths\PathFactory\WavePathFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Aether.Physics2D, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using ShakeAndBake.Controller;
-using ShakeAndBake.Classes.Model.Factories.PathFactory;
 using ShakeAndBake.Model.GameEntity;
+using ShakeAndBake.Extras.Paths;
 
 namespace ShakeAndBake.Model.Factories.EnemyFactory
 {

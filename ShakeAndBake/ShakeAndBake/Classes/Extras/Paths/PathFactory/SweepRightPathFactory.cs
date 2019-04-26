@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using ShakeAndBake.Extras.Paths;
 
-namespace ShakeAndBake.Classes.Model.Factories.PathFactory
+namespace ShakeAndBake.Extras.Paths
 {
-    class SweepRightPathFactory : PathAbstractFactory
+    public class SweepRightPathFactory : PathAbstractFactory
     {
-
         public override Path Create(Vector2 origin, Vector2 direction, float speed)
         {
             List<Vector2> points = new List<Vector2>();

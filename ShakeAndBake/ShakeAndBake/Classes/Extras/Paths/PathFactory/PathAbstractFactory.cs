@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using ShakeAndBake.Extras.Paths;
 
-namespace ShakeAndBake.Classes.Model.Factories.PathFactory
+namespace ShakeAndBake.Extras.Paths
 {
     public static class PathFactoryProducer
     {
@@ -35,6 +35,7 @@ namespace ShakeAndBake.Classes.Model.Factories.PathFactory
             return factory;
         }
     }
+    
     public abstract class PathAbstractFactory
     {
         public abstract Path Create(Vector2 origin, Vector2 direction, float speed);

@@ -40,6 +40,7 @@ namespace ShakeAndBake.Model.GameEntity
                     Player.Instance.TakeDamage(1);
                     this.TakeDamage(1);
                 }
+                
                 //Move Enemy to new position in its set path
                 position = path.NextPoint();
                 // enemy went off screen without dying, so destroy it

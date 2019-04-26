@@ -37,6 +37,13 @@ namespace ShakeAndBake.Model.GameEntity
         {
             instance = null;
         }
+        
+        private bool invincible;
+        public bool Invincible
+        {
+            get { return invincible; }
+            set { this.invincible = value; }
+        }
 
         private int score;
         public int Score
@@ -74,6 +81,7 @@ namespace ShakeAndBake.Model.GameEntity
                 }
             }
         }
+
         public override void Update(GameTime gameTime, CollisionBoard cb)
         {
             //Remove player's collision bucket before update
@@ -84,12 +92,12 @@ namespace ShakeAndBake.Model.GameEntity
             //Update collision board
             cb.FillBucket(this);
         }
-
+        
         public override void Draw(SpriteBatch spriteBatch)
         {
             if (this.isDestroyed)
             {
-                if(this.Health == 0)
+                if (this.Health == 0)
                 {
                     instance = null;
                 }

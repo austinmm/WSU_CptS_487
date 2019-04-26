@@ -35,16 +35,20 @@ namespace ShakeAndBake.View
             this.DrawCurrentStageGraphic(graphics, spriteBatch);
             this.DrawScoreGraphic(graphics, spriteBatch);
             this.DrawPlayerSpecialProjectileCountdown(graphics, spriteBatch);
+
+            if (Player.Instance.Invincible) {
+                spriteBatch.DrawString(ShakeAndBakeGame.GetFont("Small"), "Cheating Mode", new Vector2(10, GameConfig.Height - 40), Color.Lime);
+            }
         }
 
         public void DrawCurrentStageGraphic(GraphicsDeviceManager graphics, SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(ShakeAndBakeGame.GetFont("Default"), $"Stage {StageManager.STAGE + 1}", new Vector2(10, 10), Color.Gold);
+            spriteBatch.DrawString(ShakeAndBakeGame.GetFont("Small"), $"Stage {StageManager.STAGE + 1}", new Vector2(10, 10), Color.Gold);
         }
 
         public void DrawScoreGraphic(GraphicsDeviceManager graphics, SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(ShakeAndBakeGame.GetFont("Default"), $"Score: {Player.Instance.Score}", new Vector2(10, 70), Color.Gold);
+            spriteBatch.DrawString(ShakeAndBakeGame.GetFont("Small"), $"Score: {Player.Instance.Score}", new Vector2(10, 60), Color.Gold);
         }
         
         public void DrawPlayerHealth(GraphicsDeviceManager graphics, SpriteBatch spriteBatch)
@@ -65,7 +69,7 @@ namespace ShakeAndBake.View
 
         public void DrawPlayerSpecialProjectileCountdown(GraphicsDeviceManager graphics, SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(ShakeAndBakeGame.GetFont("Small"), $"SPC: {Player.Instance.SpecialProjectileCountdown}", new Vector2(10, 130), Color.Red);
+            spriteBatch.DrawString(ShakeAndBakeGame.GetFont("Small"), $"SPC: {Player.Instance.SpecialProjectileCountdown}", new Vector2(10, 110), Color.OrangeRed);
         }
     }
 }

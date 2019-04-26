@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using ShakeAndBake.Extras.Paths;
 using ShakeAndBake.Model.Factories.ProjectileFactory;
+using ShakeAndBake.Controller.Collision;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.IO;
@@ -167,6 +168,12 @@ namespace ShakeAndBake.Model.GameEntity
                 this.projectiles.Add(projectile);
                 ShakeAndBakeGame.GetSoundEffect("shot").CreateInstance().Play();
             }
+        }
+
+        public override double TakeDamage(double d)
+        {
+            if (invincible) return 0;
+            return base.TakeDamage(d);
         }
     }
 }

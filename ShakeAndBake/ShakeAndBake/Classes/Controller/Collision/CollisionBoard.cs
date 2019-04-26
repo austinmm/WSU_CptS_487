@@ -3,14 +3,12 @@ using System;
 using System.Collections.Generic;
 using ShakeAndBake.Model.GameEntity;
 
-namespace ShakeAndBake.Model
+namespace ShakeAndBake.Controller.Collision
 {
     public class CollisionBoard
     {
         private List<List<CollisionBucket>> collisionBuckets;
-        private int width;
-        private int height;
-        private int bucketWidth;
+        private int width, height, bucketWidth;
 
         public CollisionBoard(int windowHeight, int windowWidth, int bucketWidth)
         {
@@ -142,7 +140,6 @@ namespace ShakeAndBake.Model
             HashSet<GameObject> collidedBullets = GetObjectsCollided(bullet, typeof(EnemyBullet));
             HashSet<GameObject> collidedEnemies = GetObjectsCollided(bullet, typeof(Enemy));
 
-
             //player takes damage from enemy bullet
             if (Player.Instance.BoundsContains(bullet) || bullet.BoundsContains(Player.Instance))
             {
@@ -178,6 +175,7 @@ namespace ShakeAndBake.Model
                 RemoveFromBucketIfExists(bullet);
             }
         }
+
         public void HandlePlayerBulletCollisions(PlayerBullet bullet)
         {
             // player hits itself from defelcted bullet
@@ -265,31 +263,6 @@ namespace ShakeAndBake.Model
             other.Velocity = v2f.Length();
             bullet.Path.SetVelocityVector(v1f * heatLoss);
             bullet.Velocity = v1f.Length();
-        }
-    }
-
-    public class CollisionBucket
-    {
-        private HashSet<GameObject> objects;
-
-        public CollisionBucket()
-        {
-            objects = new HashSet<GameObject>();
-        }
-
-        public HashSet<GameObject> GetObjects()
-        {
-            return this.objects;
-        }
-
-        public void AddElement(GameObject obj)
-        {
-            objects.Add(obj);
-        }
-
-        public Boolean RemoveElement(GameObject obj)
-        {
-            return objects.Remove(obj);
         }
     }
 }

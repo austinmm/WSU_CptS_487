@@ -1,8 +1,8 @@
 ﻿{
-  "Acceleration": 2,
-  "Velocity": 3,
-  "FireRate": 200,
-  "Health": 10,
-  "Invincible": true,
+  "acceleration": 3,
+  "velocity": 3,
+  "firerate": 200,
+  "health": 10,
+  "invincible": false,
   "sp_fireRate": 500
 }

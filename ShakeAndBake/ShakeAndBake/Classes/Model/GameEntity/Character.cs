@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ShakeAndBake.Model.Factories.ProjectileFactory;
+using ShakeAndBake.Controller.Collision;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -90,7 +91,7 @@ namespace ShakeAndBake.Model.GameEntity
         }
 
         /* Returns the remaining amount after it is delt to the character */
-        public double TakeDamage(int amount)
+        public virtual double TakeDamage(double amount)
         {
             double overflow = 0;
             this.health -= amount;

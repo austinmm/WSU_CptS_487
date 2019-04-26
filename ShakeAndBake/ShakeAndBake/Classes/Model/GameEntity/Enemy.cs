@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using ShakeAndBake.Extras.Paths;
 using ShakeAndBake.Model.Factories.ProjectileFactory;
+using ShakeAndBake.Controller.Collision;
 using System;
 using System.Diagnostics;
 

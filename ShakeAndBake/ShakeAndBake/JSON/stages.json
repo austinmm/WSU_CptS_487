@@ -8,7 +8,7 @@
             "stringType": "Easy",
             "pathType": "SweepRight",
             "formation": "leftDiagonalLine",
-            "health": 5,
+            "health": 4,
             "speed": 5,
             "startPosition": {
               "X": 0,
@@ -28,13 +28,13 @@
             "stringType": "Easy",
             "pathType": "SweepRight",
             "formation": "leftDiagonalLine",
-            "health": 10,
+            "health": 8,
             "speed": 6,
             "startPosition": {
-              "X": 0,
+              "X": 100,
               "Y": -100
             },
-            "fireRate": 500,
+            "fireRate": 400,
             "moveDirection": {
               "X": 0,
               "Y": 1
@@ -68,7 +68,6 @@
         ]
       ]
     },
-  
     "Stage3": {
       "waves": [
         /* Wave 1 */
@@ -113,7 +112,6 @@
             },
             "count": 5
           },
-  
           {
             "stringType": "Hard",
             "pathType": "SweepRight",
@@ -135,7 +133,6 @@
         ]
       ]
     },
-  
     "Stage5": {
       "waves": [
         /* Wave 1 */
@@ -149,7 +146,7 @@
               "X": -200,
               "Y": -500
             },
-            "fireRate": 30,
+            "fireRate": 50,
             "moveDirection": {
               "X": 0,
               "Y": 0

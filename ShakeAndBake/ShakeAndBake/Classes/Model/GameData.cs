@@ -9,6 +9,7 @@ using ShakeAndBake.Model.Factories.EnemyFactory;
 using ShakeAndBake.Extras.Paths;
 using ShakeAndBake.Classes.Model.Factories.PathFactory;
 using ShakeAndBake.Classes.Controller;
+using ShakeAndBake.Controller.Collision;
 using System.IO;
 
 namespace ShakeAndBake.Model

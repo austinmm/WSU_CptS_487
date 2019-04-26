@@ -34,6 +34,7 @@ namespace ShakeAndBake.View
             this.DrawPlayerHealth(graphics, spriteBatch);
             this.DrawCurrentStageGraphic(graphics, spriteBatch);
             this.DrawScoreGraphic(graphics, spriteBatch);
+            this.DrawPlayerSpecialProjectileCountdown(graphics, spriteBatch);
         }
 
         public void DrawCurrentStageGraphic(GraphicsDeviceManager graphics, SpriteBatch spriteBatch)
@@ -60,6 +61,11 @@ namespace ShakeAndBake.View
                 spriteBatch.Draw(ShakeAndBakeGame.GetTexture("lives_left"), destinationRectangle, Color.White);
                 xOffset += 60;
             }
+        }
+
+        public void DrawPlayerSpecialProjectileCountdown(GraphicsDeviceManager graphics, SpriteBatch spriteBatch)
+        {
+            spriteBatch.DrawString(ShakeAndBakeGame.GetFont("Small"), $"SPC: {Player.Instance.SpecialProjectileCountdown}", new Vector2(10, 130), Color.Red);
         }
     }
 }

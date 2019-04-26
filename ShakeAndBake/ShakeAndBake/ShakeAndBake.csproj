@@ -160,6 +160,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="app.manifest" />
+    <None Include="Content\Small.spritefont" />
     <None Include="JSON\player.json" />
     <None Include="JSON\ProjectileTypes\EasyProjectiles.json" />
     <None Include="JSON\ProjectileTypes\HardProjectiles.json" />
@@ -258,6 +259,7 @@
     <None Include="Content\obj\DesktopGL\Content\final_dead.mgcontent" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\player_special_bullet.png" />
     <Content Include="Content\small_ball_bullet.png" />
     <Content Include="Content\small_square_bullet.png" />
     <Content Include="Content\Trophy.png" />

@@ -13,6 +13,19 @@ namespace ShakeAndBake.Model.GameEntity
     public class Player : Character
     {
         private static Player instance;
+        //This contains the time the character last fired a special projectile (Milliseconds)
+        private double sp_lastFiredTime = 0.0;
+
+        //This contains the speed at which the character can fire their special projectiles (Milliseconds)
+        private double sp_fireRate = 10000;
+        //this is the amount of time until the user can fire their special projectile again (Seconds)
+        public int SpecialProjectileCountdown
+        {
+            get {
+                int val = (int)(this.sp_lastFiredTime + this.sp_fireRate - this.timeAlive.ElapsedMilliseconds) / 1000;
+                return val > 0 ? val : 0;
+            }
+        }
 
         // Player singleton
         public static Player Instance
@@ -60,6 +73,8 @@ namespace ShakeAndBake.Model.GameEntity
                 (GameConfig.Width / 2 - (float)this.hitBoxRadius),
                 (GameConfig.Height - this.Sprite.Height)
             );
+            //sets special projectile fired time to current time
+            this.sp_lastFiredTime = this.timeAlive.ElapsedMilliseconds;
         }
 
         public void Move(float newX, float newY)
@@ -88,7 +103,6 @@ namespace ShakeAndBake.Model.GameEntity
             cb.RemoveFromBucketIfExists(this);
 
             base.Update(gameTime, cb);
-
             //Update collision board
             cb.FillBucket(this);
         }
@@ -106,7 +120,34 @@ namespace ShakeAndBake.Model.GameEntity
             base.Draw(spriteBatch);
             spriteBatch.Draw(this.Sprite, position, Color.White);
         }
-        
+
+        public override Vector2 GetCenterCoordinates()
+        {
+            Vector2 pos = Vector2.Add(position, new Vector2(
+               (ShakeAndBakeGame.GetTexture("player_default").Width - ShakeAndBakeGame.GetTexture("player_default_bullet").Width) / 2,
+               -ShakeAndBakeGame.GetTexture("player_default_bullet").Height));
+            return pos;
+        }
+
+        private Vector2 GetSpecialCenterCoordinates()
+        {
+            Vector2 pos = Vector2.Add(position, new Vector2(
+               (ShakeAndBakeGame.GetTexture("player_default").Width - ShakeAndBakeGame.GetTexture("player_special_bullet").Width) / 2,
+               -ShakeAndBakeGame.GetTexture("player_special_bullet").Height));
+            return pos;
+        }
+
+        private bool CanFireSpecialProjectile()
+        {
+            //if the character has to wait longer until they can fire another projectile
+            if (this.timeAlive.ElapsedMilliseconds < this.sp_lastFiredTime + this.sp_fireRate)
+            {
+                return false;
+            }
+            sp_lastFiredTime = this.timeAlive.ElapsedMilliseconds;
+            return true;
+        }
+
         public override void FireProjectile()
         {
             if (!this.CanFire()) { return; }
@@ -115,6 +156,17 @@ namespace ShakeAndBake.Model.GameEntity
             //The projectiles position is set to the current character's position
             this.projectiles.Add(projectile);
             ShakeAndBakeGame.GetSoundEffect("shot").CreateInstance().Play();
+        }
+
+        public void FireSpecialProjectile()
+        {
+            if (this.CanFireSpecialProjectile())
+            {
+                this.ProjectileFactory = new SpecialPlayerProjectileFactory();
+                Projectile projectile = this.ProjectileFactory.Create(this.GetSpecialCenterCoordinates());
+                this.projectiles.Add(projectile);
+                ShakeAndBakeGame.GetSoundEffect("shot").CreateInstance().Play();
+            }
         }
     }
 }

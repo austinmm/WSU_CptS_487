@@ -73,10 +73,12 @@ namespace ShakeAndBake
         {
             //Player images
             LoadAndStoreTexture("player_default");
-            LoadAndStoreTexture("player_default_bullet");
+            LoadAndStoreTexture("player_default_bullet"); LoadAndStoreTexture("player_default_bullet");
+
             //Enemy Images
             LoadAndStoreTexture("enemy_default");
             LoadAndStoreTexture("enemy_default_bullet");
+            LoadAndStoreTexture("player_special_bullet");
             //Generic Bullet Images
             LoadAndStoreTexture("small_ball_bullet");
             LoadAndStoreTexture("small_square_bullet");
@@ -95,6 +97,7 @@ namespace ShakeAndBake
             LoadAndStoreTexture("lives_left");
             //Fonts
             LoadAndStoreFont("Default");
+            LoadAndStoreFont("Small");
             LoadAndStoreFont("File");
             //LoadAndStoreTexture("lifeIcon");
 

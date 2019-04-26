@@ -159,6 +159,18 @@
 /processorParam:TextureFormat=Color
 /build:player.png;player_default.png
 
+#begin player_special_bullet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:player_special_bullet.png
+
 #begin selectionIcon.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -194,6 +206,13 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:shot.wav
+
+#begin Small.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Small.spritefont
 
 #begin small_ball_bullet.png
 /importer:TextureImporter

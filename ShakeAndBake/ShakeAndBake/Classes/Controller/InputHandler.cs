@@ -18,6 +18,7 @@ namespace ShakeAndBake.Controller
             }
         }
 
+
         public void HandleGamePlayInput(KeyboardState keyboardState)
         {
             if (keyboardState.IsKeyDown(Keys.C))
@@ -123,6 +124,10 @@ namespace ShakeAndBake.Controller
             if (state.IsKeyDown(Keys.Space))
             {
                 Player.Instance.FireProjectile();
+            }
+            else if (state.IsKeyDown(Keys.S))
+            {
+                Player.Instance.FireSpecialProjectile();
             }
         }
 

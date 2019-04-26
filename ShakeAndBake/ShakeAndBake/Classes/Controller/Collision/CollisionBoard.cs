@@ -135,6 +135,12 @@ namespace ShakeAndBake.Controller.Collision
             return bucket.RemoveElement(gameObject);
         }
 
+        public void UdateObjectPositionWithFunction(GameObject obj, Func<Boolean> lambda)
+        {
+            RemoveFromBucketIfExists(obj);
+            lambda.Invoke();
+            FillBucket(obj);
+        }
         public void HandleEnemyBulletCollisions(EnemyBullet bullet)
         {
             HashSet<GameObject> collidedBullets = GetObjectsCollided(bullet, typeof(EnemyBullet));

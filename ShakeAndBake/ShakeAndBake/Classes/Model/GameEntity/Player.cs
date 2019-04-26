@@ -96,12 +96,7 @@ namespace ShakeAndBake.Model.GameEntity
 
         public override void Update(GameTime gameTime, CollisionBoard cb)
         {
-            //Remove player's collision bucket before update
-            cb.RemoveFromBucketIfExists(this);
-
-            base.Update(gameTime, cb);
-            //Update collision board
-            cb.FillBucket(this);
+            cb.UdateObjectPositionWithFunction(this, () => { base.Update(gameTime, cb); return true; });
         }
         
         public override void Draw(SpriteBatch spriteBatch)

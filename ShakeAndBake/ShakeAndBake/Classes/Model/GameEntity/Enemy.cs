@@ -31,31 +31,33 @@ namespace ShakeAndBake.Model.GameEntity
 
         public override void Update(GameTime gameTime, CollisionBoard cb)
         {
-            cb.RemoveFromBucketIfExists(this);
-
-            if (!this.IsDestroyed)
+            cb.UdateObjectPositionWithFunction(this, () =>
             {
-                if (this.BoundsContains(Player.Instance) || Player.Instance.BoundsContains(this))
+                if (!this.IsDestroyed)
                 {
-                    Player.Instance.TakeDamage(1);
-                    this.TakeDamage(1);
+                    if (this.BoundsContains(Player.Instance) || Player.Instance.BoundsContains(this))
+                    {
+                        Player.Instance.TakeDamage(1);
+                        this.TakeDamage(1);
+                    }
+
+                    //Move Enemy to new position in its set path
+                    position = path.NextPoint();
+                    // enemy went off screen without dying, so destroy it
+                    if (position.Y > GameConfig.Height)
+                    {
+                        path.Reset();
+                    }
+                    else
+                    {
+                        //Fire a new projectile if firerate field will allow
+                        this.FireProjectile();
+                    }
                 }
-                
-                //Move Enemy to new position in its set path
-                position = path.NextPoint();
-                // enemy went off screen without dying, so destroy it
-                if (position.Y > GameConfig.Height)
-                {
-                    path.Reset();
-                }
-                else
-                {
-                    cb.FillBucket(this);
-                    //Fire a new projectile if firerate field will allow
-                    this.FireProjectile();
-                }
-            }
-            base.Update(gameTime, cb);
+                base.Update(gameTime, cb);
+                return true;
+            });
+            
         }
 
         public override void FireProjectile()

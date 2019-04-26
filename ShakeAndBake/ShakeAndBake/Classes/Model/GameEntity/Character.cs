@@ -37,11 +37,19 @@ namespace ShakeAndBake.Model.GameEntity
         }
 
         //This contains the amount of health a character has left
-        protected int health;
-        public int Health
+        protected double health;
+        public double Health
         {
             get { return this.health; }
             set { this.health = value; }
+        }
+
+        //This contains the initial health that the character spawned with
+        protected double maxHealth;
+        public double MaxHealth
+        {
+            get { return this.maxHealth; }
+            set { this.maxHealth = value; }
         }
 
         //This will be used and set by sub classes for further specification of which factory to invoke 
@@ -84,7 +92,7 @@ namespace ShakeAndBake.Model.GameEntity
         /* Returns the remaining amount after it is delt to the character */
         public double TakeDamage(int amount)
         {
-            int overflow = 0;
+            double overflow = 0;
             this.health -= amount;
             if (this.health <= 0)
             {
@@ -132,6 +140,25 @@ namespace ShakeAndBake.Model.GameEntity
             //sets last projectile fired time to current time
             this.lastFiredTime = this.timeAlive.ElapsedMilliseconds;
             return true;
+        }
+
+        public void DrawHealthBar(SpriteBatch spriteBatch, int barWidth, int barHeight)
+        {
+            if (maxHealth == 0) return;
+            double perc = (health / maxHealth);
+            int divider = (int) (barWidth * perc); // end position of green section
+
+            Texture2D rect = new Texture2D(ShakeAndBakeGame.INSTANCE.GraphicsDevice, 1, 1);
+            rect.SetData(new[] { Color.White });
+
+            Vector2 center = GetCenterCoordinates();
+            int x = (int) center.X - (barWidth / 2);
+            int y = (int) position.Y - (barHeight + (barHeight / 2));
+
+            // remaining damage (green section)
+            spriteBatch.Draw(rect, new Rectangle(x, y, divider, barHeight), Color.Lime);
+            // dealt damage (red section)
+            spriteBatch.Draw(rect, new Rectangle(x + divider, y, barWidth - divider, barHeight), Color.Red);
         }
     }
 }

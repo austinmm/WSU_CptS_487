@@ -80,16 +80,15 @@ namespace ShakeAndBake.Model
             this.deadEnemies = new List<Enemy>();
             //User
         }
-
+        
         public void AddEnemy(EnemyConfig config)
         {
             Random rand = new Random(this.visibleEnemies.Count);
-            
             Enemy enemy = EnemeyFactoryProducer.CreateEnemy(config);
-
+            enemy.Health = enemy.MaxHealth;
             this.visibleEnemies.Add(enemy);
         }
-
+        
         //When an Enemy is added or removed from the ObservableCollection "visibleEnemies"
         public void UpdateEnemies(object sender, NotifyCollectionChangedEventArgs e)
         {

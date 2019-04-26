@@ -1,38 +1,7 @@
-﻿using Microsoft.Xna.Framework;
 using System;
 
 namespace ShakeAndBake
 {
-    public enum EnemyType
-    {
-        Easy, Medium, Hard, MidBoss, FinalBoss
-    }
-
-    //public enum EnemyProjectileType
-    //{
-    //    Bullet, Rocket, FireBall, EnemyBullet, PlayerBullet, BossWaveProjectile, EnemyCircleBullet, EnemySmallBullet
-    //}
-
-    public enum MenuState
-    {
-        START, EXIT
-    }
-
-    public enum EndMenuState
-    {
-        MAIN, EXIT
-    }
-    
-    public enum PathType
-    {
-        WavePath, StraightPath, RandomWavePath, SweepRight
-    }
-
-    public enum GameState
-    {
-        PLAYING, GAMEOVER, MENU, EXIT, RESET, PAUSE
-    }
-
     public static class Util
     {
         public static readonly Random RANDOM = new Random();

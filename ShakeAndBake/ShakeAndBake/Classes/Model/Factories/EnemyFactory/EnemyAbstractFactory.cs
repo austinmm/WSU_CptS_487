@@ -56,7 +56,12 @@ namespace ShakeAndBake.Model.Factories.EnemyFactory
             enemy.FireRate = config.fireRate;
             enemy.Velocity = config.speed;
             enemy.Health = config.health;
-            enemy.Path = PathFactoryProducer.CreatePath(config.pathType, enemy.Position, new Vector2((float)config.moveDirection.X, (float)config.moveDirection.Y), (float)enemy.Velocity);
+            enemy.Path = PathFactoryProducer.CreatePath(
+                config.pathType,
+                enemy.Position,
+                new Vector2((float)config.moveDirection.X,
+                (float) config.moveDirection.Y),
+                (float) enemy.Velocity);
         }
     }
 }

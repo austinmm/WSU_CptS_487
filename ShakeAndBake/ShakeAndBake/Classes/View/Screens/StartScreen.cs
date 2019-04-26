@@ -16,23 +16,25 @@ namespace ShakeAndBake.View
 
         public void Draw(GraphicsDeviceManager graphics, SpriteBatch spriteBatch)
         {
+            spriteBatch.Draw(ShakeAndBakeGame.GetTexture("background"), new Vector2(0, 0), Color.White);
+            spriteBatch.Draw(ShakeAndBakeGame.GetTexture("titleScreen"), new Vector2(0, 0), Color.White);
+            spriteBatch.Draw(ShakeAndBakeGame.GetTexture("startIcon"), new Vector2(50, 375), Color.White);
+            spriteBatch.Draw(ShakeAndBakeGame.GetTexture("startIcon"), new Vector2(50, 450), Color.White); // todo settingsIcon
+            spriteBatch.Draw(ShakeAndBakeGame.GetTexture("exitIcon"), new Vector2(50, 525), Color.White);
+            float selectionY = 0;
             switch (gameController.MenuState)
             {
                 case MenuState.START:
-                    spriteBatch.Draw(ShakeAndBakeGame.GetTexture("background"), new Vector2(0, 0), Color.White);
-                    spriteBatch.Draw(ShakeAndBakeGame.GetTexture("titleScreen"), new Vector2(0, 0), Color.White);
-                    spriteBatch.Draw(ShakeAndBakeGame.GetTexture("startIcon"), new Vector2(50, 375), Color.White);
-                    spriteBatch.Draw(ShakeAndBakeGame.GetTexture("exitIcon"), new Vector2(50, 450), Color.White);
-                    spriteBatch.Draw(ShakeAndBakeGame.GetTexture("selectionIcon"), new Vector2(150, 365), Color.White);
+                    selectionY = 365;
+                    break;
+                case MenuState.SETTINGS:
+                    selectionY = 440;
                     break;
                 case MenuState.EXIT:
-                    spriteBatch.Draw(ShakeAndBakeGame.GetTexture("background"), new Vector2(0, 0), Color.White);
-                    spriteBatch.Draw(ShakeAndBakeGame.GetTexture("titleScreen"), new Vector2(0, 0), Color.White);
-                    spriteBatch.Draw(ShakeAndBakeGame.GetTexture("startIcon"), new Vector2(50, 375), Color.White);
-                    spriteBatch.Draw(ShakeAndBakeGame.GetTexture("exitIcon"), new Vector2(50, 450), Color.White);
-                    spriteBatch.Draw(ShakeAndBakeGame.GetTexture("selectionIcon"), new Vector2(150, 440), Color.White);
+                    selectionY = 515;
                     break;
             }
+            spriteBatch.Draw(ShakeAndBakeGame.GetTexture("selectionIcon"), new Vector2(150, selectionY), Color.White);
         }
     }
 }

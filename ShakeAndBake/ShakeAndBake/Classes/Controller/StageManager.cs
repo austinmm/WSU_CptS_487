@@ -76,7 +76,7 @@ namespace ShakeAndBake.Controller
         private List<StageData> stages;
 
         //Contains the index of the current phase
-        private int currentStage;
+        private int currentStage = 4;
         public int CurrentStage
         {
             get { return currentStage; }

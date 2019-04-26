@@ -64,7 +64,6 @@
     <Compile Include="Classes\Controller\InputHandler.cs" />
     <Compile Include="Classes\Controller\StageManager.cs" />
     <Compile Include="Classes\Extras\GameConfig.cs" />
-    <Compile Include="Classes\Extras\HelperObjects.cs" />
     <Compile Include="Classes\Extras\Updatable.cs" />
     <Compile Include="Classes\Model\Factories\PathFactory\Path.cs" />
     <Compile Include="Classes\Model\CollisionBoard.cs" />
@@ -90,6 +89,11 @@
     <Compile Include="Classes\View\Screens\GameLoseScreen.cs" />
     <Compile Include="Classes\View\Screens\GameWinScreen.cs" />
     <Compile Include="Classes\View\Screens\StartScreen.cs" />
+    <Compile Include="Classes\Extras\Types.cs" />
+    <Compile Include="Classes\Extras\Util.cs" />
+    <Compile Include="Classes\Model\Factories\ProjectileFactory\BulletProjectileFactory.cs" />
+    <Compile Include="Classes\Model\GameEntity\ProjectileTypes\EnemyBullet.cs" />
+    <Compile Include="Classes\Model\GameEntity\ProjectileTypes\PlayerBullet.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Aether.Physics2D, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -183,6 +187,7 @@
     <None Include="Content\obj\DesktopGL\Content\player.mgcontent" />
     <None Include="Content\obj\DesktopGL\Content\player_bullet.mgcontent" />
     <None Include="packages.config" />
+    <None Include="Classes\.DS_Store" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\small_ball_bullet.png" />
